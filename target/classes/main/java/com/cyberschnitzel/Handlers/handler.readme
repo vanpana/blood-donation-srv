@@ -1,0 +1,3 @@
+Here you should have packages for every entity to execute whatever task.
+
+For example, a package named users should only contain methods to create users, update them etc.
