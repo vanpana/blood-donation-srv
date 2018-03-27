@@ -23,7 +23,13 @@ public class Handler {
         // Run the designated function and catch any exception
         try {
             output = func.call();
+
+            if (output == null) throw new NullPointerException("Not found!");
+
             response = Response.status(200).entity(output).build();
+        } catch (NullPointerException npe) {
+            // If no data was found, return status 404
+            response = Response.status(404).entity(npe.getMessage()).build();
         } catch (Exception exception) {
             // Create a response based on the exception. For example, 400 means bad request
             response = Response.status(400).build();
