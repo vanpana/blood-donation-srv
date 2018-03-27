@@ -13,30 +13,28 @@ import javax.ws.rs.core.Response;
 import static com.cyberschnitzel.Handlers.Demo.Demo.getUser;
 import static com.cyberschnitzel.Handlers.Demo.Demo.hello;
 
-class EndpointsPath{
-    public final static String HELLO = "/hello";
-    public final static String USERS = "/users";
-
-
-    public final static String PATH_PARAM = "/{param}";
-    public final static String PARAM = "param";
-
-    public static String getPathParam(String path) {
-        return "/{" + path + "}";
-    }
-}
-
+/**
+ * The path is set in web.xml. The base path will be *ip*:8080/api/*
+ */
 @Path("")
 public class Endpoints {
+    // Endpoints path
+    private final static String HELLO = "/hello";
+    private final static String USERS = "/users";
 
+    // Path parameters regex
+    private final static String PATH_PARAM = "/{param}";
+    private final static String PARAM = "param";
+
+    // Endpoint handlers
     /**
      * Method that is the endpoint to GET /hello request and calls function hello with no params.
      * @return Response
      */
     @GET
-    @Path(EndpointsPath.HELLO)
+    @Path(HELLO)
     public Response sayHello() {
-        return Handler.handle(Demo::hello, EndpointsPath.HELLO);
+        return Handler.handle(Demo::hello, HELLO);
     }
 
     /**
@@ -45,20 +43,29 @@ public class Endpoints {
      * @return Response
      */
     @POST
-    @Path(EndpointsPath.HELLO)
+    @Path(HELLO)
     public Response sayHello(String input) {
-        return Handler.handle(() -> hello(input), EndpointsPath.HELLO, input);
+        return Handler.handle(() -> hello(input), HELLO, input);
     }
 
+    /**
+     * Method that returns all the users.
+     * @return Response
+     */
     @GET
-    @Path(EndpointsPath.USERS)
+    @Path(USERS)
     public Response getUsers() {
-        return Handler.handle(Demo::getUsers, EndpointsPath.USERS);
+        return Handler.handle(Demo::getUsers, USERS);
     }
 
+    /**
+     * Method that returns a user by name with GET.
+     * Make the GET request to localhost:8080/rest/users/user1 to get user with name "user1"
+     * @return Response
+     */
     @GET
-    @Path(EndpointsPath.USERS + EndpointsPath.PATH_PARAM)
-    public Response getUsers(@PathParam(EndpointsPath.PARAM) String name) {
-        return Handler.handle(() -> getUser(name), EndpointsPath.USERS, name);
+    @Path(USERS + PATH_PARAM)
+    public Response getUsers(@PathParam(PARAM) String name) {
+        return Handler.handle(() -> getUser(name), USERS, name);
     }
 }

@@ -1,11 +1,12 @@
 package com.cyberschnitzel.Handlers;
 
 
+import com.google.gson.Gson;
+
 import javax.ws.rs.core.Response;
 import java.util.concurrent.Callable;
 
 public class Handler {
-
     /**
      * Method that logs input, gets a string from the execution of the passed function, logs the response and returns
      * a Response with the corresponding status and message.
@@ -14,9 +15,12 @@ public class Handler {
      * @param input - Input body (if necessary)
      * @return response - With code + body
      */
-    public static Response handle(Callable<String> func, String endpoint, String input) {
+    public static Response handle(Callable func, String endpoint, String input) {
         Response response;
-        String output;
+
+        // The object type doesn't matter, Gson will take care of the serialization
+        Object output;
+
         // Log the input for debugging
         System.out.println(endpoint + ": " + input);
 
@@ -26,7 +30,11 @@ public class Handler {
 
             if (output == null) throw new NullPointerException("Not found!");
 
-            response = Response.status(200).entity(output).build();
+            // This will serialize any object to JSON.
+            String body = new Gson().toJson(output);
+
+            // Build the successful response
+            response = Response.status(200).entity(body).build();
         } catch (NullPointerException npe) {
             // If no data was found, return status 404
             response = Response.status(404).entity(npe.getMessage()).build();
@@ -42,7 +50,10 @@ public class Handler {
         return response;
     }
 
-    public static Response handle(Callable<String> func, String endpoint) {
+    /**
+     * Handle function with no input params
+     */
+    public static Response handle(Callable func, String endpoint) {
         return handle(func, endpoint, "");
     }
 }
