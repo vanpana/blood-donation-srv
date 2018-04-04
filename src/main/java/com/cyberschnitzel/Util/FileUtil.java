@@ -12,8 +12,11 @@ public class FileUtil {
             bufferedReader = new BufferedReader(new FileReader(file));
 
             // Build the script from the file
-            while (bufferedReader.readLine() != null)
-                content.append(bufferedReader.readLine()).append("\n");
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                content.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
 
         } catch (FileNotFoundException fnfe) {
             System.out.println("File not found:" + fnfe.getMessage());
