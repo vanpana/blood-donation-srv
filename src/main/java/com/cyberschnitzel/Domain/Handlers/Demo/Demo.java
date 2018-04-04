@@ -1,8 +1,5 @@
-package com.cyberschnitzel.Handlers.Demo;
+package com.cyberschnitzel.Domain.Handlers.Demo;
 
-import com.google.gson.Gson;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

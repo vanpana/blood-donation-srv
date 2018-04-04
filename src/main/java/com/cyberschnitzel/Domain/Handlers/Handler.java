@@ -1,4 +1,4 @@
-package com.cyberschnitzel.Handlers;
+package com.cyberschnitzel.Domain.Handlers;
 
 
 import com.google.gson.Gson;

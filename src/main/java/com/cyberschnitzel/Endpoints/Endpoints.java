@@ -1,8 +1,8 @@
 package com.cyberschnitzel.Endpoints;
 
 
-import com.cyberschnitzel.Handlers.Demo.Demo;
-import com.cyberschnitzel.Handlers.Handler;
+import com.cyberschnitzel.Domain.Handlers.Demo.Demo;
+import com.cyberschnitzel.Domain.Handlers.Handler;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,8 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import static com.cyberschnitzel.Handlers.Demo.Demo.getUser;
-import static com.cyberschnitzel.Handlers.Demo.Demo.hello;
+import static com.cyberschnitzel.Domain.Handlers.Demo.Demo.getUser;
+import static com.cyberschnitzel.Domain.Handlers.Demo.Demo.hello;
 
 /**
  * The path is set in web.xml. The base path will be *ip*:8080/api/*
