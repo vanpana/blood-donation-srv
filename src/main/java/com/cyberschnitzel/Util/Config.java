@@ -93,6 +93,12 @@ public class Config {
         return value;
     }
 
+    /**
+     * Add a property key with a value
+     * @param key - key
+     * @param value - value
+     * @return true if the operation succeeded, false otherwise
+     */
     private static boolean writeValueToPropertyKey(String key, String value) {
         Properties properties = new Properties();
         InputStream input;
@@ -164,7 +170,7 @@ public class Config {
     public static boolean getDatabaseCreationRequest() {
         boolean value = getValueFromPropertyKey(PROPERTY_DB_CREATION).equals("true");
 
-        if (value) writeValueToPropertyKey(PROPERTY_DB_CREATION, "false");
+        if (value) value = writeValueToPropertyKey(PROPERTY_DB_CREATION, "false");
 
         return value;
     }

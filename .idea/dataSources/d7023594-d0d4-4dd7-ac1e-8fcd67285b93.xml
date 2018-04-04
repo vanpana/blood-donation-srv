@@ -30,7 +30,8 @@
     </role>
     <schema id="6" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-04-04.18:23:56.931</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2018-04-04.18:30:29.186</IntrospectionTimestamp>
+      <IntrospectionStateNumber>627</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -49,5 +50,51 @@
     <schema id="11" parent="2" name="information_schema">
       <ObjectId>12087</ObjectId>
     </schema>
+    <table id="12" parent="6" name="Donation">
+      <ObjectId>16394</ObjectId>
+      <StateNumber>627</StateNumber>
+    </table>
+    <column id="13" parent="12" name="iddonation">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>627</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="14" parent="12" name="cnp">
+      <Position>2</Position>
+      <DataType>bigint|0</DataType>
+      <StateNumber>627</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="15" parent="12" name="quantity">
+      <Position>3</Position>
+      <DataType>real|0</DataType>
+      <StateNumber>627</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <column id="16" parent="12" name="status">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>627</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="17" parent="12" name="idblood">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>627</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="18" parent="12" name="Donation_pkey">
+      <ObjectId>16397</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="19" parent="12" name="Donation_pkey">
+      <ObjectId>16398</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <UnderlyingIndexName>Donation_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

@@ -1,5 +1,9 @@
-CREATE TABLE public.Test
+CREATE TABLE public."Donation"
 (
-  ID SERIAL PRIMARY KEY NOT NULL,
-  Name INT NOT NULL
-);
+  iddonation integer NOT NULL,
+  cnp bigint,
+  quantity real,
+  status integer,
+  idblood integer,
+  CONSTRAINT "Donation_pkey" PRIMARY KEY (iddonation)
+)

@@ -2,7 +2,6 @@ package com.cyberschnitzel.Util;
 
 import com.cyberschnitzel.Domain.Exceptions.ConfigException;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -103,6 +102,8 @@ public class DatabaseUtil {
             Statement statement = connection.createStatement();
             statement.execute(script);
             statement.close();
+
+            System.out.println("Recreated the database!");
         }
     }
 }
