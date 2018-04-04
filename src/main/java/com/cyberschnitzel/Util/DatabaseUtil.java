@@ -30,18 +30,14 @@ public class DatabaseUtil {
             fetchCredentials();
 
             // If the connection was already made and it's not closed, release the mutex and return the connection
-            if (connection != null && !connection.isClosed()) {
-                mutex.release();
-                return connection;
+            if (connection == null || !connection.isClosed()) {
+                // Load the JDBC class
+                Class.forName("org.postgresql.Driver");
+
+                // Get the connection
+                connection = DriverManager.getConnection("jdbc:postgresql://" + DATABASE_URL + ":" + PORT + "/" +
+                        DATABASE_NAME, USER, PASSWORD);
             }
-
-            // Load the JDBC class
-            Class.forName("org.postgresql.Driver");
-
-            // Get the connection
-            connection = DriverManager.getConnection("jdbc:postgresql://" + DATABASE_URL + ":" + PORT + "/" +
-                    DATABASE_NAME, USER, PASSWORD);
-
         } catch (InterruptedException ie) {
             System.out.println("Failed to acquire mutex: " + ie.getMessage());
         } catch (SQLException sqle) {
@@ -82,6 +78,7 @@ public class DatabaseUtil {
 
     /**
      * Checks if the credentials were instantiated
+     *
      * @return true if the credentials were instantiated, false otherwise
      */
     private static boolean checkCredentials() {
