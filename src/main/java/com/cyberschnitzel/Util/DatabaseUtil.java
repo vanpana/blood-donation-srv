@@ -96,35 +96,13 @@ public class DatabaseUtil {
 
     private static void runCreatorScript() throws SQLException, ConfigException {
         if (Config.getDatabaseCreationRequest()) {
-            File creatorScriptFile = Config.getResourcesFile(Config.getDatabaseCreatioSqlFile());
+            // Get the script from the file
+            String script = FileUtil.getFileContent(Config.getResourcesFile(Config.getDatabaseCreatioSqlFile()));
 
-            BufferedReader bufferedReader = null;
-            StringBuilder script = new StringBuilder();
-
-            try {
-                // Get file from resources folder
-                bufferedReader = new BufferedReader(new FileReader(creatorScriptFile));
-
-                // Build the script from the file
-                while (bufferedReader.readLine() != null)
-                    script.append(bufferedReader.readLine());
-
-                // Execute the creator script
-                connection.createStatement().execute(script.toString());
-            } catch (FileNotFoundException fnfe) {
-                System.out.println("File not found:" + fnfe.getMessage());
-            } catch (IOException ioe) {
-                System.out.println("I/O Exception:" + ioe.getMessage());
-            } finally {
-                // Safely close the input
-                if (bufferedReader != null) {
-                    try {
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        System.out.println("Failed closing creator script file: " + e.getMessage());
-                    }
-                }
-            }
+            // Create statement and execute the query
+            Statement statement = connection.createStatement();
+            statement.execute(script);
+            statement.close();
         }
     }
 }
