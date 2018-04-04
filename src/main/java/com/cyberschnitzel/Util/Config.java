@@ -20,6 +20,9 @@ public class Config {
     private final static String PROPERTY_DB_CREATION = "db.creation";
     private final static String PROPERTY_DB_CREATION_FILENAME = "db.creation_sql";
 
+    private final static String PROPERTY_SALT = "h.salt";
+    private final static String PROPERTY_PEPPER = "h.pepper";
+
     /**
      * Get the default config properties file
      *
@@ -177,5 +180,14 @@ public class Config {
 
     public static String getDatabaseCreatioSqlFile() {
         return getValueFromPropertyKey(PROPERTY_DB_CREATION_FILENAME);
+    }
+
+    // HASHER CONFIG
+    public static String getHasherSalt() {
+        return getValueFromPropertyKey(PROPERTY_SALT);
+    }
+
+    public static String getHasherPepper() {
+        return getValueFromPropertyKey(PROPERTY_PEPPER);
     }
 }

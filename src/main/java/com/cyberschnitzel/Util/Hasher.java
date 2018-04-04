@@ -13,6 +13,8 @@ public class Hasher {
     private static final String algorithm = "AES";
     private static final byte[] keyValue =
             new byte[]{'r', 'G', 'Y', 'e', 'A', 'a', 'Z', 'Z', 'q', 'D', 'd', 'O', 'Y', 'm', 'R', 'k'};
+    private static String SALT;
+    private static String PEPPER;
 
     /**
      * Encrypt a string with AES algorithm.
@@ -22,6 +24,13 @@ public class Hasher {
      */
     public static String encrypt(String data) throws HashingException {
         try {
+            // Load salt and pepper if not already loaded
+            loadSaltAndPepper();
+
+            // Salt and pepper data
+            data = SALT + data + PEPPER;
+
+            // Hash the data
             Key key = generateKey();
             Cipher c = Cipher.getInstance(algorithm);
             c.init(Cipher.ENCRYPT_MODE, key);
@@ -39,12 +48,17 @@ public class Hasher {
      * @return the decrypted string
      */
     public static String decrypt(String encryptedData) throws Exception {
+        // Load salt and pepper if not already loaded
+        loadSaltAndPepper();
+
         Key key = generateKey();
         Cipher c = Cipher.getInstance(algorithm);
         c.init(Cipher.DECRYPT_MODE, key);
         byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedData);
         byte[] decValue = c.doFinal(decordedValue);
-        return new String(decValue);
+
+        // Desalt and depepper data and return it
+        return new String(decValue).replace(SALT, "").replace(PEPPER, "");
     }
 
     /**
@@ -56,5 +70,12 @@ public class Hasher {
 
     public static String getToken() throws HashingException {
         return encrypt(UUID.randomUUID().toString());
+    }
+
+    public static void loadSaltAndPepper() {
+        if (SALT == null || PEPPER == null) {
+            SALT = Config.getHasherSalt();
+            PEPPER = Config.getHasherPepper();
+        }
     }
 }
