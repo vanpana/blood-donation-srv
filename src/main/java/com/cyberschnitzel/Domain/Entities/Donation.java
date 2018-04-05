@@ -1,6 +1,6 @@
 package com.cyberschnitzel.Domain.Entities;
 
-public class Donation extends Entity<Integer> {
+public class Donation extends Entity {
     public enum DonationStatus {
         Collected(0), Testing(1), Approved(2), Declined(3);
 

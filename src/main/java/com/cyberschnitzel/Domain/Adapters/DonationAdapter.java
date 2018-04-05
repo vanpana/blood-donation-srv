@@ -5,18 +5,19 @@ import com.cyberschnitzel.Domain.Entities.Donation;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class DonationAdapter implements Adapter<Integer, Donation> {
+public class DonationAdapter implements Adapter<Donation> {
     public DonationAdapter() {
     }
 
     @Override
     public PreparedStatement saveQuery(Donation entity) throws SQLException {
         String query = "INSERT INTO \"Donation\" (cnp, quantity, status, idblood, iddonation) VALUES (?, ?, ?, ?, ?)";
-        return buildPreparedStatement(connection.prepareStatement(query), entity);
+        return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class DonationAdapter implements Adapter<Integer, Donation> {
     @Override
     public PreparedStatement updateQuery(Donation entity) throws SQLException {
         String query = "UPDATE \"Donation\" SET cnp = ?, quantity = ?, status = ?, idblood = ? WHERE iddonation = ?";
-        return buildPreparedStatement(connection.prepareStatement(query), entity);
+        return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
 
     }
 

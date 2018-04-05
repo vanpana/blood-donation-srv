@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  * @param <ID>: The identity data type
  * @param <T>:  The entity data type
  */
-public interface Adapter<ID, T> {
+public interface Adapter<T> {
     Connection connection = DatabaseUtil.getConnection();
 
     /**
@@ -29,7 +29,7 @@ public interface Adapter<ID, T> {
      * @return a PreparedStatement to be executed in the Repository
      * @throws SQLException - if the PreparedStatement can't be created
      */
-    PreparedStatement deleteQuery(ID id) throws SQLException;
+    PreparedStatement deleteQuery(Integer id) throws SQLException;
 
     /**
      * @param entity - The entity to be updated
@@ -43,7 +43,7 @@ public interface Adapter<ID, T> {
      * @return a PreparedStatement to be executed in the Repository
      * @throws SQLException - if the PreparedStatement can't be created
      */
-    PreparedStatement findOneQuery(ID id) throws SQLException;
+    PreparedStatement findOneQuery(Integer id) throws SQLException;
 
     /**
      * @return a PreparedStatement to be executed in the Repository

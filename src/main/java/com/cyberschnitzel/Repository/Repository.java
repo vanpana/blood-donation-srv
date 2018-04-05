@@ -5,7 +5,7 @@ import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 
 import java.util.Optional;
 
-public interface Repository<ID, T extends Entity<ID>> {
+public interface Repository<T extends Entity> {
     /**
      * Find the entity with the given {@code id}.
      *
@@ -15,7 +15,7 @@ public interface Repository<ID, T extends Entity<ID>> {
      * @throws IllegalArgumentException
      *             if the given id is null.
      */
-    Optional<T> findOne(ID id);
+    Optional<T> findOne(Integer id);
     /**
      *
      * @return all entities.
@@ -42,7 +42,7 @@ public interface Repository<ID, T extends Entity<ID>> {
      * @throws IllegalArgumentException
      *             if the given id is null.
      */
-    Optional<T> delete(ID id) throws IllegalArgumentException;
+    Optional<T> delete(Integer id) throws IllegalArgumentException;
     /**
      * Updates the given entity.
      *

@@ -8,17 +8,17 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DatabaseRepository<ID, T extends Entity<ID>> implements Repository<ID, T> {
+public class DatabaseRepository<T extends Entity> implements Repository<T> {
     private Validator<T> validator;
-    private Adapter<ID, T> adapter;
+    private Adapter<T> adapter;
 
-    public DatabaseRepository(Validator<T> validator, Adapter<ID, T> adapter) {
+    public DatabaseRepository(Validator<T> validator, Adapter<T> adapter) {
         this.validator = validator;
         this.adapter = adapter;
     }
 
     @Override
-    public Optional<T> findOne(ID id) {
+    public Optional<T> findOne(Integer id) {
         try {
             return Optional.ofNullable(adapter.get(adapter.findOneQuery(id).executeQuery()).collect(Collectors.toList()).get(0));
         } catch (SQLException e) {
@@ -39,15 +39,16 @@ public class DatabaseRepository<ID, T extends Entity<ID>> implements Repository<
     public Optional<T> save(T entity) {
         validator.validate(entity);
         try {
-            adapter.saveQuery(entity).execute();
-            return Optional.ofNullable(entity);
+            int id = adapter.saveQuery(entity).executeUpdate();
+            entity.setId(id);
+            return Optional.of(entity);
         } catch (SQLException e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Optional<T> delete(ID id) throws IllegalArgumentException {
+    public Optional<T> delete(Integer id) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("id must not be null");
         }

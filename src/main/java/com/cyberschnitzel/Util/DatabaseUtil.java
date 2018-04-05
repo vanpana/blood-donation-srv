@@ -18,7 +18,7 @@ public class DatabaseUtil {
     private static String PASSWORD;
 
     private static final Semaphore mutex = new Semaphore(1);
-    public static final boolean testing = false;
+    public static boolean testing = false;
 
     /**
      * Method which connects to the database.
