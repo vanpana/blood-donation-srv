@@ -1,4 +1,4 @@
-package com.cyberschnitzel.Domain.Controller;
+package com.cyberschnitzel.Controller;
 
 import com.cyberschnitzel.Domain.Adapters.BloodAdapter;
 import com.cyberschnitzel.Domain.Adapters.DonationAdapter;

@@ -1,6 +1,6 @@
 package ControllerTests;
 
-import com.cyberschnitzel.Domain.Controller.Controller;
+import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import org.junit.Test;
 
