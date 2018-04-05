@@ -20,6 +20,12 @@ public class Config {
     private final static String PROPERTY_DB_CREATION = "db.creation";
     private final static String PROPERTY_DB_CREATION_FILENAME = "db.creation_sql";
 
+    private final static String PROPERTY_TEST_DB_URL = "testdb.url";
+    private final static String PROPERTY_TEST_DB_PORT = "testdb.port";
+    private final static String PROPERTY_TEST_DB_NAME = "testdb.name";
+    private final static String PROPERTY_TEST_DB_USER = "testdb.user";
+    private final static String PROPERTY_TEST_DB_PASSWORD = "testdb.password";
+
     private final static String PROPERTY_SALT = "h.salt";
     private final static String PROPERTY_PEPPER = "h.pepper";
 
@@ -178,8 +184,29 @@ public class Config {
         return value;
     }
 
-    public static String getDatabaseCreatioSqlFile() {
+    public static String getDatabaseCreationSqlFile() {
         return getValueFromPropertyKey(PROPERTY_DB_CREATION_FILENAME);
+    }
+
+    // TEST DATABASE CONFIG
+    public static String getTestDatabaseURL() {
+        return getValueFromPropertyKey(PROPERTY_TEST_DB_URL);
+    }
+
+    public static String getTestDatabaseName() {
+        return getValueFromPropertyKey(PROPERTY_TEST_DB_NAME);
+    }
+
+    public static int getTestDatabasePort() {
+        return Integer.valueOf(getValueFromPropertyKey(PROPERTY_TEST_DB_PORT));
+    }
+
+    public static String getTestDatabaseUser() {
+        return getValueFromPropertyKey(PROPERTY_TEST_DB_USER);
+    }
+
+    public static String getTestDatabasePassword() {
+        return getValueFromPropertyKey(PROPERTY_TEST_DB_PASSWORD);
     }
 
     // HASHER CONFIG

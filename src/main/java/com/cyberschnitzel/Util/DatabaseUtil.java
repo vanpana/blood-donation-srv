@@ -18,6 +18,7 @@ public class DatabaseUtil {
     private static String PASSWORD;
 
     private static final Semaphore mutex = new Semaphore(1);
+    public static final boolean testing = false;
 
     /**
      * Method which connects to the database.
@@ -76,11 +77,19 @@ public class DatabaseUtil {
      */
     private static void fetchCredentials() {
         if (!checkCredentials()) {
-            DATABASE_URL = Config.getDatabaseURL();
-            PORT = Config.getDatabasePort();
-            DATABASE_NAME = Config.getDatabaseName();
-            USER = Config.getDatabaseUser();
-            PASSWORD = Config.getDatabasePassword();
+            if (!testing) {
+                DATABASE_URL = Config.getDatabaseURL();
+                PORT = Config.getDatabasePort();
+                DATABASE_NAME = Config.getDatabaseName();
+                USER = Config.getDatabaseUser();
+                PASSWORD = Config.getDatabasePassword();
+            } else {
+                DATABASE_URL = Config.getTestDatabaseURL();
+                PORT = Config.getTestDatabasePort();
+                DATABASE_NAME = Config.getTestDatabaseName();
+                USER = Config.getTestDatabaseUser();
+                PASSWORD = Config.getTestDatabasePassword();
+            }
         }
     }
 
@@ -94,9 +103,9 @@ public class DatabaseUtil {
     }
 
     private static void runCreatorScript() throws SQLException, ConfigException {
-        if (Config.getDatabaseCreationRequest()) {
+        if (testing || Config.getDatabaseCreationRequest()) {
             // Get the script from the file
-            String script = FileUtil.getFileContent(Config.getResourcesFile(Config.getDatabaseCreatioSqlFile()));
+            String script = FileUtil.getFileContent(Config.getResourcesFile(Config.getDatabaseCreationSqlFile()));
 
             // Create statement and execute the query
             Statement statement = connection.createStatement();

@@ -63,7 +63,7 @@
       <file leaf-file-name="Endpoints.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="75">
               <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -89,12 +89,45 @@
       <file leaf-file-name="Hasher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Hasher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="793">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="88">
+              <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1723#1724#0" expanded="true" />
-                <element signature="e#1784#1785#0" expanded="true" />
+                <element signature="e#2161#2162#0" expanded="true" />
+                <element signature="e#2222#2223#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Config.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="463">
+              <caret line="190" column="54" lean-forward="false" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getPropertiesFile#0;class#Config#0" expanded="false" />
+                <element signature="method#getResourcesFile#0;class#Config#0" expanded="false" />
+                <element signature="method#getValueFromPropertyKey#0;class#Config#0" expanded="false" />
+                <element signature="method#writeValueToPropertyKey#0;class#Config#0" expanded="false" />
+                <element signature="e#5394#5395#0" expanded="true" />
+                <element signature="e#5457#5458#0" expanded="true" />
+                <element signature="e#5503#5504#0" expanded="true" />
+                <element signature="e#5567#5568#0" expanded="true" />
+                <element signature="e#5610#5611#0" expanded="true" />
+                <element signature="e#5691#5692#0" expanded="true" />
+                <element signature="e#5737#5738#0" expanded="true" />
+                <element signature="e#5801#5802#0" expanded="true" />
+                <element signature="e#5851#5852#0" expanded="true" />
+                <element signature="e#5919#5920#0" expanded="true" />
+                <element signature="method#getDatabaseCreationRequest#0;class#Config#0" expanded="false" />
+                <element signature="e#6232#6233#0" expanded="true" />
+                <element signature="e#6309#6310#0" expanded="true" />
+                <element signature="e#6374#6375#0" expanded="true" />
+                <element signature="e#6435#6436#0" expanded="true" />
+                <element signature="e#6481#6482#0" expanded="true" />
+                <element signature="e#6544#6545#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,8 +136,8 @@
       <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            <state relative-caret-position="240">
+              <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -165,12 +198,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/FileUtil.java" />
         <option value="$PROJECT_DIR$/src/main/resources/creator.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/DatabaseUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Config.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Exceptions/HashingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport/Requests/MessageRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Config.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Hasher.java" />
       </list>
     </option>
@@ -312,6 +347,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="cyberschnitzel" type="462c0819:PsiDirectoryNode" />
+              <item name="Domain" type="462c0819:PsiDirectoryNode" />
+              <item name="Transport" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blood-donation-srv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blood-donation-srv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="cyberschnitzel" type="462c0819:PsiDirectoryNode" />
               <item name="Util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -338,6 +384,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="SearchEverywhereHistoryKey" value="databa&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Util/DatabaseUtil.java" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cyberschnitzel.Domain.Transport.Requests" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -520,12 +571,12 @@
       <updated>1521029783906</updated>
       <workItem from="1521029785230" duration="988000" />
       <workItem from="1522164592203" duration="3175000" />
-      <workItem from="1522858414903" duration="554000" />
+      <workItem from="1522858414903" duration="1351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14726000" />
+    <option name="totallyTimeSpent" value="15523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -602,19 +653,6 @@
     <option name="serverIp" value="localhost" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="46" column="29" lean-forward="false" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#557#558#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/Demo/Demo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/View/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -869,13 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/README" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -894,20 +925,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/Demo/Demo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/handler.readme" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/DatabaseUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1635">
           <caret line="109" column="0" lean-forward="true" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -918,9 +944,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar!/javax/crypto/Cipher.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2085">
+          <caret line="178" column="31" lean-forward="false" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Exceptions/HashingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="23" />
+          <folding>
+            <element signature="e#141#142#0" expanded="false" />
+            <element signature="e#171#172#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport/Requests/MessageRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -940,33 +1009,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar!/javax/crypto/Cipher.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2085">
-          <caret line="178" column="31" lean-forward="false" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Exceptions/HashingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="23" />
+        <state relative-caret-position="463">
+          <caret line="190" column="54" lean-forward="false" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="54" />
           <folding>
-            <element signature="e#141#142#0" expanded="true" />
-            <element signature="e#171#172#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#getPropertiesFile#0;class#Config#0" expanded="false" />
+            <element signature="method#getResourcesFile#0;class#Config#0" expanded="false" />
+            <element signature="method#getValueFromPropertyKey#0;class#Config#0" expanded="false" />
+            <element signature="method#writeValueToPropertyKey#0;class#Config#0" expanded="false" />
+            <element signature="e#5394#5395#0" expanded="true" />
+            <element signature="e#5457#5458#0" expanded="true" />
+            <element signature="e#5503#5504#0" expanded="true" />
+            <element signature="e#5567#5568#0" expanded="true" />
+            <element signature="e#5610#5611#0" expanded="true" />
+            <element signature="e#5691#5692#0" expanded="true" />
+            <element signature="e#5737#5738#0" expanded="true" />
+            <element signature="e#5801#5802#0" expanded="true" />
+            <element signature="e#5851#5852#0" expanded="true" />
+            <element signature="e#5919#5920#0" expanded="true" />
+            <element signature="method#getDatabaseCreationRequest#0;class#Config#0" expanded="false" />
+            <element signature="e#6232#6233#0" expanded="true" />
+            <element signature="e#6309#6310#0" expanded="true" />
+            <element signature="e#6374#6375#0" expanded="true" />
+            <element signature="e#6435#6436#0" expanded="true" />
+            <element signature="e#6481#6482#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Hasher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="793">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state relative-caret-position="88">
+          <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1723#1724#0" expanded="true" />
-            <element signature="e#1784#1785#0" expanded="true" />
+            <element signature="e#2161#2162#0" expanded="true" />
+            <element signature="e#2222#2223#0" expanded="true" />
           </folding>
         </state>
       </provider>
