@@ -1,5 +1,8 @@
 package com.cyberschnitzel.Domain.Adapters;
 
+import com.cyberschnitzel.Util.DatabaseUtil;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,10 +10,13 @@ import java.util.stream.Stream;
 
 /**
  * Class which adapts every entity to a JDBC Repository
+ *
  * @param <ID>: The identity data type
- * @param <T>: The entity data type
+ * @param <T>:  The entity data type
  */
 public interface Adapter<ID, T> {
+    Connection connection = DatabaseUtil.getConnection();
+
     /**
      * @param entity - The entity to be saved
      * @return a PreparedStatement to be executed in the Repository
@@ -44,5 +50,6 @@ public interface Adapter<ID, T> {
      * @throws SQLException - if the PreparedStatement can't be created
      */
     PreparedStatement findAllQuery() throws SQLException;
+
     Stream<T> get(ResultSet rs);
 }

@@ -56,6 +56,4 @@ public interface Repository<ID, T extends Entity<ID>> {
      *             if the entity is not valid.
      */
     Optional<T> update(T entity) throws ValidatorException;
-    Optional<T> get(ID idx);
-
 }

@@ -69,9 +69,4 @@ public class DatabaseRepository<ID, T extends Entity<ID>> implements Repository<
             return Optional.empty();
         }
     }
-
-    @Override
-    public Optional<T> get(ID idx) {
-        return findOne(idx);
-    }
 }
