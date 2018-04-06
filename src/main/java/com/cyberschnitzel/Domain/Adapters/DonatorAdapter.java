@@ -14,8 +14,9 @@ import java.util.stream.Stream;
 public class DonatorAdapter implements Adapter<Donator> {
     @Override
     public PreparedStatement saveQuery(Donator entity) throws SQLException {
-        String query = "INSERT INTO \"Donator\" (cnp, name, bloodtype, email, password, token) VALUES (?, ?, ?, ?, ?, ?)";
-        return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
+        String query = "INSERT INTO \"Donator\" (cnp, name, bloodtype, email, password, token) VALUES (?, ?, ?, ?, ?, ?)" +
+                " RETURNING iddonator";
+        return buildPreparedStatement(connection.prepareStatement(query), entity);
     }
 
     @Override

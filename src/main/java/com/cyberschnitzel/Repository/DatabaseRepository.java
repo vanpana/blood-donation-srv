@@ -4,6 +4,7 @@ import com.cyberschnitzel.Domain.Adapters.Adapter;
 import com.cyberschnitzel.Domain.Entities.Entity;
 import com.cyberschnitzel.Domain.Validators.Validator;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,8 +40,8 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> save(T entity) {
         validator.validate(entity);
         try {
-            int id = adapter.saveQuery(entity).executeUpdate();
-            entity.setId(id);
+            ResultSet rs = adapter.saveQuery(entity).executeQuery();
+            if (rs.next()) entity.setId(rs.getInt(1));
             return Optional.of(entity);
         } catch (SQLException e) {
             return Optional.empty();

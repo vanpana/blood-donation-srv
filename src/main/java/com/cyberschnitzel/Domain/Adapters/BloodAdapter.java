@@ -17,8 +17,8 @@ public class BloodAdapter implements Adapter<Blood> {
 
     @Override
     public PreparedStatement saveQuery(Blood entity) throws SQLException {
-        String query = "INSERT INTO \"Blood\" (bloodtype) VALUES (?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        String query = "INSERT INTO \"Blood\" (bloodtype) VALUES (?) RETURNING idblood";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, entity.getBloodType().name());
         return preparedStatement;
     }
