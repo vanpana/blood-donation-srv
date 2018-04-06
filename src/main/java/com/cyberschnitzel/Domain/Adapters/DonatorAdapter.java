@@ -69,13 +69,15 @@ public class DonatorAdapter implements Adapter<Donator> {
     private PreparedStatement buildPreparedStatement(PreparedStatement preparedStatement, Donator entity) throws SQLException {
         preparedStatement.setString(1, entity.getCnp());
         preparedStatement.setString(2, entity.getName());
-        preparedStatement.setString(3, entity.getBloodtype().name());
+
+        if (entity.getBloodtype() != null) preparedStatement.setString(3, entity.getBloodtype().name());
+        else preparedStatement.setString(3, "");
         preparedStatement.setString(4, entity.getEmail());
         preparedStatement.setString(5, entity.getPassword());
         preparedStatement.setString(6, entity.getToken());
 
-        if (entity.getId() != null)
-            preparedStatement.setInt(7, entity.getId());
+        if (entity.getId() != null) preparedStatement.setInt(7, entity.getId());
+
         return preparedStatement;
     }
 }

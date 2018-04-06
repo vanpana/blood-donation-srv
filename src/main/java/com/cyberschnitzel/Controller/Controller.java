@@ -13,7 +13,6 @@ import com.cyberschnitzel.Domain.Validators.DonationValidator;
 import com.cyberschnitzel.Domain.Validators.DonatorValidator;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
-import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +82,8 @@ public class Controller {
     }
 
     public static int addDonation(int id, double quantity, int status, int bloodID) throws ControllerException {
-        try {
-            Optional<Donation> donationOptional = donationRepository.save(new Donation(getDonatorById(id).getCnp(), quantity, status, bloodID));
-            return donationOptional.isPresent() ? donationOptional.get().getId() : -1;
-        } catch (ValidatorException e) {
-            throw new ControllerException("Failed to add donation entity: " + e.getMessage());
-        }
+        if (getDonatorById(id) != null) return addDonation(getDonatorById(id).getCnp(), quantity, status, bloodID);
+        throw new ControllerException("Failed to add donation entity, no donator with id " + String.valueOf(id));
     }
 
     public static void deleteDonation(int donationID) {

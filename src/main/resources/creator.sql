@@ -61,7 +61,7 @@ CREATE TABLE public."Thrombocites"
 CREATE TABLE public."Donator"
 (
   iddonator serial NOT NULL,
-  cnp VARCHAR(10) NOT NULL,
+  cnp VARCHAR(10) NOT NULL UNIQUE,
   name character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
   email character varying COLLATE pg_catalog."default",
@@ -77,6 +77,8 @@ CREATE TABLE public."Status"
   description character varying COLLATE pg_catalog."default",
   CONSTRAINT "Status_pkey" PRIMARY KEY (idstatus)
 );
+
+INSERT INTO "Status" (idstatus, description) VALUES (0, 'Collected'), (1, 'Testing'), (2, 'Approved'), (3, 'Declined');
 
 
 CREATE TABLE public."Request"

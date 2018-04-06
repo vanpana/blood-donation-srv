@@ -21,7 +21,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> findOne(Integer id) {
         try {
             return Optional.ofNullable(adapter.get(adapter.findOneQuery(id).executeQuery()).collect(Collectors.toList()).get(0));
-        } catch (SQLException e) {
+        } catch (SQLException|IndexOutOfBoundsException e) {
             return Optional.empty();
         }
     }

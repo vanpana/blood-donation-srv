@@ -7,13 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9674c13c-7123-4898-ad54-ea305eb6dacb" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/vanpana.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_1_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_1_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_0_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/blood_donation_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/blood_donation_war_exploded.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1f9976e0-4ff3-4ed8-addd-286a97af572b.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/1f9976e0-4ff3-4ed8-addd-286a97af572b.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1f9976e0-4ff3-4ed8-addd-286a97af572b/storage_v2/_src_/database/test_blood_donation_db.GdOr7A/schema/public.abK9xQ.meta" afterPath="$PROJECT_DIR$/.idea/dataSources/1f9976e0-4ff3-4ed8-addd-286a97af572b/storage_v2/_src_/database/test_blood_donation_db.GdOr7A/schema/public.abK9xQ.meta" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/blood-donation.iml" afterPath="$PROJECT_DIR$/blood-donation.iml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/creator.sql" afterPath="$PROJECT_DIR$/src/main/resources/creator.sql" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java" afterPath="$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/cyberschnitzel/Controller/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/cyberschnitzel/Controller/Controller.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/cyberschnitzel/Domain/Adapters/DonationAdapter.class" afterPath="$PROJECT_DIR$/target/classes/com/cyberschnitzel/Domain/Adapters/DonationAdapter.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/creator.sql" afterPath="$PROJECT_DIR$/target/classes/creator.sql" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ControllerTests/DonationTests.class" afterPath="$PROJECT_DIR$/target/test-classes/ControllerTests/DonationTests.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,121 +78,68 @@
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="test_blood_donation_db@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="test_blood_donation_db: database" type="6d9b600a:PostgresImplModel$Database" />
+        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="Donator: table" type="a93d6ac6:PostgresImplModel$LocalTable" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6316166">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="84">
-                  <caret line="21" column="79" lean-forward="false" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#2701#2702#0" expanded="true" />
-                    <element signature="e#2754#2755#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DonatorValidator.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="105">
-                  <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-                  <folding>
-                    <element signature="e#219#220#0" expanded="true" />
-                    <element signature="e#273#274#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Donator.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="645">
-                  <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-                  <folding>
-                    <element signature="e#909#910#0" expanded="true" />
-                    <element signature="e#935#936#0" expanded="true" />
-                    <element signature="e#966#967#0" expanded="true" />
-                    <element signature="e#993#994#0" expanded="true" />
-                    <element signature="e#1032#1033#0" expanded="true" />
-                    <element signature="e#1064#1065#0" expanded="true" />
-                    <element signature="e#1096#1097#0" expanded="true" />
-                    <element signature="e#1124#1125#0" expanded="true" />
-                    <element signature="e#1159#1160#0" expanded="true" />
-                    <element signature="e#1190#1191#0" expanded="true" />
-                    <element signature="e#1222#1223#0" expanded="true" />
-                    <element signature="e#1250#1251#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DonatorAdapter.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
-                  <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <marker date="1523003993890" expanded="true" signature="525:618" ph="INSERT INTO \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="525:621" ph="INSERT INTO \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="860:890" ph="DELETE FROM \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="860:903" ph="DELETE FROM \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="1187:1229" ph="UPDATE \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="1187:1298" ph="UPDATE \&quot;Donator\&quot;... " />
-                    <marker date="1523003993890" expanded="true" signature="1538:1583" ph="SELECT * FRO... Donator" />
-                    <marker date="1523003993890" expanded="true" signature="1854:1879" ph="SELECT * FRO... Donator" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="creator.sql" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/creator.sql">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DonationAdapter.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="483">
-                  <caret line="48" column="4" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="4" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <marker date="1523003993902" expanded="true" signature="515:527" ph="INSERT INTO Donation... " />
-                    <marker date="1523003993902" expanded="true" signature="515:528" ph="INSERT INTO " />
-                    <marker date="1523003993902" expanded="true" signature="515:529" ph="INSERT INTO " />
-                    <marker date="1523003993902" expanded="true" signature="515:539" ph="INSERT INTO \&quot;\&quot;... " />
-                    <marker date="1523003993902" expanded="true" signature="515:592" ph="INSERT INTO \&quot;Donation\&quot;... " />
-                    <marker date="1523003993902" expanded="true" signature="831:876" ph="DELETE FROM \&quot;Donation\&quot;... " />
-                    <marker date="1523003993902" expanded="true" signature="1161:1252" ph="UPDATE \&quot;Donation\&quot;... " />
-                    <marker date="1523003993902" expanded="true" signature="1497:1544" ph="SELECT * FRO... Donation" />
-                    <marker date="1523003993902" expanded="true" signature="1820:1846" ph="SELECT * FRO... Donation" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DatabaseRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="23" column="55" lean-forward="false" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="83" column="112" lean-forward="false" selection-start-line="83" selection-start-column="112" selection-end-line="83" selection-end-column="112" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2485#2486#0" expanded="true" />
+                <element signature="e#2537#2538#0" expanded="true" />
+                <element signature="e#2590#2591#0" expanded="true" />
+                <element signature="e#2655#2656#0" expanded="true" />
+                <element signature="e#4101#4102#0" expanded="true" />
+                <element signature="e#4154#4155#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DonatorAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="37" column="79" lean-forward="true" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+              <folding>
+                <marker date="1523005764101" expanded="true" signature="525:618" ph="INSERT INTO \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="525:621" ph="INSERT INTO \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="860:890" ph="DELETE FROM \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="860:903" ph="DELETE FROM \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="1187:1229" ph="UPDATE \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="1187:1298" ph="UPDATE \&quot;Donator\&quot;... " />
+                <marker date="1523005764101" expanded="true" signature="1538:1583" ph="SELECT * FRO... Donator" />
+                <marker date="1523005764101" expanded="true" signature="1854:1879" ph="SELECT * FRO... Donator" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -213,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Handlers/Demo/Demo.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Handlers/Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entity.java" />
@@ -247,7 +205,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/Repository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/Adapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Entity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/BloodType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/DateUtil.java" />
@@ -257,13 +214,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/BloodValidator.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/d7023594-d0d4-4dd7-ac1e-8fcd67285b93/console_1.sql" />
-        <option value="$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/creator.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/1f9976e0-4ff3-4ed8-addd-286a97af572b/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java" />
       </list>
     </option>
   </component>
@@ -467,7 +426,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
-    <property name="SearchEverywhereHistoryKey" value="creat&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;crea&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;creator&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;bloo&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;confi&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/config.properties&#10;adap&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java&#10;adapter&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;blooda&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;data&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java&#10;enti&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Entity.java&#10;donationval&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Validators/DonationValidator.java&#10;pom&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/pom.xml&#10;ent&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Entity.java&#10;donat&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Donation.java&#10;databa&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Util/DatabaseUtil.java" />
+    <property name="SearchEverywhereHistoryKey" value="creat&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;Status&#9;PSI&#9;JAVA://com.cyberschnitzel.Domain.Entities.Donation.DonationStatus&#10;database&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java&#10;crea&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;test&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/test/ControllerTests/DonationTests.java&#10;creator&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/creator.sql&#10;bloo&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;confi&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/resources/config.properties&#10;adap&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java&#10;adapter&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;blooda&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Adapters/BloodAdapter.java&#10;data&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java&#10;enti&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Entity.java&#10;donationval&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Validators/DonationValidator.java&#10;pom&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/pom.xml&#10;ent&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Entity.java&#10;donat&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Domain/Entities/Donation.java&#10;databa&#9;FILE&#9;file:///Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Util/DatabaseUtil.java" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
   </component>
   <component name="RecentsManager">
@@ -487,7 +446,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in blood-donation">
+  <component name="RunManager" selected="JUnit.Ruler">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -531,6 +490,31 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="DonationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ControllerTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="blood-donation" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ControllerTests" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTests.DonationTests" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -699,17 +683,19 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.Unnamed" />
       <item index="1" class="java.lang.String" itemvalue="Application.Ruler" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.All in blood-donation" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.Ruler" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.DonationTests" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in blood-donation" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.Ruler" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Ruler" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.Ruler" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.All in blood-donation" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.DonationTests" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Ruler" />
       </list>
     </recent_temporary>
   </component>
@@ -728,44 +714,44 @@
       <updated>1521029783906</updated>
       <workItem from="1521029785230" duration="988000" />
       <workItem from="1522164592203" duration="3175000" />
-      <workItem from="1522858414903" duration="14318000" />
+      <workItem from="1522858414903" duration="16723000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 13m 24s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 06m 54s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 15m 16s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 09m 23s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 17m 06s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 09m 49s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 17m 54s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 13m 06s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 18m 02s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 13m 16s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 20m 54s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 14m 17s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 21m 22s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 15m 28s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 22m 00s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 16m 24s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_blood-donation - 2018.04.06 at 11h 22m 41s.xml">
-      <configuration name="All in blood-donation" configurationId="JUnit" />
+    <history-entry file="Ruler - 2018.04.06 at 12h 20m 22s.xml">
+      <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Ruler - 2018.04.05 at 22h 18m 58s.xml">
+    <history-entry file="Ruler - 2018.04.06 at 12h 22m 37s.xml">
       <configuration name="Ruler" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28490000" />
+    <option name="totallyTimeSpent" value="30895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -778,7 +764,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22103004" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -789,7 +775,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37484884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37484884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -853,13 +839,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java</url>
-          <line>16</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java</url>
+          <line>56</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -889,103 +875,6 @@
     <option name="serverIp" value="localhost" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/Demo/Demo.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/handler.readme" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Handlers/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/jce.jar!/javax/crypto/Cipher.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2085">
-          <caret line="178" column="31" lean-forward="false" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Exceptions/HashingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="23" />
-          <folding>
-            <element signature="e#141#142#0" expanded="false" />
-            <element signature="e#171#172#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Transport/Requests/MessageRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Util/Hasher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="59" column="49" lean-forward="false" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2161#2162#0" expanded="false" />
-            <element signature="e#2222#2223#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#530#531#0" expanded="false" />
-            <element signature="e#557#558#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://DATABASE/d7023594-d0d4-4dd7-ac1e-8fcd67285b93.SCHEMA:blood_donation_db.public">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>d7023594-d0d4-4dd7-ac1e-8fcd67285b93.SCHEMA:blood_donation_db.public</OriginalElement>
-          <nodes>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Status</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Thrombocites</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.RedCells</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Blood</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Plasma</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Patient</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Request</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Used</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Donator</node>
-            <node x="" y="">d7023594-d0d4-4dd7-ac1e-8fcd67285b93.TABLE:blood_donation_db.public.Donation</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.1684845718476746" x="499.52891390110864" y="293.2812057595046" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/DonationStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1056,14 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/rules/ExternalResource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/ClassRule.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1100,14 +981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3761">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/Repository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1201,24 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/test/Rule/Ruler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/1f9976e0-4ff3-4ed8-addd-286a97af572b/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1231,24 +1086,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.2.2/postgresql-42.2.2.jar!/org/postgresql/jdbc/PgConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="1358" column="0" lean-forward="false" selection-start-line="1358" selection-start-column="0" selection-end-line="1358" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1270,22 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1331,41 +1152,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+        <state relative-caret-position="105">
+          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
           <folding>
-            <element signature="e#909#910#0" expanded="true" />
-            <element signature="e#935#936#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#993#994#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-            <element signature="e#1064#1065#0" expanded="true" />
-            <element signature="e#1096#1097#0" expanded="true" />
-            <element signature="e#1124#1125#0" expanded="true" />
-            <element signature="e#1159#1160#0" expanded="true" />
-            <element signature="e#1190#1191#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
+            <element signature="e#219#220#0" expanded="false" />
+            <element signature="e#273#274#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/creator.sql">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.2.2/postgresql-42.2.2.jar!/org/postgresql/jdbc/PgConnection.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="157">
+          <caret line="1358" column="0" lean-forward="false" selection-start-line="1358" selection-start-column="0" selection-end-line="1358" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/sql/PreparedStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="235" column="9" lean-forward="false" selection-start-line="235" selection-start-column="9" selection-end-line="235" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="75" column="24" lean-forward="false" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+          <folding>
+            <element signature="e#2036#2037#0" expanded="false" />
+            <element signature="e#2063#2064#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/test/Rule/Ruler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="24" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding>
+            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1075#1076#0" expanded="true" />
+            <element signature="e#1103#1104#0" expanded="true" />
+            <element signature="e#1138#1139#0" expanded="true" />
+            <element signature="e#1169#1170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Entities/Donation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="59" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonationAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="48" column="4" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="48" selection-end-column="4" />
+        <state relative-caret-position="-12">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <marker date="1523003993902" expanded="true" signature="515:527" ph="INSERT INTO Donation... " />
             <marker date="1523003993902" expanded="true" signature="515:528" ph="INSERT INTO " />
             <marker date="1523003993902" expanded="true" signature="515:529" ph="INSERT INTO " />
@@ -1379,43 +1239,160 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/test/ControllerTests/DonationTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+        <state relative-caret-position="156">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1523003993890" expanded="true" signature="525:618" ph="INSERT INTO \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="525:621" ph="INSERT INTO \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="860:890" ph="DELETE FROM \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="860:903" ph="DELETE FROM \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="1187:1229" ph="UPDATE \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="1187:1298" ph="UPDATE \&quot;Donator\&quot;... " />
-            <marker date="1523003993890" expanded="true" signature="1538:1583" ph="SELECT * FRO... Donator" />
-            <marker date="1523003993890" expanded="true" signature="1854:1879" ph="SELECT * FRO... Donator" />
+            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runner/JUnitCore.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/BlockJUnit4ClassRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/Suite.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#2535#2536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/rules/RunRules.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/rules/ExternalResource.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/ParentRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="226" column="43" lean-forward="false" selection-start-line="226" selection-start-column="43" selection-end-line="226" selection-end-column="43" />
+          <folding>
+            <element signature="e#2111#2112#0" expanded="true" />
+            <element signature="e#2155#2156#0" expanded="true" />
+            <element signature="e#5951#6086#0" expanded="true" />
+            <element signature="e#6085#6086#0" expanded="true" />
+            <element signature="e#6484#6648#0" expanded="true" />
+            <element signature="e#6647#6648#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/statements/RunAfters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.2.2/postgresql-42.2.2.jar!/org/postgresql/jdbc/PgPreparedStatement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/Repository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/creator.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="62" column="11" lean-forward="false" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/1f9976e0-4ff3-4ed8-addd-286a97af572b/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="43" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Adapters/DonatorAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="37" column="79" lean-forward="true" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+          <folding>
+            <marker date="1523005764101" expanded="true" signature="525:618" ph="INSERT INTO \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="525:621" ph="INSERT INTO \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="860:890" ph="DELETE FROM \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="860:903" ph="DELETE FROM \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="1187:1229" ph="UPDATE \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="1187:1298" ph="UPDATE \&quot;Donator\&quot;... " />
+            <marker date="1523005764101" expanded="true" signature="1538:1583" ph="SELECT * FRO... Donator" />
+            <marker date="1523005764101" expanded="true" signature="1854:1879" ph="SELECT * FRO... Donator" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Repository/DatabaseRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="23" column="55" lean-forward="false" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="21" column="79" lean-forward="false" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
+        <state relative-caret-position="141">
+          <caret line="83" column="112" lean-forward="false" selection-start-line="83" selection-start-column="112" selection-end-line="83" selection-end-column="112" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2701#2702#0" expanded="true" />
-            <element signature="e#2754#2755#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cyberschnitzel/Domain/Validators/DonatorValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-          <folding>
-            <element signature="e#219#220#0" expanded="true" />
-            <element signature="e#273#274#0" expanded="true" />
+            <element signature="e#2485#2486#0" expanded="true" />
+            <element signature="e#2537#2538#0" expanded="true" />
+            <element signature="e#2590#2591#0" expanded="true" />
+            <element signature="e#2655#2656#0" expanded="true" />
+            <element signature="e#4101#4102#0" expanded="true" />
+            <element signature="e#4154#4155#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -12,6 +12,9 @@ public class Donator extends Entity {
         this.cnp = cnp;
         this.email = email;
         this.name = name;
+
+        this.password = "";
+        this.token = "";
     }
 
     public Donator setBloodType(String bloodType) {
