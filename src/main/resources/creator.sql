@@ -28,7 +28,7 @@ CREATE TABLE public."Plasma"
   CONSTRAINT "Plasma_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
 );
 
 
@@ -41,7 +41,7 @@ CREATE TABLE public."RedCells"
   CONSTRAINT "RedCells_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
 );
 
 
@@ -54,16 +54,20 @@ CREATE TABLE public."Thrombocites"
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
 );
 
 
 CREATE TABLE public."Donator"
 (
+  iddonator serial NOT NULL,
   cnp VARCHAR(10) NOT NULL,
   name character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
-  CONSTRAINT "Donator_pkey" PRIMARY KEY (cnp)
+  email character varying COLLATE pg_catalog."default",
+  password character varying COLLATE pg_catalog."default",
+  token character varying COLLATE pg_catalog."default",
+  CONSTRAINT "Donator_pkey" PRIMARY KEY (iddonator)
 );
 
 
@@ -94,15 +98,15 @@ CREATE TABLE public."Donation"
   CONSTRAINT "Donation_cnp_fkey" FOREIGN KEY (cnp)
   REFERENCES public."Donator" (cnp) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION,
+  ON DELETE CASCADE,
   CONSTRAINT "Donation_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION,
+  ON DELETE CASCADE,
   CONSTRAINT "Donation_status_fkey" FOREIGN KEY (status)
   REFERENCES public."Status" (idstatus) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
 );
 
 CREATE TABLE public."Patient"
@@ -121,9 +125,9 @@ CREATE TABLE public."Used"
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION,
+  ON DELETE CASCADE,
   CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (patientcnp)
   REFERENCES public."Patient" (cnp) MATCH SIMPLE
   ON UPDATE NO ACTION
-  ON DELETE NO ACTION
+  ON DELETE CASCADE
 )

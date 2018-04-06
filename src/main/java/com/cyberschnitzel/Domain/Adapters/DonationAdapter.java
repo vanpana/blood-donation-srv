@@ -32,7 +32,6 @@ public class DonationAdapter implements Adapter<Donation> {
     public PreparedStatement updateQuery(Donation entity) throws SQLException {
         String query = "UPDATE \"Donation\" SET cnp = ?, quantity = ?, status = ?, idblood = ? WHERE iddonation = ?";
         return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
-
     }
 
     @Override
