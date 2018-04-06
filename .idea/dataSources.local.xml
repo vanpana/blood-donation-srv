@@ -10,5 +10,14 @@
       <user-name>dbadmin</user-name>
       <introspection-schemas>blood_donation_db:public</introspection-schemas>
     </data-source>
+    <data-source name="test_blood_donation_db@localhost" uuid="1f9976e0-4ff3-4ed8-addd-286a97af572b">
+      <database-info product="PostgreSQL" version="9.5.9" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>dbadmin</user-name>
+      <introspection-schemas>test_blood_donation_db:public</introspection-schemas>
+    </data-source>
   </component>
 </project>

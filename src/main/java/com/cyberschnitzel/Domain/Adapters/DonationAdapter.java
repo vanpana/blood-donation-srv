@@ -16,7 +16,7 @@ public class DonationAdapter implements Adapter<Donation> {
 
     @Override
     public PreparedStatement saveQuery(Donation entity) throws SQLException {
-        String query = "INSERT INTO \"Donation\" (cnp, quantity, status, idblood, iddonation) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO \"Donation\" (cnp, quantity, status, idblood) VALUES (?, ?, ?, ?)";
         return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
     }
 
@@ -70,7 +70,9 @@ public class DonationAdapter implements Adapter<Donation> {
         preparedStatement.setDouble(2, entity.getQuantity());
         preparedStatement.setInt(3, entity.getStatus().getStatusID());
         preparedStatement.setInt(4, entity.getBloodID());
-        preparedStatement.setInt(5, entity.getId());
+
+        if (entity.getId() != null)
+            preparedStatement.setInt(5, entity.getId());
         return preparedStatement;
     }
 }

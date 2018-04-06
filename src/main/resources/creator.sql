@@ -1,20 +1,20 @@
---DROP TABLE public."Used";
---DROP TABLE public."Patient";
---DROP TABLE public."Donation";
---DROP TABLE public."Request";
---DROP TABLE public."Status";
---DROP TABLE public."Donator";
---DROP TABLE public."Plasma";
---DROP TABLE public."RedCells";
---DROP TABLE public."Thrombocites";
---DROP TABLE public."Blood";
+DROP TABLE public."Used";
+DROP TABLE public."Patient";
+DROP TABLE public."Donation";
+DROP TABLE public."Request";
+DROP TABLE public."Status";
+DROP TABLE public."Donator";
+DROP TABLE public."Plasma";
+DROP TABLE public."RedCells";
+DROP TABLE public."Thrombocites";
+DROP TABLE public."Blood";
 
 
 CREATE TABLE public."Blood"
 (
   idblood serial NOT NULL,
   bloodtype character varying COLLATE pg_catalog."default",
-  receivedate date,
+  receivedate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE public."Plasma"
 (
   idplasma serial NOT NULL,
   idblood integer,
-  expirationdate date,
+  expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Plasma_pkey" PRIMARY KEY (idplasma),
   CONSTRAINT "Plasma_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
@@ -36,7 +36,7 @@ CREATE TABLE public."RedCells"
 (
   idredcells serial NOT NULL,
   idblood integer,
-  expirationdate date,
+  expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "RedCells_pkey" PRIMARY KEY (idredcells),
   CONSTRAINT "RedCells_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
@@ -47,7 +47,7 @@ CREATE TABLE public."RedCells"
 
 CREATE TABLE public."Thrombocites"
 (
-  expirationdate date,
+  expirationdate TIMESTAMP DEFAULT now(),
   idthrombocite serial NOT NULL,
   idblood integer,
   CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocite),
@@ -60,7 +60,7 @@ CREATE TABLE public."Thrombocites"
 
 CREATE TABLE public."Donator"
 (
-  cnp bigint NOT NULL,
+  cnp VARCHAR(10) NOT NULL,
   name character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
   CONSTRAINT "Donator_pkey" PRIMARY KEY (cnp)
@@ -86,7 +86,7 @@ CREATE TABLE public."Request"
 CREATE TABLE public."Donation"
 (
   iddonation serial NOT NULL,
-  cnp bigint,
+  cnp VARCHAR(10),
   quantity real,
   status integer,
   idblood integer,
@@ -107,7 +107,7 @@ CREATE TABLE public."Donation"
 
 CREATE TABLE public."Patient"
 (
-  cnp bigint NOT NULL,
+  cnp VARCHAR(10) NOT NULL,
   name character varying COLLATE pg_catalog."default",
   CONSTRAINT "Patient_pkey" PRIMARY KEY (cnp)
 );
@@ -115,7 +115,7 @@ CREATE TABLE public."Patient"
 CREATE TABLE public."Used"
 (
   iddonation integer NOT NULL,
-  patientcnp bigint,
+  patientcnp VARCHAR(10),
   quantity real,
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
