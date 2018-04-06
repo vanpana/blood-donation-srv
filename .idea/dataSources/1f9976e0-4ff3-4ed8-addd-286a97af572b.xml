@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="test_blood_donation_db@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.7">
+    <root id="1"/>
+    <database id="2" parent="1" name="test_blood_donation_db">
+      <ObjectId>16384</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12379</ObjectId>
+    </database>
+    <role id="4" parent="1" name="dbadmin">
+      <ObjectId>16385</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="5" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="6" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2018-04-06.12:18:17.001</IntrospectionTimestamp>
+      <IntrospectionStateNumber>902</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="7" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_temp_1">
+      <ObjectId>11816</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11817</ObjectId>
+    </schema>
+    <schema id="11" parent="2" name="information_schema">
+      <ObjectId>12087</ObjectId>
+    </schema>
+    <sequence id="12" parent="6" name="Blood_idblood_seq">
+      <ObjectId>19856</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="13" parent="6" name="Donation_iddonation_seq">
+      <ObjectId>19942</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="14" parent="6" name="Donator_iddonator_seq">
+      <ObjectId>19910</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="15" parent="6" name="Plasma_idplasma_seq">
+      <ObjectId>19868</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="16" parent="6" name="RedCells_idredcells_seq">
+      <ObjectId>19882</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="17" parent="6" name="Request_idrequest_seq">
+      <ObjectId>19934</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="18" parent="6" name="Status_idstatus_seq">
+      <ObjectId>19923</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <sequence id="19" parent="6" name="Thrombocites_idthrombocite_seq">
+      <ObjectId>19896</ObjectId>
+      <StateNumber>902</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+    </sequence>
+    <table id="20" parent="6" name="Blood">
+      <ObjectId>19858</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="21" parent="6" name="Donation">
+      <ObjectId>19944</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="22" parent="6" name="Donator">
+      <ObjectId>19912</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="23" parent="6" name="Patient">
+      <ObjectId>19965</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="24" parent="6" name="Plasma">
+      <ObjectId>19870</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="25" parent="6" name="RedCells">
+      <ObjectId>19884</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="26" parent="6" name="Request">
+      <ObjectId>19936</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="27" parent="6" name="Status">
+      <ObjectId>19925</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="28" parent="6" name="Thrombocites">
+      <ObjectId>19898</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <table id="29" parent="6" name="Used">
+      <ObjectId>19973</ObjectId>
+      <StateNumber>902</StateNumber>
+    </table>
+    <column id="30" parent="20" name="idblood">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Blood_idblood_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Blood_idblood_seq</SequenceName>
+    </column>
+    <column id="31" parent="20" name="bloodtype">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="32" parent="20" name="receivedate">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="33" parent="20" name="Blood_pkey">
+      <ObjectId>19866</ObjectId>
+      <ColNames>idblood</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="34" parent="20" name="Blood_pkey">
+      <ObjectId>19867</ObjectId>
+      <ColNames>idblood</ColNames>
+      <UnderlyingIndexName>Blood_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="35" parent="21" name="iddonation">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Donation_iddonation_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Donation_iddonation_seq</SequenceName>
+    </column>
+    <column id="36" parent="21" name="cnp">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="37" parent="21" name="quantity">
+      <Position>3</Position>
+      <DataType>real|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <column id="38" parent="21" name="status">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="39" parent="21" name="idblood">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="40" parent="21" name="Donation_pkey">
+      <ObjectId>19948</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="41" parent="21" name="Donation_pkey">
+      <ObjectId>19949</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <UnderlyingIndexName>Donation_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="42" parent="21" name="Donation_cnp_fkey">
+      <ObjectId>19950</ObjectId>
+      <ColNames>cnp</ColNames>
+      <RefTableId>19912</RefTableId>
+      <RefColPositions>2</RefColPositions>
+      <RefTableName>Donator</RefTableName>
+      <RefKeyName>Donator_cnp_key</RefKeyName>
+      <RefColNames>cnp</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="43" parent="21" name="Donation_status_fkey">
+      <ObjectId>19960</ObjectId>
+      <ColNames>status</ColNames>
+      <RefTableId>19925</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Status</RefTableName>
+      <RefKeyName>Status_pkey</RefKeyName>
+      <RefColNames>idstatus</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="44" parent="21" name="Donation_idblood_fkey">
+      <ObjectId>19955</ObjectId>
+      <ColNames>idblood</ColNames>
+      <RefTableId>19858</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Blood</RefTableName>
+      <RefKeyName>Blood_pkey</RefKeyName>
+      <RefColNames>idblood</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="45" parent="22" name="iddonator">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Donator_iddonator_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Donator_iddonator_seq</SequenceName>
+    </column>
+    <column id="46" parent="22" name="cnp">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="47" parent="22" name="name">
+      <Position>3</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="48" parent="22" name="bloodtype">
+      <Position>4</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="49" parent="22" name="email">
+      <Position>5</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="50" parent="22" name="password">
+      <Position>6</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="51" parent="22" name="token">
+      <Position>7</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="52" parent="22" name="Donator_pkey">
+      <ObjectId>19919</ObjectId>
+      <ColNames>iddonator</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="53" parent="22" name="Donator_cnp_key">
+      <ObjectId>19921</ObjectId>
+      <ColNames>cnp</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="54" parent="22" name="Donator_pkey">
+      <ObjectId>19920</ObjectId>
+      <ColNames>iddonator</ColNames>
+      <UnderlyingIndexName>Donator_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="55" parent="22" name="Donator_cnp_key">
+      <ObjectId>19922</ObjectId>
+      <ColNames>cnp</ColNames>
+      <UnderlyingIndexName>Donator_cnp_key</UnderlyingIndexName>
+    </key>
+    <column id="56" parent="23" name="cnp">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="57" parent="23" name="name">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="58" parent="23" name="Patient_pkey">
+      <ObjectId>19971</ObjectId>
+      <ColNames>cnp</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="59" parent="23" name="Patient_pkey">
+      <ObjectId>19972</ObjectId>
+      <ColNames>cnp</ColNames>
+      <UnderlyingIndexName>Patient_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="60" parent="24" name="idplasma">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Plasma_idplasma_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Plasma_idplasma_seq</SequenceName>
+    </column>
+    <column id="61" parent="24" name="idblood">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="62" parent="24" name="expirationdate">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="63" parent="24" name="Plasma_pkey">
+      <ObjectId>19875</ObjectId>
+      <ColNames>idplasma</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="64" parent="24" name="Plasma_pkey">
+      <ObjectId>19876</ObjectId>
+      <ColNames>idplasma</ColNames>
+      <UnderlyingIndexName>Plasma_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="65" parent="24" name="Plasma_idblood_fkey">
+      <ObjectId>19877</ObjectId>
+      <ColNames>idblood</ColNames>
+      <RefTableId>19858</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Blood</RefTableName>
+      <RefKeyName>Blood_pkey</RefKeyName>
+      <RefColNames>idblood</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="66" parent="25" name="idredcells">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;RedCells_idredcells_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>RedCells_idredcells_seq</SequenceName>
+    </column>
+    <column id="67" parent="25" name="idblood">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="68" parent="25" name="expirationdate">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="69" parent="25" name="RedCells_pkey">
+      <ObjectId>19889</ObjectId>
+      <ColNames>idredcells</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="70" parent="25" name="RedCells_pkey">
+      <ObjectId>19890</ObjectId>
+      <ColNames>idredcells</ColNames>
+      <UnderlyingIndexName>RedCells_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="71" parent="25" name="RedCells_idblood_fkey">
+      <ObjectId>19891</ObjectId>
+      <ColNames>idblood</ColNames>
+      <RefTableId>19858</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Blood</RefTableName>
+      <RefKeyName>Blood_pkey</RefKeyName>
+      <RefColNames>idblood</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="72" parent="26" name="idrequest">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Request_idrequest_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Request_idrequest_seq</SequenceName>
+    </column>
+    <column id="73" parent="26" name="quantity">
+      <Position>2</Position>
+      <DataType>real|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <column id="74" parent="26" name="urgency">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="75" parent="26" name="Request_pkey">
+      <ObjectId>19940</ObjectId>
+      <ColNames>idrequest</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="76" parent="26" name="Request_pkey">
+      <ObjectId>19941</ObjectId>
+      <ColNames>idrequest</ColNames>
+      <UnderlyingIndexName>Request_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="77" parent="27" name="idstatus">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Status_idstatus_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Status_idstatus_seq</SequenceName>
+    </column>
+    <column id="78" parent="27" name="description">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="79" parent="27" name="Status_pkey">
+      <ObjectId>19932</ObjectId>
+      <ColNames>idstatus</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="80" parent="27" name="Status_pkey">
+      <ObjectId>19933</ObjectId>
+      <ColNames>idstatus</ColNames>
+      <UnderlyingIndexName>Status_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="81" parent="28" name="expirationdate">
+      <Position>1</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>now()</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="82" parent="28" name="idthrombocite">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Thrombocites_idthrombocite_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>Thrombocites_idthrombocite_seq</SequenceName>
+    </column>
+    <column id="83" parent="28" name="idblood">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="84" parent="28" name="Thrombocites_pkey">
+      <ObjectId>19903</ObjectId>
+      <ColNames>idthrombocite</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="85" parent="28" name="Thrombocites_pkey">
+      <ObjectId>19904</ObjectId>
+      <ColNames>idthrombocite</ColNames>
+      <UnderlyingIndexName>Thrombocites_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="86" parent="28" name="Thrombocites_idblood_fkey">
+      <ObjectId>19905</ObjectId>
+      <ColNames>idblood</ColNames>
+      <RefTableId>19858</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Blood</RefTableName>
+      <RefKeyName>Blood_pkey</RefKeyName>
+      <RefColNames>idblood</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="87" parent="29" name="iddonation">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>902</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="88" parent="29" name="patientcnp">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="89" parent="29" name="quantity">
+      <Position>3</Position>
+      <DataType>real|0</DataType>
+      <StateNumber>902</StateNumber>
+      <TypeId>700</TypeId>
+    </column>
+    <index id="90" parent="29" name="Used_pkey">
+      <ObjectId>19976</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="91" parent="29" name="Used_pkey">
+      <ObjectId>19977</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <UnderlyingIndexName>Used_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="92" parent="29" name="Used_iddonation_fkey">
+      <ObjectId>19978</ObjectId>
+      <ColNames>iddonation</ColNames>
+      <RefTableId>19944</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Donation</RefTableName>
+      <RefKeyName>Donation_pkey</RefKeyName>
+      <RefColNames>iddonation</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="93" parent="29" name="Used_patientcnp_fkey">
+      <ObjectId>19983</ObjectId>
+      <ColNames>patientcnp</ColNames>
+      <RefTableId>19965</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>Patient</RefTableName>
+      <RefKeyName>Patient_pkey</RefKeyName>
+      <RefColNames>cnp</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>
