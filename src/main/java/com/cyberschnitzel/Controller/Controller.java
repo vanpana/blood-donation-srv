@@ -6,6 +6,7 @@ import com.cyberschnitzel.Domain.Adapters.DonatorAdapter;
 import com.cyberschnitzel.Domain.Entities.Blood;
 import com.cyberschnitzel.Domain.Entities.Donation;
 import com.cyberschnitzel.Domain.Entities.Donator;
+import com.cyberschnitzel.Domain.Entities.Entity;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.BloodValidator;
@@ -30,7 +31,7 @@ public class Controller {
     public static int addDonator(String cnp, String email, String name) throws ControllerException {
         try {
             Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name));
-            return donatorOptional.isPresent() ? donatorOptional.get().getId() : -1;
+            return donatorOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to add donator entity: " + e.getMessage());
         }
@@ -42,7 +43,7 @@ public class Controller {
                     new Donator(cnp, email, name).setBloodType(bloodtype)
                             .setPassword(password)
                             .setToken(token));
-            return donatorOptional.isPresent() ? donatorOptional.get().getId() : -1;
+            return donatorOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to add donator entity: " + e.getMessage());
         }
@@ -63,7 +64,7 @@ public class Controller {
     public static int addBlood(String bloodType) throws ControllerException {
         try {
             Optional<Blood> bloodOptional = bloodRepository.save(new Blood(bloodType));
-            return bloodOptional.isPresent() ? bloodOptional.get().getId() : -1;
+            return bloodOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to add blood entity: " + e.getMessage());
         }
@@ -75,7 +76,7 @@ public class Controller {
     public static int addDonation(String cnp, double quantity, int status, int bloodID) throws ControllerException {
         try {
             Optional<Donation> donationOptional = donationRepository.save(new Donation(cnp, quantity, status, bloodID));
-            return donationOptional.isPresent() ? donationOptional.get().getId() : -1;
+            return donationOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to add donation entity: " + e.getMessage());
         }

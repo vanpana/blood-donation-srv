@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.UUID;
 
-public class Hasher {
+class Hasher {
     private static final String algorithm = "AES";
     private static final byte[] keyValue =
             new byte[]{'r', 'G', 'Y', 'e', 'A', 'a', 'Z', 'Z', 'q', 'D', 'd', 'O', 'Y', 'm', 'R', 'k'};
@@ -72,7 +72,7 @@ public class Hasher {
         return encrypt(UUID.randomUUID().toString());
     }
 
-    public static void loadSaltAndPepper() {
+    private static void loadSaltAndPepper() {
         if (SALT == null || PEPPER == null) {
             SALT = Config.getHasherSalt();
             PEPPER = Config.getHasherPepper();

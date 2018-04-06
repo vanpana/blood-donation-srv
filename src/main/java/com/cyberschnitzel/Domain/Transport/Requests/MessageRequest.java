@@ -1,6 +1,6 @@
 package com.cyberschnitzel.Domain.Transport.Requests;
 
-public class MessageRequest {
+class MessageRequest {
     private String email;
     private String password;
     private String token;

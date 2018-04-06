@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 /**
  * Class which adapts every entity to a JDBC Repository
  *
- * @param <ID>: The identity data type
  * @param <T>:  The entity data type
  */
 public interface Adapter<T> {

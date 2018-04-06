@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
 
-public class Config {
+class Config {
     private final static String PROPERTIES_FILENAME = "config.properties";
     private static File propertiesFile;
     private static Semaphore mutex = new Semaphore(1);

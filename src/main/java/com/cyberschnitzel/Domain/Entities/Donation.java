@@ -14,11 +14,17 @@ public class Donation extends Entity {
             return this.statusID;
         }
 
-        public static DonationStatus getByStatusID(int id) {
-            if (id == 0) return Collected;
-            else if (id == 1) return Testing;
-            else if (id == 2) return Approved;
-            else return Declined;
+        static DonationStatus getByStatusID(int id) {
+            switch (id) {
+                case 0:
+                    return Collected;
+                case 1:
+                    return Testing;
+                case 2:
+                    return Approved;
+                default:
+                    return Declined;
+            }
         }
     }
 

@@ -2,7 +2,7 @@ package com.cyberschnitzel.Util;
 
 import java.io.*;
 
-public class FileUtil {
+class FileUtil {
     public static String getFileContent(File file) {
         BufferedReader bufferedReader = null;
         StringBuilder content = new StringBuilder();

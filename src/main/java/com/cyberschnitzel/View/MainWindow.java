@@ -22,8 +22,8 @@ import com.vaadin.ui.VerticalLayout;
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
-public class MainWindow extends UI {
-    public static final boolean PRODUCTION_MODE = false;
+class MainWindow extends UI {
+    private static final boolean PRODUCTION_MODE = false;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -33,10 +33,8 @@ public class MainWindow extends UI {
         name.setCaption("Type your name here:");
 
         Button button = new Button("Click Me");
-        button.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
+        button.addClickListener(e -> layout.addComponent(new Label("Thanks " + name.getValue()
+                + ", it works!")));
         
         layout.addComponents(name, button);
         
