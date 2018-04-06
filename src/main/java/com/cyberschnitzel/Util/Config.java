@@ -111,7 +111,7 @@ public class Config {
     private static boolean writeValueToPropertyKey(String key, String value) {
         Properties properties = new Properties();
         InputStream input;
-        OutputStream output = null;
+        FileOutputStream output = null;
         String comment = "Key: " + key + ", Value: " + value;
         boolean result = false;
 
@@ -122,11 +122,11 @@ public class Config {
             // Load the properties from the file
             properties.load(input);
 
-            // Set the value to the property key
-            properties.setProperty(key, value);
-
             // Safely close the input
             input.close();
+
+            // Set the value to the property key
+            properties.setProperty(key, value);
 
             // Open the output stream
             output = new FileOutputStream(getPropertiesFile());
