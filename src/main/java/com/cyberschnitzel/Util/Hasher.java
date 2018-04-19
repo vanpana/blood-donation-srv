@@ -1,12 +1,11 @@
 package com.cyberschnitzel.Util;
 
 import com.cyberschnitzel.Domain.Exceptions.HashingException;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.util.Base64;
 import java.util.UUID;
 
 class Hasher {
@@ -35,7 +34,7 @@ class Hasher {
             Cipher c = Cipher.getInstance(algorithm);
             c.init(Cipher.ENCRYPT_MODE, key);
             byte[] encVal = c.doFinal(data.getBytes());
-            return new BASE64Encoder().encode(encVal);
+            return new String(Base64.getEncoder().encode(encVal));
         } catch (Exception e) {
             throw new HashingException("Failed to encrypt data: " + data + ": " + e.getMessage());
         }
@@ -54,7 +53,7 @@ class Hasher {
         Key key = generateKey();
         Cipher c = Cipher.getInstance(algorithm);
         c.init(Cipher.DECRYPT_MODE, key);
-        byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedData);
+        byte[] decordedValue = Base64.getDecoder().decode(encryptedData);
         byte[] decValue = c.doFinal(decordedValue);
 
         // Desalt and depepper data and return it

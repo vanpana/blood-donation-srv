@@ -1,4 +1,29 @@
-/Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Handlers/Demo/Demo.java
-/Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Handlers/Handler.java
-/Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/MyUI.java
-/Users/vanpana/Documents/Personal/Programming/blood-donation-srv/src/main/java/com/cyberschnitzel/Endpoints/Endpoints.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Exceptions\ConfigException.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Validators\BloodValidator.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Validators\Validator.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Util\Hasher.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Handlers\Handler.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Entities\BloodType.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Exceptions\ValidatorException.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Repository\Repository.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Validators\DonatorValidator.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Repository\DatabaseRepository.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Util\FileUtil.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\View\MainWindow.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Entities\Donation.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Exceptions\ControllerException.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Entities\Donator.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Adapters\Adapter.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Adapters\DonatorAdapter.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Adapters\DonationAdapter.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Transport\Requests\MessageRequest.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Util\Config.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Adapters\BloodAdapter.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Controller\Controller.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Validators\DonationValidator.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Util\DateUtil.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Util\DatabaseUtil.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Exceptions\HashingException.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Entities\Blood.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Endpoints\Endpoints.java
+C:\Users\Dorinel Panaite\Documents\Projects\MyStore\MyStore\blood-donation-srv\src\main\java\com\cyberschnitzel\Domain\Entities\Entity.java

@@ -25,6 +25,8 @@ import com.vaadin.ui.VerticalLayout;
 class MainWindow extends UI {
     private static final boolean PRODUCTION_MODE = false;
 
+    public MainWindow() { }
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
@@ -41,8 +43,8 @@ class MainWindow extends UI {
         setContent(layout);
     }
 
-    @WebServlet(urlPatterns = "/*", name = "BloodDonationServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MainWindow.class, productionMode = PRODUCTION_MODE)
+    // @WebServlet(urlPatterns = "/*", name = "BloodDonationServlet", asyncSupported = true)
+    // @VaadinServletConfiguration(ui = MainWindow.class, productionMode = PRODUCTION_MODE)
     public static class MyUIServlet extends VaadinServlet {
         // Override this function to do stuff when server initializes (get connection to DB, start schedulers etc)
         @Override
@@ -63,7 +65,7 @@ class MainWindow extends UI {
         /**
          * This method will start a thread to initialize the Database etc
          */
-        private static void initializeServices() {
+        private void initializeServices() {
             new Thread(() -> {
 
                 // This will get the database connection
@@ -75,7 +77,7 @@ class MainWindow extends UI {
         /**
          * This method will do the cleanup
          */
-        private static void teardownServices() {
+        private void teardownServices() {
             DatabaseUtil.closeConnection();
         }
     }
