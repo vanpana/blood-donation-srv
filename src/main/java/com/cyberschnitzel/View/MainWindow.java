@@ -14,6 +14,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
  * (or tab) or some part of an HTML page where a Vaadin application is embedded.
@@ -22,13 +23,13 @@ import com.vaadin.ui.VerticalLayout;
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
-class MainWindow extends UI {
+public class MainWindow extends UI {
     private static final boolean PRODUCTION_MODE = false;
 
-    public MainWindow() { }
+
 
     @Override
-    protected void init(VaadinRequest vaadinRequest) {
+    public void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
         
         final TextField name = new TextField();
@@ -43,10 +44,14 @@ class MainWindow extends UI {
         setContent(layout);
     }
 
-    // @WebServlet(urlPatterns = "/*", name = "BloodDonationServlet", asyncSupported = true)
-    // @VaadinServletConfiguration(ui = MainWindow.class, productionMode = PRODUCTION_MODE)
+    @WebServlet(urlPatterns = "/*", name = "BloodDonationServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = MainWindow.class, productionMode = PRODUCTION_MODE)
     public static class MyUIServlet extends VaadinServlet {
         // Override this function to do stuff when server initializes (get connection to DB, start schedulers etc)
+
+        public MyUIServlet(){
+            super();
+        }
         @Override
         protected void servletInitialized() throws ServletException {
             super.servletInitialized();
