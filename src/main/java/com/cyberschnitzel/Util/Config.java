@@ -3,6 +3,7 @@ package com.cyberschnitzel.Util;
 import com.cyberschnitzel.Domain.Exceptions.ConfigException;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.Semaphore;
@@ -58,8 +59,22 @@ class Config {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         URL url = classLoader.getResource(filename);
 
-        if (url != null) return new File(url.getFile());
-        else throw new ConfigException("Couldn't get resource");
+        // Check if url fetched correctly
+        if (url != null) {
+            // Fix for Windows users who have a space in their name
+            if (url.toString().contains("%20")) {
+                // Replace with space
+                String fixed = url.toString().replace("%20", " ");
+
+                // Try to rebuild the URL
+                try {
+                    url = new URL(fixed);
+                } catch (MalformedURLException e) {
+                    throw new ConfigException("Failed to reconstruct URL: " + e.getMessage());
+                }
+            }
+            return new File(url.getFile());
+        } else throw new ConfigException("Couldn't get resource");
     }
 
     /**
