@@ -15,6 +15,7 @@ import com.cyberschnitzel.Repository.Repository;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -135,4 +136,30 @@ public class Controller {
 		t.delete(id);
 		return 0;
 	}
+
+	public static Integer addBloodPart(String part, Integer originId, Integer partId, Date date) throws  ValidatorException {
+		try {
+			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+			f.setAccessible(true);
+			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+			t.save(new BloodPart(partId, originId, date));
+			return 0;
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+	public static Integer updateBloodPart(String part, Integer originId, Integer partId, Date date) throws  ValidatorException {
+		try {
+			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+			f.setAccessible(true);
+			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+			t.update(new BloodPart(partId, originId, date));
+			return 0;
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
 }

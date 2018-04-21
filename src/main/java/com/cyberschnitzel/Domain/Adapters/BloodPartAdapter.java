@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BloodPartAdapter<T extends BloodPart> implements Adapter<Blood> {
+public class BloodPartAdapter implements Adapter<Blood> {
 
 	private String tableName;
 
@@ -21,7 +21,14 @@ public class BloodPartAdapter<T extends BloodPart> implements Adapter<Blood> {
 	}
 	@Override
 	public PreparedStatement saveQuery(Blood entity) throws SQLException {
-		return null;
+		BloodPart b = (BloodPart)entity;
+		String query = "INSERT INTO " + "\"" + tableName + "\"" + "(id" + tableName.toLowerCase() + ", idblood, expirationdate) " +
+				"VALUES (?, ?, ?,";
+		PreparedStatement p = connection.prepareStatement(query);
+		p.setInt(1,b.getId());
+		p.setInt(2,b.getIdBlood());
+		p.setDate(3,new java.sql.Date(b.getExp().getTime()));
+		return p;
 	}
 
 	@Override
@@ -34,7 +41,15 @@ public class BloodPartAdapter<T extends BloodPart> implements Adapter<Blood> {
 
 	@Override
 	public PreparedStatement updateQuery(Blood entity) throws SQLException {
-		return null;
+		BloodPart b = (BloodPart)entity;
+		String query = "UPDATE " + "\"" + tableName + "\"" + "SET id" + tableName.toLowerCase() + " = ?, idblood = ?, expirationdate = ?) " +
+				"WHEN id" + tableName.toLowerCase() + " = ?";
+		PreparedStatement p = connection.prepareStatement(query);
+		p.setInt(1,b.getId());
+		p.setInt(2,b.getIdBlood());
+		p.setDate(3,new java.sql.Date(b.getExp().getTime()));
+		p.setInt(4,b.getId());
+		return p;
 	}
 
 	@Override

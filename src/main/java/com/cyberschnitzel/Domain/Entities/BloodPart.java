@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class BloodPart extends Blood {
 
-	Integer idBlood;
-	Date exp;
+	private Integer idBlood;
+	private Date exp;
 	public BloodPart(String bloodType) {
 		super(bloodType);
 	}
@@ -18,4 +18,11 @@ public class BloodPart extends Blood {
 
 	}
 
+	public Integer getIdBlood() {
+		return idBlood;
+	}
+
+	public Date getExp() {
+		return exp;
+	}
 }
