@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
 public class Handler {
     /**
      * Method that logs input, gets a string from the execution of the passed function, logs the response and returns
-     * a Response with the corresponding status and message.
+     * a MessageResponse with the corresponding status and message.
      * @param func - The function that should be called. Must return a string
      * @param endpoint - The url where the request came from
      * @param input - Input body (if necessary)
@@ -44,7 +44,7 @@ public class Handler {
         }
 
         // Log response
-        System.out.println("Response: " + response.getStatus() + " with body: " + response.getEntity());
+        System.out.println("MessageResponse: " + response.getStatus() + " with body: " + response.getEntity());
 
         // Return response
         return response;

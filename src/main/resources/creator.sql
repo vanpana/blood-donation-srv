@@ -94,7 +94,7 @@ CREATE TABLE public."Donation"
   iddonation serial NOT NULL,
   cnp VARCHAR(10),
   quantity real,
-  status integer,
+  success integer,
   idblood integer,
   CONSTRAINT "Donation_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Donation_cnp_fkey" FOREIGN KEY (cnp)
@@ -105,7 +105,7 @@ CREATE TABLE public."Donation"
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
-  CONSTRAINT "Donation_status_fkey" FOREIGN KEY (status)
+  CONSTRAINT "Donation_status_fkey" FOREIGN KEY (success)
   REFERENCES public."Status" (idstatus) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE

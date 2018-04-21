@@ -1,11 +1,10 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -14,18 +13,35 @@ import javax.ws.rs.core.Response;
 @Path("")
 public class Endpoints {
     // Endpoints path
+    private final static String DONATORS_PATH = "/donators";
+    private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
     private final static String PARAM = "param";
 
+    /**
+     * POST method to add a donation
+     * @param input - AddDonationRequest as a JSON
+     * @return Response code: 200, body: the added donation if the task was successful
+     */
     // Endpoint handlers
+    @POST
+    @Path(DONATIONS_PATH)
+    public Response addDonation(String input) {
+        return Handler.handle(() -> DonationHandlers.addDonation(input), DONATIONS_PATH, input);
+    }
 
+    @PUT
+    @Path(DONATIONS_PATH)
+    public Response updateDonation(String input) {
+
+    }
     /**
      * Method to get all donations
      *
-     * @return Response
+     * @return MessageResponse
      */
     @GET
     @Path(DONATIONS_PATH)
@@ -36,7 +52,7 @@ public class Endpoints {
     /**
      * Method to get donation by ID
      *
-     * @return Response
+     * @return MessageResponse
      */
     @GET
     @Path(DONATIONS_PATH + PATH_PARAM)

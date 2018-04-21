@@ -1,6 +1,6 @@
 package com.cyberschnitzel.Domain.Transport.Requests;
 
-class MessageRequest {
+public class MessageRequest {
     private String email;
     private String password;
     private String token;
@@ -11,6 +11,12 @@ class MessageRequest {
         this.password = password;
         this.token = token;
         this.message = message;
+    }
+
+    public MessageRequest(String email, String password, String token) {
+        this.email = email;
+        this.password = password;
+        this.token = token;
     }
 
     public String getEmail() {

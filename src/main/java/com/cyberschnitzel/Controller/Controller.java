@@ -135,6 +135,13 @@ public class Controller {
         return donatorRepository.findOne(donatorID).orElse(null);
     }
 
+    public static Donator getDonatorByEmail(String donatorEmail) {
+        for (Donator donator : getAllDonators()) {
+            if (donator.getEmail().equals(donatorEmail)) return donator;
+        }
+        return null;
+    }
+
     /**
      * Method that returns all the donators
      * @return list of donators
@@ -224,17 +231,17 @@ public class Controller {
     }
 
     /**
-     * Method that adds a donation by id.
-     * @param id - the id of the donator
+     * Method that adds a donation by donatorID.
+     * @param donatorID - the donatorID of the donator
      * @param quantity - the quantity donated
      * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
-     * @param bloodID - the id of the blood sample registered
-     * @return the id of the added donation
+     * @param bloodID - the donatorID of the blood sample registered
+     * @return the donatorID of the added donation
      * @throws ControllerException if the add failed because the data can't be validated
      */
-    public static int addDonation(int id, double quantity, int status, int bloodID) throws ControllerException {
-        if (getDonatorById(id) != null) return addDonation(getDonatorById(id).getCnp(), quantity, status, bloodID);
-        throw new ControllerException("Failed to add donation entity, no donator with id " + String.valueOf(id));
+    public static int addDonation(int donatorID, double quantity, int status, int bloodID) throws ControllerException {
+        if (getDonatorById(donatorID) != null) return addDonation(getDonatorById(donatorID).getCnp(), quantity, status, bloodID);
+        throw new ControllerException("Failed to add donation entity, no donator with donatorID " + String.valueOf(donatorID));
     }
 
     /**
