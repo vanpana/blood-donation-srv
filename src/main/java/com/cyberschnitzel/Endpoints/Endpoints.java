@@ -3,10 +3,12 @@ package com.cyberschnitzel.Endpoints;
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Handlers.Handler;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The path is set in web.xml. The base path will be *ip*:8080/api/*
@@ -65,4 +67,27 @@ public class Endpoints {
 	public Response getAllThrombocites(){
 		return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
 	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
+	public Response deletePlasma(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Plasma", id), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + REDCELLS_PATH + PATH_PARAM)
+	public Response deleteRedCells(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("RedCells", id), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH + PATH_PARAM)
+	public Response deleteThrombocites(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
+	}
+
+
 }

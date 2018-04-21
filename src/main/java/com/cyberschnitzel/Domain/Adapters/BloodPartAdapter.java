@@ -26,7 +26,10 @@ public class BloodPartAdapter<T extends BloodPart> implements Adapter<Blood> {
 
 	@Override
 	public PreparedStatement deleteQuery(Integer id) throws SQLException {
-		return null;
+		String query = "DELETE FROM " + "\"" + tableName + "\"" + " WHERE id" + tableName.toLowerCase() + " = ?";
+		PreparedStatement p = connection.prepareStatement(query);
+		p.setInt(1,id);
+		return p;
 	}
 
 	@Override

@@ -126,4 +126,13 @@ public class Controller {
 		t.findAll().iterator().forEachRemaining(temp::add);
 		return temp;
     }
+
+    public static Integer deleteBloodPart(String part, Integer id) throws NoSuchFieldException, IllegalAccessException {
+		List<Blood> temp = new ArrayList<>();
+		Field f = Controller.class.getDeclaredField("bloodParts"+part+"Repository");
+		f.setAccessible(true);
+		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
+		t.delete(id);
+		return 0;
+	}
 }

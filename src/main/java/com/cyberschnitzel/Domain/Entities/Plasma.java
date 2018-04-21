@@ -5,10 +5,12 @@ public class Plasma extends BloodPart {
 
 	public static Integer valabilityDays = 10; //Todo: change values here
 	private Blood origin;
+	private Integer idOrigin;
 	private Integer quantity;
 	public Plasma(String bloodType, Blood o) {
 		super(bloodType);
 		origin = o;
+		idOrigin = o.getId();
 	}
 	public Date getExpirationDate()
 	{

@@ -11,6 +11,7 @@ public class BloodPart extends Blood {
 	}
 	public BloodPart(Integer _id, Integer _idblood, Date _exp)
 	{
+
 		setId(_id);
 		idBlood =_idblood;
 		exp = _exp;
