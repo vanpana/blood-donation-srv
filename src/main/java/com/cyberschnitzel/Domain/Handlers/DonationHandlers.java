@@ -5,6 +5,7 @@ import com.cyberschnitzel.Domain.Entities.Donation;
 import com.cyberschnitzel.Domain.Entities.Donator;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
+import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
 import com.google.gson.Gson;
 
 import javax.ws.rs.core.Response;
@@ -35,6 +36,31 @@ public class DonationHandlers {
             return Controller.getDonationByID(donationID);
         } catch (Exception ex) {
             throw new HandlingException("Failed to handle add donation: " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Checks the donator and updates a donation
+     *
+     * @param input - Should be AddDonationRequest
+     * @return the donation object created
+     */
+    public static Donation updateDonation(String input) throws HandlingException {
+        try {
+            // Try to construct the update donation request
+            UpdateDonationRequest updateDonationRequest = new Gson().fromJson(input, UpdateDonationRequest.class);
+
+            // Validate input and get donor
+            Donator donator = DonatorInputValidator.validateInput(updateDonationRequest);
+
+            // Try to update the donation
+            Controller.updateDonation(updateDonationRequest.getDonationID(), donator.getCnp(),
+                    updateDonationRequest.getQuantity(), updateDonationRequest.getStatus(), updateDonationRequest.getBloodID());
+
+            // Try to return the donation by the id it was updated
+            return Controller.getDonationByID(updateDonationRequest.getDonationID());
+        } catch (Exception ex) {
+            throw new HandlingException("Failed to handle update donation: " + ex.getMessage());
         }
     }
 }

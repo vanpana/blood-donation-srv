@@ -36,7 +36,7 @@ public class Endpoints {
     @PUT
     @Path(DONATIONS_PATH)
     public Response updateDonation(String input) {
-
+        return Handler.handle(() -> DonationHandlers.updateDonation(input), DONATIONS_PATH, input);
     }
     /**
      * Method to get all donations
