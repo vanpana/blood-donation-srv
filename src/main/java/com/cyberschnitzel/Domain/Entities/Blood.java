@@ -7,6 +7,7 @@ public class Blood extends Entity {
     private BloodType bloodType;
     private Date receivedDate;
 
+    public Blood(){}
     public Blood(String bloodType) {
         this.bloodType = BloodType.getByString(bloodType);
     }
@@ -26,4 +27,7 @@ public class Blood extends Entity {
     public void setReceivedDate(Date receivedDate) {
         this.receivedDate = receivedDate;
     }
+
+
+    public String getType(){return "Blood";}
 }

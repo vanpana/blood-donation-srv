@@ -48,9 +48,9 @@ CREATE TABLE public."RedCells"
 CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
-  idthrombocite serial NOT NULL,
+  idthrombocites serial NOT NULL,
   idblood integer,
-  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocite),
+  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION

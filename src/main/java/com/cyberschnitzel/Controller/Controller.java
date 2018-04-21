@@ -1,12 +1,10 @@
 package com.cyberschnitzel.Controller;
 
 import com.cyberschnitzel.Domain.Adapters.BloodAdapter;
+import com.cyberschnitzel.Domain.Adapters.BloodPartAdapter;
 import com.cyberschnitzel.Domain.Adapters.DonationAdapter;
 import com.cyberschnitzel.Domain.Adapters.DonatorAdapter;
-import com.cyberschnitzel.Domain.Entities.Blood;
-import com.cyberschnitzel.Domain.Entities.Donation;
-import com.cyberschnitzel.Domain.Entities.Donator;
-import com.cyberschnitzel.Domain.Entities.Entity;
+import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.BloodValidator;
@@ -15,6 +13,7 @@ import com.cyberschnitzel.Domain.Validators.DonatorValidator;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,12 @@ public class Controller {
             new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
+    private static Repository<Blood> bloodPartsPlasmaRepository =
+			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
+	private static Repository<Blood> bloodPartsRedCellsRepository =
+			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
+	private static Repository<Blood> bloodPartsThrombocitesRepository =
+			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
 
     // Donator
     public static int addDonator(String cnp, String email, String name) throws ControllerException {
@@ -111,5 +116,14 @@ public class Controller {
         List<Donation> donations = new ArrayList<>();
         donationRepository.findAll().iterator().forEachRemaining(donations::add);
         return donations;
+    }
+
+    public static List<Blood> getBloodPart(String part) throws NoSuchFieldException, IllegalAccessException {
+		List<Blood> temp = new ArrayList<>();
+		Field f = Controller.class.getDeclaredField("bloodParts"+part+"Repository");
+		f.setAccessible(true);
+		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
+		t.findAll().iterator().forEachRemaining(temp::add);
+		return temp;
     }
 }

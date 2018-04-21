@@ -15,6 +15,10 @@ import javax.ws.rs.core.Response;
 public class Endpoints {
     // Endpoints path
     private final static String DONATIONS_PATH = "/donations";
+    private final static String BLOODPART_PATH = "/bloodpart";
+    private final static String PLASMA_PATH = "/plasma";
+    private final static String REDCELLS_PATH = "/redcells";
+    private final static String THROMBOCITES_PATH = "/thrombocites";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -43,4 +47,22 @@ public class Endpoints {
     public Response getDonation(@PathParam(PARAM) int id) {
         return Handler.handle(() -> Controller.getDonationByID(id), DONATIONS_PATH, String.valueOf(id));
     }
+
+    @GET
+	@Path(BLOODPART_PATH + PLASMA_PATH)
+	public Response getAllPlasma(){
+		return Handler.handle(() -> Controller.getBloodPart("Plasma"), BLOODPART_PATH);
+	}
+
+	@GET
+	@Path(BLOODPART_PATH + REDCELLS_PATH)
+	public Response getAllRedCells(){
+		return Handler.handle(() -> Controller.getBloodPart("RedCells"), BLOODPART_PATH);
+	}
+
+	@GET
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH)
+	public Response getAllThrombocites(){
+		return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
+	}
 }
