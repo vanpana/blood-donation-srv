@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Controller {
+    //=== REPOSITORIES
     private static Repository<Donator> donatorRepository =
             new DatabaseRepository<>(new DonatorValidator(), new DonatorAdapter());
     private static Repository<Blood> bloodRepository =
@@ -27,7 +28,15 @@ public class Controller {
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
 
-    // Donator
+    //=== DONATOR METHODS
+    /**
+     * Method that adds a donator with the base information.
+     * @param cnp - the cnp of the donator
+     * @param email - the email of the donator
+     * @param name - the name of the donator
+     * @return - the id of the added donator
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static int addDonator(String cnp, String email, String name) throws ControllerException {
         try {
             Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name));
@@ -37,6 +46,17 @@ public class Controller {
         }
     }
 
+    /**
+     * Method that adds a donator with full information.
+     * @param cnp - the cnp of the donator
+     * @param email - the email of the donator
+     * @param name - the name of the donator
+     * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
+     * @param password - the password set by the donator
+     * @param token - the token which was passed to the donator
+     * @return - the id of the added donator
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static int addDonator(String cnp, String email, String name, String bloodtype, String password, String token) throws ControllerException {
         try {
             Optional<Donator> donatorOptional = donatorRepository.save(
@@ -49,18 +69,89 @@ public class Controller {
         }
     }
 
-    public static void deleteDonator(int donationID) {
-        donatorRepository.delete(donationID);
+    /**
+     * Method that deletes a donator by id
+     * @param donatorID - the id of the donator to be deleted
+     */
+    public static void deleteDonator(int donatorID) {
+        donatorRepository.delete(donatorID);
     }
 
-
-    public static Donator getDonatorById(int id) {
-        return donatorRepository.findOne(id).orElse(null);
+    /**
+     * Method that updates the base information of a donator
+     * @param donatorID - the id of the donator to be deleted
+     * @param cnp - the cnp of the donator
+     * @param email - the email of the donator
+     * @param name - the name of the donator
+     * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
+     *@throws ControllerException if the add failed because the data can't be validated
+     */
+    public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype) throws ControllerException {
+        Donator donator = new Donator(cnp, email, name).setBloodType(bloodtype);
+        donator.setId(donatorID);
+        try {
+            donatorRepository.update(donator);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update full donator entity: " + e.getMessage());
+        }
     }
 
-    // TODO: Implement rest of the donator functions
+    /**
+     * Method that updates the donator password
+     * @param donatorID - the id of the donator
+     * @param password - the new password of the donator
+     *@throws ControllerException if the add failed because the data can't be validated
+     */
+    public static void updateDonatorPassword(int donatorID, String password) throws ControllerException {
+        Donator donator = getDonatorById(donatorID).setPassword(password);
+        try {
+        donatorRepository.update(donator);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update donator password: " + e.getMessage());
+        }
+    }
 
-    // Blood
+    /**
+     * Method that updates the donator token
+     * @param donatorID - the id of the donator
+     * @param token - the new password of the donator
+     *@throws ControllerException if the add failed because the data can't be validated
+     */
+    public static void updateDonatorToken(int donatorID, String token) throws ControllerException {
+        Donator donator = getDonatorById(donatorID).setToken(token);
+        try {
+            donatorRepository.update(donator);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update donator token: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Method that returns a donor by id
+     * @param donatorID - id of the donator to be fetched
+     * @return Donator entity
+     */
+    public static Donator getDonatorById(int donatorID) {
+        return donatorRepository.findOne(donatorID).orElse(null);
+    }
+
+    /**
+     * Method that returns all the donators
+     * @return list of donators
+     */
+    public static List<Donator> getAllDonators() {
+        List<Donator> donators = new ArrayList<>();
+        donatorRepository.findAll().iterator().forEachRemaining(donators::add);
+        return donators;
+    }
+
+    //=== BLOOD METHODS
+    /**
+     * Method that adds a blood sample
+     * @param bloodType - the bloodtype of the sample (ZERO, A, B or AB)
+     * @return the id of the added bloodtype
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static int addBlood(String bloodType) throws ControllerException {
         try {
             Optional<Blood> bloodOptional = bloodRepository.save(new Blood(bloodType));
@@ -70,9 +161,59 @@ public class Controller {
         }
     }
 
-    // TODO: Implement rest of the blood functions
+    /**
+     * Method that deletes a blood sample by id
+     * @param bloodID - the id of the donator to be deleted
+     */
+    public static void deleteBlood(int bloodID) {
+        bloodRepository.delete(bloodID);
+    }
 
-    // Donations
+    /**
+     * Method that adds a blood sample by id
+     * @param bloodID - the blood id of the sample to be updated
+     * @param bloodType - the bloodtype of the sample (ZERO, A, B or AB)
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
+    public static void updateBlood(int bloodID,String bloodType) throws ControllerException {
+        Blood blood = new Blood(bloodType);
+        blood.setId(bloodID);
+        try {
+            bloodRepository.update(blood);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update blood entity: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Method that gets a blood sample by id
+     * @param bloodID - the blood id of the sample to be fetched
+     * @return Blood
+     */
+    public static Blood getBloodByID(int bloodID) {
+        return bloodRepository.findOne(bloodID).orElse(null);
+    }
+
+    /**
+     * Method that gets all blood samples
+     * @return List of Blood (samples)
+     */
+    public static List<Blood> getAllBlood() {
+        List<Blood> blood = new ArrayList<>();
+        bloodRepository.findAll().iterator().forEachRemaining(blood::add);
+        return blood;
+    }
+
+    //=== DONATION METHODS
+    /**
+     * Method that adds a donation by cnp.
+     * @param cnp - the cnp of the donator
+     * @param quantity - the quantity donated
+     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID - the id of the blood sample registered
+     * @return the id of the added donation
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static int addDonation(String cnp, double quantity, int status, int bloodID) throws ControllerException {
         try {
             Optional<Donation> donationOptional = donationRepository.save(new Donation(cnp, quantity, status, bloodID));
@@ -82,15 +223,37 @@ public class Controller {
         }
     }
 
+    /**
+     * Method that adds a donation by id.
+     * @param id - the id of the donator
+     * @param quantity - the quantity donated
+     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID - the id of the blood sample registered
+     * @return the id of the added donation
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static int addDonation(int id, double quantity, int status, int bloodID) throws ControllerException {
         if (getDonatorById(id) != null) return addDonation(getDonatorById(id).getCnp(), quantity, status, bloodID);
         throw new ControllerException("Failed to add donation entity, no donator with id " + String.valueOf(id));
     }
 
+    /**
+     * Method that deletes a donation by id
+     * @param donationID - the id of the donation to be deleted
+     */
     public static void deleteDonation(int donationID) {
         donationRepository.delete(donationID);
     }
 
+    /**
+     * Method that updates a donation.
+     * @param donationID - the id of the donation to be updated
+     * @param cnp - the cnp of the donator
+     * @param quantity - the quantity donated
+     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID - the id of the blood sample registered
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
     public static void updateDonation(int donationID, String cnp, double quantity, int status, int bloodID) throws ControllerException {
         Donation donation = new Donation(cnp, quantity, status, bloodID);
         donation.setId(donationID);
@@ -102,11 +265,20 @@ public class Controller {
         }
     }
 
+    /**
+     * Method that gets a donations by id
+     * @param donationID - the donation id to be fetched
+     * @return Donation
+     */
     public static Donation getDonationByID(int donationID) {
         Optional<Donation> donationOptional = donationRepository.findOne(donationID);
         return donationOptional.orElse(null);
     }
 
+    /**
+     * Method that gets all donations
+     * @return List of Donatios (samples)
+     */
     public static List<Donation> getAllDonations() {
         List<Donation> donations = new ArrayList<>();
         donationRepository.findAll().iterator().forEachRemaining(donations::add);
