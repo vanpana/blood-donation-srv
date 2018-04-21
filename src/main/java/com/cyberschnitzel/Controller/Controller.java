@@ -284,7 +284,7 @@ public class Controller {
 
     /**
      * Method that gets all donations
-     * @return List of Donatios (samples)
+     * @return List of Donations
      */
     public static List<Donation> getAllDonations() {
         List<Donation> donations = new ArrayList<>();
