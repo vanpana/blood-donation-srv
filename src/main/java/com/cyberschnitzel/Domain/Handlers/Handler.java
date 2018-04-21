@@ -1,6 +1,8 @@
 package com.cyberschnitzel.Domain.Handlers;
 
 
+import com.cyberschnitzel.Domain.Exceptions.HandlingException;
+import com.cyberschnitzel.Domain.Transport.Responses.SuccessResponse;
 import com.google.gson.Gson;
 
 import javax.ws.rs.core.Response;
@@ -17,6 +19,8 @@ public class Handler {
      */
     public static Response handle(Callable func, String endpoint, String input) {
         Response response;
+        int responseCode;
+        String responseBody;
 
         // The object type doesn't matter, Gson will take care of the serialization
         Object output;
@@ -30,18 +34,26 @@ public class Handler {
 
             if (output == null) throw new NullPointerException("Not found!");
 
-            // This will serialize any object to JSON.
-            String body = new Gson().toJson(output);
-
-            // Build the successful response
-            response = Response.status(200).entity(body).build();
+            // Build the transport entity
+            SuccessResponse successResponse = new SuccessResponse(true, new Gson().toJson(output));
+            responseCode = 200;
+            responseBody = new Gson().toJson(successResponse);
+        } catch (HandlingException he) {
+            SuccessResponse successResponse = new SuccessResponse(false, he.getMessage());
+            responseCode = 200;
+            responseBody = new Gson().toJson(successResponse);
         } catch (NullPointerException npe) {
             // If no data was found, return status 404
-            response = Response.status(404).entity(npe.getMessage()).build();
+            responseCode = 404;
+            responseBody = "";
         } catch (Exception exception) {
             // Create a response based on the exception. For example, 400 means bad request
-            response = Response.status(400).build();
+            responseCode = 500;
+            responseBody = "";
         }
+
+        // Build the response entity
+        response = Response.status(responseCode).entity(responseBody).header("Content-Type", "text/json; charset=UTF-8").build();
 
         // Log response
         System.out.println("MessageResponse: " + response.getStatus() + " with body: " + response.getEntity());

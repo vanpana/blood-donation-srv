@@ -5,10 +5,11 @@ import com.cyberschnitzel.Domain.Entities.Donation;
 import com.cyberschnitzel.Domain.Entities.Donator;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
+import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
 import com.google.gson.Gson;
 
-import javax.ws.rs.core.Response;
+import java.util.List;
 
 public class DonationHandlers {
     /**
@@ -61,6 +62,34 @@ public class DonationHandlers {
             return Controller.getDonationByID(updateDonationRequest.getDonationID());
         } catch (Exception ex) {
             throw new HandlingException("Failed to handle update donation: " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Checks the donator and deletes a donation
+     *
+     * @param input - Should be MessageRequest with empty message
+     * @return the donation object deleted
+     */
+    public static Donation deleteDonation(String input, int donationID) throws HandlingException {
+        try {
+            // Try to construct the message request
+            MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+
+            // Validate input
+            DonatorInputValidator.validateInput(messageRequest);
+
+            // Try to fetch the donation by ID
+            Donation donation = Controller.getDonationByID(donationID);
+            if (donation == null) throw new Exception("Inexistent donation!");
+
+            // Delete the donation
+            Controller.deleteDonation(donationID);
+
+            // Return the deleted donation
+            return donation;
+        } catch (Exception ex) {
+            throw new HandlingException("Failed to handle delete donation: " + ex.getMessage());
         }
     }
 }
