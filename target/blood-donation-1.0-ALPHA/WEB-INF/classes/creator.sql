@@ -1,3 +1,4 @@
+DROP TABLE public."Personnel"
 DROP TABLE public."Used";
 DROP TABLE public."Patient";
 DROP TABLE public."Donation";
@@ -48,9 +49,9 @@ CREATE TABLE public."RedCells"
 CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
-  idthrombocites serial NOT NULL,
+  idthrombocite serial NOT NULL,
   idblood integer,
-  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
+  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocite),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
@@ -132,4 +133,12 @@ CREATE TABLE public."Used"
   REFERENCES public."Patient" (cnp) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
+);
+
+CREATE TABLE public."Personnel"
+(
+    idpersonnel integer NOT NULL,
+    name character varying COLLATE pg_catalog."default",
+    email character varying COLLATE pg_catalog."default",
+    CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 )

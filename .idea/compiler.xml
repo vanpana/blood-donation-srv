@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="blood-donation" target="1.8" />
+      <module name="blood-donation" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

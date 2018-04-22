@@ -14,7 +14,7 @@ public class Donation extends Entity {
             return this.statusID;
         }
 
-        static DonationStatus getByStatusID(int id) {
+        public static DonationStatus getByStatusID(int id) {
             switch (id) {
                 case 0:
                     return Collected;

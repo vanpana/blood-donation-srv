@@ -23,7 +23,6 @@ public class BloodPartTests {
 
 	@Before
 	public void setup(){
-		Controller.reinitRepositories();
 	}
 
 	@After
