@@ -40,8 +40,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> save(T entity) {
         validator.validate(entity);
         try {
-            ResultSet rs = adapter.saveQuery(entity).executeQuery();
-            if (rs.next()) entity.setId(rs.getInt(1));
+            adapter.saveQuery(entity).executeUpdate();
             return Optional.of(entity);
         } catch (SQLException e) {
             return Optional.empty();
@@ -65,7 +64,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> update(T entity) {
         validator.validate(entity);
         try {
-            adapter.updateQuery(entity).execute();
+            adapter.updateQuery(entity).executeUpdate();
             return Optional.ofNullable(entity);
         } catch (SQLException e) {
             return Optional.empty();

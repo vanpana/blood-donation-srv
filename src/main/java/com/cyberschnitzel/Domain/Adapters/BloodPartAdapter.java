@@ -23,7 +23,7 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	public PreparedStatement saveQuery(Blood entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
 		String query = "INSERT INTO " + "\"" + tableName + "\"" + "(id" + tableName.toLowerCase() + ", idblood, expirationdate) " +
-				"VALUES (?, ?, ?,";
+				"VALUES (?, ?, ?)";
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1,b.getId());
 		p.setInt(2,b.getIdBlood());
@@ -42,8 +42,8 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	@Override
 	public PreparedStatement updateQuery(Blood entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
-		String query = "UPDATE " + "\"" + tableName + "\"" + "SET id" + tableName.toLowerCase() + " = ?, idblood = ?, expirationdate = ?) " +
-				"WHEN id" + tableName.toLowerCase() + " = ?";
+		String query = "UPDATE " + "\"" + tableName + "\"" + " SET id" + tableName.toLowerCase() + " = ?, idblood = ?, expirationdate = ? " +
+				"WHERE id" + tableName.toLowerCase() + " = ?";
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1,b.getId());
 		p.setInt(2,b.getIdBlood());
@@ -54,8 +54,12 @@ public class BloodPartAdapter implements Adapter<Blood> {
 
 	@Override
 	public PreparedStatement findOneQuery(Integer id) throws SQLException {
-		return null;
+		String query = "SELECT * FROM " + "\"" + tableName + "\"" + " WHERE id" + tableName.toLowerCase() + " = ?";
+		PreparedStatement p = connection.prepareStatement(query);
+		p.setInt(1,id);
+		return p;
 	}
+
 
 	@Override
 	public PreparedStatement findAllQuery() throws SQLException {

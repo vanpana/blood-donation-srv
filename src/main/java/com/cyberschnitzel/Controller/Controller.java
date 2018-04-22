@@ -12,6 +12,7 @@ import com.cyberschnitzel.Domain.Validators.DonationValidator;
 import com.cyberschnitzel.Domain.Validators.DonatorValidator;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
+import com.cyberschnitzel.Domain.Entities.Plasma;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -32,6 +33,22 @@ public class Controller {
 			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
 	private static Repository<Blood> bloodPartsThrombocitesRepository =
 			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
+
+	public static void reinitRepositories(){
+		Repository<Donator> donatorRepository =
+				new DatabaseRepository<>(new DonatorValidator(), new DonatorAdapter());
+		Repository<Blood> bloodRepository =
+				new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
+		Repository<Donation> donationRepository =
+				new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
+		Repository<Blood> bloodPartsPlasmaRepository =
+				new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
+		Repository<Blood> bloodPartsRedCellsRepository =
+				new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
+		Repository<Blood> bloodPartsThrombocitesRepository =
+				new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
+
+	}
 
     // Donator
     public static int addDonator(String cnp, String email, String name) throws ControllerException {
@@ -128,6 +145,16 @@ public class Controller {
 		return temp;
     }
 
+
+	public static Blood findBloodPart(Class part, Integer id) throws NoSuchFieldException, IllegalAccessException {
+		List<Blood> temp = new ArrayList<>();
+		Field f = Controller.class.getDeclaredField("bloodParts"+part.getSimpleName()+"Repository");
+		f.setAccessible(true);
+		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
+		return t.findOne(id).get();
+
+	}
+
     public static Integer deleteBloodPart(String part, Integer id) throws NoSuchFieldException, IllegalAccessException {
 		List<Blood> temp = new ArrayList<>();
 		Field f = Controller.class.getDeclaredField("bloodParts"+part+"Repository");
@@ -137,14 +164,21 @@ public class Controller {
 		return 0;
 	}
 
-	public static Integer addBloodPart(String part, Integer originId, Integer partId, Date date) throws  ValidatorException {
+	public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws  ValidatorException {
 		try {
-			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
 			f.setAccessible(true);
 			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			t.save(new BloodPart(partId, originId, date));
+
+
+			BloodPart tb =  (BloodPart)part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
+
+
+			Optional<Blood> ret =  t.save(tb);
+			if(!ret.isPresent())
+				return 1;
 			return 0;
-		} catch (IllegalAccessException | NoSuchFieldException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 1;
 		}
