@@ -20,15 +20,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class Controller {
-    //=== REPOSITORIES
+    //<editor-fold desc="Repositories">
     private static Repository<Donator> donatorRepository =
             new DatabaseRepository<>(new DonatorValidator(), new DonatorAdapter());
     private static Repository<Blood> bloodRepository =
             new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
+    //</editor-fold>
 
-    //=== DONATOR METHODS
+    //<editor-fold desc="Donator methods">
     /**
      * Method that adds a donator with the base information.
      * @param cnp - the cnp of the donator
@@ -151,8 +152,9 @@ public class Controller {
         donatorRepository.findAll().iterator().forEachRemaining(donators::add);
         return donators;
     }
+    //</editor-fold>
 
-    //=== BLOOD METHODS
+    //<editor-fold desc="Blood methods">
     /**
      * Method that adds a blood sample
      * @param bloodType - the bloodtype of the sample (ZERO, A, B or AB)
@@ -210,8 +212,9 @@ public class Controller {
         bloodRepository.findAll().iterator().forEachRemaining(blood::add);
         return blood;
     }
+    //</editor-fold>
 
-    //=== DONATION METHODS
+    //<editor-fold desc="Donation methods">
     /**
      * Method that adds a donation by cnp.
      * @param cnp - the cnp of the donator
@@ -291,4 +294,5 @@ public class Controller {
         donationRepository.findAll().iterator().forEachRemaining(donations::add);
         return donations;
     }
+    //</editor-fold>
 }
