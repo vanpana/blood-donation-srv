@@ -169,11 +169,7 @@ public class Controller {
 			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
 			f.setAccessible(true);
 			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-
-
 			BloodPart tb =  (BloodPart)part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
-
-
 			Optional<Blood> ret =  t.save(tb);
 			if(!ret.isPresent())
 				return 1;

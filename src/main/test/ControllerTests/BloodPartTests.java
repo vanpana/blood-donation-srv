@@ -4,6 +4,7 @@ import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.Blood;
 import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Plasma;
+import com.cyberschnitzel.Domain.Entities.RedCells;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import org.junit.After;
@@ -74,6 +75,33 @@ public class BloodPartTests {
 		Long result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
 		Long updateResult = b.getExp().getTime();
 		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+
+
+		try {
+			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
+			retCode = Controller.addBloodPart(RedCells.class, 1, 100, d);
+		} catch (ValidatorException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			retCode = Controller.updateBloodPart("RedCells",1,100, new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"));
+		} catch (ValidatorException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		bb = Controller.findBloodPart(RedCells.class, 100);
+		b = (BloodPart)bb;
+
+		result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
+		updateResult = b.getExp().getTime();
+		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+
+
 
 	}
 
