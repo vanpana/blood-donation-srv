@@ -1,9 +1,11 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Handlers.BloodPartHandlers;
 import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
+import org.atmosphere.config.service.Put;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -138,6 +140,13 @@ public class Endpoints {
 	public Response addBloodPart(String addBloodPartRequestJson) {
 		return Handler.handle(() -> BloodPartHandlers.addBloodPart(addBloodPartRequestJson), BLOODPART_PATH,
 				addBloodPartRequestJson);
+	}
+
+	@PUT
+	@Path(BLOODPART_PATH + PATH_PARAM)
+	public Response updateBloodPart(@PathParam(PARAM) int id,String updateBloodPartRequestJson) {
+		return Handler.handle(() -> BloodPartHandlers.updateBloodPart(updateBloodPartRequestJson,id), BLOODPART_PATH,
+				updateBloodPartRequestJson);
 	}
 
 }
