@@ -1,6 +1,7 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Handlers.BloodPartHandlers;
 import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
 
@@ -131,4 +132,12 @@ public class Endpoints {
 	{
 		return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
 	}
+
+	@POST
+	@Path(BLOODPART_PATH)
+	public Response addBloodPart(String addBloodPartRequestJson) {
+		return Handler.handle(() -> BloodPartHandlers.addBloodPart(addBloodPartRequestJson), BLOODPART_PATH,
+				addBloodPartRequestJson);
+	}
+
 }

@@ -300,58 +300,77 @@ public class Controller {
     }
 
     //=== BLOOD PART METHODS
-    public static List<Blood> getBloodPart(String part) throws NoSuchFieldException, IllegalAccessException {
-		List<Blood> temp = new ArrayList<>();
-		Field f = Controller.class.getDeclaredField("bloodParts"+part+"Repository");
-		f.setAccessible(true);
-		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
-		t.findAll().iterator().forEachRemaining(temp::add);
-		return temp;
-    }
-
-
-	public static Blood findBloodPart(Class part, Integer id) throws NoSuchFieldException, IllegalAccessException {
-		List<Blood> temp = new ArrayList<>();
-		Field f = Controller.class.getDeclaredField("bloodParts"+part.getSimpleName()+"Repository");
-		f.setAccessible(true);
-		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
-		return t.findOne(id).get();
+	@SuppressWarnings("unchecked")
+    public static List<Blood> getBloodPart(String part) throws ControllerException {
+    	try {
+			List<Blood> temp = new ArrayList<>();
+			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+			f.setAccessible(true);
+			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+			t.findAll().iterator().forEachRemaining(temp::add);
+			return temp;
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			e.printStackTrace();
+			throw new ControllerException(e.getMessage());
+		}
 	}
 
-    public static Integer deleteBloodPart(String part, Integer id) throws NoSuchFieldException, IllegalAccessException {
-		List<Blood> temp = new ArrayList<>();
-		Field f = Controller.class.getDeclaredField("bloodParts"+part+"Repository");
-		f.setAccessible(true);
-		Repository<Blood> t = (Repository<Blood>)f.get(Controller.class);
-		t.delete(id);
-		return 0;
+	@SuppressWarnings("unchecked")
+	public static Blood findBloodPart(Class part, Integer id) throws ControllerException {
+    	try {
+			List<Blood> temp = new ArrayList<>();
+			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
+			f.setAccessible(true);
+			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+			return t.findOne(id).get();
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			e.printStackTrace();
+			throw new ControllerException(e.getMessage());
+		}
 	}
+	@SuppressWarnings("unchecked")
+    public static Integer deleteBloodPart(String part, Integer id) throws ControllerException {
+		try {
+			List<Blood> temp = new ArrayList<>();
+			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+			f.setAccessible(true);
+			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+			t.delete(id);
+			return 0;
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			e.printStackTrace();
+			throw new ControllerException(e.getMessage());
+		}
 
-	public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws  ValidatorException {
+	}
+	@SuppressWarnings("unchecked")
+	public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws ControllerException {
 		try {
 			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
 			f.setAccessible(true);
 			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			BloodPart tb =  (BloodPart)part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
+			BloodPart tb =  (BloodPart) part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
 			Optional<Blood> ret =  t.save(tb);
 			if(!ret.isPresent())
 				return 1;
 			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 1;
+			throw new ControllerException(e.getMessage());
 		}
 	}
-	public static Integer updateBloodPart(String part, Integer originId, Integer partId, Date date) throws  ValidatorException {
+	@SuppressWarnings("unchecked")
+	public static Integer updateBloodPart(String part, Integer originId, Integer partId, Date date) throws ControllerException {
 		try {
 			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
 			f.setAccessible(true);
 			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
 			t.update(new BloodPart(partId, originId, date));
 			return 0;
-		} catch (IllegalAccessException | NoSuchFieldException e) {
+		} catch (IllegalAccessException | ValidatorException | NoSuchFieldException e) {
 			e.printStackTrace();
-			return 1;
+			throw new ControllerException(e.getMessage());
 		}
+
 	}
 }

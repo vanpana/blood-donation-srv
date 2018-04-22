@@ -26,19 +26,19 @@ public class BloodPartTests {
 	}
 
 	@After
-	public void teardown() throws NoSuchFieldException, IllegalAccessException {
+	public void teardown() throws NoSuchFieldException, IllegalAccessException, ControllerException {
 		Controller.deleteBloodPart("Plasma", 100);
 	}
 
 	@Test
-	public void testAdd() throws NoSuchFieldException, IllegalAccessException {
+	public void testAdd() throws NoSuchFieldException, IllegalAccessException, ControllerException {
 		try {
 			retCode = Controller.addBloodPart(Plasma.class, 1, 100, new SimpleDateFormat("DD.MM.YYYY").parse("01.01.2000"));
-		} catch (ValidatorException e) {
-			fail("Validator Exception");
-			e.printStackTrace();
+
 		} catch (ParseException e) {
 			fail("Date Exception");
+			e.printStackTrace();
+		} catch (ControllerException e) {
 			e.printStackTrace();
 		}
 		assertTrue("Entity should have been added", retCode == 0);
@@ -50,12 +50,10 @@ public class BloodPartTests {
 	}
 
 	@Test
-	public void testUpdate() throws NoSuchFieldException, IllegalAccessException, ParseException {
+	public void testUpdate() throws NoSuchFieldException, IllegalAccessException, ParseException, ControllerException {
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
 			retCode = Controller.addBloodPart(Plasma.class, 1, 100, d);
-		} catch (ValidatorException e) {
-			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -63,8 +61,7 @@ public class BloodPartTests {
 		try {
 
 			retCode = Controller.updateBloodPart("Plasma",1,100, new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"));
-		} catch (ValidatorException e) {
-			e.printStackTrace();
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -79,8 +76,6 @@ public class BloodPartTests {
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
 			retCode = Controller.addBloodPart(RedCells.class, 1, 100, d);
-		} catch (ValidatorException e) {
-			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -88,8 +83,6 @@ public class BloodPartTests {
 		try {
 
 			retCode = Controller.updateBloodPart("RedCells",1,100, new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"));
-		} catch (ValidatorException e) {
-			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
