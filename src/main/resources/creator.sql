@@ -1,4 +1,4 @@
-DROP TABLE public."Personnel"
+DROP TABLE public."Personnel";
 DROP TABLE public."Used";
 DROP TABLE public."Patient";
 DROP TABLE public."Donation";
@@ -137,7 +137,7 @@ CREATE TABLE public."Used"
 
 CREATE TABLE public."Personnel"
 (
-    idpersonnel integer NOT NULL,
+    idpersonnel serial NOT NULL,
     name character varying COLLATE pg_catalog."default",
     email character varying COLLATE pg_catalog."default",
     CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
