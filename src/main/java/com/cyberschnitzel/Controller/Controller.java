@@ -3,15 +3,14 @@ package com.cyberschnitzel.Controller;
 import com.cyberschnitzel.Domain.Adapters.BloodAdapter;
 import com.cyberschnitzel.Domain.Adapters.DonationAdapter;
 import com.cyberschnitzel.Domain.Adapters.DonatorAdapter;
-import com.cyberschnitzel.Domain.Entities.Blood;
-import com.cyberschnitzel.Domain.Entities.Donation;
-import com.cyberschnitzel.Domain.Entities.Donator;
-import com.cyberschnitzel.Domain.Entities.Entity;
+import com.cyberschnitzel.Domain.Adapters.PersonnelAdapter;
+import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.BloodValidator;
 import com.cyberschnitzel.Domain.Validators.DonationValidator;
 import com.cyberschnitzel.Domain.Validators.DonatorValidator;
+import com.cyberschnitzel.Domain.Validators.PersonnelValidator;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
 
@@ -29,8 +28,10 @@ public class Controller {
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
     //</editor-fold>
 
-    //<editor-fold desc="Donator methods">
+    private static Repository<Personnel> personnelRepository =
+            new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
 
+    //<editor-fold desc="Donator methods">
     /**
      * Method that adds a donator with the base information.
      *
@@ -318,4 +319,69 @@ public class Controller {
         return donations;
     }
     //</editor-fold>
+
+    //<editor-fold desc="Personnel methods">
+    /**
+     * Method that adds a personnel with the full information.
+     * @param email - the email of the personnel
+     * @param name - the name of the personnel
+     * @return - the id of the added personnel
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
+    public static int addPersonnel(String name,String email) throws ControllerException {
+        try {
+            Optional<Personnel> personnelOptional = personnelRepository.save(new Personnel(name,email));
+            return personnelOptional.map(Entity::getId).orElse(-1);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to add personnel entity: " + e.getMessage());
+        }
+    }
+
+
+    /**
+     * Method that deletes a personnel by id
+     * @param personnelID - the id of the personnel to be deleted
+     */
+    public static void deletePersonnel(int personnelID) {
+        personnelRepository.delete(personnelID);
+    }
+
+
+    /**
+     * Method that updates the information of a personnel
+     * @param personnelID - the id of the personnel to be deleted
+     * @param name - the name of the personnel
+     * @param email - the email of the personnel
+     * @throws ControllerException if the add failed because the data can't be validated
+     */
+    public static void updatePersonnelInformation(int personnelID,String name,String email) throws ControllerException {
+        Personnel personnel = new Personnel(name,email);
+        personnel.setId(personnelID);
+        try {
+            personnelRepository.update(personnel);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update full donator entity: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Method that gets a personnel by id
+     * @param personnelID - the personnel id to be fetched
+     * @return Personnel
+     */
+    public static Personnel getPersonnelByID(int personnelID) {
+        Optional<Personnel> personnelOptional = personnelRepository.findOne(personnelID);
+        return personnelOptional.orElse(null);
+    }
+
+    /**
+     * Method that gets all personnels
+     * @return List of Personnels
+     */
+    public static List<Personnel> getAllPersonnels() {
+        List<Personnel> personnels = new ArrayList<>();
+        personnelRepository.findAll().iterator().forEachRemaining(personnels::add);
+        return personnels;
+    }
+   //</editor-fold>
 }
