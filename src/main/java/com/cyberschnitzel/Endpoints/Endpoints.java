@@ -1,6 +1,7 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Handlers.BloodHandlers;
 import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
 import com.cyberschnitzel.Domain.Handlers.PersonnelHandlers;
@@ -23,13 +24,57 @@ public class Endpoints {
     private final static String PATH_PARAM = "/{param}";
     private final static String PARAM = "param";
 
+    // Note: Important entities should not be fetched through GET method with no credentials checking, but for now, we'll
+    // keep it like this.
+
+    // TODO: Donator creation with transport request.
+
+    //<editor-fold desc="Blood endpoints">
+
+    /**
+     * POST method to add a blood samlpe
+     *
+     * @param addBloodRequestJson - AddBloodRequest as a JSON
+     * @return Response code: 200, body: the added blood if the task was successful
+     */
+    @POST
+    @Path(BLOOD_PATH)
+    public Response addBlood(String addBloodRequestJson) {
+        return Handler.handle(() -> BloodHandlers.addBlood(addBloodRequestJson), BLOOD_PATH,
+                addBloodRequestJson);
+    }
+
+    /**
+     * Method to get all blood samples
+     *
+     * @return MessageResponse
+     */
+    @GET
+    @Path(BLOOD_PATH)
+    public Response getBlood() {
+        return Handler.handle(Controller::getAllBlood, BLOOD_PATH);
+    }
+
+    /**
+     * Method to get blood sample by ID
+     *
+     * @return MessageResponse
+     */
+    @GET
+    @Path(BLOOD_PATH + PATH_PARAM)
+    public Response getBloodByID(@PathParam(PARAM) int bloodID) {
+        return Handler.handle(() -> Controller.getBloodByID(bloodID), BLOOD_PATH, String.valueOf(bloodID));
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Donation endpoints">
+
     /**
      * POST method to add a donation
      *
      * @param addDonationRequestJson - AddDonationRequest as a JSON
      * @return Response code: 200, body: the added donation if the task was successful
      */
-    // Endpoint handlers
     @POST
     @Path(DONATIONS_PATH)
     public Response addDonation(String addDonationRequestJson) {
@@ -63,8 +108,6 @@ public class Endpoints {
                 DONATIONS_PATH + PATH_PARAM, String.valueOf(id) + " " + messageRequestJson);
     }
 
-    // Note: Important entities should not be fetched through GET method with no credentials checking, but for now, we'll
-    // keep it like this.
     /**
      * Method to get all donations
      *
@@ -83,10 +126,10 @@ public class Endpoints {
      */
     @GET
     @Path(DONATIONS_PATH + PATH_PARAM)
-    public Response getDonation(@PathParam(PARAM) int donationID) {
+    public Response getDonationByID(@PathParam(PARAM) int donationID) {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
     }
-
+  //</editor-fold>
 
 
 //    /**

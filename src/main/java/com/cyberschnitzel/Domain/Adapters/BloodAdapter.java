@@ -56,13 +56,13 @@ public class BloodAdapter implements Adapter<Blood> {
     }
 
     @Override
-    public Stream<Blood> get(ResultSet rs) {
+    public Stream<Blood> get(ResultSet resultSet) {
         List<Blood> bloodList = new ArrayList<>();
         try {
-            while (rs.next()) {
-                Blood blood = new Blood(rs.getString("bloodtype"));
-                blood.setReceivedDate(rs.getDate("receivedate"));
-                blood.setId(rs.getInt("idblood"));
+            while (resultSet.next()) {
+                Blood blood = new Blood(resultSet.getString("bloodtype"));
+                blood.setReceivedDate(resultSet.getDate("receivedate"));
+                blood.setId(resultSet.getInt("idblood"));
                 bloodList.add(blood);
             }
         } catch (SQLException sqle) {

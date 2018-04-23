@@ -9,13 +9,11 @@ import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
 import com.google.gson.Gson;
 
-import java.util.List;
-
 public class DonationHandlers {
     /**
      * Checks the donator and adds a donation
      *
-     * @param input - Should be AddDonationRequest
+     * @param input - Should be AddDonationRequest as JSON
      * @return the donation object created
      */
     // TODO: In this case, donator should be changed to personnel
