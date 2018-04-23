@@ -29,11 +29,13 @@ public class Controller {
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
 
     //=== DONATOR METHODS
+
     /**
      * Method that adds a donator with the base information.
-     * @param cnp - the cnp of the donator
+     *
+     * @param cnp   - the cnp of the donator
      * @param email - the email of the donator
-     * @param name - the name of the donator
+     * @param name  - the name of the donator
      * @return - the id of the added donator
      * @throws ControllerException if the add failed because the data can't be validated
      */
@@ -48,12 +50,13 @@ public class Controller {
 
     /**
      * Method that adds a donator with full information.
-     * @param cnp - the cnp of the donator
-     * @param email - the email of the donator
-     * @param name - the name of the donator
+     *
+     * @param cnp       - the cnp of the donator
+     * @param email     - the email of the donator
+     * @param name      - the name of the donator
      * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
-     * @param password - the password set by the donator
-     * @param token - the token which was passed to the donator
+     * @param password  - the password set by the donator
+     * @param token     - the token which was passed to the donator
      * @return - the id of the added donator
      * @throws ControllerException if the add failed because the data can't be validated
      */
@@ -71,6 +74,7 @@ public class Controller {
 
     /**
      * Method that deletes a donator by id
+     *
      * @param donatorID - the id of the donator to be deleted
      */
     public static void deleteDonator(int donatorID) {
@@ -79,12 +83,13 @@ public class Controller {
 
     /**
      * Method that updates the base information of a donator
+     *
      * @param donatorID - the id of the donator to be deleted
-     * @param cnp - the cnp of the donator
-     * @param email - the email of the donator
-     * @param name - the name of the donator
+     * @param cnp       - the cnp of the donator
+     * @param email     - the email of the donator
+     * @param name      - the name of the donator
      * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
-     *@throws ControllerException if the add failed because the data can't be validated
+     * @throws ControllerException if the add failed because the data can't be validated
      */
     public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype) throws ControllerException {
         Donator donator = new Donator(cnp, email, name).setBloodType(bloodtype);
@@ -98,14 +103,15 @@ public class Controller {
 
     /**
      * Method that updates the donator password
+     *
      * @param donatorID - the id of the donator
-     * @param password - the new password of the donator
-     *@throws ControllerException if the add failed because the data can't be validated
+     * @param password  - the new password of the donator
+     * @throws ControllerException if the add failed because the data can't be validated
      */
     public static void updateDonatorPassword(int donatorID, String password) throws ControllerException {
         Donator donator = getDonatorById(donatorID).setPassword(password);
         try {
-        donatorRepository.update(donator);
+            donatorRepository.update(donator);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to update donator password: " + e.getMessage());
         }
@@ -113,9 +119,10 @@ public class Controller {
 
     /**
      * Method that updates the donator token
+     *
      * @param donatorID - the id of the donator
-     * @param token - the new password of the donator
-     *@throws ControllerException if the add failed because the data can't be validated
+     * @param token     - the new password of the donator
+     * @throws ControllerException if the add failed because the data can't be validated
      */
     public static void updateDonatorToken(int donatorID, String token) throws ControllerException {
         Donator donator = getDonatorById(donatorID).setToken(token);
@@ -128,6 +135,7 @@ public class Controller {
 
     /**
      * Method that returns a donor by id
+     *
      * @param donatorID - id of the donator to be fetched
      * @return Donator entity
      */
@@ -144,6 +152,7 @@ public class Controller {
 
     /**
      * Method that returns all the donators
+     *
      * @return list of donators
      */
     public static List<Donator> getAllDonators() {
@@ -153,8 +162,10 @@ public class Controller {
     }
 
     //=== BLOOD METHODS
+
     /**
      * Method that adds a blood sample
+     *
      * @param bloodType - the bloodtype of the sample (ZERO, A, B or AB)
      * @return the id of the added bloodtype
      * @throws ControllerException if the add failed because the data can't be validated
@@ -170,6 +181,7 @@ public class Controller {
 
     /**
      * Method that deletes a blood sample by id
+     *
      * @param bloodID - the id of the donator to be deleted
      */
     public static void deleteBlood(int bloodID) {
@@ -178,11 +190,12 @@ public class Controller {
 
     /**
      * Method that adds a blood sample by id
-     * @param bloodID - the blood id of the sample to be updated
+     *
+     * @param bloodID   - the blood id of the sample to be updated
      * @param bloodType - the bloodtype of the sample (ZERO, A, B or AB)
      * @throws ControllerException if the add failed because the data can't be validated
      */
-    public static void updateBlood(int bloodID,String bloodType) throws ControllerException {
+    public static void updateBlood(int bloodID, String bloodType) throws ControllerException {
         Blood blood = new Blood(bloodType);
         blood.setId(bloodID);
         try {
@@ -194,6 +207,7 @@ public class Controller {
 
     /**
      * Method that gets a blood sample by id
+     *
      * @param bloodID - the blood id of the sample to be fetched
      * @return Blood
      */
@@ -203,6 +217,7 @@ public class Controller {
 
     /**
      * Method that gets all blood samples
+     *
      * @return List of Blood (samples)
      */
     public static List<Blood> getAllBlood() {
@@ -212,12 +227,14 @@ public class Controller {
     }
 
     //=== DONATION METHODS
+
     /**
      * Method that adds a donation by cnp.
-     * @param cnp - the cnp of the donator
+     *
+     * @param cnp      - the cnp of the donator
      * @param quantity - the quantity donated
-     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
-     * @param bloodID - the id of the blood sample registered
+     * @param status   - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID  - the id of the blood sample registered
      * @return the id of the added donation
      * @throws ControllerException if the add failed because the data can't be validated
      */
@@ -232,20 +249,23 @@ public class Controller {
 
     /**
      * Method that adds a donation by donatorID.
+     *
      * @param donatorID - the donatorID of the donator
-     * @param quantity - the quantity donated
-     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
-     * @param bloodID - the donatorID of the blood sample registered
+     * @param quantity  - the quantity donated
+     * @param status    - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID   - the donatorID of the blood sample registered
      * @return the donatorID of the added donation
      * @throws ControllerException if the add failed because the data can't be validated
      */
     public static int addDonation(int donatorID, double quantity, int status, int bloodID) throws ControllerException {
-        if (getDonatorById(donatorID) != null) return addDonation(getDonatorById(donatorID).getCnp(), quantity, status, bloodID);
+        if (getDonatorById(donatorID) != null)
+            return addDonation(getDonatorById(donatorID).getCnp(), quantity, status, bloodID);
         throw new ControllerException("Failed to add donation entity, no donator with donatorID " + String.valueOf(donatorID));
     }
 
     /**
      * Method that deletes a donation by id
+     *
      * @param donationID - the id of the donation to be deleted
      */
     public static void deleteDonation(int donationID) {
@@ -254,11 +274,12 @@ public class Controller {
 
     /**
      * Method that updates a donation.
+     *
      * @param donationID - the id of the donation to be updated
-     * @param cnp - the cnp of the donator
-     * @param quantity - the quantity donated
-     * @param status - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
-     * @param bloodID - the id of the blood sample registered
+     * @param cnp        - the cnp of the donator
+     * @param quantity   - the quantity donated
+     * @param status     - the status of the donation (0 most probably) - 0 = Collected, 1 = Testing, 2 = Approved, 3 = Declined
+     * @param bloodID    - the id of the blood sample registered
      * @throws ControllerException if the add failed because the data can't be validated
      */
     public static void updateDonation(int donationID, String cnp, double quantity, int status, int bloodID) throws ControllerException {
@@ -274,6 +295,7 @@ public class Controller {
 
     /**
      * Method that gets a donations by id
+     *
      * @param donationID - the donation id to be fetched
      * @return Donation
      */
@@ -284,6 +306,7 @@ public class Controller {
 
     /**
      * Method that gets all donations
+     *
      * @return List of Donations
      */
     public static List<Donation> getAllDonations() {
