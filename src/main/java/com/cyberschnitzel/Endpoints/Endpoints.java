@@ -18,6 +18,7 @@ public class Endpoints {
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
    // private final static String PERSONNELS_PATH = "/personnels";
+   private final static String USED_PATH = "/used";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
