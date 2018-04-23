@@ -3,6 +3,7 @@ package com.cyberschnitzel.Endpoints;
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
+import com.cyberschnitzel.Domain.Handlers.PersonnelHandlers;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -16,6 +17,7 @@ public class Endpoints {
     private final static String DONATORS_PATH = "/donators";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
+   // private final static String PERSONNELS_PATH = "/personnels";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -84,4 +86,50 @@ public class Endpoints {
     public Response getDonation(@PathParam(PARAM) int donationID) {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
     }
+
+
+
+//    /**
+//     * POST method to add a personnel
+//     *
+//     * @param addPersonnelRequestJson - AddPersonnelRequestJson as a JSON
+//     * @return Response code: 200, body: the added personnel if the task was successful
+//     */
+//    // Endpoint handlers
+//    @POST
+//    @Path(PERSONNELS_PATH)
+//    public Response addPersonnel(String addPersonnelRequestJson) {
+//        return Handler.handle(() -> PersonnelHandlers.addPersonnel(addPersonnelRequestJson), DONATIONS_PATH,
+//                addPersonnelRequestJson);
+//    }
+//
+//    /**
+//     * PUT method to update a personnel
+//     *
+//     * @param updatePersonnelRequestJson - UpdatePersonnelRequest as a JSON
+//     * @return Response code: 200, body: the updated personnel if the task was successful
+//     */
+//    @PUT
+//    @Path(PERSONNELS_PATH)
+//    public Response updatePersonnel(String updatePersonnelRequestJson) {
+//        return Handler.handle(() -> PersonnelHandlers.updatePersonnel(updatePersonnelRequestJson), DONATIONS_PATH,
+//                updatePersonnelRequestJson);
+//    }
+//
+//
+//    /**
+//     * DELETE method to delete a personnel
+//     *
+//     * @param messageRequestJson - MessageRequest as a JSON with empty message
+//     * @return Response code: 200, body: the deleted donation if the task was successful
+//     */
+//    @DELETE
+//    @Path(DONATIONS_PATH + PATH_PARAM)
+//    public Response deleteDonation(@PathParam(PARAM) int id, String messageRequestJson) {
+//        return Handler.handle(() -> DonationHandlers.deleteDonation(messageRequestJson, id),
+//                DONATIONS_PATH + PATH_PARAM, String.valueOf(id) + " " + messageRequestJson);
+//    }
+
+
+
 }
