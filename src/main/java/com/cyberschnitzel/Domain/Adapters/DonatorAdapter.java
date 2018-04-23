@@ -48,17 +48,17 @@ public class DonatorAdapter implements Adapter<Donator> {
     }
 
     @Override
-    public Stream<Donator> get(ResultSet rs) {
+    public Stream<Donator> get(ResultSet resultSet) {
         List<Donator> donators = new ArrayList<>();
         try {
-            while (rs.next()) {
-                Donator donator = new Donator(rs.getString("cnp"),
-                        rs.getString("email"),
-                        rs.getString("name"));
-                donator.setId(rs.getInt("iddonator"));
-                donator.setBloodType(rs.getString("bloodtype"))
-                        .setPassword(rs.getString("password"))
-                        .setToken(rs.getString("token"));
+            while (resultSet.next()) {
+                Donator donator = new Donator(resultSet.getString("cnp"),
+                        resultSet.getString("email"),
+                        resultSet.getString("name"));
+                donator.setId(resultSet.getInt("iddonator"));
+                donator.setBloodType(resultSet.getString("bloodtype"))
+                        .setPassword(resultSet.getString("password"))
+                        .setToken(resultSet.getString("token"));
                 donators.add(donator);
             }
         } catch (SQLException sqle) {

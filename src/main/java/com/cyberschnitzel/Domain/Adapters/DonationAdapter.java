@@ -50,13 +50,13 @@ public class DonationAdapter implements Adapter<Donation> {
     }
 
     @Override
-    public Stream<Donation> get(ResultSet rs) {
+    public Stream<Donation> get(ResultSet resultSet) {
         List<Donation> donations = new ArrayList<>();
         try {
-            while (rs.next()) {
-                Donation donation = new Donation(rs.getString("cnp"),
-                        rs.getDouble("quantity"), rs.getInt("status"), rs.getInt("idblood"));
-                donation.setId(rs.getInt("iddonation"));
+            while (resultSet.next()) {
+                Donation donation = new Donation(resultSet.getString("cnp"),
+                        resultSet.getDouble("quantity"), resultSet.getInt("status"), resultSet.getInt("idblood"));
+                donation.setId(resultSet.getInt("iddonation"));
                 donations.add(donation);
             }
         } catch (SQLException sqle) {
