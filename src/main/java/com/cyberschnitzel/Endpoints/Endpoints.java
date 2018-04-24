@@ -24,6 +24,7 @@ public class Endpoints {
     private final static String PATH_PARAM = "/{param}";
     private final static String PARAM = "param";
 
+    // @startuml
     /**
      * POST method to add a donation
      *
@@ -37,6 +38,8 @@ public class Endpoints {
         return Handler.handle(() -> DonationHandlers.addDonation(addDonationRequestJson), DONATIONS_PATH,
                 addDonationRequestJson);
     }
+
+    //@enduml
 
     /**
      * PUT method to update a donation
