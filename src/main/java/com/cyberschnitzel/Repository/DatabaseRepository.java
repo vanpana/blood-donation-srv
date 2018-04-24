@@ -38,6 +38,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Optional<T> save(T entity) {
+//        TODO: make validation work
         validator.validate(entity);
         try {
             ResultSet rs = adapter.saveQuery(entity).executeQuery();
@@ -63,6 +64,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Optional<T> update(T entity) {
+//        TODO: MAKE VALIDATION WORK
         validator.validate(entity);
         try {
             adapter.updateQuery(entity).execute();
