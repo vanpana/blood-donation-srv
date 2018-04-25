@@ -386,7 +386,7 @@ public class Controller {
      * @param personnelEmail - the personnel email to be fetched
      * @return Personnel
      */
-    private static Personnel getPersonnelByEmail(String personnelEmail) {
+    public static Personnel getPersonnelByEmail(String personnelEmail) {
         for (Personnel personnel: getAllPersonnel()) {
             if (personnel.getEmail().equals(personnelEmail)) return personnel;
         }
@@ -475,7 +475,7 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Utils methods">
-    private static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
+    public static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
         CredentialsEntity credentialsEntity;
 
         // Try to fetch the entity with specified mail
