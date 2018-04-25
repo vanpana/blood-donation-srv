@@ -15,7 +15,7 @@ CREATE TABLE public."Blood"
 (
   idblood serial NOT NULL,
   bloodtype character varying COLLATE pg_catalog."default",
-  receivedate TIMESTAMP DEFAULT now(),
+  receiveddate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE public."Thrombocites"
 CREATE TABLE public."Donator"
 (
   iddonator serial NOT NULL,
-  cnp VARCHAR(10) NOT NULL UNIQUE,
+  cnp VARCHAR(13) NOT NULL UNIQUE,
   name character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
   email character varying COLLATE pg_catalog."default",
@@ -93,7 +93,7 @@ CREATE TABLE public."Request"
 CREATE TABLE public."Donation"
 (
   iddonation serial NOT NULL,
-  cnp VARCHAR(10),
+  cnp VARCHAR(13),
   quantity real,
   status integer,
   idblood integer,
@@ -123,7 +123,7 @@ CREATE TABLE public."Patient"
 CREATE TABLE public."Used"
 (
   iddonation integer NOT NULL,
-  patientcnp VARCHAR(10),
+  patientcnp VARCHAR(13),
   quantity real,
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)

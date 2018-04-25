@@ -8,6 +8,8 @@ import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
 
+import javax.jws.soap.SOAPBinding;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +28,9 @@ public class Controller {
             new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
     private static Repository<Patient> patientRepository =
             new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
+    private static Repository<Used> usedRepository =
+            new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
+    //</editor-fold>
 
     //<editor-fold desc="Donator methods">
     /**
@@ -320,13 +325,13 @@ public class Controller {
     /**
      * Method that adds a personnel with the full information.
      * @param email - the email of the personnel
-     * @param name - the name of the personnel
+     * @param name  - the name of the personnel
      * @return - the id of the added personnel
      * @throws ControllerException if the add failed because the data can't be validated
      */
-    public static int addPersonnel(String name,String email) throws ControllerException {
+    public static int addPersonnel(String name, String email) throws ControllerException {
         try {
-            Optional<Personnel> personnelOptional = personnelRepository.save(new Personnel(name,email));
+            Optional<Personnel> personnelOptional = personnelRepository.save(new Personnel(name, email));
             return personnelOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to add personnel entity: " + e.getMessage());
@@ -345,13 +350,14 @@ public class Controller {
 
     /**
      * Method that updates the information of a personnel
+     *
      * @param personnelID - the id of the personnel to be deleted
-     * @param name - the name of the personnel
-     * @param email - the email of the personnel
+     * @param name        - the name of the personnel
+     * @param email       - the email of the personnel
      * @throws ControllerException if the add failed because the data can't be validated
      */
-    public static void updatePersonnelInformation(int personnelID,String name,String email) throws ControllerException {
-        Personnel personnel = new Personnel(name,email);
+    public static void updatePersonnelInformation(int personnelID, String name, String email) throws ControllerException {
+        Personnel personnel = new Personnel(name, email);
         personnel.setId(personnelID);
         try {
             personnelRepository.update(personnel);
@@ -362,6 +368,7 @@ public class Controller {
 
     /**
      * Method that gets a personnel by id
+     *
      * @param personnelID - the personnel id to be fetched
      * @return Personnel
      */
@@ -372,6 +379,7 @@ public class Controller {
 
     /**
      * Method that gets all personnels
+     *
      * @return List of Personnels
      */
     public static List<Personnel> getAllPersonnels() {
@@ -379,6 +387,76 @@ public class Controller {
         personnelRepository.findAll().iterator().forEachRemaining(personnels::add);
         return personnels;
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Used methods">
+    /**
+     * Method that adds a used quantity for a specific donation having as a target the patient with a given cnp
+     *
+     * @param idDontaion - the id of the used
+     * @param patientCNP - the cnp of the patient to whom the quantity will go
+     * @param quantity   - the quantity of blood used from a given donation
+     * @return - the id of the donation
+     * @throws ControllerException -if any exception occur
+     */
+    public static int addUsed(int idDontaion, String patientCNP, float quantity) throws ControllerException {
+        try {
+            Used used = new Used(idDontaion, patientCNP, quantity);
+            Optional<Used> usedOptional = usedRepository.save(used);
+            return usedOptional.map(Entity::getId).orElse(-1);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to add a used entity, no donator with donatorID " + idDontaion + "\n" + e.getMessage());
+        }
+    }
+
+    /**
+     * Method deletes an used registration by id
+     *
+     * @param idDonation -the id of the deleted used
+     */
+    public static void deleteUsed(int idDonation) {
+        usedRepository.delete(idDonation);
+    }
+
+    /**
+     * Method that updates a used entity
+     *
+     * @param idDonation - the id donation of the used entity to be updated
+     * @param patientCNP - the new patientCNP
+     * @param quantity   - the new quantity
+     * @throws ControllerException - if the update cannot be done
+     */
+    public static void updateUsed(int idDonation, String patientCNP, float quantity) throws ControllerException {
+        Used used = new Used(idDonation, patientCNP, quantity);
+        try {
+            usedRepository.update(used);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update a used entity" + e.getMessage());
+        }
+    }
+
+    /**
+     * Method that return a used entity by id
+     *
+     * @param idDonation - the id of the used entity to be found
+     * @return - an used entity
+     */
+    public static Used getUsedById(int idDonation) {
+        Optional<Used> usedOptional = usedRepository.findOne(idDonation);
+        return usedOptional.orElse(null);
+    }
+
+    /**
+     * Method that returns the list of all used entities
+     *
+     * @return - a list of used entities
+     */
+    public static List<Used> getAllUsed() {
+        List<Used> usedList = new ArrayList<>();
+        usedRepository.findAll().iterator().forEachRemaining(usedList::add);
+        return usedList;
+    }
+    //</editor-fold>
    //</editor-fold>
 
     public static int addPatient(String cnp, String name) throws ControllerException {
