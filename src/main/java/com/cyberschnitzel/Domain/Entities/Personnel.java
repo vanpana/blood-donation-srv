@@ -1,13 +1,13 @@
 package com.cyberschnitzel.Domain.Entities;
 
-public class Personnel extends Entity {
+public class Personnel extends CredentialsEntity {
 
     private String name;
     private String email;
 
     public Personnel(String name, String email){
+        super(email);
         this.name=name;
-        this.email=email;
     }
 
     public String getName() {

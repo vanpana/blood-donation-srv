@@ -6,8 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class PersonnelTests {
 
@@ -37,7 +36,7 @@ public class PersonnelTests {
     public void addPersonnelBadEmail() {
         try {
             int personnelID = Controller.addPersonnel("Test2","incorrect.email.com");
-            assertTrue( "Bad personnel was prevented from being added!!", personnelID == -1);
+            assertEquals("Bad personnel was prevented from being added!!", personnelID, -1);
         } catch (ControllerException e) {
             fail("Error should've not been thrown: " + e.getMessage());
         }
@@ -47,7 +46,7 @@ public class PersonnelTests {
     public void addPersonnelEmptyName() {
         try {
             int personnelID = Controller.addPersonnel("","correct@email.com");
-            assertTrue( "Bad personnel was prevented from being added!!", personnelID == -1);
+            assertEquals("Bad personnel was prevented from being added!!", personnelID, -1);
         } catch (ControllerException e) {
             fail("Error should've not been thrown: " + e.getMessage());
         }

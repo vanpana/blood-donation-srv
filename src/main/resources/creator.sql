@@ -140,6 +140,8 @@ CREATE TABLE public."Personnel"
     idpersonnel serial NOT NULL,
     name character varying COLLATE pg_catalog."default",
     email character varying COLLATE pg_catalog."default",
+    password character varying COLLATE pg_catalog."default",
+    token character varying COLLATE pg_catalog."default",
     CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 );
 
