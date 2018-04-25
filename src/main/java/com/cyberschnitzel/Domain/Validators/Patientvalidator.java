@@ -11,7 +11,7 @@ public class Patientvalidator implements Validator<Patient> {
             return false;
         if (null == entity.getName())
             return false;
-        if (entity.getCnp().length() != 10)
+        if (entity.getCnp().length() != 13)
             return false;
         if (!entity.getCnp().matches("[0-9]+"))
             return false;

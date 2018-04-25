@@ -22,14 +22,14 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> findOne(Integer id) {
         try {
             return Optional.ofNullable(adapter.get(adapter.findOneQuery(id).executeQuery()).collect(Collectors.toList()).get(0));
-        } catch (SQLException|IndexOutOfBoundsException e) {
+        } catch (SQLException | IndexOutOfBoundsException e) {
             return Optional.empty();
         }
     }
 
     @Override
     public Iterable<T> findAll() {
-        try{
+        try {
             return adapter.get(adapter.findAllQuery().executeQuery()).collect(Collectors.toList());
         } catch (SQLException sqle) {
             return null;
@@ -38,15 +38,15 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Optional<T> save(T entity) {
-//        TODO: make validation work
-        validator.validate(entity);
-        try {
-            ResultSet rs = adapter.saveQuery(entity).executeQuery();
-            if (rs.next()) entity.setId(rs.getInt(1));
-            return Optional.of(entity);
-        } catch (SQLException e) {
-            return Optional.empty();
-        }
+        if (validator.validate(entity))
+            try {
+                ResultSet rs = adapter.saveQuery(entity).executeQuery();
+                if (rs.next()) entity.setId(rs.getInt(1));
+                return Optional.of(entity);
+            } catch (SQLException e) {
+                return Optional.empty();
+            }
+        return Optional.empty();
     }
 
     @Override
@@ -64,7 +64,6 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Optional<T> update(T entity) {
-//        TODO: MAKE VALIDATION WORK
         validator.validate(entity);
         try {
             adapter.updateQuery(entity).execute();

@@ -1,4 +1,4 @@
-DROP TABLE public."Personnel"
+DROP TABLE public."Personnel";
 DROP TABLE public."Used";
 DROP TABLE public."Patient";
 DROP TABLE public."Donation";
@@ -114,9 +114,10 @@ CREATE TABLE public."Donation"
 
 CREATE TABLE public."Patient"
 (
-  cnp VARCHAR(10) NOT NULL,
+  id serial NOT NULL,
+  cnp VARCHAR(13) NOT NULL,
   name character varying COLLATE pg_catalog."default",
-  CONSTRAINT "Patient_pkey" PRIMARY KEY (cnp)
+  CONSTRAINT "Patient_pkey" PRIMARY KEY (id)
 );
 
 CREATE TABLE public."Used"
@@ -137,7 +138,7 @@ CREATE TABLE public."Used"
 
 CREATE TABLE public."Personnel"
 (
-    idpersonnel integer NOT NULL,
+    idpersonnel serial NOT NULL,
     name character varying COLLATE pg_catalog."default",
     email character varying COLLATE pg_catalog."default",
     CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
