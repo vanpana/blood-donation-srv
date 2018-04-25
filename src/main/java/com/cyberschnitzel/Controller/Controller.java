@@ -3,13 +3,13 @@ package com.cyberschnitzel.Controller;
 import com.cyberschnitzel.Domain.Adapters.*;
 import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
+import com.cyberschnitzel.Domain.Exceptions.HashingException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
+import com.cyberschnitzel.Util.Hasher;
 
-import javax.jws.soap.SOAPBinding;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,6 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Donator methods">
-
     /**
      * Method that adds a donator with the base information.
      *
@@ -139,10 +138,16 @@ public class Controller {
      * @param donatorID - id of the donator to be fetched
      * @return Donator entity
      */
-    public static Donator getDonatorById(int donatorID) {
+    private static Donator getDonatorById(int donatorID) {
         return donatorRepository.findOne(donatorID).orElse(null);
     }
 
+    /**
+     * Method that returns a donor by email
+     *
+     * @param donatorEmail - email of the donator to be fetched
+     * @return Donator entity
+     */
     public static Donator getDonatorByEmail(String donatorEmail) {
         for (Donator donator : getAllDonators()) {
             if (donator.getEmail().equals(donatorEmail)) return donator;
@@ -155,15 +160,15 @@ public class Controller {
      *
      * @return list of donators
      */
-    public static List<Donator> getAllDonators() {
+    private static List<Donator> getAllDonators() {
         List<Donator> donators = new ArrayList<>();
         donatorRepository.findAll().iterator().forEachRemaining(donators::add);
         return donators;
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Blood methods">
-
     /**
      * Method that adds a blood sample
      *
@@ -229,7 +234,6 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Donation methods">
-
     /**
      * Method that adds a donation by cnp.
      *
@@ -319,7 +323,6 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Personnel methods">
-
     /**
      * Method that adds a personnel with the full information.
      *
@@ -362,7 +365,7 @@ public class Controller {
         try {
             personnelRepository.update(personnel);
         } catch (ValidatorException e) {
-            throw new ControllerException("Failed to update full donator entity: " + e.getMessage());
+            throw new ControllerException("Failed to update full personnel entity: " + e.getMessage());
         }
     }
 
@@ -378,11 +381,24 @@ public class Controller {
     }
 
     /**
-     * Method that gets all personnels
+     * Method that gets a personnel by email
      *
-     * @return List of Personnels
+     * @param personnelEmail - the personnel email to be fetched
+     * @return Personnel
      */
-    public static List<Personnel> getAllPersonnels() {
+    private static Personnel getPersonnelByEmail(String personnelEmail) {
+        for (Personnel personnel: getAllPersonnel()) {
+            if (personnel.getEmail().equals(personnelEmail)) return personnel;
+        }
+        return null;
+    }
+
+    /**
+     * Method that gets all personnel
+     *
+     * @return List of Personnel
+     */
+    private static List<Personnel> getAllPersonnel() {
         List<Personnel> personnels = new ArrayList<>();
         personnelRepository.findAll().iterator().forEachRemaining(personnels::add);
         return personnels;
@@ -455,6 +471,44 @@ public class Controller {
         List<Used> usedList = new ArrayList<>();
         usedRepository.findAll().iterator().forEachRemaining(usedList::add);
         return usedList;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Utils methods">
+    private static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
+        CredentialsEntity credentialsEntity;
+
+        // Try to fetch the entity with specified mail
+        if (isDonator) credentialsEntity = getDonatorByEmail(email);
+        else credentialsEntity = getPersonnelByEmail(email);
+
+        // Check if the entity exists
+        if (credentialsEntity == null) {
+            if (isDonator) throw new ControllerException("Inexistent donor with specified email.");
+            else throw new ControllerException("Inexistent personnel with specified email.");
+        }
+
+        // Hash the password and the token
+        try {
+            password = Hasher.encrypt(password);
+            token = Hasher.encrypt(token);
+        } catch (HashingException he) {
+            throw new ControllerException("Failed to hash password or token: " + he.getMessage());
+        }
+
+        // Check if the password and token match the database ones
+        if (!password.equals(credentialsEntity.getPassword())) throw new ControllerException("Incorrect password for donor");
+        if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token for donor");
+
+        return true;
+    }
+
+    public static boolean checkDonatorCredentials(String email, String password, String token) throws ControllerException {
+        return checkCredentials(email, password, token, true);
+    }
+
+    public static boolean checkPersonnelCredentials(String email, String password, String token) throws ControllerException {
+        return checkCredentials(email, password, token, false);
     }
     //</editor-fold>
 }
