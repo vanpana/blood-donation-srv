@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" external-system-id="Maven" name="blood-donation:war">
+  <artifact type="war" name="blood-donation:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="blood-donation-1.0-ALPHA.war">
       <element id="artifact" artifact-name="blood-donation:war exploded" />
