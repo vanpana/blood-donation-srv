@@ -15,10 +15,7 @@ public class Endpoints {
     private final static String DONATORS_PATH = "/donators";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
-   // private final static String PERSONNELS_PATH = "/personnels";
     private final static String PATIENTS_PATH = "/patients";
-    // private final static String PERSONNELS_PATH = "/personnels";
-    // private final static String USED_PATH = "/used";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -30,7 +27,6 @@ public class Endpoints {
     // TODO: Donator creation with transport request.
 
     //<editor-fold desc="Blood endpoints">
-
     /**
      * POST method to add a blood samlpe
      *
@@ -68,7 +64,6 @@ public class Endpoints {
     //</editor-fold>
 
     //<editor-fold desc="Donation endpoints">
-
     /**
      * POST method to add a donation
      *
@@ -131,51 +126,7 @@ public class Endpoints {
     }
   //</editor-fold>
 
-
-//    /**
-//     * POST method to add a personnel
-//     *
-//     * @param addPersonnelRequestJson - AddPersonnelRequestJson as a JSON
-//     * @return Response code: 200, body: the added personnel if the task was successful
-//     */
-//    // Endpoint handlers
-//    @POST
-//    @Path(PERSONNELS_PATH)
-//    public Response addPersonnel(String addPersonnelRequestJson) {
-//        return Handler.handle(() -> PersonnelHandlers.addPersonnel(addPersonnelRequestJson), DONATIONS_PATH,
-//                addPersonnelRequestJson);
-//    }
-//
-//    /**
-//     * PUT method to update a personnel
-//     *
-//     * @param updatePersonnelRequestJson - UpdatePersonnelRequest as a JSON
-//     * @return Response code: 200, body: the updated personnel if the task was successful
-//     */
-//    @PUT
-//    @Path(PERSONNELS_PATH)
-//    public Response updatePersonnel(String updatePersonnelRequestJson) {
-//        return Handler.handle(() -> PersonnelHandlers.updatePersonnel(updatePersonnelRequestJson), DONATIONS_PATH,
-//                updatePersonnelRequestJson);
-//    }
-//
-//
-//    /**
-//     * DELETE method to delete a personnel
-//     *
-//     * @param messageRequestJson - MessageRequest as a JSON with empty message
-//     * @return Response code: 200, body: the deleted donation if the task was successful
-//     */
-//    @DELETE
-//    @Path(DONATIONS_PATH + PATH_PARAM)
-//    public Response deleteDonation(@PathParam(PARAM) int id, String messageRequestJson) {
-//        return Handler.handle(() -> DonationHandlers.deleteDonation(messageRequestJson, id),
-//                DONATIONS_PATH + PATH_PARAM, String.valueOf(id) + " " + messageRequestJson);
-//    }
-
-
-//    ----PATIENT STUFF-------
-
+    //<editor-fold desc="Patient endpoints">
     @POST
     @Path(PATIENTS_PATH)
     public Response addPatient(String addPatientRequestJson){
