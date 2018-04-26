@@ -626,11 +626,12 @@ public class Controller {
 		}
 
 		// Hash the password and the token
-		try {
-			password = Hasher.encrypt(password);
-		} catch (HashingException he) {
-			throw new ControllerException("Failed to hash password or token: " + he.getMessage());
-		}
+//
+//		try {
+//			password = Hasher.encrypt(password);
+//		} catch (HashingException he) {
+//			throw new ControllerException("Failed to hash password or token: " + he.getMessage());
+//		}
 
 		// Check if the password and token match the database ones
 		if (!password.equals(credentialsEntity.getPassword()))

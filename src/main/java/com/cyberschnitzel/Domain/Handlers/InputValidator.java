@@ -12,8 +12,10 @@ class InputValidator {
     private static void validateInput(MessageRequest messageRequest, boolean isDonator) throws HandlingException {
         // Check if the entity exists and verify the credentials
         try {
-            if(messageRequest.getToken() == null)
-                Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), isDonator);
+            if(messageRequest.getToken() == null) {
+				Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), isDonator);
+				return;
+			}
             Controller.checkCredentials(messageRequest.getEmail(), messageRequest.getPassword(), messageRequest.getToken(),
                     isDonator);
         } catch (ControllerException ce) {
