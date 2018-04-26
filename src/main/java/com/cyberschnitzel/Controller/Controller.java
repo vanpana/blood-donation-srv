@@ -22,8 +22,12 @@ public class Controller {
             new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
+    //</editor-fold>
+
     private static Repository<Personnel> personnelRepository =
             new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
+    private static Repository<Patient> patientRepository =
+            new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
     //</editor-fold>
@@ -325,7 +329,6 @@ public class Controller {
     //<editor-fold desc="Personnel methods">
     /**
      * Method that adds a personnel with the full information.
-     *
      * @param email - the email of the personnel
      * @param name  - the name of the personnel
      * @return - the id of the added personnel
@@ -343,7 +346,6 @@ public class Controller {
 
     /**
      * Method that deletes a personnel by id
-     *
      * @param personnelID - the id of the personnel to be deleted
      */
     public static void deletePersonnel(int personnelID) {
@@ -474,6 +476,41 @@ public class Controller {
     }
     //</editor-fold>
 
+  //<editor-fold desc="Patient methods">
+    public static int addPatient(String cnp, String name) throws ControllerException {
+        try {
+            Optional<Patient> patientOptional = patientRepository.save(new Patient(cnp, name));
+            return patientOptional.map(Entity::getId).orElse(-1);
+        } catch (ValidatorException e){
+            throw new ControllerException("Failed to add patient");
+        }
+    }
+
+    public static void deletePatient(int patientID){
+        patientRepository.delete(patientID);
+    }
+
+    public static void updatePatient(int patientID, String cnp, String name) throws ControllerException {
+        Patient patient = new Patient(cnp, name);
+        patient.setId(patientID);
+        try{
+            patientRepository.update(patient);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update patient");
+        }
+    }
+
+    public static Patient getPatientById(int patientID){
+        Optional<Patient> patientOptional = patientRepository.findOne(patientID);
+        return patientOptional.orElse(null);
+    }
+
+    public static List<Patient> getAllPatients(){
+        List<Patient> patients = new ArrayList<>();
+        patientRepository.findAll().iterator().forEachRemaining(patients::add);
+        return patients;
+    }
+  //</editor-fold>
     //<editor-fold desc="Utils methods">
     public static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
         CredentialsEntity credentialsEntity;
@@ -510,6 +547,5 @@ public class Controller {
     public static boolean checkPersonnelCredentials(String email, String password, String token) throws ControllerException {
         return checkCredentials(email, password, token, false);
     }
-    //</editor-fold>
+   //</editor-fold>
 }
-

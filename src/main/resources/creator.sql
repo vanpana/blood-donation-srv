@@ -114,9 +114,10 @@ CREATE TABLE public."Donation"
 
 CREATE TABLE public."Patient"
 (
+  id serial NOT NULL,
   cnp VARCHAR(13) NOT NULL,
   name character varying COLLATE pg_catalog."default",
-  CONSTRAINT "Patient_pkey" PRIMARY KEY (cnp)
+  CONSTRAINT "Patient_pkey" PRIMARY KEY (id)
 );
 
 CREATE TABLE public."Used"
@@ -144,64 +145,3 @@ CREATE TABLE public."Personnel"
     token character varying COLLATE pg_catalog."default",
     CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 );
-
-
-INSERT INTO public."Patient"(
-	cnp, name)
-	VALUES ('2970107127098', 'Popa Anastasia') , ('1890501126578', 'Abrudan Andrei') , ('2991010146789', 'Ile Amalia') , ('2901211678123', 'Morar Irina') , ('1670126125816', 'Ilisei Victor');
-
-	
-
-
-INSERT INTO public."Donator"(
-	iddonator, cnp, name, bloodtype, email, password, token)
-	VALUES (1, '2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123abMnOiy'),(2, '2970421167567', 'Pop Claudia','AB','claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
-	(3, '1961028125816', 'Opruta David','B','david@yahooo.com', 'od1234', 'lmnop874oA'),(4, '1661010128765', 'Panaite Dorinel','A','dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
-	(5, '1991211125877', 'Paius Teodor','A','teodor@yahooo.com', 'tp1234', '9isD57Bls1'),(6, '1890106125899', 'Podariu Catalin','0','catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
-
-
-
-INSERT INTO public."Personnel"(
-	idpersonnel, name, email)
-	VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com'), (2, 'Ion Dan', 'ion1974@yahoo.com'), (3, 'Dragomir Irina', 'dirina@yahoo.com');
-
-
-
-INSERT INTO public."Request"(
-	idrequest, quantity, urgency)
-	VALUES (1, 200, 1),(2, 400, 2),(3, 200, 1),(4, 600, 3);
-
-
-INSERT INTO public."Blood"(
-	idblood, bloodtype, receiveddate)
-	VALUES (1, 'AB', '5.04.2018'),(2, '0', '23.04.2018'),(3, 'A', '24.03.2018');
-
-
-
-INSERT INTO public."RedCells"(
-	idredcells, idblood, expirationdate)
-	VALUES (1, 1, '10.04.2018');
-
-
-INSERT INTO public."Plasma"(
-	idplasma, idblood, expirationdate)
-	VALUES (1, 1, '12.04.2018');
-
-
-INSERT INTO public."Thrombocites"(
-	expirationdate, idthrombocite, idblood)
-	VALUES ('8.04.2018',1, 1);
-
-
-
-
-INSERT INTO public."Donation"(
-	iddonation, cnp, quantity, status, idblood)
-	VALUES (1, '2970106123456',  800, 3, 2),(2, '2970421167567',  700, 2, 1),(3, '1991211125877',  750, 1,3 );
-
-
-INSERT INTO public."Used"(
-	iddonation, patientcnp, quantity)
-	VALUES (2, '2970107127098', 200);
-
-

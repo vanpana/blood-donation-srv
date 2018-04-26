@@ -1,10 +1,7 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
-import com.cyberschnitzel.Domain.Handlers.BloodHandlers;
-import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
-import com.cyberschnitzel.Domain.Handlers.Handler;
-import com.cyberschnitzel.Domain.Handlers.PersonnelHandlers;
+import com.cyberschnitzel.Domain.Handlers.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -18,6 +15,7 @@ public class Endpoints {
     private final static String DONATORS_PATH = "/donators";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
+    private final static String PATIENTS_PATH = "/patients";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -26,9 +24,7 @@ public class Endpoints {
     // Note: Important entities should not be fetched through GET method with no credentials checking, but for now, we'll
     // keep it like this.
 
-    // TODO: Donator creation request with transport
     //<editor-fold desc="Blood endpoints">
-
     /**
      * POST method to add a blood samlpe
      *
@@ -66,7 +62,6 @@ public class Endpoints {
     //</editor-fold>
 
     //<editor-fold desc="Donation endpoints">
-
     /**
      * POST method to add a donation
      *
@@ -75,13 +70,10 @@ public class Endpoints {
      */
     @POST
     @Path(DONATIONS_PATH)
-
     public Response addDonation(String addDonationRequestJson) {
         return Handler.handle(() -> DonationHandlers.addDonation(addDonationRequestJson), DONATIONS_PATH,
                 addDonationRequestJson);
     }
-
-    //@enduml
 
     /**
      * PUT method to update a donation
@@ -129,6 +121,41 @@ public class Endpoints {
     @Path(DONATIONS_PATH + PATH_PARAM)
     public Response getDonationByID(@PathParam(PARAM) int donationID) {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
+    }
+  //</editor-fold>
+
+    //<editor-fold desc="Patient endpoints">
+    @POST
+    @Path(PATIENTS_PATH)
+    public Response addPatient(String addPatientRequestJson){
+        return Handler.handle(() -> PatientHandlers.addPatient(addPatientRequestJson), PATIENTS_PATH,
+                addPatientRequestJson);
+    }
+
+    @PUT
+    @Path(PATIENTS_PATH)
+    public Response updatePatient(String updatePatientRequestJson){
+        return Handler.handle(() -> PatientHandlers.updatePatient(updatePatientRequestJson), PATIENTS_PATH,
+            updatePatientRequestJson);
+    }
+
+    @DELETE
+    @Path(PATIENTS_PATH + PATH_PARAM)
+    public Response deletePatient(@PathParam(PARAM) int id, String messageRequestJson){
+        return Handler.handle(() -> PatientHandlers.deletePatient(messageRequestJson, id),
+                PATIENTS_PATH + PATH_PARAM, String.valueOf(id) + messageRequestJson);
+    }
+
+    @GET
+    @Path(PATIENTS_PATH + PATH_PARAM)
+    public Response getPatientByID(@PathParam(PARAM) int id){
+        return Handler.handle(() -> Controller.getPatientById(id), PATIENTS_PATH, String.valueOf(id));
+    }
+
+    @GET
+    @Path(PATIENTS_PATH)
+    public Response getPatients(){
+        return Handler.handle(Controller::getAllPatients, PATIENTS_PATH);
     }
     //</editor-fold>
 }
