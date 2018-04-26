@@ -12,10 +12,11 @@ public class Handler {
     /**
      * Method that logs input, gets a string from the execution of the passed function, logs the response and returns
      * a MessageResponse with the corresponding status and message.
-     * @param func - The function that should be called. Must return a string
+     *
+     * @param func     - The function that should be called. Must return a string
      * @param endpoint - The url where the request came from
-     * @param input - Input body (if necessary)
-     * @return response - With code + body
+     * @param input    - Input body (if necessary)
+     * @return response - With code + body. If code is 200, the body will be a {@link SuccessResponse SuccessResponse.class}.
      */
     public static Response handle(Callable func, String endpoint, String input) {
         Response response;

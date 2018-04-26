@@ -2,33 +2,30 @@ package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.Donation;
-import com.cyberschnitzel.Domain.Entities.Donator;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
 import com.google.gson.Gson;
 
-import java.util.List;
-
 public class DonationHandlers {
     /**
      * Checks the donator and adds a donation
      *
-     * @param input - Should be AddDonationRequest
+     * @param input - Should be AddDonationRequest as JSON
      * @return the donation object created
      */
-    // TODO: In this case, donator should be changed to personnel
     public static Donation addDonation(String input) throws HandlingException {
         try {
             // Try to construct the add donation request
             AddDonationRequest addDonationRequest = new Gson().fromJson(input, AddDonationRequest.class);
 
             // Validate input and get donor
-            Donator donator = DonatorInputValidator.validateInput(addDonationRequest);
+            InputValidator.validatePersonnelInput(addDonationRequest);
 
             // Try to add the donation
-            int donationID = Controller.addDonation(donator.getCnp(), addDonationRequest.getQuantity(), addDonationRequest.getStatus(), addDonationRequest.getBloodID());
+            int donationID = Controller.addDonation(addDonationRequest.getDonatorCNP(), addDonationRequest.getQuantity(),
+                    addDonationRequest.getStatus(), addDonationRequest.getBloodID());
 
             // Throw exception if donation couldn't be added
             if (donationID == -1) throw new Exception("Donation wasn't added, ID = -1!");
@@ -52,10 +49,10 @@ public class DonationHandlers {
             UpdateDonationRequest updateDonationRequest = new Gson().fromJson(input, UpdateDonationRequest.class);
 
             // Validate input and get donor
-            Donator donator = DonatorInputValidator.validateInput(updateDonationRequest);
+            InputValidator.validatePersonnelInput(updateDonationRequest);
 
             // Try to update the donation
-            Controller.updateDonation(updateDonationRequest.getDonationID(), donator.getCnp(),
+            Controller.updateDonation(updateDonationRequest.getDonationID(), updateDonationRequest.getDonatorCNP(),
                     updateDonationRequest.getQuantity(), updateDonationRequest.getStatus(), updateDonationRequest.getBloodID());
 
             // Try to return the donation by the id it was updated
@@ -77,7 +74,7 @@ public class DonationHandlers {
             MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 
             // Validate input
-            DonatorInputValidator.validateInput(messageRequest);
+            InputValidator.validatePersonnelInput(messageRequest);
 
             // Try to fetch the donation by ID
             Donation donation = Controller.getDonationByID(donationID);

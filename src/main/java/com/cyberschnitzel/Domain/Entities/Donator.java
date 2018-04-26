@@ -1,20 +1,20 @@
 package com.cyberschnitzel.Domain.Entities;
 
-public class Donator extends Entity {
+public class Donator extends CredentialsEntity {
     private String cnp;
     private String name;
     private BloodType bloodtype;
-    private String email;
-    private String password;
-    private String token;
 
     public Donator(String cnp, String email, String name) {
+        super(email);
         this.cnp = cnp;
-        this.email = email;
         this.name = name;
+    }
 
-        this.password = "";
-        this.token = "";
+    public Donator(String email, String password, String token, String cnp, String name) {
+        super(email, password, token);
+        this.cnp = cnp;
+        this.name = name;
     }
 
     public Donator setBloodType(String bloodType) {

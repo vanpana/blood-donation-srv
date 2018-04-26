@@ -8,7 +8,7 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.UUID;
 
-class Hasher {
+public class Hasher {
     private static final String algorithm = "AES";
     private static final byte[] keyValue =
             new byte[]{'r', 'G', 'Y', 'e', 'A', 'a', 'Z', 'Z', 'q', 'D', 'd', 'O', 'Y', 'm', 'R', 'k'};
