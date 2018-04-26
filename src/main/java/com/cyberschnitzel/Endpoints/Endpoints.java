@@ -5,6 +5,7 @@ import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Handlers.BloodPartHandlers;
 import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
 import com.cyberschnitzel.Domain.Handlers.Handler;
+import org.atmosphere.config.service.Post;
 import org.atmosphere.config.service.Put;
 import com.cyberschnitzel.Domain.Handlers.*;
 
@@ -24,6 +25,7 @@ public class Endpoints {
     private final static String DONATORS_PATH = "/donators";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
+    private final static String DETAILED_DONATIONS_PATH = "/detailed-donations";
     private final static String BLOODPART_PATH = "/bloodpart";
     private final static String PLASMA_PATH = "/plasma";
     private final static String REDCELLS_PATH = "/redcells";
@@ -121,10 +123,10 @@ public class Endpoints {
      *
      * @return MessageResponse
      */
-    @GET
-    @Path(DONATIONS_PATH)
-    public Response getDonations() {
-        return Handler.handle(Controller::getAllDonations, DONATIONS_PATH);
+    @POST
+    @Path(DETAILED_DONATIONS_PATH)
+    public Response getDonations(String messageRequestJson) {
+        return Handler.handle(() -> DonationHandlers.getAllDonations(messageRequestJson), DONATIONS_PATH);
     }
 
     /**

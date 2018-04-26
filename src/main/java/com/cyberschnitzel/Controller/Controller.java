@@ -170,6 +170,19 @@ public class Controller {
         return null;
     }
 
+	/**
+	 * Method that returns a donor by cnp
+	 *
+	 * @param donatorCnp - cnp of the donator to be fetched
+	 * @return Donator entity
+	 */
+	public static Donator getDonatorByCnp(String donatorCnp) {
+		for (Donator donator : getAllDonators()) {
+			if (donator.getCnp().equals(donatorCnp)) return donator;
+		}
+		return null;
+	}
+
     /**
      * Method that returns all the donators
      *
@@ -652,6 +665,7 @@ public class Controller {
             else throw new ControllerException("Inexistent personnel with specified email.");
         }
 
+        /*
         // Hash the password and the token
         try {
             password = Hasher.encrypt(password);
@@ -659,6 +673,7 @@ public class Controller {
         } catch (HashingException he) {
             throw new ControllerException("Failed to hash password or token: " + he.getMessage());
         }
+        */
 
         // Check if the password and token match the database ones
         if (!password.equals(credentialsEntity.getPassword()))

@@ -27,7 +27,7 @@ public class PersonnelHandlers {
         return null;
     }
 
-    public static String checkPersonnelLogin(String input) throws HandlingException {
+    public static Personnel checkPersonnelLogin(String input) throws HandlingException {
 		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 
 		InputValidator.validatePersonnelInput(messageRequest);
@@ -36,7 +36,8 @@ public class PersonnelHandlers {
 		try {
 			String tkn =  Hasher.getToken();
 			Controller.updatePersonnelToken(pers.getId(), Hasher.getToken());
-			return tkn;
+			pers.setToken(tkn);
+			return pers;
 		} catch (ControllerException | HashingException e) {
 			throw new HandlingException(e.getMessage());
 		}

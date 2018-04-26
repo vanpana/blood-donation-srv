@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>15fe5d07-7da7-4ea3-a8f0-b15aa2467365.DATABASE:blood_donation_db</OriginalElement>
+  <nodes>
+    <node x="780.5555555555555" y="256.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Thrombocites</node>
+    <node x="0.0" y="565.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Personnel</node>
+    <node x="179.05555555555554" y="0.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donator</node>
+    <node x="2.055555555555543" y="55.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Status</node>
+    <node x="350.55555555555554" y="256.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Plasma</node>
+    <node x="155.0" y="234.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donation</node>
+    <node x="565.5555555555555" y="256.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.RedCells</node>
+    <node x="0.0" y="256.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Patient</node>
+    <node x="203.0" y="565.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Request</node>
+    <node x="474.86805555555554" y="44.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Blood</node>
+    <node x="87.45833333333331" y="424.0">15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Used</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donation" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Status">
+      <point x="-50.66666666666666" y="-70.0" />
+      <point x="180.33333333333334" y="214.0" />
+      <point x="80.55555555555554" y="214.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Thrombocites" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Blood">
+      <point x="0.0" y="-48.0" />
+      <point x="878.0555555555555" y="204.0" />
+      <point x="638.4930555555557" y="204.0" />
+      <point x="70.125" y="48.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donation" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donator">
+      <point x="0.0" y="-70.0" />
+      <point x="231.0" y="214.0" />
+      <point x="254.55555555555554" y="214.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Used" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Patient">
+      <point x="-38.0" y="-48.0" />
+      <point x="125.45833333333331" y="399.0" />
+      <point x="67.5" y="399.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Plasma" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Blood">
+      <point x="0.0" y="-48.0" />
+      <point x="448.05555555555554" y="214.0" />
+      <point x="544.9930555555555" y="214.0" />
+      <point x="-23.375" y="48.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donation" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Blood">
+      <point x="50.66666666666666" y="-70.0" />
+      <point x="281.66666666666663" y="204.0" />
+      <point x="498.24305555555554" y="204.0" />
+      <point x="-70.125" y="48.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.RedCells" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Blood">
+      <point x="0.0" y="-48.0" />
+      <point x="663.0555555555555" y="214.0" />
+      <point x="591.7430555555555" y="214.0" />
+      <point x="23.375" y="48.0" />
+    </edge>
+    <edge source="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Used" target="15fe5d07-7da7-4ea3-a8f0-b15aa2467365.TABLE:blood_donation_db.public.Donation">
+      <point x="38.0" y="-48.0" />
+      <point x="201.45833333333331" y="399.0" />
+      <point x="231.0" y="399.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8510344827586207" x="488.0" y="352.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

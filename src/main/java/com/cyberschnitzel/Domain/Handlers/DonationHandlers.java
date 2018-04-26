@@ -1,12 +1,19 @@
 package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Entities.Blood;
 import com.cyberschnitzel.Domain.Entities.Donation;
+import com.cyberschnitzel.Domain.Entities.Donator;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
+import com.cyberschnitzel.Domain.Transport.Responses.DonationsResponse;
 import com.google.gson.Gson;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DonationHandlers {
     /**
@@ -89,4 +96,25 @@ public class DonationHandlers {
             throw new HandlingException("Failed to handle delete donation: " + ex.getMessage());
         }
     }
+
+    public static List<DonationsResponse> getAllDonations(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+
+		// Validate input
+		InputValidator.validatePersonnelInput(messageRequest);
+
+		List<DonationsResponse> donationsResponses = new ArrayList<>();
+		List<Donation> lst = Controller.getAllDonations();
+
+		for(Donation don : lst){
+			Donator donator = Controller.getDonatorByCnp(don.getCnp());
+			Blood blood = Controller.getBloodByID(don.getBloodID());
+			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), blood.getReceivedDate(), "dummyLocation");
+			donationsResponses.add(donationsResponse);
+		}
+		return donationsResponses;
+
+
+
+	}
 }
