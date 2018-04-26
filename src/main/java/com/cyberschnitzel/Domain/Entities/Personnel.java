@@ -24,5 +24,10 @@ public class Personnel extends CredentialsEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Personnel setToken(String token) {
+        if (token != null) this.token = token;
+        return this;
+    }
 }
 

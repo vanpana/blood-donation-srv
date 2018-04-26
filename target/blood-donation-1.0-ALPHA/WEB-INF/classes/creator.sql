@@ -1,23 +1,13 @@
 DROP TABLE "Personnel";
-
 DROP TABLE "Used";
-
 DROP TABLE "Patient";
-
 DROP TABLE "Donation";
-
 DROP TABLE "Request";
-
 DROP TABLE "Status";
-
 DROP TABLE "Donator";
-
 DROP TABLE "Thrombocites";
-
 DROP TABLE "RedCells";
-
 DROP TABLE "Plasma";
-
 DROP TABLE "Blood";
 
 

@@ -29,6 +29,8 @@ public class Endpoints {
     private final static String REDCELLS_PATH = "/redcells";
     private final static String THROMBOCITES_PATH = "/thrombocites";
     private final static String PATIENTS_PATH = "/patients";
+    private final static String LOGIN_PATH = "/login";
+    private final static String PERSONNEL_PATH = "/personnel";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -137,7 +139,8 @@ public class Endpoints {
     }
   //</editor-fold>
 
-    @GET
+	//<editor-fold desc="Bloodpart endpoints">
+	@GET
 	@Path(BLOODPART_PATH + PLASMA_PATH)
 	public Response getAllPlasma(){
 		return Handler.handle(() -> Controller.getBloodPart("Plasma"), BLOODPART_PATH);
@@ -189,9 +192,7 @@ public class Endpoints {
 		return Handler.handle(() -> BloodPartHandlers.updateBloodPart(updateBloodPartRequestJson,id), BLOODPART_PATH,
 				updateBloodPartRequestJson);
 	}
-
-
-  
+	//</editor-fold>
 
     //<editor-fold desc="Patient endpoints">
     @POST
@@ -227,4 +228,14 @@ public class Endpoints {
         return Handler.handle(Controller::getAllPatients, PATIENTS_PATH);
     }
     //</editor-fold>
+
+	@POST
+	@Path(PERSONNEL_PATH + LOGIN_PATH)
+	public Response loginPatient(String messageRequestJson){
+		return Handler.handle(() -> PersonnelHandlers.checkPersonnelLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
+				messageRequestJson);
+	}
+
+
+
 }
