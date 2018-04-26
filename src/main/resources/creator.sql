@@ -11,6 +11,8 @@ DROP TABLE "Plasma";
 DROP TABLE "Blood";
 DROP TABLE "Locations";
 
+-- Set the date style to day.month.year
+SET DateStyle TO DMY;
 
 CREATE TABLE public."Blood"
 (
@@ -27,7 +29,7 @@ CREATE TABLE public."Locations"
   latitude INT,
   longitude INT
 );
-CREATE UNIQUE INDEX Locations_idlocation_uindex ON public.Locations (idlocation);
+CREATE UNIQUE INDEX Locations_idlocation_uindex ON public."Locations" (idlocation);
 
 
 CREATE TABLE public."Plasma"

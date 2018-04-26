@@ -43,7 +43,7 @@ public class Endpoints {
 
     //<editor-fold desc="Blood endpoints">
     /**
-     * POST method to add a blood samlpe
+     * POST method to add a blood sample
      *
      * @param addBloodRequestJson - AddBloodRequest as a JSON
      * @return Response code: 200, body: the added blood if the task was successful
