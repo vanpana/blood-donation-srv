@@ -3,6 +3,7 @@ package com.cyberschnitzel.Domain.Handlers;
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Donator;
+import com.cyberschnitzel.Domain.Entities.Personnel;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddBloodPartRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
@@ -15,7 +16,7 @@ public class BloodPartHandlers {
 			AddBloodPartRequest addBloodPartRequest = new Gson().fromJson(input, AddBloodPartRequest.class);
 
 			// Validate input and get donor
-			Donator donator = DonatorInputValidator.validateInput(addBloodPartRequest);
+			InputValidator.validatePersonnelInput(addBloodPartRequest);
 
 			int retCode = Controller.addBloodPart(addBloodPartRequest.getPartClass(), addBloodPartRequest.getBloodId(),
 					addBloodPartRequest.getPartId(), addBloodPartRequest.getExpDate());
@@ -34,7 +35,7 @@ public class BloodPartHandlers {
 
 			AddBloodPartRequest addBloodPartRequest = new Gson().fromJson(input, AddBloodPartRequest.class);
 
-			Donator donator = DonatorInputValidator.validateInput(addBloodPartRequest);
+			InputValidator.validatePersonnelInput(addBloodPartRequest);
 
 			int retCode = Controller.updateBloodPart(addBloodPartRequest.getPartClass().getSimpleName(), addBloodPartRequest.getBloodId(),
 					addBloodPartRequest.getPartId(), addBloodPartRequest.getExpDate());
