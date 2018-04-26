@@ -2,6 +2,7 @@ package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.Patient;
+import com.cyberschnitzel.Domain.Entities.Personnel;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddPatientRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
@@ -37,7 +38,7 @@ public class PatientHandlers {
             MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 
             // Validate input
-            DonatorInputValidator.validateInput(messageRequest);
+            InputValidator.validatePersonnelInput(messageRequest);
 
             // Try to fetch the patient
             Patient patient = Controller.getPatientById(patientID);

@@ -34,7 +34,7 @@ public class DatabaseUtil {
             fetchCredentials();
 
             // If the connection was already made and it's not closed, release the mutex and return the connection
-            if (connection == null || !connection.isClosed()) {
+            if (connection == null || connection.isClosed()) {
                 // Load the JDBC class
                 Class.forName("org.postgresql.Driver");
 

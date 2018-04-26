@@ -190,7 +190,7 @@ public class Endpoints {
 				updateBloodPartRequestJson);
 	}
 
-}
+
   
 
     //<editor-fold desc="Patient endpoints">
