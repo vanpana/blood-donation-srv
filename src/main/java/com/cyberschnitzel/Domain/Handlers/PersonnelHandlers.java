@@ -35,7 +35,7 @@ public class PersonnelHandlers {
 		Personnel pers = Controller.getPersonnelByEmail(messageRequest.getEmail());
 		try {
 			String tkn =  Hasher.getToken();
-			Controller.updatePersonnelToken(pers.getId(), Hasher.getToken());
+			Controller.updatePersonnelToken(pers.getId(), tkn);
 			pers.setToken(tkn);
 			return pers;
 		} catch (ControllerException | HashingException e) {

@@ -12,10 +12,10 @@ public class DonationsResponse {
 	private Donation.DonationStatus status;
 	private BloodType bloodType;
 	private String donatorName;
-	private Date submittedDate;
+	private String submittedDate;
 	private String location;
 
-	public DonationsResponse(Integer id, String cnp, double quantity, Donation.DonationStatus status, BloodType bloodType, String donatorName, Date submittedDate, String location) {
+	public DonationsResponse(Integer id, String cnp, double quantity, Donation.DonationStatus status, BloodType bloodType, String donatorName, String submittedDate, String location) {
 		this.id = id;
 		this.cnp = cnp;
 		this.quantity = quantity;
@@ -74,11 +74,11 @@ public class DonationsResponse {
 		this.donatorName = donatorName;
 	}
 
-	public Date getSubmittedDate() {
+	public String getSubmittedDate() {
 		return submittedDate;
 	}
 
-	public void setSubmittedDate(Date submittedDate) {
+	public void setSubmittedDate(String submittedDate) {
 		this.submittedDate = submittedDate;
 	}
 

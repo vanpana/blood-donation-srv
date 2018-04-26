@@ -6,7 +6,7 @@ public enum BloodType {
     public static BloodType getByString(String bloodtype) {
         bloodtype = bloodtype.toUpperCase();
         switch (bloodtype) {
-            case "ZERO":
+            case "0":
                 return ZERO;
             case "A":
                 return A;

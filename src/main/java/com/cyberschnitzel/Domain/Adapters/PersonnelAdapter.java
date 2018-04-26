@@ -70,7 +70,7 @@ public class PersonnelAdapter implements Adapter<Personnel> {
         preparedStatement.setString(2, entity.getEmail());
         preparedStatement.setString(3, entity.getPassword());
         preparedStatement.setString(4, entity.getToken());
-        if (entity.getId() != null) preparedStatement.setInt(3, entity.getId());
+        if (entity.getId() != null) preparedStatement.setInt(5, entity.getId());
 
         return preparedStatement;
     }

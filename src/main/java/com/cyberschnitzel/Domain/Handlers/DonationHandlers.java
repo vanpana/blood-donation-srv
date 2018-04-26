@@ -12,6 +12,7 @@ import com.cyberschnitzel.Domain.Transport.Responses.DonationsResponse;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class DonationHandlers {
 		for(Donation don : lst){
 			Donator donator = Controller.getDonatorByCnp(don.getCnp());
 			Blood blood = Controller.getBloodByID(don.getBloodID());
-			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), blood.getReceivedDate(), "dummyLocation");
+			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), "dummyLocation");
 			donationsResponses.add(donationsResponse);
 		}
 		return donationsResponses;
