@@ -27,11 +27,17 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/test/ControllerTests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:8.1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-shared:8.1.7" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.8.3" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-push:8.1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:8.1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:8.1.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:8.1.7" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13" level="project" />

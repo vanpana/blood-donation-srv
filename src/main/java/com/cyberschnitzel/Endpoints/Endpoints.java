@@ -24,8 +24,6 @@ public class Endpoints {
     // Note: Important entities should not be fetched through GET method with no credentials checking, but for now, we'll
     // keep it like this.
 
-    // TODO: Donator creation with transport request.
-
     //<editor-fold desc="Blood endpoints">
     /**
      * POST method to add a blood samlpe

@@ -20,7 +20,7 @@ public class BloodHandlers {
             AddBloodRequest addBloodRequest = new Gson().fromJson(input, AddBloodRequest.class);
 
             // Validate input
-            DonatorInputValidator.validateInput(addBloodRequest);
+            InputValidator.validatePersonnelInput(addBloodRequest);
 
             // Try to add the blood sample
             int bloodID = Controller.addBlood(addBloodRequest.getBloodType());
