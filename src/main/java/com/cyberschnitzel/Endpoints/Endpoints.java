@@ -1,8 +1,17 @@
 package com.cyberschnitzel.Endpoints;
 
 import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Entities.BloodPart;
+import com.cyberschnitzel.Domain.Handlers.BloodPartHandlers;
+import com.cyberschnitzel.Domain.Handlers.DonationHandlers;
+import com.cyberschnitzel.Domain.Handlers.Handler;
+import org.atmosphere.config.service.Put;
 import com.cyberschnitzel.Domain.Handlers.*;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
@@ -15,6 +24,10 @@ public class Endpoints {
     private final static String DONATORS_PATH = "/donators";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
+    private final static String BLOODPART_PATH = "/bloodpart";
+    private final static String PLASMA_PATH = "/plasma";
+    private final static String REDCELLS_PATH = "/redcells";
+    private final static String THROMBOCITES_PATH = "/thrombocites";
     private final static String PATIENTS_PATH = "/patients";
 
     // Path parameters regex
@@ -123,6 +136,62 @@ public class Endpoints {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
     }
   //</editor-fold>
+
+    @GET
+	@Path(BLOODPART_PATH + PLASMA_PATH)
+	public Response getAllPlasma(){
+		return Handler.handle(() -> Controller.getBloodPart("Plasma"), BLOODPART_PATH);
+	}
+
+	@GET
+	@Path(BLOODPART_PATH + REDCELLS_PATH)
+	public Response getAllRedCells(){
+		return Handler.handle(() -> Controller.getBloodPart("RedCells"), BLOODPART_PATH);
+	}
+
+	@GET
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH)
+	public Response getAllThrombocites(){
+		return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
+	public Response deletePlasma(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Plasma", id), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + REDCELLS_PATH + PATH_PARAM)
+	public Response deleteRedCells(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("RedCells", id), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH + PATH_PARAM)
+	public Response deleteThrombocites(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
+	}
+
+	@POST
+	@Path(BLOODPART_PATH)
+	public Response addBloodPart(String addBloodPartRequestJson) {
+		return Handler.handle(() -> BloodPartHandlers.addBloodPart(addBloodPartRequestJson), BLOODPART_PATH,
+				addBloodPartRequestJson);
+	}
+
+	@PUT
+	@Path(BLOODPART_PATH + PATH_PARAM)
+	public Response updateBloodPart(@PathParam(PARAM) int id,String updateBloodPartRequestJson) {
+		return Handler.handle(() -> BloodPartHandlers.updateBloodPart(updateBloodPartRequestJson,id), BLOODPART_PATH,
+				updateBloodPartRequestJson);
+	}
+
+}
+  
 
     //<editor-fold desc="Patient endpoints">
     @POST

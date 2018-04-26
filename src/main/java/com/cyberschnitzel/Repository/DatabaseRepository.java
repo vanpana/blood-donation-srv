@@ -66,7 +66,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
     public Optional<T> update(T entity) {
         validator.validate(entity);
         try {
-            adapter.updateQuery(entity).execute();
+            adapter.updateQuery(entity).executeUpdate();
             return Optional.ofNullable(entity);
         } catch (SQLException e) {
             return Optional.empty();

@@ -144,7 +144,6 @@ CREATE TABLE public."Personnel"
     password character varying COLLATE pg_catalog."default",
     token character varying COLLATE pg_catalog."default",
     CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
-);
 
 INSERT INTO public."Patient"(
 	cnp, name)
