@@ -12,7 +12,6 @@ import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
-import com.cyberschnitzel.Domain.Entities.Plasma;
 import com.cyberschnitzel.Util.Hasher;
 
 import java.lang.reflect.Field;
@@ -30,19 +29,18 @@ public class Controller {
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
     private static Repository<Blood> bloodPartsPlasmaRepository =
-			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
-	private static Repository<Blood> bloodPartsRedCellsRepository =
-			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
-	private static Repository<Blood> bloodPartsThrombocitesRepository =
-			new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
-    //</editor-fold>
-
+            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
+    private static Repository<Blood> bloodPartsRedCellsRepository =
+            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
+    private static Repository<Blood> bloodPartsThrombocitesRepository =
+            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
     private static Repository<Personnel> personnelRepository =
             new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
     private static Repository<Patient> patientRepository =
             new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
+
     //</editor-fold>
 
     //<editor-fold desc="Donator methods">
@@ -337,86 +335,89 @@ public class Controller {
         donationRepository.findAll().iterator().forEachRemaining(donations::add);
         return donations;
     }
+    //</editor-fold>
 
-  //<editor-fold desc="Blood part methods">
-	@SuppressWarnings("unchecked")
+    //<editor-fold desc="Blood part methods">
+    @SuppressWarnings("unchecked")
     public static List<Blood> getBloodPart(String part) throws ControllerException {
-    	try {
-			List<Blood> temp = new ArrayList<>();
-			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
-			f.setAccessible(true);
-			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			t.findAll().iterator().forEachRemaining(temp::add);
-			return temp;
-		} catch (IllegalAccessException | NoSuchFieldException e) {
-			e.printStackTrace();
-			throw new ControllerException(e.getMessage());
-		}
-	}
+        try {
+            List<Blood> temp = new ArrayList<>();
+            Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+            f.setAccessible(true);
+            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            t.findAll().iterator().forEachRemaining(temp::add);
+            return temp;
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getMessage());
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	public static Blood findBloodPart(Class part, Integer id) throws ControllerException {
-    	try {
-			List<Blood> temp = new ArrayList<>();
-			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
-			f.setAccessible(true);
-			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			return t.findOne(id).get();
-		} catch (IllegalAccessException | NoSuchFieldException e) {
-			e.printStackTrace();
-			throw new ControllerException(e.getMessage());
-		}
-	}
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
+    public static Blood findBloodPart(Class part, Integer id) throws ControllerException {
+        try {
+            Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
+            f.setAccessible(true);
+            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            return t.findOne(id).orElse(null);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     public static Integer deleteBloodPart(String part, Integer id) throws ControllerException {
-		try {
-			List<Blood> temp = new ArrayList<>();
-			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
-			f.setAccessible(true);
-			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			t.delete(id);
-			return 0;
-		} catch (IllegalAccessException | NoSuchFieldException e) {
-			e.printStackTrace();
-			throw new ControllerException(e.getMessage());
-		}
+        try {
+            Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+            f.setAccessible(true);
+            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            t.delete(id);
+            return 0;
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getMessage());
+        }
 
-	}
-	@SuppressWarnings("unchecked")
-	public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws ControllerException {
-		try {
-			Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
-			f.setAccessible(true);
-			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			BloodPart tb =  (BloodPart) part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
-			Optional<Blood> ret =  t.save(tb);
-			if(!ret.isPresent())
-				return 1;
-			return 0;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ControllerException(e.getMessage());
-		}
-	}
-	@SuppressWarnings("unchecked")
-	public static Integer updateBloodPart(String part, Integer originId, Integer partId, Date date) throws ControllerException {
-		try {
-			Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
-			f.setAccessible(true);
-			Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-			t.update(new BloodPart(partId, originId, date));
-			return 0;
-		} catch (IllegalAccessException | ValidatorException | NoSuchFieldException e) {
-			e.printStackTrace();
-			throw new ControllerException(e.getMessage());
-		}
+    }
 
-	}
+    @SuppressWarnings("unchecked")
+    public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws ControllerException {
+        try {
+            Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
+            f.setAccessible(true);
+            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
+            Optional<Blood> ret = t.save(tb);
+            if (!ret.isPresent())
+                return 1;
+            return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Integer updateBloodPart(String part, Integer originId, Integer partId, Date date) throws ControllerException {
+        try {
+            Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
+            f.setAccessible(true);
+            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            t.update(new BloodPart(partId, originId, date));
+            return 0;
+        } catch (IllegalAccessException | ValidatorException | NoSuchFieldException e) {
+            e.printStackTrace();
+            throw new ControllerException(e.getMessage());
+        }
+
+    }
     //</editor-fold>
 
     //<editor-fold desc="Personnel methods">
     /**
      * Method that adds a personnel with the full information.
+     *
      * @param email - the email of the personnel
      * @param name  - the name of the personnel
      * @return - the id of the added personnel
@@ -434,6 +435,7 @@ public class Controller {
 
     /**
      * Method that deletes a personnel by id
+     *
      * @param personnelID - the id of the personnel to be deleted
      */
     public static void deletePersonnel(int personnelID) {
@@ -477,7 +479,7 @@ public class Controller {
      * @return Personnel
      */
     public static Personnel getPersonnelByEmail(String personnelEmail) {
-        for (Personnel personnel: getAllPersonnel()) {
+        for (Personnel personnel : getAllPersonnel()) {
             if (personnel.getEmail().equals(personnelEmail)) return personnel;
         }
         return null;
@@ -564,42 +566,42 @@ public class Controller {
     }
     //</editor-fold>
 
-  //<editor-fold desc="Patient methods">
+    //<editor-fold desc="Patient methods">
     public static int addPatient(String cnp, String name) throws ControllerException {
         try {
             Optional<Patient> patientOptional = patientRepository.save(new Patient(cnp, name));
             return patientOptional.map(Entity::getId).orElse(-1);
-        } catch (ValidatorException e){
+        } catch (ValidatorException e) {
             throw new ControllerException("Failed to add patient");
         }
     }
 
-    public static void deletePatient(int patientID){
+    public static void deletePatient(int patientID) {
         patientRepository.delete(patientID);
     }
 
     public static void updatePatient(int patientID, String cnp, String name) throws ControllerException {
         Patient patient = new Patient(cnp, name);
         patient.setId(patientID);
-        try{
+        try {
             patientRepository.update(patient);
         } catch (ValidatorException e) {
             throw new ControllerException("Failed to update patient");
         }
     }
 
-    public static Patient getPatientById(int patientID){
+    public static Patient getPatientById(int patientID) {
         Optional<Patient> patientOptional = patientRepository.findOne(patientID);
         return patientOptional.orElse(null);
     }
 
-    public static List<Patient> getAllPatients(){
+    public static List<Patient> getAllPatients() {
         List<Patient> patients = new ArrayList<>();
         patientRepository.findAll().iterator().forEachRemaining(patients::add);
         return patients;
     }
-  //</editor-fold>
-  
+    //</editor-fold>
+
     //<editor-fold desc="Utils methods">
     public static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
         CredentialsEntity credentialsEntity;
@@ -623,7 +625,8 @@ public class Controller {
         }
 
         // Check if the password and token match the database ones
-        if (!password.equals(credentialsEntity.getPassword())) throw new ControllerException("Incorrect password for donor");
+        if (!password.equals(credentialsEntity.getPassword()))
+            throw new ControllerException("Incorrect password for donor");
         if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token for donor");
 
         return true;
@@ -636,5 +639,5 @@ public class Controller {
     public static boolean checkPersonnelCredentials(String email, String password, String token) throws ControllerException {
         return checkCredentials(email, password, token, false);
     }
-   //</editor-fold>
+    //</editor-fold>
 }
