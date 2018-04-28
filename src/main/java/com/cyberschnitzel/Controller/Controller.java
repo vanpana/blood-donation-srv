@@ -170,6 +170,19 @@ public class Controller {
         return null;
     }
 
+	/**
+	 * Method that returns a donor by cnp
+	 *
+	 * @param donatorCnp - cnp of the donator to be fetched
+	 * @return Donator entity
+	 */
+	public static Donator getDonatorByCnp(String donatorCnp) {
+		for (Donator donator : getAllDonators()) {
+			if (donator.getCnp().equals(donatorCnp)) return donator;
+		}
+		return null;
+	}
+
     /**
      * Method that returns all the donators
      *
@@ -432,6 +445,14 @@ public class Controller {
         }
     }
 
+	public static void updatePersonnelToken(int personnelID, String token) throws ControllerException {
+		Personnel pers = getPersonnelByID(personnelID).setToken(token);
+		try {
+			personnelRepository.update(pers);
+		} catch (ValidatorException e) {
+			throw new ControllerException("Failed to update pers token: " + e.getMessage());
+		}
+	}
 
     /**
      * Method that deletes a personnel by id
@@ -603,6 +624,34 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Utils methods">
+
+	public static boolean checkCredentialsNoToken(String email, String password, boolean isDonator) throws ControllerException {
+		CredentialsEntity credentialsEntity;
+
+		// Try to fetch the entity with specified mail
+		if (isDonator) credentialsEntity = getDonatorByEmail(email);
+		else credentialsEntity = getPersonnelByEmail(email);
+
+		// Check if the entity exists
+		if (credentialsEntity == null) {
+			if (isDonator) throw new ControllerException("Inexistent donor with specified email.");
+			else throw new ControllerException("Inexistent personnel with specified email.");
+		}
+
+		// Hash the password and the token
+//
+//		try {
+//			password = Hasher.encrypt(password);
+//		} catch (HashingException he) {
+//			throw new ControllerException("Failed to hash password or token: " + he.getMessage());
+//		}
+
+		// Check if the password and token match the database ones
+		if (!password.equals(credentialsEntity.getPassword()))
+			throw new ControllerException("Incorrect password for donor");
+		return true;
+	}
+
     public static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
         CredentialsEntity credentialsEntity;
 
@@ -616,6 +665,7 @@ public class Controller {
             else throw new ControllerException("Inexistent personnel with specified email.");
         }
 
+        /*
         // Hash the password and the token
         try {
             password = Hasher.encrypt(password);
@@ -623,6 +673,7 @@ public class Controller {
         } catch (HashingException he) {
             throw new ControllerException("Failed to hash password or token: " + he.getMessage());
         }
+        */
 
         // Check if the password and token match the database ones
         if (!password.equals(credentialsEntity.getPassword()))

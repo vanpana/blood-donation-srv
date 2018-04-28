@@ -53,7 +53,7 @@ public class PersonnelAdapter implements Adapter<Personnel> {
         List<Personnel> personnels = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                Personnel personnel = new Personnel(resultSet.getString("email"), resultSet.getString("name"));
+                Personnel personnel = new Personnel(resultSet.getString("name"),resultSet.getString("email"));
                 personnel.setId(resultSet.getInt("idpersonnel"));
                 personnel.setPassword(resultSet.getString("password"))
                         .setToken(resultSet.getString("token"));
@@ -70,7 +70,7 @@ public class PersonnelAdapter implements Adapter<Personnel> {
         preparedStatement.setString(2, entity.getEmail());
         preparedStatement.setString(3, entity.getPassword());
         preparedStatement.setString(4, entity.getToken());
-        if (entity.getId() != null) preparedStatement.setInt(3, entity.getId());
+        if (entity.getId() != null) preparedStatement.setInt(5, entity.getId());
 
         return preparedStatement;
     }

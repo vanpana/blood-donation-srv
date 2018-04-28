@@ -1,25 +1,15 @@
 DROP TABLE "Personnel";
-
 DROP TABLE "Used";
-
 DROP TABLE "Patient";
-
 DROP TABLE "Donation";
-
 DROP TABLE "Request";
-
 DROP TABLE "Status";
-
 DROP TABLE "Donator";
-
 DROP TABLE "Thrombocites";
-
 DROP TABLE "RedCells";
-
 DROP TABLE "Plasma";
-
 DROP TABLE "Blood";
-
+DROP TABLE "Locations";
 
 
 CREATE TABLE public."Blood"
@@ -29,6 +19,15 @@ CREATE TABLE public."Blood"
   receiveddate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
+
+CREATE TABLE public."Locations"
+(
+  idlocation SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(50),
+  latitude INT,
+  longitude INT
+);
+CREATE UNIQUE INDEX Locations_idlocation_uindex ON public.Locations (idlocation);
 
 
 CREATE TABLE public."Plasma"
@@ -108,11 +107,16 @@ CREATE TABLE public."Donation"
   quantity real,
   status integer,
   idblood integer,
+  idlocation INTEGER,
   CONSTRAINT "Donation_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Donation_cnp_fkey" FOREIGN KEY (cnp)
   REFERENCES public."Donator" (cnp) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
+  CONSTRAINT "Donation_idlocation_fkey" FOREIGN KEY (idlocation)
+  REFERENCES public."Locations" (idlocation) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION ,
   CONSTRAINT "Donation_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION

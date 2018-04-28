@@ -3,7 +3,6 @@ package com.cyberschnitzel.Domain.Entities;
 public class Personnel extends CredentialsEntity {
 
     private String name;
-    private String email;
 
     public Personnel(String name, String email){
         super(email);
@@ -24,6 +23,11 @@ public class Personnel extends CredentialsEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Personnel setToken(String token) {
+        if (token != null) this.token = token;
+        return this;
     }
 }
 

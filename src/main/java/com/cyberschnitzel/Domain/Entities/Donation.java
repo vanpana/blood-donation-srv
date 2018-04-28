@@ -32,6 +32,15 @@ public class Donation extends Entity {
     private double quantity;
     private DonationStatus status;
     private int bloodID;
+    private int locationid;
+
+    public int getLocationid() {
+        return locationid;
+    }
+
+    public void setLocationid(int locationid) {
+        this.locationid = locationid;
+    }
 
     public Donation(String cnp, double quantity, int status, int bloodID) {
         this.cnp = cnp;
