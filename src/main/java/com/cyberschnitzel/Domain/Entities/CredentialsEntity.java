@@ -1,6 +1,11 @@
 package com.cyberschnitzel.Domain.Entities;
 
 public class CredentialsEntity extends Entity {
+    public enum EntityType{
+        PERSONNEL, DONATOR, DOCTOR
+    }
+
+
     protected String email, password, token;
 
     public CredentialsEntity(String email) {

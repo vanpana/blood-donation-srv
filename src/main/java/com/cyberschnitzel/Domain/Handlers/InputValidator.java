@@ -9,15 +9,15 @@ import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 
 class InputValidator {
-    private static void validateInput(MessageRequest messageRequest, boolean isDonator) throws HandlingException {
+    private static void validateInput(MessageRequest messageRequest, CredentialsEntity.EntityType entityType) throws HandlingException {
         // Check if the entity exists and verify the credentials
         try {
             if(messageRequest.getToken() == null) {
-				Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), isDonator);
+				Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), entityType);
 				return;
 			}
             Controller.checkCredentials(messageRequest.getEmail(), messageRequest.getPassword(), messageRequest.getToken(),
-                    isDonator);
+                    entityType);
         } catch (ControllerException ce) {
             throw new HandlingException(ce.getMessage());
         }
@@ -26,12 +26,12 @@ class InputValidator {
     }
 
     static Donator validateDonatorInput(MessageRequest messageRequest) throws HandlingException {
-        validateInput(messageRequest, true);
+        validateInput(messageRequest, CredentialsEntity.EntityType.DONATOR);
         return Controller.getDonatorByEmail(messageRequest.getEmail());
     }
 
     static Personnel validatePersonnelInput(MessageRequest messageRequest) throws HandlingException {
-        validateInput(messageRequest, false);
+        validateInput(messageRequest, CredentialsEntity.EntityType.PERSONNEL);
         return Controller.getPersonnelByEmail(messageRequest.getEmail());
     }
 }
