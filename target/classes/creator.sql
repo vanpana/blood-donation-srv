@@ -61,9 +61,9 @@ CREATE TABLE public."RedCells"
 CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
-  idthrombocite serial NOT NULL,
+  idthrombocites serial NOT NULL,
   idblood integer,
-  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocite),
+  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
@@ -163,6 +163,16 @@ CREATE TABLE public."Personnel"
   CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 );
 
+CREATE TABLE public."Doctor"
+(
+  iddoctor SERIAL NOT NULL,
+  name        CHARACTER VARYING COLLATE pg_catalog."default",
+  email       CHARACTER VARYING COLLATE pg_catalog."default",
+  password    CHARACTER VARYING COLLATE pg_catalog."default",
+  token       CHARACTER VARYING COLLATE pg_catalog."default",
+  CONSTRAINT "Doctor._pkey" PRIMARY KEY (iddoctor)
+);
+
 
 INSERT INTO public."Patient"(
   cnp, name)
@@ -209,7 +219,7 @@ VALUES (1, 1, '12.04.2018');
 
 
 INSERT INTO public."Thrombocites"(
-  expirationdate, idthrombocite, idblood)
+  expirationdate, idthrombocites, idblood)
 VALUES ('8.04.2018',1, 1);
 
 
