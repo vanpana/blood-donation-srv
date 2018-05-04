@@ -70,17 +70,20 @@ public class BloodPartHandlers {
 		}
 		for(BloodPart b : plasma)
 		{
-			response.add(new BloodPartResponse(b, "Plasma"));
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "Plasma", blood.getBloodType(), blood.getReceivedDate().toString()));
 		}
 
 		for(BloodPart b : redcells)
 		{
-			response.add(new BloodPartResponse(b, "RedCells"));
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "RedCells", blood.getBloodType(), blood.getReceivedDate().toString()));
 		}
 
 		for(BloodPart b : thrombocites)
 		{
-			response.add(new BloodPartResponse(b, "Thrombocites"));
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "Thrombocites", blood.getBloodType(), blood.getReceivedDate().toString()));
 		}
 
 

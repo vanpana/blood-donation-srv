@@ -16,10 +16,12 @@ public class RedCells extends BloodPart {
 	{
 		super(_id, _idblood, _exp);
 	}
+
+	@Override
 	public Date getExpirationDate()
 	{
 		Date received = super.getReceivedDate();
-		return null;
+		return received;
 	}
 
 	public Blood getOrigin()
@@ -28,7 +30,7 @@ public class RedCells extends BloodPart {
 
 	}
 	public static RedCells fromBloodPart(BloodPart bp){
-		return new RedCells(bp.getId(), bp.getIdBlood(), bp.getExp());
+		return new RedCells(bp.getId(), bp.getIdBlood(), bp.getExpirationDate());
 	}
 
 	@Override

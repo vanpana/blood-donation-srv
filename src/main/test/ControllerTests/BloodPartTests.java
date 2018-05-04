@@ -6,7 +6,6 @@ import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Plasma;
 import com.cyberschnitzel.Domain.Entities.RedCells;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
-import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,8 +68,8 @@ public class BloodPartTests {
 		BloodPart b = (BloodPart)bb;
 
 		Long result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
-		Long updateResult = b.getExp().getTime();
-		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+		Long updateResult = b.getExpirationDate().getTime();
+		assertTrue("Find fail", b.getExpirationDate().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
 
 
 		try {
@@ -90,8 +89,8 @@ public class BloodPartTests {
 		b = (BloodPart)bb;
 
 		result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
-		updateResult = b.getExp().getTime();
-		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+		updateResult = b.getExpirationDate().getTime();
+		assertTrue("Find fail", b.getExpirationDate().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
 
 
 

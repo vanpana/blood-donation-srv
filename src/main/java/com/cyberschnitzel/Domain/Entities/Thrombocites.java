@@ -16,10 +16,12 @@ public class Thrombocites extends BloodPart {
 	{
 		super(_id, _idblood, _exp);
 	}
+
+	@Override
 	public Date getExpirationDate()
 	{
 		Date received = super.getReceivedDate();
-		return null;
+		return received;
 	}
 
 	public Blood getOrigin()
@@ -28,7 +30,7 @@ public class Thrombocites extends BloodPart {
 
 	}
 	public static Thrombocites fromBloodPart(BloodPart bp){
-		return new Thrombocites(bp.getId(), bp.getIdBlood(), bp.getExp());
+		return new Thrombocites(bp.getId(), bp.getIdBlood(), bp.getExpirationDate());
 	}
 
 	@Override
