@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BloodPartAdapter implements Adapter<Blood> {
+public class BloodPartAdapter implements Adapter<BloodPart> {
 
 	private String tableName;
 
@@ -20,7 +20,7 @@ public class BloodPartAdapter implements Adapter<Blood> {
 		tableName = partName;
 	}
 	@Override
-	public PreparedStatement saveQuery(Blood entity) throws SQLException {
+	public PreparedStatement saveQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
 		String query = "INSERT INTO " + "\"" + tableName + "\"" + "(id" + tableName.toLowerCase() + ", idblood, expirationdate) " +
 				"VALUES (?, ?, ?)";
@@ -40,7 +40,7 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	}
 
 	@Override
-	public PreparedStatement updateQuery(Blood entity) throws SQLException {
+	public PreparedStatement updateQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
 		String query = "UPDATE " + "\"" + tableName + "\"" + " SET id" + tableName.toLowerCase() + " = ?, idblood = ?, expirationdate = ? " +
 				"WHERE id" + tableName.toLowerCase() + " = ?";
@@ -68,8 +68,8 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	}
 
 	@Override
-	public Stream<Blood> get(ResultSet rs) {
-		List<Blood> bloodList = new ArrayList<>();
+	public Stream<BloodPart> get(ResultSet rs) {
+		List<BloodPart> bloodList = new ArrayList<>();
 		try {
 			while (rs.next()) {
 				BloodPart blood = new BloodPart(rs.getInt("id" + tableName.toLowerCase()),

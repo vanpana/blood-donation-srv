@@ -160,6 +160,13 @@ public class Endpoints {
 		return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
 	}
 
+	@POST
+	@Path(BLOODPART_PATH)
+	public Response getAllBloodParts(String messageRequestJson){
+    	return Handler.handle(() -> BloodPartHandlers.getAllBloodParts(messageRequestJson), BLOODPART_PATH);
+	}
+
+
 	@DELETE
 	@Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
 	public Response deletePlasma(@PathParam(PARAM) int id)
@@ -181,12 +188,12 @@ public class Endpoints {
 		return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
 	}
 
-	@POST
-	@Path(BLOODPART_PATH)
-	public Response addBloodPart(String addBloodPartRequestJson) {
-		return Handler.handle(() -> BloodPartHandlers.addBloodPart(addBloodPartRequestJson), BLOODPART_PATH,
-				addBloodPartRequestJson);
-	}
+//	@POST
+//	@Path(BLOODPART_PATH)
+//	public Response addBloodPart(String addBloodPartRequestJson) {
+//		return Handler.handle(() -> BloodPartHandlers.addBloodPart(addBloodPartRequestJson), BLOODPART_PATH,
+//				addBloodPartRequestJson);
+//	}
 
 	@PUT
 	@Path(BLOODPART_PATH + PATH_PARAM)

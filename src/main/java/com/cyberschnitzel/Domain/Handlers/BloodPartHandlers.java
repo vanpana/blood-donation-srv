@@ -1,13 +1,16 @@
 package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
-import com.cyberschnitzel.Domain.Entities.BloodPart;
-import com.cyberschnitzel.Domain.Entities.Donator;
-import com.cyberschnitzel.Domain.Entities.Personnel;
+import com.cyberschnitzel.Domain.Entities.*;
+import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddBloodPartRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
+import com.cyberschnitzel.Domain.Transport.Responses.BloodPartResponse;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BloodPartHandlers {
 	public static Integer addBloodPart(String input) throws HandlingException {
@@ -47,6 +50,42 @@ public class BloodPartHandlers {
 		} catch (Exception ex) {
 			throw new HandlingException("Failed to handle update part: " + ex.getMessage());
 		}
+	}
+
+	public static List<BloodPartResponse> getAllBloodParts(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+		// Validate input
+		InputValidator.validatePersonnelInput(messageRequest);
+		List<BloodPart> plasma = new ArrayList<>();
+		List<BloodPart> redcells = new ArrayList<>();
+		List<BloodPart> thrombocites = new ArrayList<>();
+		List<BloodPartResponse> response = new ArrayList<>();
+
+		try {
+			plasma = Controller.getBloodPart("Plasma");
+			redcells = Controller.getBloodPart("RedCells");
+			thrombocites = Controller.getBloodPart("Thrombocites");
+		} catch (ControllerException e) {
+			e.printStackTrace();
+		}
+		for(BloodPart b : plasma)
+		{
+			response.add(new BloodPartResponse(b, "Plasma"));
+		}
+
+		for(BloodPart b : redcells)
+		{
+			response.add(new BloodPartResponse(b, "RedCells"));
+		}
+
+		for(BloodPart b : thrombocites)
+		{
+			response.add(new BloodPartResponse(b, "Thrombocites"));
+		}
+
+
+		return response;
+
 	}
 
 

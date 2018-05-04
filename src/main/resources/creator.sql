@@ -209,7 +209,7 @@ VALUES (1, 1, '12.04.2018');
 
 
 INSERT INTO public."Thrombocites"(
-  expirationdate, idthrombocite, idblood)
+  expirationdate, idthrombocites, idblood)
 VALUES ('8.04.2018',1, 1);
 
 

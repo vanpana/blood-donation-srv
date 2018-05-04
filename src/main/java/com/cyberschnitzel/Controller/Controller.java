@@ -28,12 +28,12 @@ public class Controller {
             new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
-    private static Repository<Blood> bloodPartsPlasmaRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
-    private static Repository<Blood> bloodPartsRedCellsRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
-    private static Repository<Blood> bloodPartsThrombocitesRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
+    private static Repository<BloodPart> bloodPartsPlasmaRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("Plasma"));
+    private static Repository<BloodPart> bloodPartsRedCellsRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("RedCells"));
+    private static Repository<BloodPart> bloodPartsThrombocitesRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("Thrombocites"));
     private static Repository<Personnel> personnelRepository =
             new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
     private static Repository<Patient> patientRepository =
@@ -352,12 +352,12 @@ public class Controller {
 
     //<editor-fold desc="Blood part methods">
     @SuppressWarnings("unchecked")
-    public static List<Blood> getBloodPart(String part) throws ControllerException {
+    public static List<BloodPart> getBloodPart(String part) throws ControllerException {
         try {
-            List<Blood> temp = new ArrayList<>();
+            List<BloodPart> temp = new ArrayList<>();
             Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
             f.setAccessible(true);
-            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            Repository<BloodPart> t = (Repository<BloodPart>) f.get(Controller.class);
             t.findAll().iterator().forEachRemaining(temp::add);
             return temp;
         } catch (IllegalAccessException | NoSuchFieldException e) {
@@ -416,7 +416,7 @@ public class Controller {
         try {
             Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
             f.setAccessible(true);
-            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            Repository<BloodPart> t = (Repository<BloodPart>) f.get(Controller.class);
             t.update(new BloodPart(partId, originId, date));
             return 0;
         } catch (IllegalAccessException | ValidatorException | NoSuchFieldException e) {
