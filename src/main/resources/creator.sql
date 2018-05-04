@@ -179,6 +179,16 @@ CREATE TABLE public."Personnel"
   CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 );
 
+CREATE TABLE public."Doctor"
+(
+  iddoctor SERIAL NOT NULL,
+  name        CHARACTER VARYING COLLATE pg_catalog."default",
+  email       CHARACTER VARYING COLLATE pg_catalog."default",
+  password    CHARACTER VARYING COLLATE pg_catalog."default",
+  token       CHARACTER VARYING COLLATE pg_catalog."default",
+  CONSTRAINT "Doctor._pkey" PRIMARY KEY (iddoctor)
+);
+
 
 INSERT INTO public."Patient"(
   cnp, name)

@@ -1,18 +1,12 @@
 package com.cyberschnitzel.Controller;
 
-import com.cyberschnitzel.Domain.Adapters.BloodAdapter;
-import com.cyberschnitzel.Domain.Adapters.BloodPartAdapter;
-import com.cyberschnitzel.Domain.Adapters.DonationAdapter;
-import com.cyberschnitzel.Domain.Adapters.DonatorAdapter;
 import com.cyberschnitzel.Domain.Adapters.*;
 import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
-import com.cyberschnitzel.Domain.Exceptions.HashingException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
-import com.cyberschnitzel.Util.Hasher;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -41,6 +35,8 @@ public class Controller {
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
+    private static Repository<Doctor> doctorRepository =
+            new DatabaseRepository<>(new DoctorValidator(), new DoctorAdapter());
 
     //</editor-fold>
 
@@ -643,7 +639,7 @@ public class Controller {
 
         // Check if the password and token match the database ones
         if (!password.equals(credentialsEntity.getPassword()))
-            throw new ControllerException("Incorrect password for donor");
+            throw new ControllerException("Incorrect password");
         return true;
     }
 
@@ -662,8 +658,8 @@ public class Controller {
 
         // Check if the password and token match the database ones
         if (!password.equals(credentialsEntity.getPassword()))
-            throw new ControllerException("Incorrect password for donor");
-        if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token for donor");
+            throw new ControllerException("Incorrect password");
+        if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token");
 
         return true;
     }
@@ -674,7 +670,7 @@ public class Controller {
         // Try to fetch the entity with specified mail
         if (entityType == CredentialsEntity.EntityType.DONATOR) credentialsEntity = getDonatorByEmail(email);
         else if (entityType == CredentialsEntity.EntityType.PERSONNEL) credentialsEntity = getPersonnelByEmail(email);
-        else if (entityType == CredentialsEntity.EntityType.DOCTOR) credentialsEntity = null;
+        else if (entityType == CredentialsEntity.EntityType.DOCTOR) credentialsEntity = getDoctorByEmail(email);
 
         // Check if the entity exists
         if (credentialsEntity == null) {
@@ -683,7 +679,7 @@ public class Controller {
             else if (entityType == CredentialsEntity.EntityType.PERSONNEL)
                 throw new ControllerException("Inexistent personnel with specified email.");
             else if (entityType == CredentialsEntity.EntityType.DOCTOR)
-                throw new ControllerException("Inexistent doctor");
+                throw new ControllerException("Inexistent doctor with specified email");
             else throw new ControllerException("Inexistent user with specified email");
         }
 
@@ -692,12 +688,64 @@ public class Controller {
 
     //</editor-fold>
 
-
     public static Location getLocationById(Integer id)
     {
         Optional<Location> opt = locationRepository.findOne(id);
         return opt.orElse(null);
     }
 
+    //<editor-fold desc = "Doctor methods">
+    public static int addDoctor(String name, String email) throws ControllerException {
+        try {
+            Optional<Doctor> doctorOptional = doctorRepository.save(new Doctor(name, email));
+            return doctorOptional.map(Entity::getId).orElse(-1);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to add personnel entity: " + e.getMessage());
+        }
+    }
+
+    public static void updateDoctorToken(int iddoctor, String token) throws ControllerException {
+        Doctor doctor = getDoctorById(iddoctor).setToken(token);
+        try {
+            doctorRepository.update(doctor);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update pers token: " + e.getMessage());
+        }
+    }
+
+    public static void deleteDoctor(int iddoctor){
+        doctorRepository.delete(iddoctor);
+    }
+
+    public static Doctor getDoctorById(int iddoctor) {
+        Optional<Doctor> doctorOptional = doctorRepository.findOne(iddoctor);
+        return doctorOptional.orElse(null);
+    }
+
+    public static void updateDoctorInformation(int iddoctor, String name, String email) throws ControllerException {
+        Doctor doctor = new Doctor(name, email);
+        doctor.setId(iddoctor);
+        try {
+            doctorRepository.update(doctor);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update full doctor entity: " + e.getMessage());
+        }
+    }
+
+    public static Doctor getDoctorByEmail(String doctorEmail) {
+        for (Doctor doctor : getAllDoctors()) {
+            if (doctor.getEmail().equals(doctorEmail)) return doctor;
+        }
+        return null;
+    }
+
+
+    private static List<Doctor> getAllDoctors() {
+        List<Doctor> doctors = new ArrayList<>();
+        doctorRepository.findAll().iterator().forEachRemaining(doctors::add);
+        return doctors;
+    }
+
+//</editor-fold>
 
 }
