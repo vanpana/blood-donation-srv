@@ -4,10 +4,12 @@ import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.Blood;
 import com.cyberschnitzel.Domain.Entities.Donation;
 import com.cyberschnitzel.Domain.Entities.Donator;
+import com.cyberschnitzel.Domain.Entities.Location;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
+import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationStatusRequest;
 import com.cyberschnitzel.Domain.Transport.Responses.DonationsResponse;
 import com.google.gson.Gson;
 
@@ -70,6 +72,28 @@ public class DonationHandlers {
         }
     }
 
+	public static Donation updateDonationStatus(String input) throws HandlingException {
+		try {
+			// Try to construct the update donation request
+			UpdateDonationStatusRequest updateDonationRequest = new Gson().fromJson(input, UpdateDonationStatusRequest.class);
+
+			// Validate input and get donor
+			InputValidator.validatePersonnelInput(updateDonationRequest);
+
+			// Try to update the donation
+			Donation don = Controller.getDonationByID(updateDonationRequest.getDonationID());
+			don.setStatus(Donation.DonationStatus.getByStatusID(updateDonationRequest.getStatusID()));
+			Controller.updateDonation(don.getId(), don.getCnp(),
+					don.getQuantity(), updateDonationRequest.getStatusID(), don.getBloodID());
+
+			// Try to return the donation by the id it was updated
+			return Controller.getDonationByID(updateDonationRequest.getDonationID());
+		} catch (Exception ex) {
+			throw new HandlingException("Failed to handle update donation: " + ex.getMessage());
+		}
+	}
+
+
     /**
      * Checks the donator and deletes a donation
      *
@@ -110,7 +134,8 @@ public class DonationHandlers {
 		for(Donation don : lst){
 			Donator donator = Controller.getDonatorByCnp(don.getCnp());
 			Blood blood = Controller.getBloodByID(don.getBloodID());
-			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), "dummyLocation");
+			Location location = Controller.getLocationById(don.getLocationid());
+			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
 			donationsResponses.add(donationsResponse);
 		}
 		return donationsResponses;

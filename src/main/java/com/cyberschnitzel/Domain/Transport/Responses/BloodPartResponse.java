@@ -11,9 +11,11 @@ public class BloodPartResponse {
 	private String bloodPartType;
 	private BloodType bloodType;
 	private String receivedDate;
+	private String status;
 
 	public BloodPartResponse(BloodPart bloodPart, String bloodPartType, BloodType bloodType, String receivedDate) {
 		this.id = bloodPart.getId();
+
 		this.idBlood = bloodPart.getIdBlood();
 		this.bloodPartType = bloodPartType;
 		this.expirationDate = bloodPart.getExpirationDate().toString();

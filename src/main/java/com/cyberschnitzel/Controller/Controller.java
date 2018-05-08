@@ -40,6 +40,7 @@ public class Controller {
             new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
+    private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
 
     //</editor-fold>
 
@@ -691,4 +692,13 @@ public class Controller {
         return checkCredentials(email, password, token, false);
     }
     //</editor-fold>
+
+
+    public static Location getLocationById(Integer id)
+    {
+        Optional<Location> opt = locationRepository.findOne(id);
+        return opt.orElse(null);
+    }
+
+
 }

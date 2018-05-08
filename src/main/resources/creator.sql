@@ -9,10 +9,26 @@ DROP TABLE "Thrombocites";
 DROP TABLE "RedCells";
 DROP TABLE "Plasma";
 DROP TABLE "Blood";
-DROP TABLE "Locations";
+DROP TABLE "Location";
 
 -- Set the date style to day.month.year
 SET DateStyle TO DMY;
+
+
+-- DROP TABLE public."Location";
+
+CREATE TABLE public."Location"
+(
+  name character varying COLLATE pg_catalog."default",
+  x double precision,
+  y double precision,
+  idlocation integer primary key
+);
+
+INSERT INTO public."Location"(
+  name, x, y, idlocation)
+VALUES ('Cluj-Napoca', 46, 23, 1), ('Baia Mare', 47, 23, 2), ('Bucuresti', 44, 26, 3),
+  ('Arad', 46, 21, 4),('Timisoara', 45, 21, 5);
 
 CREATE TABLE public."Blood"
 (

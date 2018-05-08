@@ -33,6 +33,8 @@ public class Endpoints {
     private final static String PATIENTS_PATH = "/patients";
     private final static String LOGIN_PATH = "/login";
     private final static String PERSONNEL_PATH = "/personnel";
+    private final static String STATUS_PATH = "/status";
+
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -104,6 +106,14 @@ public class Endpoints {
         return Handler.handle(() -> DonationHandlers.updateDonation(updateDonationRequestJson), DONATIONS_PATH,
                 updateDonationRequestJson);
     }
+
+    @PUT
+	@Path(DONATIONS_PATH + STATUS_PATH)
+	public Response updateDonationStatus(String updateDonationStatusRequestJson)
+	{
+		return Handler.handle(() -> DonationHandlers.updateDonationStatus(updateDonationStatusRequestJson), DONATIONS_PATH + STATUS_PATH, updateDonationStatusRequestJson);
+	}
+
 
     /**
      * DELETE method to delete a donation
@@ -242,6 +252,13 @@ public class Endpoints {
 	@Path(PERSONNEL_PATH + LOGIN_PATH)
 	public Response loginPatient(String messageRequestJson){
 		return Handler.handle(() -> PersonnelHandlers.checkPersonnelLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
+				messageRequestJson);
+	}
+
+	@POST
+	@Path(DONATORS_PATH + LOGIN_PATH)
+	public Response loginUser(String messageRequestJson){
+		return Handler.handle(() -> UserHandlers.checkDonatorLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
 				messageRequestJson);
 	}
 
