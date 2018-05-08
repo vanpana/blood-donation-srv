@@ -396,16 +396,15 @@ public class Controller {
     }
 
     @SuppressWarnings("unchecked")
-    public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws ControllerException {
+    public static Integer addBloodPart(Class part, Integer originId, Date date) throws ControllerException {
         try {
             Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
             f.setAccessible(true);
             Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
+            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class).newInstance(originId, date);
+            tb.setReceivedDate(date);
             Optional<Blood> ret = t.save(tb);
-            if (!ret.isPresent())
-                return 1;
-            return 0;
+			return ret.map(Entity::getId).orElse(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ControllerException(e.getMessage());

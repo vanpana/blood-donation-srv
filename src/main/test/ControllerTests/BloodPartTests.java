@@ -32,7 +32,7 @@ public class BloodPartTests {
 	@Test
 	public void testAdd() throws NoSuchFieldException, IllegalAccessException, ControllerException {
 		try {
-			retCode = Controller.addBloodPart(Plasma.class, 1, 100, new SimpleDateFormat("DD.MM.YYYY").parse("01.01.2000"));
+			retCode = Controller.addBloodPart(Plasma.class, 1, new SimpleDateFormat("DD.MM.YYYY").parse("01.01.2000"));
 
 		} catch (ParseException e) {
 			fail("Date Exception");
@@ -52,7 +52,7 @@ public class BloodPartTests {
 	public void testUpdate() throws NoSuchFieldException, IllegalAccessException, ParseException, ControllerException {
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
-			retCode = Controller.addBloodPart(Plasma.class, 1, 100, d);
+			retCode = Controller.addBloodPart(Plasma.class, 1, d);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -74,7 +74,7 @@ public class BloodPartTests {
 
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
-			retCode = Controller.addBloodPart(RedCells.class, 1, 100, d);
+			retCode = Controller.addBloodPart(RedCells.class, 1, d);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

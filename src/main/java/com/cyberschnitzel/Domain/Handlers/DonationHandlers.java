@@ -1,21 +1,19 @@
 package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
-import com.cyberschnitzel.Domain.Entities.Blood;
-import com.cyberschnitzel.Domain.Entities.Donation;
-import com.cyberschnitzel.Domain.Entities.Donator;
-import com.cyberschnitzel.Domain.Entities.Location;
+import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
-import com.cyberschnitzel.Domain.Transport.Requests.AddDonationRequest;
-import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
-import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationRequest;
-import com.cyberschnitzel.Domain.Transport.Requests.UpdateDonationStatusRequest;
+import com.cyberschnitzel.Domain.Transport.Requests.*;
 import com.cyberschnitzel.Domain.Transport.Responses.DonationsResponse;
+import com.cyberschnitzel.Domain.Transport.Responses.SuccessResponse;
 import com.google.gson.Gson;
 
+import javax.ws.rs.core.Response;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DonationHandlers {
@@ -140,7 +138,71 @@ public class DonationHandlers {
 		}
 		return donationsResponses;
 
-
-
 	}
+
+	public static SuccessResponse receiveDonation(String input) throws HandlingException {
+		try {
+			// Try to construct the add donation request
+			ReceiveDonationRequest receiveDonationRequest = new Gson().fromJson(input, ReceiveDonationRequest.class);
+
+			// Validate input and get donor
+			InputValidator.validatePersonnelInput(receiveDonationRequest);
+
+			String cnp = receiveDonationRequest.getCnp();
+			String name = receiveDonationRequest.getName();
+			String bloodType = receiveDonationRequest.getBloodType();
+			Donator d = Controller.getDonatorByCnp(cnp);
+			Integer donatorId;
+
+			if(d == null){
+				d = new Donator(null,null,null,cnp,name);
+				d.setBloodType(bloodType);
+				donatorId = Controller.addDonator(cnp,null, name, bloodType, null, null);
+			}
+			else
+			{
+				donatorId = d.getId();
+			}
+
+			Integer totalBloodQty = receiveDonationRequest.getBloodQuantity() + receiveDonationRequest.getPlasmaQuantity() +
+					receiveDonationRequest.getRedCellsQuantity() + receiveDonationRequest.getThrombocitesQuantity();
+
+
+			Integer bloodId = Controller.addBlood(bloodType);
+			Blood blood = Controller.getBloodByID(bloodId);
+			Controller.addDonation(cnp,totalBloodQty,0,bloodId);
+
+			Integer plasmaQty = receiveDonationRequest.getPlasmaQuantity();
+			Integer redCellsQty = receiveDonationRequest.getRedCellsQuantity();
+			Integer thrombocitesQty = receiveDonationRequest.getThrombocitesQuantity();
+
+			if(plasmaQty > 0)
+			{
+				Controller.addBloodPart(Plasma.class, bloodId, blood.getReceivedDate());
+			}
+			if(redCellsQty > 0)
+			{
+				Controller.addBloodPart(RedCells.class, bloodId, blood.getReceivedDate());
+			}
+			if(thrombocitesQty > 0)
+			{
+				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate());
+			}
+
+
+			// flow: user exists -> yes -> get user
+			//					-> n0 -> create + get
+			//				check quants
+			//				add blood/parts based on quants
+			//				send notif if succces
+			// Try to add the donation
+			System.out.println(receiveDonationRequest.toString());
+
+			return new SuccessResponse(true, "Donation succesfull");
+		} catch (Exception ex) {
+			throw new HandlingException("Failed to handle add donation: " + ex.getMessage());
+		}
+	}
+
+
 }

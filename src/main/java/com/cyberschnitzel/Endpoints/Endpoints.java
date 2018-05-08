@@ -34,7 +34,7 @@ public class Endpoints {
     private final static String LOGIN_PATH = "/login";
     private final static String PERSONNEL_PATH = "/personnel";
     private final static String STATUS_PATH = "/status";
-
+	private final static String RECEIVE = "/receive";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -94,6 +94,16 @@ public class Endpoints {
                 addDonationRequestJson);
     }
 
+
+    //params cnp, 4 x quant, status auto, bloodType, name, dob, recv auto
+	//TODO notif succeful
+	@POST
+	@Path(DONATIONS_PATH + RECEIVE)
+	public Response receiveDonation(String receiveDonationRequestJson) {
+		return Handler.handle(() -> DonationHandlers.receiveDonation(receiveDonationRequestJson), DONATIONS_PATH,
+				receiveDonationRequestJson);
+	}
+
     /**
      * PUT method to update a donation
      *
@@ -106,6 +116,7 @@ public class Endpoints {
         return Handler.handle(() -> DonationHandlers.updateDonation(updateDonationRequestJson), DONATIONS_PATH,
                 updateDonationRequestJson);
     }
+
 
     @PUT
 	@Path(DONATIONS_PATH + STATUS_PATH)

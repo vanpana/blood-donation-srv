@@ -22,7 +22,7 @@ public class BloodPartHandlers {
 			InputValidator.validatePersonnelInput(addBloodPartRequest);
 
 			int retCode = Controller.addBloodPart(addBloodPartRequest.getPartClass(), addBloodPartRequest.getBloodId(),
-					addBloodPartRequest.getPartId(), addBloodPartRequest.getExpDate());
+					addBloodPartRequest.getExpDate());
 			// Throw exception if donation couldn't be added
 			if (retCode != 0) throw new Exception("Error inserting part");
 

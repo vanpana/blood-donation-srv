@@ -16,7 +16,10 @@ public class Thrombocites extends BloodPart {
 	{
 		super(_id, _idblood, _exp);
 	}
-
+	public Thrombocites( Integer _idblood, Date _exp)
+	{
+		super(_idblood, _exp);
+	}
 	@Override
 	public Date getExpirationDate()
 	{

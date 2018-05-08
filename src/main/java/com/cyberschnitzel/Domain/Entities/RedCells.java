@@ -16,7 +16,10 @@ public class RedCells extends BloodPart {
 	{
 		super(_id, _idblood, _exp);
 	}
-
+	public RedCells( Integer _idblood, Date _exp)
+	{
+		super(_idblood, _exp);
+	}
 	@Override
 	public Date getExpirationDate()
 	{

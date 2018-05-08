@@ -21,12 +21,11 @@ public class BloodPartAdapter implements Adapter<BloodPart> {
 	@Override
 	public PreparedStatement saveQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
-		String query = "INSERT INTO " + "\"" + tableName + "\"" + "(id" + tableName.toLowerCase() + ", idblood, expirationdate) " +
-				"VALUES (?, ?, ?)";
+		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate) " +
+				"VALUES (?, ?) returning id" + tableName.toLowerCase();
 		PreparedStatement p = connection.prepareStatement(query);
-		p.setInt(1,b.getId());
-		p.setInt(2,b.getIdBlood());
-		p.setDate(3,new java.sql.Date(b.getExpirationDate().getTime()));
+		p.setInt(1,b.getIdBlood());
+		p.setDate(2,new java.sql.Date(b.getExpirationDate().getTime()));
 		return p;
 	}
 

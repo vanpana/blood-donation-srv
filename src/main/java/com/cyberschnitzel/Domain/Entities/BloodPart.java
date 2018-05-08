@@ -18,6 +18,12 @@ public class BloodPart extends Blood {
 
 	}
 
+	public BloodPart(Integer _idblood, Date _exp)
+	{
+		idBlood =_idblood;
+		expirationDate = _exp;
+	}
+
 	public Integer getIdBlood() {
 		return idBlood;
 	}
