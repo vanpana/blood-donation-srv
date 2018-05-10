@@ -16,10 +16,16 @@ public class Plasma extends BloodPart {
 	{
 		super(_id, _idblood, _exp);
 	}
+	public Plasma( Integer _idblood, Date _exp)
+	{
+		super(_idblood, _exp);
+	}
+
+	@Override
 	public Date getExpirationDate()
 	{
 		Date received = super.getReceivedDate();
-		return null;
+		return received;
 	}
 
 	public Blood getOrigin()
@@ -28,7 +34,7 @@ public class Plasma extends BloodPart {
 
 	}
 	public static Plasma fromBloodPart(BloodPart bp){
-		return new Plasma(bp.getId(), bp.getIdBlood(), bp.getExp());
+		return new Plasma(bp.getId(), bp.getIdBlood(), bp.getExpirationDate());
 	}
 
 	@Override

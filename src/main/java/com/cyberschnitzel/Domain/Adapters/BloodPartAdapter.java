@@ -1,6 +1,5 @@
 package com.cyberschnitzel.Domain.Adapters;
 
-import com.cyberschnitzel.Domain.Entities.Blood;
 import com.cyberschnitzel.Domain.Entities.BloodPart;
 
 import java.sql.PreparedStatement;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class BloodPartAdapter implements Adapter<Blood> {
+public class BloodPartAdapter implements Adapter<BloodPart> {
 
 	private String tableName;
 
@@ -20,14 +19,13 @@ public class BloodPartAdapter implements Adapter<Blood> {
 		tableName = partName;
 	}
 	@Override
-	public PreparedStatement saveQuery(Blood entity) throws SQLException {
+	public PreparedStatement saveQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
-		String query = "INSERT INTO " + "\"" + tableName + "\"" + "(id" + tableName.toLowerCase() + ", idblood, expirationdate) " +
-				"VALUES (?, ?, ?)";
+		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate) " +
+				"VALUES (?, ?) returning id" + tableName.toLowerCase();
 		PreparedStatement p = connection.prepareStatement(query);
-		p.setInt(1,b.getId());
-		p.setInt(2,b.getIdBlood());
-		p.setDate(3,new java.sql.Date(b.getExp().getTime()));
+		p.setInt(1,b.getIdBlood());
+		p.setDate(2,new java.sql.Date(b.getExpirationDate().getTime()));
 		return p;
 	}
 
@@ -40,14 +38,14 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	}
 
 	@Override
-	public PreparedStatement updateQuery(Blood entity) throws SQLException {
+	public PreparedStatement updateQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
 		String query = "UPDATE " + "\"" + tableName + "\"" + " SET id" + tableName.toLowerCase() + " = ?, idblood = ?, expirationdate = ? " +
 				"WHERE id" + tableName.toLowerCase() + " = ?";
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1,b.getId());
 		p.setInt(2,b.getIdBlood());
-		p.setDate(3,new java.sql.Date(b.getExp().getTime()));
+		p.setDate(3,new java.sql.Date(b.getExpirationDate().getTime()));
 		p.setInt(4,b.getId());
 		return p;
 	}
@@ -68,8 +66,8 @@ public class BloodPartAdapter implements Adapter<Blood> {
 	}
 
 	@Override
-	public Stream<Blood> get(ResultSet rs) {
-		List<Blood> bloodList = new ArrayList<>();
+	public Stream<BloodPart> get(ResultSet rs) {
+		List<BloodPart> bloodList = new ArrayList<>();
 		try {
 			while (rs.next()) {
 				BloodPart blood = new BloodPart(rs.getInt("id" + tableName.toLowerCase()),

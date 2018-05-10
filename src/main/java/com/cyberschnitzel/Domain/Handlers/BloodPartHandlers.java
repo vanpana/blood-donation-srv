@@ -1,13 +1,16 @@
 package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
-import com.cyberschnitzel.Domain.Entities.BloodPart;
-import com.cyberschnitzel.Domain.Entities.Donator;
-import com.cyberschnitzel.Domain.Entities.Personnel;
+import com.cyberschnitzel.Domain.Entities.*;
+import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.AddBloodPartRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
+import com.cyberschnitzel.Domain.Transport.Responses.BloodPartResponse;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BloodPartHandlers {
 	public static Integer addBloodPart(String input) throws HandlingException {
@@ -19,7 +22,7 @@ public class BloodPartHandlers {
 			InputValidator.validatePersonnelInput(addBloodPartRequest);
 
 			int retCode = Controller.addBloodPart(addBloodPartRequest.getPartClass(), addBloodPartRequest.getBloodId(),
-					addBloodPartRequest.getPartId(), addBloodPartRequest.getExpDate());
+					addBloodPartRequest.getExpDate());
 			// Throw exception if donation couldn't be added
 			if (retCode != 0) throw new Exception("Error inserting part");
 
@@ -47,6 +50,45 @@ public class BloodPartHandlers {
 		} catch (Exception ex) {
 			throw new HandlingException("Failed to handle update part: " + ex.getMessage());
 		}
+	}
+
+	public static List<BloodPartResponse> getAllBloodParts(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+		// Validate input
+		InputValidator.validatePersonnelInput(messageRequest);
+		List<BloodPart> plasma = new ArrayList<>();
+		List<BloodPart> redcells = new ArrayList<>();
+		List<BloodPart> thrombocites = new ArrayList<>();
+		List<BloodPartResponse> response = new ArrayList<>();
+
+		try {
+			plasma = Controller.getBloodPart("Plasma");
+			redcells = Controller.getBloodPart("RedCells");
+			thrombocites = Controller.getBloodPart("Thrombocites");
+		} catch (ControllerException e) {
+			e.printStackTrace();
+		}
+		for(BloodPart b : plasma)
+		{
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "Plasma", blood.getBloodType(), blood.getReceivedDate().toString()));
+		}
+
+		for(BloodPart b : redcells)
+		{
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "RedCells", blood.getBloodType(), blood.getReceivedDate().toString()));
+		}
+
+		for(BloodPart b : thrombocites)
+		{
+			Blood blood = Controller.getBloodByID(b.getIdBlood());
+			response.add(new BloodPartResponse(b, "Thrombocites", blood.getBloodType(), blood.getReceivedDate().toString()));
+		}
+
+
+		return response;
+
 	}
 
 

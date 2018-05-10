@@ -28,18 +28,19 @@ public class Controller {
             new DatabaseRepository<>(new BloodValidator(), new BloodAdapter());
     private static Repository<Donation> donationRepository =
             new DatabaseRepository<>(new DonationValidator(), new DonationAdapter());
-    private static Repository<Blood> bloodPartsPlasmaRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Plasma"));
-    private static Repository<Blood> bloodPartsRedCellsRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("RedCells"));
-    private static Repository<Blood> bloodPartsThrombocitesRepository =
-            new DatabaseRepository<>(new BloodValidator(), new BloodPartAdapter("Thrombocites"));
+    private static Repository<BloodPart> bloodPartsPlasmaRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("Plasma"));
+    private static Repository<BloodPart> bloodPartsRedCellsRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("RedCells"));
+    private static Repository<BloodPart> bloodPartsThrombocitesRepository =
+            new DatabaseRepository<>(new BloodPartValidator(), new BloodPartAdapter("Thrombocites"));
     private static Repository<Personnel> personnelRepository =
             new DatabaseRepository<>(new PersonnelValidator(), new PersonnelAdapter());
     private static Repository<Patient> patientRepository =
             new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
+    private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
 
     //</editor-fold>
 
@@ -352,12 +353,12 @@ public class Controller {
 
     //<editor-fold desc="Blood part methods">
     @SuppressWarnings("unchecked")
-    public static List<Blood> getBloodPart(String part) throws ControllerException {
+    public static List<BloodPart> getBloodPart(String part) throws ControllerException {
         try {
-            List<Blood> temp = new ArrayList<>();
+            List<BloodPart> temp = new ArrayList<>();
             Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
             f.setAccessible(true);
-            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            Repository<BloodPart> t = (Repository<BloodPart>) f.get(Controller.class);
             t.findAll().iterator().forEachRemaining(temp::add);
             return temp;
         } catch (IllegalAccessException | NoSuchFieldException e) {
@@ -395,16 +396,15 @@ public class Controller {
     }
 
     @SuppressWarnings("unchecked")
-    public static Integer addBloodPart(Class part, Integer originId, Integer partId, Date date) throws ControllerException {
+    public static Integer addBloodPart(Class part, Integer originId, Date date) throws ControllerException {
         try {
             Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
             f.setAccessible(true);
             Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Integer.class, Date.class).newInstance(partId, originId, date);
+            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class).newInstance(originId, date);
+            tb.setReceivedDate(date);
             Optional<Blood> ret = t.save(tb);
-            if (!ret.isPresent())
-                return 1;
-            return 0;
+			return ret.map(Entity::getId).orElse(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ControllerException(e.getMessage());
@@ -416,7 +416,7 @@ public class Controller {
         try {
             Field f = Controller.class.getDeclaredField("bloodParts" + part + "Repository");
             f.setAccessible(true);
-            Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
+            Repository<BloodPart> t = (Repository<BloodPart>) f.get(Controller.class);
             t.update(new BloodPart(partId, originId, date));
             return 0;
         } catch (IllegalAccessException | ValidatorException | NoSuchFieldException e) {
@@ -691,4 +691,13 @@ public class Controller {
         return checkCredentials(email, password, token, false);
     }
     //</editor-fold>
+
+
+    public static Location getLocationById(Integer id)
+    {
+        Optional<Location> opt = locationRepository.findOne(id);
+        return opt.orElse(null);
+    }
+
+
 }

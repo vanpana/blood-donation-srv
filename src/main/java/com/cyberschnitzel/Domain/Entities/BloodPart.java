@@ -5,7 +5,7 @@ import java.util.Date;
 public class BloodPart extends Blood {
 
 	private Integer idBlood;
-	private Date exp;
+	private Date expirationDate;
 	public BloodPart(String bloodType) {
 		super(bloodType);
 	}
@@ -14,15 +14,21 @@ public class BloodPart extends Blood {
 
 		setId(_id);
 		idBlood =_idblood;
-		exp = _exp;
+		expirationDate = _exp;
 
+	}
+
+	public BloodPart(Integer _idblood, Date _exp)
+	{
+		idBlood =_idblood;
+		expirationDate = _exp;
 	}
 
 	public Integer getIdBlood() {
 		return idBlood;
 	}
 
-	public Date getExp() {
-		return exp;
+	public Date getExpirationDate() {
+		return expirationDate;
 	}
 }

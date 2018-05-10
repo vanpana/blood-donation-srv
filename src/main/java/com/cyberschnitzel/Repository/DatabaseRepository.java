@@ -41,6 +41,7 @@ public class DatabaseRepository<T extends Entity> implements Repository<T> {
         if (validator.validate(entity))
             try {
                 ResultSet rs = adapter.saveQuery(entity).executeQuery();
+                //TODO care
                 if (rs.next()) entity.setId(rs.getInt(1));
                 return Optional.of(entity);
             } catch (SQLException e) {

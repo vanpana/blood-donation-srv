@@ -57,6 +57,7 @@ public class DonationAdapter implements Adapter<Donation> {
                 Donation donation = new Donation(resultSet.getString("cnp"),
                         resultSet.getDouble("quantity"), resultSet.getInt("status"), resultSet.getInt("idblood"));
                 donation.setId(resultSet.getInt("iddonation"));
+                donation.setLocationid(resultSet.getInt("idlocation"));
                 donations.add(donation);
             }
         } catch (SQLException sqle) {

@@ -9,10 +9,26 @@ DROP TABLE "Thrombocites";
 DROP TABLE "RedCells";
 DROP TABLE "Plasma";
 DROP TABLE "Blood";
-DROP TABLE "Locations";
+DROP TABLE "Location";
 
 -- Set the date style to day.month.year
 SET DateStyle TO DMY;
+
+
+-- DROP TABLE public."Location";
+
+CREATE TABLE public."Location"
+(
+  name character varying COLLATE pg_catalog."default",
+  x double precision,
+  y double precision,
+  idlocation integer primary key
+);
+
+INSERT INTO public."Location"(
+  name, x, y, idlocation)
+VALUES ('Cluj-Napoca', 46, 23, 1), ('Baia Mare', 47, 23, 2), ('Bucuresti', 44, 26, 3),
+  ('Arad', 46, 21, 4),('Timisoara', 45, 21, 5);
 
 CREATE TABLE public."Blood"
 (
@@ -61,9 +77,9 @@ CREATE TABLE public."RedCells"
 CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
-  idthrombocite serial NOT NULL,
+  idthrombocites serial NOT NULL,
   idblood integer,
-  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocite),
+  CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
   REFERENCES public."Blood" (idblood) MATCH SIMPLE
   ON UPDATE NO ACTION
@@ -209,7 +225,7 @@ VALUES (1, 1, '12.04.2018');
 
 
 INSERT INTO public."Thrombocites"(
-  expirationdate, idthrombocite, idblood)
+  expirationdate, idthrombocites, idblood)
 VALUES ('8.04.2018',1, 1);
 
 

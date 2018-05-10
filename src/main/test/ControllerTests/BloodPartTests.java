@@ -6,7 +6,6 @@ import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Plasma;
 import com.cyberschnitzel.Domain.Entities.RedCells;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
-import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +32,7 @@ public class BloodPartTests {
 	@Test
 	public void testAdd() throws NoSuchFieldException, IllegalAccessException, ControllerException {
 		try {
-			retCode = Controller.addBloodPart(Plasma.class, 1, 100, new SimpleDateFormat("DD.MM.YYYY").parse("01.01.2000"));
+			retCode = Controller.addBloodPart(Plasma.class, 1, new SimpleDateFormat("DD.MM.YYYY").parse("01.01.2000"));
 
 		} catch (ParseException e) {
 			fail("Date Exception");
@@ -53,7 +52,7 @@ public class BloodPartTests {
 	public void testUpdate() throws NoSuchFieldException, IllegalAccessException, ParseException, ControllerException {
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
-			retCode = Controller.addBloodPart(Plasma.class, 1, 100, d);
+			retCode = Controller.addBloodPart(Plasma.class, 1, d);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -69,13 +68,13 @@ public class BloodPartTests {
 		BloodPart b = (BloodPart)bb;
 
 		Long result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
-		Long updateResult = b.getExp().getTime();
-		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+		Long updateResult = b.getExpirationDate().getTime();
+		assertTrue("Find fail", b.getExpirationDate().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
 
 
 		try {
 			Date d = new SimpleDateFormat("dd.MM.yyyy").parse("01.01.2000");
-			retCode = Controller.addBloodPart(RedCells.class, 1, 100, d);
+			retCode = Controller.addBloodPart(RedCells.class, 1, d);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -90,8 +89,8 @@ public class BloodPartTests {
 		b = (BloodPart)bb;
 
 		result = new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000").getTime();
-		updateResult = b.getExp().getTime();
-		assertTrue("Find fail", b.getExp().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
+		updateResult = b.getExpirationDate().getTime();
+		assertTrue("Find fail", b.getExpirationDate().compareTo(new SimpleDateFormat("dd.MM.yyyy").parse("02.02.2000"))==0);
 
 
 
