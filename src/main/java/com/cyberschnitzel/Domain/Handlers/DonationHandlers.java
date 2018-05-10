@@ -131,8 +131,14 @@ public class DonationHandlers {
 
 		for(Donation don : lst){
 			Donator donator = Controller.getDonatorByCnp(don.getCnp());
+			if(donator == null)
+				continue;
 			Blood blood = Controller.getBloodByID(don.getBloodID());
+			if(blood == null)
+				continue;
 			Location location = Controller.getLocationById(don.getLocationid());
+			if(location == null)
+				location = new Location("dummy",0,0,0);
 			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
 			donationsResponses.add(donationsResponse);
 		}
