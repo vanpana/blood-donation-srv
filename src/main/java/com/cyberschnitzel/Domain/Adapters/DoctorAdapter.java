@@ -51,7 +51,7 @@ public class DoctorAdapter implements Adapter<Doctor> {
         List<Doctor> doctors = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                Doctor doctor = new Doctor(resultSet.getString("name"), resultSet.getString("email"));
+                Doctor doctor = new Doctor( resultSet.getString("email"),resultSet.getString("name"));
                 doctor.setId(resultSet.getInt("iddoctor"));
                 doctor.setPassword(resultSet.getString("password"))
                         .setToken(resultSet.getString("token"));
