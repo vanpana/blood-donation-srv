@@ -5,20 +5,24 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 
-public class DoctorView extends VerticalLayout {
+public class DoctorView {
 
     private MainWindow mainWindow;
     private TextField quantity;
     private TextField urgency;
     private TextField patientName;
     private Button backButton;
+    private ControlPanel controlPanel;
     private final VerticalLayout layout = new VerticalLayout();
 
-    DoctorView(MainWindow mainWindow) {
+    DoctorView(MainWindow mainWindow, ControlPanel controlPanel) {
         this.mainWindow = mainWindow;
+        this.controlPanel = controlPanel;
+
+        mainWindow.getPage().setTitle("Doctor");
 
         backButton = new Button("Go back");
-        backButton.addClickListener(e -> mainWindow.goToMainView());
+        backButton.addClickListener(e -> mainWindow.setContent(controlPanel.getLayout()));
 
         patientName = new TextField("Patient name: ");
         quantity = new TextField("Quantity:");

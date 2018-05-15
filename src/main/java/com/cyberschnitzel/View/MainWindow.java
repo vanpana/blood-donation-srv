@@ -66,7 +66,7 @@ public class MainWindow extends UI {
         try {
 
             Boolean res = Controller.checkCredentialsNoToken(email,password,CredentialsEntity.EntityType.DOCTOR);
-            DoctorView view =new DoctorView(this);
+            ControlPanel view = new ControlPanel(this);
             setContent(view.getLayout());
             return "Successfully logged in";
 
