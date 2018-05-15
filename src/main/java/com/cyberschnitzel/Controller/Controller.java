@@ -34,9 +34,14 @@ public class Controller {
             new DatabaseRepository<>(new Patientvalidator(), new PatientAdapter());
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
+<<<<<<< HEAD
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
     private static Repository<Doctor> doctorRepository =
             new DatabaseRepository<>(new DoctorValidator(), new DoctorAdapter());
+=======
+    private static Repository<Doctor> doctorRepository =
+            new DatabaseRepository<Doctor>(new DoctorValidator(), new DoctorAdapter());
+>>>>>>> 680c0949f73a80567691e8b111c644ddc119aec1
 
     //</editor-fold>
 
@@ -671,6 +676,7 @@ public class Controller {
         if (entityType == CredentialsEntity.EntityType.DONATOR) credentialsEntity = getDonatorByEmail(email);
         else if (entityType == CredentialsEntity.EntityType.PERSONNEL) credentialsEntity = getPersonnelByEmail(email);
         else if (entityType == CredentialsEntity.EntityType.DOCTOR) credentialsEntity = getDoctorByEmail(email);
+<<<<<<< HEAD
 
         // Check if the entity exists
         if (credentialsEntity == null) {
@@ -683,11 +689,26 @@ public class Controller {
             else throw new ControllerException("Inexistent user with specified email");
         }
 
+=======
+
+        // Check if the entity exists
+        if (credentialsEntity == null) {
+            if (entityType == CredentialsEntity.EntityType.DONATOR)
+                throw new ControllerException("Inexistent donor with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.PERSONNEL)
+                throw new ControllerException("Inexistent personnel with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.DOCTOR)
+                throw new ControllerException("Inexistent doctor with specified email");
+            else throw new ControllerException("Inexistent user with specified email");
+        }
+
+>>>>>>> 680c0949f73a80567691e8b111c644ddc119aec1
         return credentialsEntity;
     }
 
     //</editor-fold>
 
+<<<<<<< HEAD
     public static Location getLocationById(Integer id)
     {
         Optional<Location> opt = locationRepository.findOne(id);
@@ -695,6 +716,10 @@ public class Controller {
     }
 
     //<editor-fold desc = "Doctor methods">
+=======
+    //<editor-fold desc = "Doctor methods">
+
+>>>>>>> 680c0949f73a80567691e8b111c644ddc119aec1
     public static int addDoctor(String name, String email) throws ControllerException {
         try {
             Optional<Doctor> doctorOptional = doctorRepository.save(new Doctor(name, email));
