@@ -233,3 +233,6 @@ VALUES (1, '2970106123456',  800, 3, 2),(2, '2970421167567',  700, 2, 1),(3, '19
 INSERT INTO public."Used"(
   iddonation, patientid, quantity)
 VALUES (2, 1, 200);
+
+INSERT INTO public."Doctor"(iddoctor, name, email, password, token)
+    VALUES (1,'David','da@yahoo.com','da','');

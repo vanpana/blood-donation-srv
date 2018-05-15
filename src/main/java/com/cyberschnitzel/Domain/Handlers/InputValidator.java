@@ -2,6 +2,7 @@ package com.cyberschnitzel.Domain.Handlers;
 
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.CredentialsEntity;
+import com.cyberschnitzel.Domain.Entities.Doctor;
 import com.cyberschnitzel.Domain.Entities.Donator;
 import com.cyberschnitzel.Domain.Entities.Personnel;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
