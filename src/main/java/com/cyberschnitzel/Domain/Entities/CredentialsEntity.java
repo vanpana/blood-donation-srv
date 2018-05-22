@@ -8,6 +8,7 @@ public class CredentialsEntity extends Entity {
 
     protected String email, password, token;
 
+    public CredentialsEntity() {}
     public CredentialsEntity(String email) {
         this.email = email;
     }

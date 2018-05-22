@@ -37,6 +37,7 @@ public class Controller {
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
     private static Repository<Doctor> doctorRepository =
             new DatabaseRepository<>(new DoctorValidator(), new DoctorAdapter());
+    private static Repository<Request> requestRepository= new DatabaseRepository<>(new RequestValidator(), new RequestAdapter());
 
     //</editor-fold>
 
@@ -761,5 +762,11 @@ public class Controller {
     }
 
 //</editor-fold>
+    public static List<Request> getAllRequests()
+    {
+        List<Request> requests = new ArrayList<>();
+        requestRepository.findAll().iterator().forEachRemaining(requests::add);
+        return requests;
+    }
 
 }
