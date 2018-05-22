@@ -10,6 +10,7 @@ DROP TABLE "RedCells";
 DROP TABLE "Plasma";
 DROP TABLE "Blood";
 DROP TABLE "Location";
+DROP TABLE "Doctor";
 
 -- Set the date style to day.month.year
 SET DateStyle TO DMY;
@@ -37,16 +38,6 @@ CREATE TABLE public."Blood"
   receiveddate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
-
-CREATE TABLE public."Locations"
-(
-  idlocation SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(50),
-  latitude INT,
-  longitude INT
-);
-CREATE UNIQUE INDEX Locations_idlocation_uindex ON public."Locations" (idlocation);
-
 
 CREATE TABLE public."Plasma"
 (
@@ -114,7 +105,14 @@ CREATE TABLE public."Request"
 (
   idrequest serial primary key ,
   quantity real,
-  urgency integer
+  urgency integer,
+  bloodPartType VARCHAR(50),
+  locationId int,
+  bloodType VARCHAR(50),
+  CONSTRAINT "Request_locationId_fkey" FOREIGN KEY (locationId)
+  REFERENCES public."Location"(idlocation) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE CASCADE
 );
 
 
@@ -132,7 +130,7 @@ CREATE TABLE public."Donation"
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
   CONSTRAINT "Donation_idlocation_fkey" FOREIGN KEY (idlocation)
-  REFERENCES public."Locations" (idlocation) MATCH SIMPLE
+  REFERENCES public."Location" (idlocation) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE NO ACTION ,
   CONSTRAINT "Donation_idblood_fkey" FOREIGN KEY (idblood)

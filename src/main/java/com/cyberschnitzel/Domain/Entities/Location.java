@@ -12,6 +12,7 @@ public class Location extends Entity {
 	}
 
 	public Location(String name, double x, double y, Integer idLocation) {
+		this.setId(idLocation);
 		this.name = name;
 		this.x = x;
 		this.y = y;
