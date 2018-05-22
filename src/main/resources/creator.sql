@@ -10,6 +10,7 @@ DROP TABLE "RedCells";
 DROP TABLE "Plasma";
 DROP TABLE "Blood";
 DROP TABLE "Location";
+DROP TABLE "Doctor";
 
 -- Set the date style to day.month.year
 SET DateStyle TO DMY;
@@ -37,16 +38,6 @@ CREATE TABLE public."Blood"
   receiveddate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
-
-CREATE TABLE public."Locations"
-(
-  idlocation SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(50),
-  latitude INT,
-  longitude INT
-);
-CREATE UNIQUE INDEX Locations_idlocation_uindex ON public."Locations" (idlocation);
-
 
 CREATE TABLE public."Plasma"
 (
@@ -114,7 +105,14 @@ CREATE TABLE public."Request"
 (
   idrequest serial primary key ,
   quantity real,
-  urgency integer
+  urgency integer,
+  bloodPartType VARCHAR(50),
+  locationId int,
+  bloodType VARCHAR(50),
+  CONSTRAINT "Request_locationId_fkey" FOREIGN KEY (locationId)
+  REFERENCES public."Location"(idlocation) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE CASCADE
 );
 
 
@@ -132,7 +130,7 @@ CREATE TABLE public."Donation"
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
   CONSTRAINT "Donation_idlocation_fkey" FOREIGN KEY (idlocation)
-  REFERENCES public."Locations" (idlocation) MATCH SIMPLE
+  REFERENCES public."Location" (idlocation) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE NO ACTION ,
   CONSTRAINT "Donation_idblood_fkey" FOREIGN KEY (idblood)
@@ -179,6 +177,16 @@ CREATE TABLE public."Personnel"
   CONSTRAINT "Personnel_pkey" PRIMARY KEY (idpersonnel)
 );
 
+CREATE TABLE public."Doctor"
+(
+  iddoctor SERIAL NOT NULL,
+  name        CHARACTER VARYING COLLATE pg_catalog."default",
+  email       CHARACTER VARYING COLLATE pg_catalog."default",
+  password    CHARACTER VARYING COLLATE pg_catalog."default",
+  token       CHARACTER VARYING COLLATE pg_catalog."default",
+  CONSTRAINT "Doctor._pkey" PRIMARY KEY (iddoctor)
+);
+
 
 INSERT INTO public."Patient"(
   cnp, name)
@@ -188,54 +196,50 @@ VALUES ('2970107127098', 'Popa Anastasia') , ('1890501126578', 'Abrudan Andrei')
 
 
 INSERT INTO public."Donator"(
-  iddonator, cnp, name, bloodtype, email, password, token)
-VALUES (1, '2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123abMnOiy'),(2, '2970421167567', 'Pop Claudia','AB','claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
-  (3, '1961028125816', 'Opruta David','B','david@yahooo.com', 'od1234', 'lmnop874oA'),(4, '1661010128765', 'Panaite Dorinel','A','dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
-  (5, '1991211125877', 'Paius Teodor','A','teodor@yahooo.com', 'tp1234', '9isD57Bls1'),(6, '1890106125899', 'Podariu Catalin','0','catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
+  cnp, name, bloodtype, email, password, token)
+VALUES ('2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123abMnOiy'),('2970421167567', 'Pop Claudia','AB','claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
+  ('1961028125816', 'Opruta David','B','david@yahooo.com', 'od1234', 'lmnop874oA'),('1661010128765', 'Panaite Dorinel','A','dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
+  ('1991211125877', 'Paius Teodor','A','teodor@yahooo.com', 'tp1234', '9isD57Bls1'),('1890106125899', 'Podariu Catalin','0','catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
 
 
 
-INSERT INTO public."Personnel"(
-  idpersonnel, name, email, password, token)
-VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
-  (2, 'Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
-  (3, 'Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
-
-
-
-INSERT INTO public."Request"(
-  idrequest, quantity, urgency)
-VALUES (1, 200, 1),(2, 400, 2),(3, 200, 1),(4, 600, 3);
+INSERT INTO public."Personnel"(name, email, password, token)
+VALUES ('Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
+  ('Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
+  ('Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
 
 
 INSERT INTO public."Blood"(
-  idblood, bloodtype, receiveddate)
-VALUES (1, 'AB', '5.04.2018'),(2, '0', '23.04.2018'),(3, 'A', '24.03.2018');
+  bloodtype, receiveddate)
+VALUES ('AB', '5.04.2018'),('0', '23.04.2018'),('A', '24.03.2018');
 
 
 
 INSERT INTO public."RedCells"(
-  idredcells, idblood, expirationdate)
-VALUES (1, 1, '10.04.2018');
+  idblood, expirationdate)
+VALUES (1, '10.04.2018');
 
 
 INSERT INTO public."Plasma"(
-  idplasma, idblood, expirationdate)
-VALUES (1, 1, '12.04.2018');
+  idblood, expirationdate)
+VALUES (1, '12.04.2018');
 
 
 INSERT INTO public."Thrombocites"(
-  expirationdate, idthrombocites, idblood)
-VALUES ('8.04.2018',1, 1);
+  expirationdate, idblood)
+VALUES ('8.04.2018', 1);
 
 
 
 
 INSERT INTO public."Donation"(
-  iddonation, cnp, quantity, status, idblood)
-VALUES (1, '2970106123456',  800, 3, 2),(2, '2970421167567',  700, 2, 1),(3, '1991211125877',  750, 1,3 );
+  cnp, quantity, status, idblood)
+VALUES ('2970106123456',  800, 3, 2),('2970421167567',  700, 2, 1),('1991211125877',  750, 1,3 );
 
 
 INSERT INTO public."Used"(
   iddonation, patientid, quantity)
-VALUES (2, 1, 200);
+VALUES (1, 1, 200);
+
+INSERT INTO public."Doctor"(name, email, password, token)
+    VALUES ('David','da@yahoo.com','da','');

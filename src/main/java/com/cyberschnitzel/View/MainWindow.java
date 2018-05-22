@@ -2,47 +2,81 @@ package com.cyberschnitzel.View;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.swing.*;
 
+import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.Entities.CredentialsEntity;
+import com.cyberschnitzel.Domain.Exceptions.ControllerException;
+import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Util.DatabaseUtil;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
-
+import java.awt.*;
 
 
 /**
- * This UI is the application entry point. A UI may either represent a browser window 
+ * This UI is the application entry point. A UI may either represent a browser window
  * (or tab) or some part of an HTML page where a Vaadin application is embedded.
  * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
+ * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
 public class MainWindow extends UI {
     private static final boolean PRODUCTION_MODE = false;
-
-
+    private final VerticalLayout layout = new VerticalLayout();
 
     @Override
     public void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
-        
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        getPage().setTitle("Doctor Login");
 
-        Button button = new Button("Click Me");
-        button.addClickListener(e -> layout.addComponent(new Label("Thanks " + name.getValue()
-                + ", it works!")));
-        
-        layout.addComponents(name, button);
-        
+        final TextField username = new TextField();
+        username.setCaption("Username:");
+
+        final PasswordField password = new PasswordField();
+        password.setCaption("Password:");
+
+
+        Button button = new Button("Log in");
+        button.addClickListener(e -> {
+            Label label = new Label(login(username.getValue(), password.getValue()));
+            layout.addComponent(label);
+            layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
+        });
+
+        layout.addComponent(username);
+        layout.addComponent(password);
+        layout.addComponent(button);
+
+        layout.setComponentAlignment(username, Alignment.MIDDLE_CENTER);
+        layout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
+        layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
+        setContent(layout);
+
+    }
+
+    private String login(String email, String password) {
+        try {
+
+            Boolean res = Controller.checkCredentialsNoToken(email,password,CredentialsEntity.EntityType.DOCTOR);
+            ControlPanel view = new ControlPanel(this);
+            setContent(view.getLayout());
+            return "Successfully logged in";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+//        return "Successfully logged in";
+    }
+
+    public void goToMainView(){
         setContent(layout);
     }
 
@@ -51,9 +85,10 @@ public class MainWindow extends UI {
     public static class MyUIServlet extends VaadinServlet {
         // Override this function to do stuff when server initializes (get connection to DB, start schedulers etc)
 
-        public MyUIServlet(){
+        public MyUIServlet() {
             super();
         }
+
         @Override
         protected void servletInitialized() throws ServletException {
             super.servletInitialized();

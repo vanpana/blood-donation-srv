@@ -1,18 +1,12 @@
 package com.cyberschnitzel.Controller;
 
-import com.cyberschnitzel.Domain.Adapters.BloodAdapter;
-import com.cyberschnitzel.Domain.Adapters.BloodPartAdapter;
-import com.cyberschnitzel.Domain.Adapters.DonationAdapter;
-import com.cyberschnitzel.Domain.Adapters.DonatorAdapter;
 import com.cyberschnitzel.Domain.Adapters.*;
 import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
-import com.cyberschnitzel.Domain.Exceptions.HashingException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
-import com.cyberschnitzel.Util.Hasher;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -41,10 +35,14 @@ public class Controller {
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
+    private static Repository<Doctor> doctorRepository =
+            new DatabaseRepository<>(new DoctorValidator(), new DoctorAdapter());
+    private static Repository<Request> requestRepository = new DatabaseRepository<>(new RequestValidator(), new RequestAdapter());
 
     //</editor-fold>
 
     //<editor-fold desc="Donator methods">
+
     /**
      * Method that adds a donator with the base information.
      *
@@ -171,18 +169,18 @@ public class Controller {
         return null;
     }
 
-	/**
-	 * Method that returns a donor by cnp
-	 *
-	 * @param donatorCnp - cnp of the donator to be fetched
-	 * @return Donator entity
-	 */
-	public static Donator getDonatorByCnp(String donatorCnp) {
-		for (Donator donator : getAllDonators()) {
-			if (donator.getCnp().equals(donatorCnp)) return donator;
-		}
-		return null;
-	}
+    /**
+     * Method that returns a donor by cnp
+     *
+     * @param donatorCnp - cnp of the donator to be fetched
+     * @return Donator entity
+     */
+    public static Donator getDonatorByCnp(String donatorCnp) {
+        for (Donator donator : getAllDonators()) {
+            if (donator.getCnp().equals(donatorCnp)) return donator;
+        }
+        return null;
+    }
 
     /**
      * Method that returns all the donators
@@ -198,6 +196,7 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Blood methods">
+
     /**
      * Method that adds a blood sample
      *
@@ -263,6 +262,7 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Donation methods">
+
     /**
      * Method that adds a donation by cnp.
      *
@@ -404,7 +404,7 @@ public class Controller {
             BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class).newInstance(originId, date);
             tb.setReceivedDate(date);
             Optional<Blood> ret = t.save(tb);
-			return ret.map(Entity::getId).orElse(-1);
+            return ret.map(Entity::getId).orElse(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ControllerException(e.getMessage());
@@ -428,6 +428,7 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Personnel methods">
+
     /**
      * Method that adds a personnel with the full information.
      *
@@ -445,14 +446,14 @@ public class Controller {
         }
     }
 
-	public static void updatePersonnelToken(int personnelID, String token) throws ControllerException {
-		Personnel pers = getPersonnelByID(personnelID).setToken(token);
-		try {
-			personnelRepository.update(pers);
-		} catch (ValidatorException e) {
-			throw new ControllerException("Failed to update pers token: " + e.getMessage());
-		}
-	}
+    public static void updatePersonnelToken(int personnelID, String token) throws ControllerException {
+        Personnel pers = getPersonnelByID(personnelID).setToken(token);
+        try {
+            personnelRepository.update(pers);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update pers token: " + e.getMessage());
+        }
+    }
 
     /**
      * Method that deletes a personnel by id
@@ -519,6 +520,7 @@ public class Controller {
     //</editor-fold>
 
     //<editor-fold desc="Used methods">
+
     /**
      * Method that adds a used quantity for a specific donation having as a target the patient with a given cnp
      *
@@ -625,20 +627,10 @@ public class Controller {
 
     //<editor-fold desc="Utils methods">
 
-	public static boolean checkCredentialsNoToken(String email, String password, boolean isDonator) throws ControllerException {
-		CredentialsEntity credentialsEntity;
+    public static boolean checkCredentialsNoToken(String email, String password, CredentialsEntity.EntityType entityType) throws ControllerException {
+        CredentialsEntity credentialsEntity = getCredentialToBeValidated(entityType, email);
 
-		// Try to fetch the entity with specified mail
-		if (isDonator) credentialsEntity = getDonatorByEmail(email);
-		else credentialsEntity = getPersonnelByEmail(email);
-
-		// Check if the entity exists
-		if (credentialsEntity == null) {
-			if (isDonator) throw new ControllerException("Inexistent donor with specified email.");
-			else throw new ControllerException("Inexistent personnel with specified email.");
-		}
-
-		// Hash the password and the token
+        // Hash the password and the token
 //
 //		try {
 //			password = Hasher.encrypt(password);
@@ -646,24 +638,14 @@ public class Controller {
 //			throw new ControllerException("Failed to hash password or token: " + he.getMessage());
 //		}
 
-		// Check if the password and token match the database ones
-		if (!password.equals(credentialsEntity.getPassword()))
-			throw new ControllerException("Incorrect password for donor");
-		return true;
-	}
+        // Check if the password and token match the database ones
+        if (!password.equals(credentialsEntity.getPassword()))
+            throw new ControllerException("Incorrect password");
+        return true;
+    }
 
-    public static boolean checkCredentials(String email, String password, String token, boolean isDonator) throws ControllerException {
-        CredentialsEntity credentialsEntity;
-
-        // Try to fetch the entity with specified mail
-        if (isDonator) credentialsEntity = getDonatorByEmail(email);
-        else credentialsEntity = getPersonnelByEmail(email);
-
-        // Check if the entity exists
-        if (credentialsEntity == null) {
-            if (isDonator) throw new ControllerException("Inexistent donor with specified email.");
-            else throw new ControllerException("Inexistent personnel with specified email.");
-        }
+    public static boolean checkCredentials(String email, String password, String token, CredentialsEntity.EntityType entityType) throws ControllerException {
+        CredentialsEntity credentialsEntity = getCredentialToBeValidated(entityType, email);
 
         /*
         // Hash the password and the token
@@ -677,27 +659,124 @@ public class Controller {
 
         // Check if the password and token match the database ones
         if (!password.equals(credentialsEntity.getPassword()))
-            throw new ControllerException("Incorrect password for donor");
-        if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token for donor");
+            throw new ControllerException("Incorrect password");
+        if (!token.equals(credentialsEntity.getToken())) throw new ControllerException("Incorrect token");
 
         return true;
     }
 
-    public static boolean checkDonatorCredentials(String email, String password, String token) throws ControllerException {
-        return checkCredentials(email, password, token, true);
+    private static CredentialsEntity getCredentialToBeValidated(CredentialsEntity.EntityType entityType, String email) throws ControllerException {
+        CredentialsEntity credentialsEntity = null;
+
+        // Try to fetch the entity with specified mail
+        if (entityType == CredentialsEntity.EntityType.DONATOR) credentialsEntity = getDonatorByEmail(email);
+        else if (entityType == CredentialsEntity.EntityType.PERSONNEL) credentialsEntity = getPersonnelByEmail(email);
+        else if (entityType == CredentialsEntity.EntityType.DOCTOR) credentialsEntity = getDoctorByEmail(email);
+
+        // Check if the entity exists
+        if (credentialsEntity == null) {
+            if (entityType == CredentialsEntity.EntityType.DONATOR)
+                throw new ControllerException("Inexistent donor with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.PERSONNEL)
+                throw new ControllerException("Inexistent personnel with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.DOCTOR)
+                throw new ControllerException("Inexistent doctor with specified email");
+            else throw new ControllerException("Inexistent user with specified email");
+        }
+
+        // Check if the entity exists
+        if (credentialsEntity == null) {
+            if (entityType == CredentialsEntity.EntityType.DONATOR)
+                throw new ControllerException("Inexistent donor with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.PERSONNEL)
+                throw new ControllerException("Inexistent personnel with specified email.");
+            else if (entityType == CredentialsEntity.EntityType.DOCTOR)
+                throw new ControllerException("Inexistent doctor with specified email");
+            else throw new ControllerException("Inexistent user with specified email");
+        }
+        return credentialsEntity;
     }
 
-    public static boolean checkPersonnelCredentials(String email, String password, String token) throws ControllerException {
-        return checkCredentials(email, password, token, false);
-    }
     //</editor-fold>
 
-
-    public static Location getLocationById(Integer id)
-    {
+    public static Location getLocationById(Integer id) {
         Optional<Location> opt = locationRepository.findOne(id);
         return opt.orElse(null);
     }
 
+    public static List<Location> getAllLocations(){
+        List<Location> locations = new ArrayList<>();
+        locationRepository.findAll().iterator().forEachRemaining(locations::add);
+        return locations;
+    }
 
+    //<editor-fold desc = "Doctor methods">
+
+
+    public static int addDoctor(String name, String email) throws ControllerException {
+        try {
+            Optional<Doctor> doctorOptional = doctorRepository.save(new Doctor(name, email));
+            return doctorOptional.map(Entity::getId).orElse(-1);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to add personnel entity: " + e.getMessage());
+        }
+    }
+
+    public static void updateDoctorToken(int iddoctor, String token) throws ControllerException {
+        Doctor doctor = getDoctorById(iddoctor).setToken(token);
+        try {
+            doctorRepository.update(doctor);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update pers token: " + e.getMessage());
+        }
+    }
+
+    public static void deleteDoctor(int iddoctor) {
+        doctorRepository.delete(iddoctor);
+    }
+
+    public static Doctor getDoctorById(int iddoctor) {
+        Optional<Doctor> doctorOptional = doctorRepository.findOne(iddoctor);
+        return doctorOptional.orElse(null);
+    }
+
+    public static void updateDoctorInformation(int iddoctor, String name, String email) throws ControllerException {
+        Doctor doctor = new Doctor(name, email);
+        doctor.setId(iddoctor);
+        try {
+            doctorRepository.update(doctor);
+        } catch (ValidatorException e) {
+            throw new ControllerException("Failed to update full doctor entity: " + e.getMessage());
+        }
+    }
+
+    public static Doctor getDoctorByEmail(String doctorEmail) {
+        for (Doctor doctor : getAllDoctors()) {
+            if (doctor.getEmail().equals(doctorEmail)) return doctor;
+        }
+        return null;
+    }
+
+
+    private static List<Doctor> getAllDoctors() {
+        List<Doctor> doctors = new ArrayList<>();
+        doctorRepository.findAll().iterator().forEachRemaining(doctors::add);
+        return doctors;
+    }
+
+    //</editor-fold>
+    public static List<Request> getAllRequests() {
+        List<Request> requests = new ArrayList<>();
+        requestRepository.findAll().iterator().forEachRemaining(requests::add);
+        return requests;
+    }
+
+    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType) throws ControllerException {
+        Request request = new Request(quantity,urgency,bloodType,location,bloodPartType);
+        try {
+            requestRepository.save(request);
+        } catch (ValidatorException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
 }

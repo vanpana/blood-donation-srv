@@ -16,14 +16,31 @@ public class UserHandlers {
 		InputValidator.validateDonatorInput(messageRequest);
 
 		Donator don = Controller.getDonatorByEmail(messageRequest.getEmail());
+		if (don == null)
+			throw new HandlingException("no donator with that email");
 		try {
-			String tkn =  Hasher.getToken();
+			String tkn = Hasher.getToken();
 			Controller.updateDonatorToken(don.getId(), tkn);
 			don.setToken(tkn);
 			return don;
 		} catch (ControllerException | HashingException e) {
 			throw new HandlingException(e.getMessage());
 		}
+	}
+
+	public static Donator getDonatorByCnp(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+
+		InputValidator.validatePersonnelInput(messageRequest);
+
+		Donator donator = Controller.getDonatorByCnp(messageRequest.getMessage());
+
+		if (donator != null) {
+			return donator;
+		} else
+			throw new HandlingException("no donator with that cnp");
 
 	}
+
+
 }
