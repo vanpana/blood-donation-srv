@@ -35,6 +35,7 @@ public class Endpoints {
     private final static String PERSONNEL_PATH = "/personnel";
     private final static String STATUS_PATH = "/status";
 	private final static String RECEIVE = "/receive";
+	private final static String REQUESTS_PATH = "/requests";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -187,6 +188,13 @@ public class Endpoints {
     	return Handler.handle(() -> BloodPartHandlers.getAllBloodParts(messageRequestJson), BLOODPART_PATH);
 	}
 
+	@POST
+	@Path(REQUESTS_PATH)
+	public Response getAllRequests(String messageRequestJson){
+		return Handler.handle(() -> RequestsHandlers.getAllRequests(messageRequestJson), BLOODPART_PATH);
+	}
+
+
 
 	@DELETE
 	@Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
@@ -269,7 +277,15 @@ public class Endpoints {
 	@POST
 	@Path(DONATORS_PATH + LOGIN_PATH)
 	public Response loginUser(String messageRequestJson){
-		return Handler.handle(() -> UserHandlers.checkDonatorLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
+		return Handler.handle(() -> UserHandlers.checkDonatorLogin(messageRequestJson), DONATORS_PATH + LOGIN_PATH,
+				messageRequestJson);
+	}
+
+	@POST
+	@Path(DONATORS_PATH)
+	public Response getDonatorByCnp(String messageRequestJson)
+	{
+		return Handler.handle(() -> UserHandlers.getDonatorByCnp(messageRequestJson), DONATORS_PATH,
 				messageRequestJson);
 	}
 

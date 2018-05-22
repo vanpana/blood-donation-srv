@@ -5,6 +5,7 @@ public class Donator extends CredentialsEntity {
     private String name;
     private BloodType bloodtype;
 
+    public Donator() {}
     public Donator(String cnp, String email, String name) {
         super(email);
         this.cnp = cnp;
@@ -32,6 +33,10 @@ public class Donator extends CredentialsEntity {
         return this;
     }
 
+    public Donator setCnp(String cnp) {
+        if (cnp != null) this.cnp = cnp;
+        return this;
+    }
     public String getCnp() {
         return cnp;
     }

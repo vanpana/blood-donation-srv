@@ -41,7 +41,7 @@ public class Controller {
     private static Repository<Used> usedRepository =
             new DatabaseRepository<>(new UsedValidator(), new UsedAdapter());
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
-
+    private static Repository<Request> requestRepository= new DatabaseRepository<>(new RequestValidator(), new RequestAdapter());
     //</editor-fold>
 
     //<editor-fold desc="Donator methods">
@@ -698,6 +698,14 @@ public class Controller {
         Optional<Location> opt = locationRepository.findOne(id);
         return opt.orElse(null);
     }
+
+    public static List<Request> getAllRequests()
+    {
+        List<Request> requests = new ArrayList<>();
+        requestRepository.findAll().iterator().forEachRemaining(requests::add);
+        return requests;
+    }
+
 
 
 }
