@@ -38,15 +38,6 @@ CREATE TABLE public."Blood"
   CONSTRAINT "Blood_pkey" PRIMARY KEY (idblood)
 );
 
-CREATE TABLE public."Locations"
-(
-  idlocation SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(50),
-  latitude INT,
-  longitude INT
-);
-CREATE UNIQUE INDEX Locations_idlocation_uindex ON public."Locations" (idlocation);
-
 
 CREATE TABLE public."Plasma"
 (

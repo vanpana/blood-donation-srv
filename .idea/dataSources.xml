@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/blood_donation_db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="test_blood_donation_db@localhost" uuid="ddef3ac3-8dad-4927-9d5c-f6528f3511a9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/test_blood_donation_db</jdbc-url>
+    </data-source>
   </component>
 </project>
