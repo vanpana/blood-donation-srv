@@ -19,7 +19,7 @@ public class Request extends Entity {
         this.bloodPartType = bloodPartType;
     }
 
-    public Request(int quantity, int urgency, String bloodPartType, BloodType bloodType, int locationId) {
+    public Request(float quantity, int urgency, BloodType bloodType, int locationId, String bloodPartType) {
         this.quantity = quantity;
         this.urgency = urgency;
         this.bloodPartType = bloodPartType;
