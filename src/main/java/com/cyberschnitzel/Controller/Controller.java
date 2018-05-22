@@ -37,7 +37,7 @@ public class Controller {
     private static Repository<Location> locationRepository = new DatabaseRepository<>(new LocationValidator(), new LocationAdapter());
     private static Repository<Doctor> doctorRepository =
             new DatabaseRepository<>(new DoctorValidator(), new DoctorAdapter());
-    private static Repository<Request> requestRepository= new DatabaseRepository<>(new RequestValidator(), new RequestAdapter());
+    private static Repository<Request> requestRepository = new DatabaseRepository<>(new RequestValidator(), new RequestAdapter());
 
     //</editor-fold>
 
@@ -404,7 +404,7 @@ public class Controller {
             BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class).newInstance(originId, date);
             tb.setReceivedDate(date);
             Optional<Blood> ret = t.save(tb);
-			return ret.map(Entity::getId).orElse(-1);
+            return ret.map(Entity::getId).orElse(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw new ControllerException(e.getMessage());
@@ -665,7 +665,7 @@ public class Controller {
         return true;
     }
 
-    private static CredentialsEntity getCredentialToBeValidated(CredentialsEntity.EntityType entityType, String email) throws ControllerException{
+    private static CredentialsEntity getCredentialToBeValidated(CredentialsEntity.EntityType entityType, String email) throws ControllerException {
         CredentialsEntity credentialsEntity = null;
 
         // Try to fetch the entity with specified mail
@@ -699,13 +699,16 @@ public class Controller {
 
     //</editor-fold>
 
-    public static Location getLocationById(Integer id)
-    {
+    public static Location getLocationById(Integer id) {
         Optional<Location> opt = locationRepository.findOne(id);
         return opt.orElse(null);
     }
 
-    //<editor-fold desc = "Doctor methods">
+    public static List<Location> getAllLocations(){
+        List<Location> locations = new ArrayList<>();
+        locationRepository.findAll().iterator().forEachRemaining(locations::add);
+        return locations;
+    }
 
     //<editor-fold desc = "Doctor methods">
 
@@ -728,7 +731,7 @@ public class Controller {
         }
     }
 
-    public static void deleteDoctor(int iddoctor){
+    public static void deleteDoctor(int iddoctor) {
         doctorRepository.delete(iddoctor);
     }
 
@@ -761,12 +764,19 @@ public class Controller {
         return doctors;
     }
 
-//</editor-fold>
-    public static List<Request> getAllRequests()
-    {
+    //</editor-fold>
+    public static List<Request> getAllRequests() {
         List<Request> requests = new ArrayList<>();
         requestRepository.findAll().iterator().forEachRemaining(requests::add);
         return requests;
     }
 
+    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType) throws ControllerException {
+        Request request = new Request(quantity,urgency,bloodType,location,bloodPartType);
+        try {
+            requestRepository.save(request);
+        } catch (ValidatorException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
 }

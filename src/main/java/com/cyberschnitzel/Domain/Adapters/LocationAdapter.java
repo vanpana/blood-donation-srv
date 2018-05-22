@@ -35,7 +35,8 @@ public class LocationAdapter implements Adapter<Location> {
 
 	@Override
 	public PreparedStatement findAllQuery() throws SQLException {
-		return null;
+		String query = "SELECT * FROM \"Location\"";
+		return connection.prepareStatement(query);
 	}
 
 	@Override
