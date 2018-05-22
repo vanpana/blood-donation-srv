@@ -43,6 +43,7 @@ CREATE TABLE public."Plasma"
 (
   idplasma serial NOT NULL,
   idblood integer,
+  quantity REAL,
   expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Plasma_pkey" PRIMARY KEY (idplasma),
   CONSTRAINT "Plasma_idblood_fkey" FOREIGN KEY (idblood)
@@ -56,6 +57,7 @@ CREATE TABLE public."RedCells"
 (
   idredcells serial NOT NULL,
   idblood integer,
+  quantity REAL,
   expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "RedCells_pkey" PRIMARY KEY (idredcells),
   CONSTRAINT "RedCells_idblood_fkey" FOREIGN KEY (idblood)
@@ -69,6 +71,7 @@ CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
   idthrombocites serial NOT NULL,
+  quantity REAL,
   idblood integer,
   CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)

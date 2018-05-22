@@ -396,12 +396,12 @@ public class Controller {
     }
 
     @SuppressWarnings("unchecked")
-    public static Integer addBloodPart(Class part, Integer originId, Date date) throws ControllerException {
+    public static Integer addBloodPart(Class part, Integer originId, Date date, Float quantity) throws ControllerException {
         try {
             Field f = Controller.class.getDeclaredField("bloodParts" + part.getSimpleName() + "Repository");
             f.setAccessible(true);
             Repository<Blood> t = (Repository<Blood>) f.get(Controller.class);
-            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class).newInstance(originId, date);
+            BloodPart tb = (BloodPart) part.getConstructor(Integer.class, Date.class, Float.class).newInstance(originId, date, quantity);
             tb.setReceivedDate(date);
             Optional<Blood> ret = t.save(tb);
 			return ret.map(Entity::getId).orElse(-1);
@@ -768,5 +768,26 @@ public class Controller {
         requestRepository.findAll().iterator().forEachRemaining(requests::add);
         return requests;
     }
+
+    public static List<Integer> getAllAvailableBloodForRequest(Integer idRequest)
+	{
+		Request request = requestRepository.findOne(idRequest).orElse(null);
+		if(request == null)
+			return new ArrayList<>();
+
+		BloodType bloodType = request.getBloodType();
+		String bloodPartName = request.getBloodPartType();
+
+
+
+		if(bloodPartName.equals("blood"))
+		{
+
+		}
+		return null;
+
+
+
+	}
 
 }

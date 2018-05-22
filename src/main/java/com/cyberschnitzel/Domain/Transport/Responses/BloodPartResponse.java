@@ -9,11 +9,21 @@ public class BloodPartResponse {
 	private String expirationDate;
 	//bloodPartType, BloodType, receivedDate
 	private String bloodPartType;
+
+	public Float getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Float quantity) {
+		this.quantity = quantity;
+	}
+
 	private BloodType bloodType;
 	private String receivedDate;
 	private String status;
+	private Float quantity;
 
-	public BloodPartResponse(BloodPart bloodPart, String bloodPartType, BloodType bloodType, String receivedDate) {
+	public BloodPartResponse(BloodPart bloodPart, String bloodPartType, BloodType bloodType, String receivedDate, Float quantity) {
 		this.id = bloodPart.getId();
 
 		this.idBlood = bloodPart.getIdBlood();
@@ -21,6 +31,7 @@ public class BloodPartResponse {
 		this.expirationDate = bloodPart.getExpirationDate().toString();
 		this.bloodType = bloodType;
 		this.receivedDate = receivedDate;
+		this.quantity = quantity;
 	}
 
 	public Integer getId() {
