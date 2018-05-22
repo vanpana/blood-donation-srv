@@ -7,6 +7,25 @@ public class RequestResponse {
 	private int urgency;
 	private String bloodPartType;
 	private String location;
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public RequestResponse(float quantity, int urgency, String bloodPartType, String location, int id, BloodType bloodType) {
+		this.quantity = quantity;
+		this.urgency = urgency;
+		this.bloodPartType = bloodPartType;
+		this.location = location;
+		this.id = id;
+		this.bloodType = bloodType;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+
+	}
 
 	public float getQuantity() {
 		return quantity;
@@ -45,15 +64,6 @@ public class RequestResponse {
 	}
 
 	public void setBloodType(BloodType bloodType) {
-		this.bloodType = bloodType;
-	}
-
-	public RequestResponse(float quantity, int urgency, String bloodPartType, String location, BloodType bloodType) {
-		this.quantity = quantity;
-		this.urgency = urgency;
-
-		this.bloodPartType = bloodPartType;
-		this.location = location;
 		this.bloodType = bloodType;
 	}
 

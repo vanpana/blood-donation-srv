@@ -19,7 +19,7 @@ public class RequestsHandlers {
 		InputValidator.validatePersonnelInput(messageRequest);
 		List<Request> requests = Controller.getAllRequests();
 		return requests.stream().map(req -> new RequestResponse(req.getQuantity(),req.getUrgency(),req.getBloodPartType(),
-				Controller.getLocationById(req.getLocation()).getName(),req.getBloodType())).collect(Collectors.toList());
+				Controller.getLocationById(req.getLocation()).getName(),req.getId(),req.getBloodType())).collect(Collectors.toList());
 	}
 
 	public static List<Integer> getAllAvailableBloodForRequest(String input) throws HandlingException {

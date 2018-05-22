@@ -159,6 +159,7 @@ CREATE TABLE public."Used"
   iddonation integer NOT NULL,
   patientid INTEGER,
   quantity real,
+  bloodPartType VARCHAR(50),
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE

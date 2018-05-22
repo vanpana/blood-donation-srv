@@ -777,6 +777,7 @@ public class Controller {
 		List<Integer> result = new ArrayList<>();
 
 
+
 		if (bloodPartName.equals("Blood")) {
 			Iterable<Blood> bloodList = bloodRepository.findAll();
 			for (Blood blood : bloodList) {
