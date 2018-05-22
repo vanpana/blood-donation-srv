@@ -212,8 +212,8 @@ VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
 
 
 INSERT INTO public."Request"(
-  idrequest, quantity, urgency)
-VALUES (1, 200, 1),(2, 400, 2),(3, 200, 1),(4, 600, 3);
+  idrequest, quantity, urgency, bloodPartType, bloodType, locationId)
+VALUES (1, 200, 1, 'Plasma', 'A', 1),(2, 400, 2, 'Plasma', 'A', 1),(3, 200, 1, 'Plasma', 'A', 1),(4, 600, 3, 'Plasma', 'A', 1);
 
 
 INSERT INTO public."Blood"(

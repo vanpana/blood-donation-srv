@@ -1,9 +1,12 @@
 package com.cyberschnitzel.Domain.Adapters;
 
+import com.cyberschnitzel.Domain.Entities.BloodType;
 import com.cyberschnitzel.Domain.Entities.Request;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class RequestAdapter implements Adapter<Request> {
@@ -51,7 +54,20 @@ public class RequestAdapter implements Adapter<Request> {
     }
 
     @Override
-    public Stream<Request> get(ResultSet rs) {
-        return null;
+    public Stream<Request> get(ResultSet resultSet) {
+        List<Request> requests = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                Request request = new Request(resultSet.getFloat("quantity"),
+                        resultSet.getInt("urgency"), BloodType.getByString(resultSet.getString("bloodType")),
+                        resultSet.getInt("locationId"),resultSet.getString("bloodPartType"));
+                request.setId(resultSet.getInt("idrequest"));
+                requests.add(request);
+            }
+        } catch (SQLException sqle) {
+            return null;
+        }
+        return requests.stream();
     }
 }
+
