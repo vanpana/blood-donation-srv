@@ -7,6 +7,20 @@ public class AddBloodPartRequest extends MessageRequest{
 	private Integer bloodId, partId;
 	private Date expDate;
 	private Class partClass;
+	private Float quantity;
+
+	public Float getQuantity() {
+		return quantity;
+	}
+
+	public AddBloodPartRequest(String email, String password, String token, Integer bloodId, Integer partId, Date expDate, Class partClass, Float quantity) {
+		super(email, password, token);
+		this.bloodId = bloodId;
+		this.partId = partId;
+		this.expDate = expDate;
+		this.partClass = partClass;
+		this.quantity = quantity;
+	}
 
 	public Integer getBloodId() {
 		return bloodId;

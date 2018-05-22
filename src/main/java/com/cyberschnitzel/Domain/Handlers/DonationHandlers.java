@@ -184,15 +184,15 @@ public class DonationHandlers {
 
 			if(plasmaQty > 0)
 			{
-				Controller.addBloodPart(Plasma.class, bloodId, blood.getReceivedDate());
+				Controller.addBloodPart(Plasma.class, bloodId, blood.getReceivedDate(),plasmaQty.floatValue());
 			}
 			if(redCellsQty > 0)
 			{
-				Controller.addBloodPart(RedCells.class, bloodId, blood.getReceivedDate());
+				Controller.addBloodPart(RedCells.class, bloodId, blood.getReceivedDate(), redCellsQty.floatValue());
 			}
 			if(thrombocitesQty > 0)
 			{
-				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate());
+				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate(), thrombocitesQty.floatValue());
 			}
 
 

@@ -43,6 +43,7 @@ CREATE TABLE public."Plasma"
 (
   idplasma serial NOT NULL,
   idblood integer,
+  quantity REAL,
   expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "Plasma_pkey" PRIMARY KEY (idplasma),
   CONSTRAINT "Plasma_idblood_fkey" FOREIGN KEY (idblood)
@@ -56,6 +57,7 @@ CREATE TABLE public."RedCells"
 (
   idredcells serial NOT NULL,
   idblood integer,
+  quantity REAL,
   expirationdate TIMESTAMP DEFAULT now(),
   CONSTRAINT "RedCells_pkey" PRIMARY KEY (idredcells),
   CONSTRAINT "RedCells_idblood_fkey" FOREIGN KEY (idblood)
@@ -69,6 +71,7 @@ CREATE TABLE public."Thrombocites"
 (
   expirationdate TIMESTAMP DEFAULT now(),
   idthrombocites serial NOT NULL,
+  quantity REAL,
   idblood integer,
   CONSTRAINT "Thrombocites_pkey" PRIMARY KEY (idthrombocites),
   CONSTRAINT "Thrombocites_idblood_fkey" FOREIGN KEY (idblood)
@@ -156,6 +159,7 @@ CREATE TABLE public."Used"
   iddonation integer NOT NULL,
   patientid INTEGER,
   quantity real,
+  bloodPartType VARCHAR(50),
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE
@@ -203,10 +207,18 @@ VALUES ('2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123
 
 
 
-INSERT INTO public."Personnel"(name, email, password, token)
-VALUES ('Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
-  ('Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
-  ('Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
+INSERT INTO public."Personnel"(
+  idpersonnel, name, email, password, token)
+VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
+  (2, 'Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
+  (3, 'Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
+
+
+
+INSERT INTO public."Request"(
+  idrequest, quantity, urgency, bloodPartType, bloodType, locationId)
+VALUES (1, 200, 1, 'Plasma', 'A', 1),(2, 400, 2, 'Plasma', 'A', 1),(3, 200, 1, 'Plasma', 'A', 1),(4, 600, 3, 'Plasma', 'A', 1);
+
 
 
 INSERT INTO public."Blood"(

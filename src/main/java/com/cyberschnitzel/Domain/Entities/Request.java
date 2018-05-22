@@ -78,3 +78,5 @@ public class Request extends Entity {
                 '}';
     }
 }
+
+(int) (Page.getCurrent().getBrowserWindowWidth() - Page.getCurrent().getBrowserWindowWidth() * 0.35);
