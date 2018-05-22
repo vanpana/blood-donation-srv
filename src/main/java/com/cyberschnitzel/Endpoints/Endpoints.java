@@ -25,6 +25,8 @@ public class Endpoints {
     private final static String PERSONNEL_PATH = "/personnel";
     private final static String STATUS_PATH = "/status";
     private final static String RECEIVE = "/receive";
+    private final static String REQUESTS_PATH = "/requests";
+
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -151,6 +153,7 @@ public class Endpoints {
     public static Response getDonationByID(@PathParam(PARAM) int donationID) {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Bloodpart endpoints">
@@ -206,6 +209,7 @@ public class Endpoints {
 
     @PUT
     @Path(BLOODPART_PATH + PATH_PARAM)
+
     public static Response updateBloodPart(@PathParam(PARAM) int id, String updateBloodPartRequestJson) {
         return Handler.handle(() -> BloodPartHandlers.updateBloodPart(updateBloodPartRequestJson, id), BLOODPART_PATH,
                 updateBloodPartRequestJson);
@@ -247,12 +251,14 @@ public class Endpoints {
     }
     //</editor-fold>
 
+
     @POST
     @Path(PERSONNEL_PATH + LOGIN_PATH)
     public static Response loginPatient(String messageRequestJson) {
         return Handler.handle(() -> PersonnelHandlers.checkPersonnelLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
                 messageRequestJson);
     }
+
 
     @POST
     @Path(DONATORS_PATH + LOGIN_PATH)
