@@ -203,11 +203,10 @@ VALUES (1, '2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '
 
 
 
-INSERT INTO public."Personnel"(
-  idpersonnel, name, email, password, token)
-VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
-  (2, 'Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
-  (3, 'Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
+INSERT INTO public."Personnel"(name, email, password, token)
+VALUES ('Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
+  ('Ion Dan', 'ion1974@yahoo.com', 'cp1234', 'aaTo945P12'),
+  ('Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
 
 
 

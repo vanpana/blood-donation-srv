@@ -19,7 +19,6 @@ public class DoctorView {
     private TextField quantity;
     private TextField urgency;
     private TextField bloodType;
-    private TextField city;
     private ComboBox<String> listingsChooser;
     private TextField bloodPartType;
     private Button createRequest;
@@ -42,14 +41,11 @@ public class DoctorView {
         backButton.addClickListener(e -> mainWindow.setContent(controlPanel.getLayout()));
 
         createRequest = new Button("Create request");
-        createRequest.addClickListener(e->{
-            label.setValue(addRequest());
-        });
+        createRequest.addClickListener(e-> label.setValue(addRequest()));
 
         quantity = new TextField("Quantity:");
         urgency = new TextField("Urgency level (between 1-3):");
         bloodType = new TextField("Blood Type:");
-        city = new TextField("City:");
         bloodPartType = new TextField("Blood Part Type:");
         loadFirstListing();
 
@@ -60,7 +56,6 @@ public class DoctorView {
         layout.addComponent(quantity);
         layout.addComponent(urgency);
         layout.addComponent(bloodType);
-//        layout.addComponent(city);
         layout.addComponent(listingsChooser);
         layout.addComponent(bloodPartType);
         layout.addComponent(label);
@@ -106,7 +101,6 @@ public class DoctorView {
     private void loadFirstListing() {
         // Init the combo box
         listingsChooser = new ComboBox<>();
-
 
         // Set the dropdown menu
         setupDropBox();
