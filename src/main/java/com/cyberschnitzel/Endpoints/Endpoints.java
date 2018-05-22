@@ -36,7 +36,7 @@ public class Endpoints {
     private final static String STATUS_PATH = "/status";
 	private final static String RECEIVE = "/receive";
 	private final static String REQUESTS_PATH = "/requests";
-	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/request/available";
+	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/requests/available";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";

@@ -6,7 +6,7 @@ public class RequestResponse {
 	private float quantity;
 	private int urgency;
 	private String bloodPartType;
-	private String locationName;
+	private String location;
 
 	public float getQuantity() {
 		return quantity;
@@ -32,12 +32,12 @@ public class RequestResponse {
 		this.bloodPartType = bloodPartType;
 	}
 
-	public String getLocationName() {
-		return locationName;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public BloodType getBloodType() {
@@ -48,12 +48,12 @@ public class RequestResponse {
 		this.bloodType = bloodType;
 	}
 
-	public RequestResponse(float quantity, int urgency, String bloodPartType, String locationName, BloodType bloodType) {
+	public RequestResponse(float quantity, int urgency, String bloodPartType, String location, BloodType bloodType) {
 		this.quantity = quantity;
 		this.urgency = urgency;
 
 		this.bloodPartType = bloodPartType;
-		this.locationName = locationName;
+		this.location = location;
 		this.bloodType = bloodType;
 	}
 
