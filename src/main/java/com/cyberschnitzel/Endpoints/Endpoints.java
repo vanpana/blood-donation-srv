@@ -23,6 +23,7 @@ import javax.ws.rs.core.Response;
 public class Endpoints {
     // Endpoints path
     private final static String DONATORS_PATH = "/donators";
+    private final static String CREATE_DONATORS_PATH = "/donators/create";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
     private final static String DETAILED_DONATIONS_PATH = "/detailed-donations";
@@ -289,6 +290,12 @@ public class Endpoints {
 				messageRequestJson);
 	}
 
+    //<editor-fold desc="Donator endpoints">
+    @POST
+    @Path(CREATE_DONATORS_PATH)
+    public Response getDonator(String messageRequestJson){
+        return Handler.handle(() -> UserHandlers.createDonator(messageRequestJson),CREATE_DONATORS_PATH,messageRequestJson);
+    }
 
-
+    //</editor-fold>
 }

@@ -13,10 +13,10 @@ class InputValidator {
     private static void validateInput(MessageRequest messageRequest, CredentialsEntity.EntityType entityType) throws HandlingException {
         // Check if the entity exists and verify the credentials
         try {
-            if(messageRequest.getToken() == null) {
-				Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), entityType);
-				return;
-			}
+            if (messageRequest.getToken() == null) {
+                Controller.checkCredentialsNoToken(messageRequest.getEmail(), messageRequest.getPassword(), entityType);
+                return;
+            }
             Controller.checkCredentials(messageRequest.getEmail(), messageRequest.getPassword(), messageRequest.getToken(),
                     entityType);
         } catch (ControllerException ce) {
