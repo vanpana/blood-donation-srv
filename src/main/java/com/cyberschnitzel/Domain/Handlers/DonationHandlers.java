@@ -194,7 +194,7 @@ public class DonationHandlers {
 			{
 				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate(), thrombocitesQty.floatValue());
 			}
-
+			Controller.addDonation(cnp,totalBloodQty,0,bloodId);
 
 			// flow: user exists -> yes -> get user
 			//					-> n0 -> create + get

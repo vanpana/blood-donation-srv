@@ -4,6 +4,7 @@ import com.cyberschnitzel.Domain.Adapters.*;
 import com.cyberschnitzel.Domain.Entities.*;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.ValidatorException;
+import com.cyberschnitzel.Domain.Transport.Responses.AvailableBloodResponse;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Controller {
 	//<editor-fold desc="Repositories">
@@ -532,7 +534,7 @@ public class Controller {
 	 */
 	public static int addUsed(int idDontaion, String patientCNP, float quantity) throws ControllerException {
 		try {
-			Used used = new Used(idDontaion, patientCNP, quantity);
+			Used used = new Used(idDontaion, patientCNP, quantity,"");
 			Optional<Used> usedOptional = usedRepository.save(used);
 			return usedOptional.map(Entity::getId).orElse(-1);
 		} catch (ValidatorException e) {
@@ -558,7 +560,7 @@ public class Controller {
 	 * @throws ControllerException - if the update cannot be done
 	 */
 	public static void updateUsed(int idDonation, String patientCNP, float quantity) throws ControllerException {
-		Used used = new Used(idDonation, patientCNP, quantity);
+		Used used = new Used(idDonation, patientCNP, quantity, "");
 		try {
 			usedRepository.update(used);
 		} catch (ValidatorException e) {
@@ -767,22 +769,25 @@ public class Controller {
 		return requests;
 	}
 
-	public static List<Integer> getAllAvailableBloodForRequest(Integer idRequest) {
+	public static List<AvailableBloodResponse> getAllAvailableBloodForRequest(Integer idRequest) {
 		Request request = requestRepository.findOne(idRequest).orElse(null);
 		if (request == null)
 			return new ArrayList<>();
 
 		BloodType bloodType = request.getBloodType();
 		String bloodPartName = request.getBloodPartType();
-		List<Integer> result = new ArrayList<>();
-
+		List<AvailableBloodResponse> result = new ArrayList<>();
+		Iterable<Used> useds = usedRepository.findAll();
 
 
 		if (bloodPartName.equals("Blood")) {
-			Iterable<Blood> bloodList = bloodRepository.findAll();
-			for (Blood blood : bloodList) {
-				if (CompatibilityValidator.compare(blood.getBloodType(), bloodType)) {
-					result.add(blood.getId());
+			Iterable<Donation> donationList = donationRepository.findAll();
+			for (Donation donation : donationList) {
+				Blood b =  bloodRepository.findOne(donation.getBloodID()).orElse(null);
+				if(b == null)
+					continue;
+				if (CompatibilityValidator.compare(b.getBloodType(), bloodType)) {
+					result.add(new AvailableBloodResponse(donation.getId(), (float)donation.getQuantity()));
 				}
 			}
 
@@ -804,17 +809,24 @@ public class Controller {
 			selectBloodPart(bloodType, result, bloodList);
 		}
 
-		return result;
+		List<Used> useds1 = new ArrayList<>();
+		useds.forEach(useds1::add);
+
+		List<Integer> newUsedList = useds1.stream().filter(x -> x.getBloodPartType().equals(bloodPartName)).map(x-> x.getIdDonation()).collect(Collectors.toList());
+		List<AvailableBloodResponse> resres = result.stream().filter(x -> !newUsedList.contains(x.getId())).collect(Collectors.toList());
+
+
+		return resres;
 
 	}
 
-	private static void selectBloodPart(BloodType bloodType, List<Integer> result, Iterable<BloodPart> bloodList) {
+	private static void selectBloodPart(BloodType bloodType, List<AvailableBloodResponse> result, Iterable<BloodPart> bloodList) {
 		for (BloodPart bp : bloodList) {
 			Blood blood = bloodRepository.findOne(bp.getIdBlood()).orElse(null);
 			if (blood == null)
 				continue;
 			if (CompatibilityValidator.compare(blood.getBloodType(), bloodType)) {
-				result.add(bp.getId());
+				result.add(new AvailableBloodResponse(bp.getId(), (float)bp.getQuantity()));
 			}
 		}
 	}

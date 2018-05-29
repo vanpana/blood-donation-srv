@@ -3,9 +3,12 @@ package com.cyberschnitzel.Domain.Handlers;
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Request;
+import com.cyberschnitzel.Domain.Entities.Used;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
+import com.cyberschnitzel.Domain.Transport.Responses.AvailableBloodResponse;
 import com.cyberschnitzel.Domain.Transport.Responses.RequestResponse;
+import com.cyberschnitzel.Domain.Transport.Responses.SuccessResponse;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -22,7 +25,7 @@ public class RequestsHandlers {
 				Controller.getLocationById(req.getLocation()).getName(),req.getId(),req.getBloodType())).collect(Collectors.toList());
 	}
 
-	public static List<Integer> getAllAvailableBloodForRequest(String input) throws HandlingException {
+	public static List<AvailableBloodResponse> getAllAvailableBloodForRequest(String input) throws HandlingException {
 		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 		// Validate input
 		InputValidator.validatePersonnelInput(messageRequest);
@@ -30,4 +33,8 @@ public class RequestsHandlers {
 		return Controller.getAllAvailableBloodForRequest(idRequest);
 	}
 
+
+	public static Used useBlood(String useBloodRequestJson) {
+
+	}
 }

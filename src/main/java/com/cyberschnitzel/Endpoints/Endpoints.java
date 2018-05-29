@@ -37,7 +37,7 @@ public class Endpoints {
 	private final static String RECEIVE = "/receive";
 	private final static String REQUESTS_PATH = "/requests";
 	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/requests/available";
-	private final static String USE_BLOOD_PATH = "/use";
+	private final static String USE_BLOOD_PATH = "/used";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -300,9 +300,13 @@ public class Endpoints {
 	}
 
 
-//	@POST
-//	@Path(USE_BLOOD_PATH)
-
+	@POST
+	@Path(USE_BLOOD_PATH)
+	public Response useBlood(String useBloodRequestJson)
+	{
+		return Handler.handle(() -> RequestsHandlers.useBlood(useBloodRequestJson), REQUEST_AVAILABLE_BLOOD_PATH,
+				useBloodRequestJson);
+	}
 
 
 }
