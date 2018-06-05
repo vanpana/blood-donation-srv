@@ -38,6 +38,7 @@ public class Endpoints {
 	private final static String REQUESTS_PATH = "/requests";
 	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/requests/available";
 	private final static String USE_BLOOD_PATH = "/used";
+	private final static String CNP_PATH = "/cnp";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -304,9 +305,18 @@ public class Endpoints {
 	@Path(USE_BLOOD_PATH)
 	public Response useBlood(String useBloodRequestJson)
 	{
-		return Handler.handle(() -> RequestsHandlers.useBlood(useBloodRequestJson), REQUEST_AVAILABLE_BLOOD_PATH,
+		return Handler.handle(() -> RequestsHandlers.useBlood(useBloodRequestJson), USE_BLOOD_PATH,
 				useBloodRequestJson);
 	}
+
+	@POST
+	@Path(DONATIONS_PATH + CNP_PATH)
+	public Response getAllDonationsByCnp(String messageRequestJson)
+	{
+		return Handler.handle(() -> DonationHandlers.getAllDonationsByCnp(messageRequestJson), DONATIONS_PATH + CNP_PATH,
+				messageRequestJson);
+	}
+
 
 
 }

@@ -532,9 +532,9 @@ public class Controller {
 	 * @return - the id of the donation
 	 * @throws ControllerException -if any exception occur
 	 */
-	public static int addUsed(int idDontaion, String patientCNP, float quantity) throws ControllerException {
+	public static int addUsed(int idDontaion, Integer patientCNP, float quantity, String bloodPartType) throws ControllerException {
 		try {
-			Used used = new Used(idDontaion, patientCNP, quantity,"");
+			Used used = new Used(idDontaion, patientCNP, quantity,bloodPartType);
 			Optional<Used> usedOptional = usedRepository.save(used);
 			return usedOptional.map(Entity::getId).orElse(-1);
 		} catch (ValidatorException e) {
@@ -559,7 +559,7 @@ public class Controller {
 	 * @param quantity   - the new quantity
 	 * @throws ControllerException - if the update cannot be done
 	 */
-	public static void updateUsed(int idDonation, String patientCNP, float quantity) throws ControllerException {
+	public static void updateUsed(int idDonation, Integer patientCNP, float quantity) throws ControllerException {
 		Used used = new Used(idDonation, patientCNP, quantity, "");
 		try {
 			usedRepository.update(used);

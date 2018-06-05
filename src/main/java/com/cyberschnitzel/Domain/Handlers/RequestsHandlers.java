@@ -4,6 +4,7 @@ import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.BloodPart;
 import com.cyberschnitzel.Domain.Entities.Request;
 import com.cyberschnitzel.Domain.Entities.Used;
+import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Exceptions.HandlingException;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Responses.AvailableBloodResponse;
@@ -34,7 +35,13 @@ public class RequestsHandlers {
 	}
 
 
-	public static Used useBlood(String useBloodRequestJson) {
+	public static Integer useBlood(String useBloodRequestJson) throws HandlingException, ControllerException {
+		MessageRequest messageRequest = new Gson().fromJson(useBloodRequestJson, MessageRequest.class);
+		// Validate input
+		InputValidator.validatePersonnelInput(messageRequest);
 
+		Used u = new Gson().fromJson(messageRequest.getMessage(), Used.class);
+
+		return Controller.addUsed(u.getIdDonation(),u.getRequestId(),u.getQuantity(), u.getBloodPartType());
 	}
 }

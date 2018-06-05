@@ -157,7 +157,7 @@ CREATE TABLE public."Patient"
 CREATE TABLE public."Used"
 (
   iddonation integer NOT NULL,
-  patientid INTEGER,
+  requestid INTEGER,
   quantity real,
   bloodPartType VARCHAR(50),
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
@@ -165,7 +165,7 @@ CREATE TABLE public."Used"
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
-  CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (patientid)
+  CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (requestid)
   REFERENCES public."Patient" (id) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
@@ -249,7 +249,7 @@ VALUES (1, '2970106123456',  800, 3, 2),(2, '2970421167567',  700, 2, 1),(3, '19
 
 
 INSERT INTO public."Used"(
-  iddonation, patientid, quantity)
+  iddonation, requestid, quantity)
 VALUES (2, 1, 200);
 
 INSERT INTO public."Doctor"(iddoctor, name, email, password, token)

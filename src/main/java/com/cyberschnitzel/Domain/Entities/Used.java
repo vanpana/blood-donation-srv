@@ -2,13 +2,13 @@ package com.cyberschnitzel.Domain.Entities;
 
 public class Used  extends Entity{
     private Integer idDonation;
-    private String idPatient;
+    private Integer requestId;
     private float quantity;
     private String bloodPartType;
 
-    public Used(Integer idDonation, String idPatient, float quantity, String bloodPartType) {
+    public Used(Integer idDonation, Integer requestId, float quantity, String bloodPartType) {
         this.idDonation = idDonation;
-        this.idPatient = idPatient;
+        this.requestId = requestId;
         this.quantity = quantity;
         this.bloodPartType = bloodPartType;
     }
@@ -21,12 +21,12 @@ public class Used  extends Entity{
         this.idDonation = idDonation;
     }
 
-    public String getIdPatient() {
-        return idPatient;
+    public Integer getRequestId() {
+        return requestId;
     }
 
-    public void setIdPatient(String idPatient) {
-        this.idPatient = idPatient;
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
     }
 
     public float getQuantity() {

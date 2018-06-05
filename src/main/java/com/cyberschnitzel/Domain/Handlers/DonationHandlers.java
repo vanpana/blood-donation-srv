@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DonationHandlers {
     /**
@@ -145,6 +146,37 @@ public class DonationHandlers {
 		return donationsResponses;
 
 	}
+
+	public static List<DonationsResponse> getAllDonationsByCnp(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+
+		// Validate input
+		InputValidator.validateDonatorInput(messageRequest);
+
+		String cnp = messageRequest.getMessage();
+		List<DonationsResponse> donationsResponses = new ArrayList<>();
+		List<Donation> lst = Controller.getAllDonations().stream().filter( x -> x.getCnp().equals(cnp)).collect(Collectors.toList());
+
+		for(Donation don : lst){
+			Donator donator = Controller.getDonatorByCnp(don.getCnp());
+			if(donator == null)
+				continue;
+			Blood blood = Controller.getBloodByID(don.getBloodID());
+			if(blood == null)
+				continue;
+			Location location = Controller.getLocationById(don.getLocationid());
+			if(location == null)
+				location = new Location("dummy",0,0,0);
+			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
+			donationsResponses.add(donationsResponse);
+		}
+
+
+
+		return donationsResponses;
+
+	}
+
 
 	public static SuccessResponse receiveDonation(String input) throws HandlingException {
 		try {
