@@ -706,6 +706,11 @@ public class Controller {
 		return opt.orElse(null);
 	}
 
+	public static List<Location> getAllLocations(){
+		List<Location> locations = new ArrayList<>();
+		locationRepository.findAll().iterator().forEachRemaining(locations::add);
+		return locations;
+	}
 	//<editor-fold desc = "Doctor methods">
 
 	//<editor-fold desc = "Doctor methods">
