@@ -39,6 +39,7 @@ public class Endpoints {
 	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/requests/available";
 	private final static String USE_BLOOD_PATH = "/used";
 	private final static String CNP_PATH = "/cnp";
+	private final static String PATIENT_DONATIONS = "/donator/donations";
 
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
@@ -153,6 +154,13 @@ public class Endpoints {
     public Response getDonations(String messageRequestJson) {
         return Handler.handle(() -> DonationHandlers.getAllDonations(messageRequestJson), DONATIONS_PATH);
     }
+
+	@POST
+	@Path(PATIENT_DONATIONS)
+	public Response getPatientDonations(String messageRequestJson) {
+		return Handler.handle(() -> DonationHandlers.getAllDonationsByCnp(messageRequestJson), DONATIONS_PATH);
+	}
+
 
     /**
      * Method to get donation by ID

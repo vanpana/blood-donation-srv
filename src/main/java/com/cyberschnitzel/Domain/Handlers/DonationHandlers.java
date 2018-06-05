@@ -153,9 +153,9 @@ public class DonationHandlers {
 		// Validate input
 		InputValidator.validateDonatorInput(messageRequest);
 
-		String cnp = messageRequest.getMessage();
+		//String cnp = messageRequest.getMessage();
 		List<DonationsResponse> donationsResponses = new ArrayList<>();
-		List<Donation> lst = Controller.getAllDonations().stream().filter( x -> x.getCnp().equals(cnp)).collect(Collectors.toList());
+		List<Donation> lst = Controller.getAllDonations();
 
 		for(Donation don : lst){
 			Donator donator = Controller.getDonatorByCnp(don.getCnp());
@@ -170,8 +170,6 @@ public class DonationHandlers {
 			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
 			donationsResponses.add(donationsResponse);
 		}
-
-
 
 		return donationsResponses;
 
@@ -226,14 +224,8 @@ public class DonationHandlers {
 			{
 				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate(), thrombocitesQty.floatValue());
 			}
-			Controller.addDonation(cnp,totalBloodQty,0,bloodId);
 
-			// flow: user exists -> yes -> get user
-			//					-> n0 -> create + get
-			//				check quants
-			//				add blood/parts based on quants
-			//				send notif if succces
-			// Try to add the donation
+
 			System.out.println(receiveDonationRequest.toString());
 
 			return new SuccessResponse(true, "Donation succesfull");

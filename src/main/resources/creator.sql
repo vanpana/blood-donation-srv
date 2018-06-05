@@ -156,6 +156,7 @@ CREATE TABLE public."Patient"
 
 CREATE TABLE public."Used"
 (
+  idused serial NOT NULL,
   iddonation integer NOT NULL,
   patientid INTEGER,
   quantity real,
