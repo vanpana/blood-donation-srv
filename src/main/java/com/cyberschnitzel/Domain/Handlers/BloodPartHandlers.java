@@ -22,7 +22,7 @@ public class BloodPartHandlers {
 			InputValidator.validatePersonnelInput(addBloodPartRequest);
 
 			int retCode = Controller.addBloodPart(addBloodPartRequest.getPartClass(), addBloodPartRequest.getBloodId(),
-					addBloodPartRequest.getExpDate());
+					addBloodPartRequest.getExpDate(), addBloodPartRequest.getQuantity());
 			// Throw exception if donation couldn't be added
 			if (retCode != 0) throw new Exception("Error inserting part");
 
@@ -71,19 +71,19 @@ public class BloodPartHandlers {
 		for(BloodPart b : plasma)
 		{
 			Blood blood = Controller.getBloodByID(b.getIdBlood());
-			response.add(new BloodPartResponse(b, "Plasma", blood.getBloodType(), blood.getReceivedDate().toString()));
+			response.add(new BloodPartResponse(b, "Plasma", blood.getBloodType(), blood.getReceivedDate().toString(), b.getQuantity()));
 		}
 
 		for(BloodPart b : redcells)
 		{
 			Blood blood = Controller.getBloodByID(b.getIdBlood());
-			response.add(new BloodPartResponse(b, "RedCells", blood.getBloodType(), blood.getReceivedDate().toString()));
+			response.add(new BloodPartResponse(b, "RedCells", blood.getBloodType(), blood.getReceivedDate().toString(), b.getQuantity()));
 		}
 
 		for(BloodPart b : thrombocites)
 		{
 			Blood blood = Controller.getBloodByID(b.getIdBlood());
-			response.add(new BloodPartResponse(b, "Thrombocites", blood.getBloodType(), blood.getReceivedDate().toString()));
+			response.add(new BloodPartResponse(b, "Thrombocites", blood.getBloodType(), blood.getReceivedDate().toString(), b.getQuantity()));
 		}
 
 
