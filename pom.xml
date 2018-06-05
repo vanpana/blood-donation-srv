@@ -173,7 +173,7 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>src/main/webapp/VAADIN/themes</directory>
+							<directory>src/Main/webapp/VAADIN/themes</directory>
 							<includes>
 								<include>**/styles.css</include>
 								<include>**/styles.scss.cache</include>

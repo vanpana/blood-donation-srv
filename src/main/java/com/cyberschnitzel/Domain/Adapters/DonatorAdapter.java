@@ -1,6 +1,5 @@
 package com.cyberschnitzel.Domain.Adapters;
 
-import com.cyberschnitzel.Domain.Entities.Donation;
 import com.cyberschnitzel.Domain.Entities.Donator;
 
 import java.sql.PreparedStatement;
