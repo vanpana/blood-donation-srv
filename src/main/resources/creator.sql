@@ -157,7 +157,7 @@ CREATE TABLE public."Patient"
 CREATE TABLE public."Used"
 (
   iddonation integer NOT NULL,
-  requestid INTEGER,
+  patientid INTEGER,
   quantity real,
   bloodPartType VARCHAR(50),
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
@@ -165,7 +165,7 @@ CREATE TABLE public."Used"
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
-  CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (requestid)
+  CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (patientid)
   REFERENCES public."Patient" (id) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
@@ -200,10 +200,10 @@ VALUES ('2970107127098', 'Popa Anastasia') , ('1890501126578', 'Abrudan Andrei')
 
 
 INSERT INTO public."Donator"(
-  iddonator, cnp, name, bloodtype, email, password, token)
-VALUES (1, '2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123abMnOiy'),(2, '2970421167567', 'Pop Claudia','AB','claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
-  (3, '1961028125816', 'Opruta David','B','david@yahooo.com', 'od1234', 'lmnop874oA'),(4, '1661010128765', 'Panaite Dorinel','A','dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
-  (5, '1991211125877', 'Paius Teodor','A','teodor@yahooo.com', 'tp1234', '9isD57Bls1'),(6, '1890106125899', 'Podariu Catalin','0','catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
+  cnp, name, bloodtype, email, password, token)
+VALUES ('2970106123456', 'Prodan Bianca','0','bianca@yahooo.com', 'bp1234', '123abMnOiy'),('2970421167567', 'Pop Claudia','AB','claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
+  ('1961028125816', 'Opruta David','B','david@yahooo.com', 'od1234', 'lmnop874oA'),('1661010128765', 'Panaite Dorinel','A','dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
+  ('1991211125877', 'Paius Teodor','A','teodor@yahooo.com', 'tp1234', '9isD57Bls1'),('1890106125899', 'Podariu Catalin','0','catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
 
 
 
@@ -220,37 +220,39 @@ INSERT INTO public."Request"(
 VALUES (1, 200, 1, 'Plasma', 'A', 1),(2, 400, 2, 'Plasma', 'A', 1),(3, 200, 1, 'Plasma', 'A', 1),(4, 600, 3, 'Plasma', 'A', 1);
 
 
+
 INSERT INTO public."Blood"(
-  idblood, bloodtype, receiveddate)
-VALUES (1, 'AB', '5.04.2018'),(2, '0', '23.04.2018'),(3, 'A', '24.03.2018');
+  bloodtype, receiveddate)
+VALUES ('AB', '5.04.2018'),('0', '23.04.2018'),('A', '24.03.2018');
 
 
 
 INSERT INTO public."RedCells"(
-  idredcells, idblood, expirationdate)
-VALUES (1, 1, '10.04.2018');
+  idblood, expirationdate)
+VALUES (1, '10.04.2018');
 
 
 INSERT INTO public."Plasma"(
-  idplasma, idblood, expirationdate)
-VALUES (1, 1, '12.04.2018');
+  idblood, expirationdate)
+VALUES (1, '12.04.2018');
 
 
 INSERT INTO public."Thrombocites"(
-  expirationdate, idthrombocites, idblood)
-VALUES ('8.04.2018',1, 1);
+  expirationdate, idblood)
+VALUES ('8.04.2018', 1);
 
 
 
 
 INSERT INTO public."Donation"(
-  iddonation, cnp, quantity, status, idblood)
-VALUES (1, '2970106123456',  800, 3, 2),(2, '2970421167567',  700, 2, 1),(3, '1991211125877',  750, 1,3 );
+  cnp, quantity, status, idblood)
+VALUES ('2970106123456',  800, 3, 2),('2970421167567',  700, 2, 1),('1991211125877',  750, 1,3 );
 
 
 INSERT INTO public."Used"(
-  iddonation, requestid, quantity)
-VALUES (2, 1, 200);
+  iddonation, patientid, quantity)
+VALUES (1, 1, 200);
 
-INSERT INTO public."Doctor"(iddoctor, name, email, password, token)
-    VALUES (1,'David','da@yahoo.com','da','');
+INSERT INTO public."Doctor"(name, email, password, token)
+    VALUES ('David','da@yahoo.com','da','');
+

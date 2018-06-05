@@ -633,7 +633,7 @@ public class Controller {
 		CredentialsEntity credentialsEntity = getCredentialToBeValidated(entityType, email);
 
 		// Hash the password and the token
-//
+
 //		try {
 //			password = Hasher.encrypt(password);
 //		} catch (HashingException he) {
@@ -830,5 +830,12 @@ public class Controller {
 			}
 		}
 	}
-
+    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType) throws ControllerException {
+        Request request = new Request(quantity,urgency,bloodType,location,bloodPartType);
+        try {
+            requestRepository.save(request);
+        } catch (ValidatorException e) {
+            throw new ControllerException(e.getMessage());
+        }
+    }
 }

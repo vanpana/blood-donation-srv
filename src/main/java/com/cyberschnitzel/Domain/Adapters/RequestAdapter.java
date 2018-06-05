@@ -21,12 +21,23 @@ public class RequestAdapter implements Adapter<Request> {
 
     @Override
     public PreparedStatement deleteQuery(Integer id) throws SQLException {
-        return null;
+        String query = "DELETE FROM \"Request\" WHERE idrequest = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        return preparedStatement;
     }
 
     @Override
     public PreparedStatement updateQuery(Request entity) throws SQLException {
-        return null;
+        String query = "UPDATE \"Request\" SET quantity = ?, urgency= ?, bloodparttype= ?, locationid= ?, bloodtype= ? WHERE idrequest = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setFloat(1, entity.getQuantity());
+        preparedStatement.setInt(2, entity.getUrgency());
+        preparedStatement.setString(3, entity.getBloodPartType());
+        preparedStatement.setInt(4, entity.getLocation());
+        preparedStatement.setString(5, entity.getBloodType().name());
+        preparedStatement.setInt(6,entity.getId());
+        return preparedStatement;
     }
 
     @Override
