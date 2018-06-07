@@ -21,7 +21,7 @@ public class BloodPartAdapter implements Adapter<BloodPart> {
 	@Override
 	public PreparedStatement saveQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
-		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate) " +
+		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate, quantity) " +
 				"VALUES (?, ?, ?) returning id" + tableName.toLowerCase();
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1,b.getIdBlood());

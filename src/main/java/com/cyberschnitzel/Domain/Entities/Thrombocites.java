@@ -20,11 +20,17 @@ public class Thrombocites extends BloodPart {
 	{
 		super(_idblood, _exp);
 	}
+
+	public Thrombocites(Integer _idblood, Date _exp, Float _quantity) {
+		super(_idblood, _exp, _quantity);
+	}
+
 	@Override
 	public Date getExpirationDate()
 	{
 		Date received = super.getReceivedDate();
 		return received;
+
 	}
 
 	public Blood getOrigin()

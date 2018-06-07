@@ -156,6 +156,7 @@ CREATE TABLE public."Patient"
 
 CREATE TABLE public."Used"
 (
+  idused serial NOT NULL,
   iddonation integer NOT NULL,
   patientid INTEGER,
   quantity real,
@@ -255,3 +256,4 @@ VALUES (1, 1, 200);
 
 INSERT INTO public."Doctor"(name, email, password, token)
     VALUES ('David','da@yahoo.com','da','');
+

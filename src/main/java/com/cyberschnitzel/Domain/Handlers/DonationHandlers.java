@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DonationHandlers {
     /**
@@ -146,6 +147,35 @@ public class DonationHandlers {
 
 	}
 
+	public static List<DonationsResponse> getAllDonationsByCnp(String input) throws HandlingException {
+		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+
+		// Validate input
+		InputValidator.validateDonatorInput(messageRequest);
+
+		//String cnp = messageRequest.getMessage();
+		List<DonationsResponse> donationsResponses = new ArrayList<>();
+		List<Donation> lst = Controller.getAllDonations();
+
+		for(Donation don : lst){
+			Donator donator = Controller.getDonatorByCnp(don.getCnp());
+			if(donator == null)
+				continue;
+			Blood blood = Controller.getBloodByID(don.getBloodID());
+			if(blood == null)
+				continue;
+			Location location = Controller.getLocationById(don.getLocationid());
+			if(location == null)
+				location = new Location("dummy",0,0,0);
+			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
+			donationsResponses.add(donationsResponse);
+		}
+
+		return donationsResponses;
+
+	}
+
+
 	public static SuccessResponse receiveDonation(String input) throws HandlingException {
 		try {
 			// Try to construct the add donation request
@@ -196,12 +226,6 @@ public class DonationHandlers {
 			}
 
 
-			// flow: user exists -> yes -> get user
-			//					-> n0 -> create + get
-			//				check quants
-			//				add blood/parts based on quants
-			//				send notif if succces
-			// Try to add the donation
 			System.out.println(receiveDonationRequest.toString());
 
 			return new SuccessResponse(true, "Donation succesfull");

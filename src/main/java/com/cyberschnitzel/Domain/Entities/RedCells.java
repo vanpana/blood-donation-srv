@@ -6,7 +6,7 @@ public class RedCells extends BloodPart {
 	public static Integer valabilityDays = 20; //Todo: change values here
 	private Blood origin;
 	private Integer idOrigin;
-	private Integer quantity;
+	private Float quantity;
 	public RedCells(String bloodType, Blood o) {
 		super(bloodType);
 		origin = o;
@@ -20,6 +20,12 @@ public class RedCells extends BloodPart {
 	{
 		super(_idblood, _exp);
 	}
+
+	public RedCells(Integer _idblood, Date _exp, Float _quantity) {
+		super(_idblood, _exp, _quantity);
+
+	}
+
 	@Override
 	public Date getExpirationDate()
 	{
