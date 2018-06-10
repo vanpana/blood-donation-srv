@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Controller {
+
 	//<editor-fold desc="Repositories">
 	private static Repository<Donator> donatorRepository =
 			new DatabaseRepository<>(new DonatorValidator(), new DonatorAdapter());
@@ -633,6 +634,7 @@ public class Controller {
 		CredentialsEntity credentialsEntity = getCredentialToBeValidated(entityType, email);
 
 		// Hash the password and the token
+
 
 //		try {
 //			password = Hasher.encrypt(password);

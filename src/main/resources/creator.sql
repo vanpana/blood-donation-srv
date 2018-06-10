@@ -1,3 +1,4 @@
+
 DROP TABLE "Personnel";
 DROP TABLE "Used";
 DROP TABLE "Patient";

@@ -1,6 +1,7 @@
 package Rule;
 
 import ControllerTests.DonationTests;
+import ControllerTests.EndPointsTests;
 import com.cyberschnitzel.Util.DatabaseUtil;
 import org.junit.ClassRule;
 import org.junit.rules.ExternalResource;
@@ -10,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({DonationTests.class})
+@Suite.SuiteClasses({EndPointsTests.class})
 public class Ruler{
     private static TestRule setupTeardown = new ExternalResource() {
         @Override
