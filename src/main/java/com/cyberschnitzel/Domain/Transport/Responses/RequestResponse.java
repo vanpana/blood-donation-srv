@@ -7,22 +7,32 @@ public class RequestResponse {
 	private int urgency;
 	private String bloodPartType;
 	private String location;
+	private int doctorId;
 	private int id;
 
 	public int getId() {
 		return id;
 	}
 
-	public RequestResponse(float quantity, int urgency, String bloodPartType, String location, int id, BloodType bloodType) {
+	public RequestResponse(float quantity, int urgency, String bloodPartType, String location, int id, BloodType bloodType, int doctorId) {
 		this.quantity = quantity;
 		this.urgency = urgency;
 		this.bloodPartType = bloodPartType;
 		this.location = location;
 		this.id = id;
 		this.bloodType = bloodType;
+		this.doctorId = doctorId;
 	}
 
-	public void setId(int id) {
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setId(int id) {
 		this.id = id;
 
 	}

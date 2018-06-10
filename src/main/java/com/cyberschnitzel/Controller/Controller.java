@@ -835,8 +835,8 @@ public class Controller {
 			}
 		}
 	}
-    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType) throws ControllerException {
-        Request request = new Request(quantity,urgency,bloodType,location,bloodPartType);
+    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType, int doctorId) throws ControllerException {
+        Request request = new Request(quantity,urgency,bloodType,location,bloodPartType, doctorId);
         try {
             requestRepository.save(request);
         } catch (ValidatorException e) {

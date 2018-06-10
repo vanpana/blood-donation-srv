@@ -112,8 +112,13 @@ CREATE TABLE public."Request"
   bloodPartType VARCHAR(50),
   locationId int,
   bloodType VARCHAR(50),
+  doctorId int,
   CONSTRAINT "Request_locationId_fkey" FOREIGN KEY (locationId)
   REFERENCES public."Location"(idlocation) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE CASCADE,
+  CONSTRAINT "Request_doctorId_fkey" FOREIGN KEY (doctorId)
+  REFERENCES public."Doctor"(iddoctor) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
 );
