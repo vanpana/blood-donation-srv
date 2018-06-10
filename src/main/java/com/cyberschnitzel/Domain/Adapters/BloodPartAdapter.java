@@ -21,11 +21,12 @@ public class BloodPartAdapter implements Adapter<BloodPart> {
 	@Override
 	public PreparedStatement saveQuery(BloodPart entity) throws SQLException {
 		BloodPart b = (BloodPart)entity;
-		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate) " +
-				"VALUES (?, ?) returning id" + tableName.toLowerCase();
+		String query = "INSERT INTO " + "\"" + tableName + "\"" +  "(idblood, expirationdate, quantity) " +
+				"VALUES (?, ?, ?) returning id" + tableName.toLowerCase();
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1,b.getIdBlood());
 		p.setDate(2,new java.sql.Date(b.getExpirationDate().getTime()));
+		p.setFloat(3, entity.getQuantity());
 		return p;
 	}
 
@@ -72,7 +73,10 @@ public class BloodPartAdapter implements Adapter<BloodPart> {
 			while (rs.next()) {
 				BloodPart blood = new BloodPart(rs.getInt("id" + tableName.toLowerCase()),
 												rs.getInt("idblood"),
-												rs.getTimestamp("expirationdate"));
+
+												rs.getDate("expirationdate")
+												);
+				blood.setQuantity(rs.getFloat("quantity"));
 
 				bloodList.add(blood);
 			}

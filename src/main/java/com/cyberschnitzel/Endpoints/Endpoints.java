@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 public class Endpoints {
     // Endpoints path
     private final static String DONATORS_PATH = "/donators";
+    private final static String CREATE_DONATORS_PATH = "/donators/create";
     private final static String BLOOD_PATH = "/blood";
     private final static String DONATIONS_PATH = "/donations";
     private final static String DETAILED_DONATIONS_PATH = "/detailed-donations";
@@ -24,8 +25,13 @@ public class Endpoints {
     private final static String LOGIN_PATH = "/login";
     private final static String PERSONNEL_PATH = "/personnel";
     private final static String STATUS_PATH = "/status";
-    private final static String RECEIVE = "/receive";
-    private final static String REQUESTS_PATH = "/requests";
+
+	private final static String RECEIVE = "/receive";
+	private final static String REQUESTS_PATH = "/requests";
+	private final static String REQUEST_AVAILABLE_BLOOD_PATH = "/requests/available";
+	private final static String USE_BLOOD_PATH = "/used";
+	private final static String CNP_PATH = "/cnp";
+	private final static String PATIENT_DONATIONS = "/donator/donations";
 
 
     // Path parameters regex
@@ -143,6 +149,13 @@ public class Endpoints {
         return Handler.handle(() -> DonationHandlers.getAllDonations(messageRequestJson), DONATIONS_PATH);
     }
 
+	@POST
+	@Path(PATIENT_DONATIONS)
+	public Response getPatientDonations(String messageRequestJson) {
+		return Handler.handle(() -> DonationHandlers.getAllDonationsByCnp(messageRequestJson), DONATIONS_PATH);
+	}
+
+
     /**
      * Method to get donation by ID
      *
@@ -154,51 +167,61 @@ public class Endpoints {
         return Handler.handle(() -> Controller.getDonationByID(donationID), DONATIONS_PATH, String.valueOf(donationID));
     }
 
-    //</editor-fold>
+  //</editor-fold>
 
-    //<editor-fold desc="Bloodpart endpoints">
-    @GET
-    @Path(BLOODPART_PATH + PLASMA_PATH)
-    public static Response getAllPlasma() {
-        return Handler.handle(() -> Controller.getBloodPart("Plasma"), BLOODPART_PATH);
-    }
+	//<editor-fold desc="Bloodpart endpoints">
+	@GET
+	@Path(BLOODPART_PATH + PLASMA_PATH)
+	public Response getAllPlasma(){
+		return Handler.handle(() -> Controller.getBloodPart("Plasma"), BLOODPART_PATH);
+	}
 
-    @GET
-    @Path(BLOODPART_PATH + REDCELLS_PATH)
-    public static Response getAllRedCells() {
-        return Handler.handle(() -> Controller.getBloodPart("RedCells"), BLOODPART_PATH);
-    }
+	@GET
+	@Path(BLOODPART_PATH + REDCELLS_PATH)
+	public Response getAllRedCells(){
+		return Handler.handle(() -> Controller.getBloodPart("RedCells"), BLOODPART_PATH);
+	}
 
-    @GET
-    @Path(BLOODPART_PATH + THROMBOCITES_PATH)
-    public static Response getAllThrombocites() {
-        return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
-    }
+	@GET
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH)
+	public Response getAllThrombocites(){
+		return Handler.handle(() -> Controller.getBloodPart("Thrombocites"), BLOODPART_PATH);
+	}
 
-    @POST
-    @Path(BLOODPART_PATH)
-    public static Response getAllBloodParts(String messageRequestJson) {
-        return Handler.handle(() -> BloodPartHandlers.getAllBloodParts(messageRequestJson), BLOODPART_PATH);
-    }
+	@POST
+	@Path(BLOODPART_PATH)
+	public Response getAllBloodParts(String messageRequestJson){
+    	return Handler.handle(() -> BloodPartHandlers.getAllBloodParts(messageRequestJson), BLOODPART_PATH);
+	}
+
+	@POST
+	@Path(REQUESTS_PATH)
+	public Response getAllRequests(String messageRequestJson){
+		return Handler.handle(() -> RequestsHandlers.getAllRequests(messageRequestJson), REQUESTS_PATH);
+	}
 
 
-    @DELETE
-    @Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
-    public static Response deletePlasma(@PathParam(PARAM) int id) {
-        return Handler.handle(() -> Controller.deleteBloodPart("Plasma", id), BLOODPART_PATH);
-    }
 
-    @DELETE
-    @Path(BLOODPART_PATH + REDCELLS_PATH + PATH_PARAM)
-    public static Response deleteRedCells(@PathParam(PARAM) int id) {
-        return Handler.handle(() -> Controller.deleteBloodPart("RedCells", id), BLOODPART_PATH);
-    }
+	@DELETE
+	@Path(BLOODPART_PATH + PLASMA_PATH + PATH_PARAM)
+	public Response deletePlasma(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Plasma", id), BLOODPART_PATH);
+	}
 
-    @DELETE
-    @Path(BLOODPART_PATH + THROMBOCITES_PATH + PATH_PARAM)
-    public static Response deleteThrombocites(@PathParam(PARAM) int id) {
-        return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
-    }
+	@DELETE
+	@Path(BLOODPART_PATH + REDCELLS_PATH + PATH_PARAM)
+	public Response deleteRedCells(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("RedCells", id), BLOODPART_PATH);
+	}
+
+	@DELETE
+	@Path(BLOODPART_PATH + THROMBOCITES_PATH + PATH_PARAM)
+	public Response deleteThrombocites(@PathParam(PARAM) int id)
+	{
+		return Handler.handle(() -> Controller.deleteBloodPart("Thrombocites", id), BLOODPART_PATH);
+	}
 
 //	@POST
 //	@Path(BLOODPART_PATH)
@@ -252,20 +275,39 @@ public class Endpoints {
     //</editor-fold>
 
 
+
+    //<editor-fold desc="Donator endpoints">
     @POST
-    @Path(PERSONNEL_PATH + LOGIN_PATH)
-    public static Response loginPatient(String messageRequestJson) {
-        return Handler.handle(() -> PersonnelHandlers.checkPersonnelLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
-                messageRequestJson);
+    @Path(CREATE_DONATORS_PATH)
+    public Response getDonator(String messageRequestJson){
+        return Handler.handle(() -> UserHandlers.createDonator(messageRequestJson),CREATE_DONATORS_PATH,messageRequestJson);
     }
+  
+	@POST
+	@Path(REQUEST_AVAILABLE_BLOOD_PATH)
+	public Response getAllAvailabeBloodForRequest(String messageRequestJson)
+	{
+		return Handler.handle(() -> RequestsHandlers.getAllAvailableBloodForRequest(messageRequestJson), REQUEST_AVAILABLE_BLOOD_PATH,
+				messageRequestJson);
+	}
 
 
-    @POST
-    @Path(DONATORS_PATH + LOGIN_PATH)
-    public static Response loginUser(String messageRequestJson) {
-        return Handler.handle(() -> UserHandlers.checkDonatorLogin(messageRequestJson), PERSONNEL_PATH + LOGIN_PATH,
-                messageRequestJson);
-    }
+	@POST
+	@Path(USE_BLOOD_PATH)
+	public Response useBlood(String useBloodRequestJson)
+	{
+		return Handler.handle(() -> RequestsHandlers.useBlood(useBloodRequestJson), USE_BLOOD_PATH,
+				useBloodRequestJson);
+	}
 
 
+	@POST
+	@Path(DONATIONS_PATH + CNP_PATH)
+	public Response getAllDonationsByCnp(String messageRequestJson)
+	{
+		return Handler.handle(() -> DonationHandlers.getAllDonationsByCnp(messageRequestJson), DONATIONS_PATH + CNP_PATH,
+				messageRequestJson);
+	}
+
+    //</editor-fold>
 }

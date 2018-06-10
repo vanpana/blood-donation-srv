@@ -81,3 +81,4 @@ public class RequestAdapter implements Adapter<Request> {
         return requests.stream();
     }
 }
+

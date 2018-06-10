@@ -21,6 +21,10 @@ public class Plasma extends BloodPart {
 		super(_idblood, _exp);
 	}
 
+	public Plasma(Integer _idblood, Date _exp, Float _quantity) {
+		super(_idblood, _exp, _quantity);
+	}
+
 	@Override
 	public Date getExpirationDate()
 	{
