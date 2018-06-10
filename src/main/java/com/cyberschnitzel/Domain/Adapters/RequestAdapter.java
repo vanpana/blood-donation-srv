@@ -64,6 +64,7 @@ public class RequestAdapter implements Adapter<Request> {
         preparedStatement.setString(3, entity.getBloodPartType());
 
 
+
         return preparedStatement;
     }
 

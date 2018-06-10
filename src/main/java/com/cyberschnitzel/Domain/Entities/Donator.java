@@ -4,18 +4,36 @@ public class Donator extends CredentialsEntity {
     private String cnp;
     private String name;
     private BloodType bloodtype;
+    private String location;
 
     public Donator() {}
-    public Donator(String cnp, String email, String name) {
+
+    public void setBloodtype(BloodType bloodtype) {
+        this.bloodtype = bloodtype;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
+
+    public Donator(String cnp, String email, String name, String location) {
         super(email);
         this.cnp = cnp;
         this.name = name;
+        this.location = location;
     }
 
-    public Donator(String email, String password, String token, String cnp, String name) {
+    public Donator(String email, String password, String token, String cnp, String name, String location) {
         super(email, password, token);
         this.cnp = cnp;
         this.name = name;
+        this.location = location;
     }
 
     public Donator setBloodType(String bloodType) {

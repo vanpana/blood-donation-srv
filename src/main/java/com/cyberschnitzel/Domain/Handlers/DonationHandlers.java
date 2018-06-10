@@ -71,26 +71,26 @@ public class DonationHandlers {
         }
     }
 
-	public static Donation updateDonationStatus(String input) throws HandlingException {
-		try {
-			// Try to construct the update donation request
-			UpdateDonationStatusRequest updateDonationRequest = new Gson().fromJson(input, UpdateDonationStatusRequest.class);
+    public static Donation updateDonationStatus(String input) throws HandlingException {
+        try {
+            // Try to construct the update donation request
+            UpdateDonationStatusRequest updateDonationRequest = new Gson().fromJson(input, UpdateDonationStatusRequest.class);
 
-			// Validate input and get donor
-			InputValidator.validatePersonnelInput(updateDonationRequest);
+            // Validate input and get donor
+            InputValidator.validatePersonnelInput(updateDonationRequest);
 
-			// Try to update the donation
-			Donation don = Controller.getDonationByID(updateDonationRequest.getDonationID());
-			don.setStatus(Donation.DonationStatus.getByStatusID(updateDonationRequest.getStatusID()));
-			Controller.updateDonation(don.getId(), don.getCnp(),
-					don.getQuantity(), updateDonationRequest.getStatusID(), don.getBloodID());
+            // Try to update the donation
+            Donation don = Controller.getDonationByID(updateDonationRequest.getDonationID());
+            don.setStatus(Donation.DonationStatus.getByStatusID(updateDonationRequest.getStatusID()));
+            Controller.updateDonation(don.getId(), don.getCnp(),
+                    don.getQuantity(), updateDonationRequest.getStatusID(), don.getBloodID());
 
-			// Try to return the donation by the id it was updated
-			return Controller.getDonationByID(updateDonationRequest.getDonationID());
-		} catch (Exception ex) {
-			throw new HandlingException("Failed to handle update donation: " + ex.getMessage());
-		}
-	}
+            // Try to return the donation by the id it was updated
+            return Controller.getDonationByID(updateDonationRequest.getDonationID());
+        } catch (Exception ex) {
+            throw new HandlingException("Failed to handle update donation: " + ex.getMessage());
+        }
+    }
 
 
     /**
@@ -122,117 +122,112 @@ public class DonationHandlers {
     }
 
     public static List<DonationsResponse> getAllDonations(String input) throws HandlingException {
-		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+        MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 
-		// Validate input
-		InputValidator.validatePersonnelInput(messageRequest);
+        // Validate input
+        InputValidator.validatePersonnelInput(messageRequest);
 
-		List<DonationsResponse> donationsResponses = new ArrayList<>();
-		List<Donation> lst = Controller.getAllDonations();
+        List<DonationsResponse> donationsResponses = new ArrayList<>();
+        List<Donation> lst = Controller.getAllDonations();
 
-		for(Donation don : lst){
-			Donator donator = Controller.getDonatorByCnp(don.getCnp());
-			if(donator == null)
-				continue;
-			Blood blood = Controller.getBloodByID(don.getBloodID());
-			if(blood == null)
-				continue;
-			Location location = Controller.getLocationById(don.getLocationid());
-			if(location == null)
-				location = new Location("dummy",0,0,0);
-			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
-			donationsResponses.add(donationsResponse);
-		}
-		return donationsResponses;
+        for (Donation don : lst) {
+            Donator donator = Controller.getDonatorByCnp(don.getCnp());
+            if (donator == null)
+                continue;
+            Blood blood = Controller.getBloodByID(don.getBloodID());
+            if (blood == null)
+                continue;
+            Location location = Controller.getLocationById(don.getLocationid());
+            if (location == null)
+                location = new Location("dummy", 0, 0, 0);
+            DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
+            donationsResponses.add(donationsResponse);
+        }
+        return donationsResponses;
 
-	}
+    }
 
-	public static List<DonationsResponse> getAllDonationsByCnp(String input) throws HandlingException {
-		MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+    public static List<DonationsResponse> getAllDonationsByCnp(String input) throws HandlingException {
+        MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
 
-		// Validate input
-		InputValidator.validateDonatorInput(messageRequest);
+        // Validate input
+        InputValidator.validateDonatorInput(messageRequest);
 
-		//String cnp = messageRequest.getMessage();
-		List<DonationsResponse> donationsResponses = new ArrayList<>();
-		List<Donation> lst = Controller.getAllDonations();
+        //String cnp = messageRequest.getMessage();
+        List<DonationsResponse> donationsResponses = new ArrayList<>();
+        List<Donation> lst = Controller.getAllDonations();
 
-		for(Donation don : lst){
-			Donator donator = Controller.getDonatorByCnp(don.getCnp());
-			if(donator == null)
-				continue;
-			Blood blood = Controller.getBloodByID(don.getBloodID());
-			if(blood == null)
-				continue;
-			Location location = Controller.getLocationById(don.getLocationid());
-			if(location == null)
-				location = new Location("dummy",0,0,0);
-			DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
-			donationsResponses.add(donationsResponse);
-		}
+        for (Donation don : lst) {
+            Donator donator = Controller.getDonatorByCnp(don.getCnp());
+            if (donator == null)
+                continue;
+            Blood blood = Controller.getBloodByID(don.getBloodID());
+            if (blood == null)
+                continue;
+            Location location = Controller.getLocationById(don.getLocationid());
+            if (location == null)
+                location = new Location("dummy", 0, 0, 0);
+            DonationsResponse donationsResponse = new DonationsResponse(don.getId(), donator.getCnp(), don.getQuantity(), don.getStatus(), blood.getBloodType(), donator.getName(), new SimpleDateFormat("dd-MM-yyyy").format(blood.getReceivedDate()), location.getName());
+            donationsResponses.add(donationsResponse);
+        }
 
-		return donationsResponses;
+        return donationsResponses;
 
-	}
-
-
-	public static SuccessResponse receiveDonation(String input) throws HandlingException {
-		try {
-			// Try to construct the add donation request
-			ReceiveDonationRequest receiveDonationRequest = new Gson().fromJson(input, ReceiveDonationRequest.class);
-
-			// Validate input and get donor
-			InputValidator.validatePersonnelInput(receiveDonationRequest);
-
-			String cnp = receiveDonationRequest.getCnp();
-			String name = receiveDonationRequest.getName();
-			String bloodType = receiveDonationRequest.getBloodType();
-			Donator d = Controller.getDonatorByCnp(cnp);
-			Integer donatorId;
-
-			if(d == null){
-				d = new Donator(null,null,null,cnp,name);
-				d.setBloodType(bloodType);
-				donatorId = Controller.addDonator(cnp,null, name, bloodType, null, null);
-			}
-			else
-			{
-				donatorId = d.getId();
-			}
-
-			Integer totalBloodQty = receiveDonationRequest.getBloodQuantity() + receiveDonationRequest.getPlasmaQuantity() +
-					receiveDonationRequest.getRedCellsQuantity() + receiveDonationRequest.getThrombocitesQuantity();
+    }
 
 
-			Integer bloodId = Controller.addBlood(bloodType);
-			Blood blood = Controller.getBloodByID(bloodId);
-			Controller.addDonation(cnp,totalBloodQty,0,bloodId);
+    public static SuccessResponse receiveDonation(String input) throws HandlingException {
+        try {
+            // Try to construct the add donation request
+            ReceiveDonationRequest receiveDonationRequest = new Gson().fromJson(input, ReceiveDonationRequest.class);
 
-			Integer plasmaQty = receiveDonationRequest.getPlasmaQuantity();
-			Integer redCellsQty = receiveDonationRequest.getRedCellsQuantity();
-			Integer thrombocitesQty = receiveDonationRequest.getThrombocitesQuantity();
+            // Validate input and get donor
+            InputValidator.validatePersonnelInput(receiveDonationRequest);
 
-			if(plasmaQty > 0)
-			{
-				Controller.addBloodPart(Plasma.class, bloodId, blood.getReceivedDate(),plasmaQty.floatValue());
-			}
-			if(redCellsQty > 0)
-			{
-				Controller.addBloodPart(RedCells.class, bloodId, blood.getReceivedDate(), redCellsQty.floatValue());
-			}
-			if(thrombocitesQty > 0)
-			{
-				Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate(), thrombocitesQty.floatValue());
-			}
+            String cnp = receiveDonationRequest.getCnp();
+            String name = receiveDonationRequest.getName();
+            String bloodType = receiveDonationRequest.getBloodType();
+            Donator d = Controller.getDonatorByCnp(cnp);
+            Integer donatorId;
+
+            if (d == null) {
+                d = new Donator(null, null, null, cnp, name, "");
+                d.setBloodType(bloodType);
+                donatorId = Controller.addDonator(cnp, null, name, bloodType, null, null, "");
+            } else {
+                donatorId = d.getId();
+            }
+
+            Integer totalBloodQty = receiveDonationRequest.getBloodQuantity() + receiveDonationRequest.getPlasmaQuantity() +
+                    receiveDonationRequest.getRedCellsQuantity() + receiveDonationRequest.getThrombocitesQuantity();
 
 
-			System.out.println(receiveDonationRequest.toString());
+            Integer bloodId = Controller.addBlood(bloodType);
+            Blood blood = Controller.getBloodByID(bloodId);
+            Controller.addDonation(cnp, totalBloodQty, 0, bloodId);
 
-			return new SuccessResponse(true, "Donation succesfull");
-		} catch (Exception ex) {
-			throw new HandlingException("Failed to handle add donation: " + ex.getMessage());
-		}
-	}
+            Integer plasmaQty = receiveDonationRequest.getPlasmaQuantity();
+            Integer redCellsQty = receiveDonationRequest.getRedCellsQuantity();
+            Integer thrombocitesQty = receiveDonationRequest.getThrombocitesQuantity();
+
+            if (plasmaQty > 0) {
+                Controller.addBloodPart(Plasma.class, bloodId, blood.getReceivedDate(), plasmaQty.floatValue());
+            }
+            if (redCellsQty > 0) {
+                Controller.addBloodPart(RedCells.class, bloodId, blood.getReceivedDate(), redCellsQty.floatValue());
+            }
+            if (thrombocitesQty > 0) {
+                Controller.addBloodPart(Thrombocites.class, bloodId, blood.getReceivedDate(), thrombocitesQty.floatValue());
+            }
+
+
+            System.out.println(receiveDonationRequest.toString());
+
+            return new SuccessResponse(true, "Donation succesfull");
+        } catch (Exception ex) {
+            throw new HandlingException("Failed to handle add donation: " + ex.getMessage());
+        }
+    }
 
 
 }

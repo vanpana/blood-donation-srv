@@ -88,9 +88,10 @@ CREATE TABLE public."Donator"
   cnp       VARCHAR(13) NOT NULL UNIQUE,
   name      character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
-  email     character varying COLLATE pg_catalog."default",
-  password  character varying COLLATE pg_catalog."default",
-  token     character varying COLLATE pg_catalog."default",
+  email character varying COLLATE pg_catalog."default",
+  password character varying COLLATE pg_catalog."default",
+  token character varying COLLATE pg_catalog."default",
+  location varchar(50),
   CONSTRAINT "Donator_pkey" PRIMARY KEY (iddonator)
 );
 
@@ -226,7 +227,6 @@ VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
 
 INSERT INTO public."Doctor" (name , email , password , token)
 VALUES ('David', 'da@yahoo.com', 'da', '');
-
 
 INSERT INTO public."Request" (quantity , urgency , bloodPartType , bloodType , locationId, doctorId)
 VALUES (200, 1, 'Plasma', 'A', 1, 1),

@@ -54,9 +54,9 @@ public class Controller {
 	 * @return - the id of the added donator
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static int addDonator(String cnp, String email, String name) throws ControllerException {
+	public static int addDonator(String cnp, String email, String name, String location) throws ControllerException {
 		try {
-			Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name));
+			Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name, location));
 			return donatorOptional.map(Entity::getId).orElse(-1);
 		} catch (ValidatorException e) {
 			throw new ControllerException("Failed to add donator entity: " + e.getMessage());
@@ -75,10 +75,10 @@ public class Controller {
 	 * @return - the id of the added donator
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static int addDonator(String cnp, String email, String name, String bloodtype, String password, String token) throws ControllerException {
+	public static int addDonator(String cnp, String email, String name, String bloodtype, String password, String token, String location) throws ControllerException {
 		try {
 			Optional<Donator> donatorOptional = donatorRepository.save(
-					new Donator(cnp, email, name).setBloodType(bloodtype)
+					new Donator(cnp, email, name, location).setBloodType(bloodtype)
 							.setPassword(password)
 							.setToken(token));
 			return donatorOptional.map(Entity::getId).orElse(-1);
@@ -106,8 +106,8 @@ public class Controller {
 	 * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype) throws ControllerException {
-		Donator donator = new Donator(cnp, email, name).setBloodType(bloodtype);
+	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String location) throws ControllerException {
+		Donator donator = new Donator(cnp, email, name, location).setBloodType(bloodtype);
 		donator.setId(donatorID);
 		try {
 			donatorRepository.update(donator);
@@ -835,12 +835,24 @@ public class Controller {
 			}
 		}
 	}
-    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType, int doctorId) throws ControllerException {
+    public static int addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType, int doctorId) throws ControllerException {
         Request request = new Request(quantity,urgency,bloodType,location,bloodPartType, doctorId);
         try {
-            requestRepository.save(request);
+			Optional<Request> requestOptional = requestRepository.save(request);
+			return requestOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException(e.getMessage());
         }
     }
+
+    public static int getRequestStatus(int requestId){
+		Request r = requestRepository.findOne(requestId).get();
+		List<Used> useds = new ArrayList<>();
+		usedRepository.findAll().iterator().forEachRemaining(useds::add);
+		for(Used u : useds){
+			if (u.getRequestId().equals(r.getId()))
+				return 1;
+		}
+		return 0;
+	}
 }

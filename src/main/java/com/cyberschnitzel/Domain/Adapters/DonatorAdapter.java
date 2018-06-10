@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class DonatorAdapter implements Adapter<Donator> {
     @Override
     public PreparedStatement saveQuery(Donator entity) throws SQLException {
-        String query = "INSERT INTO \"Donator\" (cnp, name, bloodtype, email, password, token) VALUES (?, ?, ?, ?, ?, ?)" +
+        String query = "INSERT INTO \"Donator\" (cnp, name, bloodtype, email, password, token, location) VALUES (?, ?, ?, ?, ?, ?, ?)" +
                 " RETURNING iddonator";
         return buildPreparedStatement(connection.prepareStatement(query), entity);
     }
@@ -28,7 +28,7 @@ public class DonatorAdapter implements Adapter<Donator> {
 
     @Override
     public PreparedStatement updateQuery(Donator entity) throws SQLException {
-        String query = "UPDATE \"Donator\" SET cnp = ?, name = ?, bloodtype = ?, email = ?, password = ?, token = ? WHERE iddonator = ?";
+        String query = "UPDATE \"Donator\" SET cnp = ?, name = ?, bloodtype = ?, email = ?, password = ?, token = ?, location =? WHERE iddonator = ?";
         return buildPreparedStatement(connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS), entity);
     }
 
@@ -53,7 +53,7 @@ public class DonatorAdapter implements Adapter<Donator> {
             while (resultSet.next()) {
                 Donator donator = new Donator(resultSet.getString("cnp"),
                         resultSet.getString("email"),
-                        resultSet.getString("name"));
+                        resultSet.getString("name"),resultSet.getString("location"));
                 donator.setId(resultSet.getInt("iddonator"));
                 donator.setBloodType(resultSet.getString("bloodtype"))
                         .setPassword(resultSet.getString("password"))
@@ -75,8 +75,8 @@ public class DonatorAdapter implements Adapter<Donator> {
         preparedStatement.setString(4, entity.getEmail());
         preparedStatement.setString(5, entity.getPassword());
         preparedStatement.setString(6, entity.getToken());
-
-        if (entity.getId() != null) preparedStatement.setInt(7, entity.getId());
+        preparedStatement.setString(7, entity.getLocation());
+        if (entity.getId() != null) preparedStatement.setInt(8, entity.getId());
 
         return preparedStatement;
     }
