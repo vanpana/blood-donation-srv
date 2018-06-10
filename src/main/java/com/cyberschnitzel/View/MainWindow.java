@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.CredentialsEntity;
+import com.cyberschnitzel.Domain.Entities.Doctor;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Util.DatabaseUtil;
@@ -31,6 +32,7 @@ import java.awt.*;
 @Theme("mytheme")
 public class MainWindow extends UI {
     private static final boolean PRODUCTION_MODE = false;
+    private static int doctorID;
     private final VerticalLayout layout = new VerticalLayout();
 
     @Override
@@ -64,19 +66,22 @@ public class MainWindow extends UI {
 
     private String login(String email, String password) {
         try {
+            Controller.checkCredentialsNoToken(email, password, CredentialsEntity.EntityType.DOCTOR);
+            Doctor doctor = Controller.getDoctorByEmail(email);
 
-            Boolean res = Controller.checkCredentialsNoToken(email,password,CredentialsEntity.EntityType.DOCTOR);
+            if (doctor != null) {
+                doctorID = doctor.getId();
+            }
+
             ControlPanel view = new ControlPanel(this);
             setContent(view.getLayout());
             return "Successfully logged in";
-
         } catch (Exception e) {
             return e.getMessage();
         }
-//        return "Successfully logged in";
     }
 
-    public void goToMainView(){
+    public void goToMainView() {
         setContent(layout);
     }
 
