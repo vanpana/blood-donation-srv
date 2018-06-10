@@ -72,7 +72,7 @@ public class BloodPartAdapter implements Adapter<BloodPart> {
 			while (rs.next()) {
 				BloodPart blood = new BloodPart(rs.getInt("id" + tableName.toLowerCase()),
 												rs.getInt("idblood"),
-												rs.getDate("expirationdate"));
+												rs.getTimestamp("expirationdate"));
 
 				bloodList.add(blood);
 			}

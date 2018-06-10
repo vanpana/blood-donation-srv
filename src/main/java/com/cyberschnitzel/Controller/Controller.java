@@ -182,6 +182,7 @@ public class Controller {
         return null;
     }
 
+
     /**
      * Method that returns all the donators
      *
@@ -337,6 +338,19 @@ public class Controller {
     public static Donation getDonationByID(int donationID) {
         Optional<Donation> donationOptional = donationRepository.findOne(donationID);
         return donationOptional.orElse(null);
+    }
+
+    /**
+     * Method that returns a donation by cnp
+     *
+     * @param donatorCnp - cnp of the donator to be fetched
+     * @return Donation entity
+     */
+    public static Donation getDonationByCnp(String donatorCnp) {
+        for (Donation donation : getAllDonations()) {
+            if (donation.getCnp().equals(donatorCnp)) return donation;
+        }
+        return null;
     }
 
     /**
