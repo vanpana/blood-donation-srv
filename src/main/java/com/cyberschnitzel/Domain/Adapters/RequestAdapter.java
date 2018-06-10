@@ -59,6 +59,7 @@ public class RequestAdapter implements Adapter<Request> {
         preparedStatement.setFloat(1, entity.getQuantity());
         preparedStatement.setInt(2, entity.getUrgency());
         preparedStatement.setString(5, entity.getBloodType().name());
+        preparedStatement.setInt(6, entity.getDoctorId());
         preparedStatement.setInt(4, entity.getLocation());
         preparedStatement.setString(3, entity.getBloodPartType());
 

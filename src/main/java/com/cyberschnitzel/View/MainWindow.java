@@ -32,7 +32,7 @@ import java.awt.*;
 @Theme("mytheme")
 public class MainWindow extends UI {
     private static final boolean PRODUCTION_MODE = false;
-    private static int doctorID;
+    public static int doctorID;
     private final VerticalLayout layout = new VerticalLayout();
 
     @Override

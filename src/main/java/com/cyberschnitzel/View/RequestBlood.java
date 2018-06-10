@@ -93,7 +93,7 @@ public class RequestBlood {
 
                 throw new ControllerException("Wrong Blood part type");
             }
-            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartTypeChooser.getValue());
+            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartTypeChooser.getValue(), MainWindow.doctorID);
 
         } catch (Exception ignored) {
             return ignored.getMessage();
