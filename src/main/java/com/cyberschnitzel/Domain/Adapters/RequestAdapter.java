@@ -13,7 +13,7 @@ public class RequestAdapter implements Adapter<Request> {
 
     @Override
     public PreparedStatement saveQuery(Request entity) throws SQLException {
-        String query = "INSERT INTO \"Request\" (quantity, urgency, bloodparttype, locationid, bloodtype) VALUES (?, ?, ?, ?, ?)" +
+        String query = "INSERT INTO \"Request\" (quantity, urgency, bloodparttype, locationid, bloodtype, doctorid) VALUES (?, ?, ?, ?, ?, ?)" +
                 " RETURNING idrequest";
 
         return buildPreparedStatement(connection.prepareStatement(query),entity);
@@ -29,14 +29,15 @@ public class RequestAdapter implements Adapter<Request> {
 
     @Override
     public PreparedStatement updateQuery(Request entity) throws SQLException {
-        String query = "UPDATE \"Request\" SET quantity = ?, urgency= ?, bloodparttype= ?, locationid= ?, bloodtype= ? WHERE idrequest = ?";
+        String query = "UPDATE \"Request\" SET quantity = ?, urgency= ?, bloodparttype= ?, locationid= ?, bloodtype= ?, doctorid=? WHERE idrequest = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setFloat(1, entity.getQuantity());
         preparedStatement.setInt(2, entity.getUrgency());
         preparedStatement.setString(3, entity.getBloodPartType());
         preparedStatement.setInt(4, entity.getLocation());
         preparedStatement.setString(5, entity.getBloodType().name());
-        preparedStatement.setInt(6,entity.getId());
+        preparedStatement.setInt(6,entity.getDoctorId());
+        preparedStatement.setInt(7, entity.getId());
         return preparedStatement;
     }
 
@@ -61,6 +62,7 @@ public class RequestAdapter implements Adapter<Request> {
         preparedStatement.setInt(4, entity.getLocation());
         preparedStatement.setString(3, entity.getBloodPartType());
 
+
         return preparedStatement;
     }
 
@@ -71,7 +73,7 @@ public class RequestAdapter implements Adapter<Request> {
             while (resultSet.next()) {
                 Request request = new Request(resultSet.getFloat("quantity"),
                         resultSet.getInt("urgency"), BloodType.getByString(resultSet.getString("bloodType")),
-                        resultSet.getInt("locationId"),resultSet.getString("bloodPartType"));
+                        resultSet.getInt("locationId"),resultSet.getString("bloodPartType"), resultSet.getInt("doctorId"));
                 request.setId(resultSet.getInt("idrequest"));
                 requests.add(request);
             }
