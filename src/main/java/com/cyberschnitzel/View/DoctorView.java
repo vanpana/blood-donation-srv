@@ -92,6 +92,7 @@ public class DoctorView {
             }
             int requestID = Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartType.getValue(), 1);
 
+            // TODO: notify available users
         } catch (Exception ignored){
             return ignored.getMessage();
         }

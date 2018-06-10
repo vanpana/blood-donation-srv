@@ -88,10 +88,10 @@ CREATE TABLE public."Donator"
   cnp       VARCHAR(13) NOT NULL UNIQUE,
   name      character varying COLLATE pg_catalog."default",
   bloodtype character varying COLLATE pg_catalog."default",
-  email character varying COLLATE pg_catalog."default",
-  password character varying COLLATE pg_catalog."default",
-  token character varying COLLATE pg_catalog."default",
-  location varchar(50),
+  email     character varying COLLATE pg_catalog."default",
+  password  character varying COLLATE pg_catalog."default",
+  token     character varying COLLATE pg_catalog."default",
+  location  varchar(50),
   CONSTRAINT "Donator_pkey" PRIMARY KEY (iddonator)
 );
 
@@ -182,6 +182,7 @@ CREATE TABLE public."Used"
   patientid     INTEGER,
   quantity      real,
   bloodPartType VARCHAR(50),
+  requestid     INTEGER,
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
   REFERENCES public."Donation" (iddonation) MATCH SIMPLE
@@ -189,6 +190,10 @@ CREATE TABLE public."Used"
   ON DELETE CASCADE,
   CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (patientid)
   REFERENCES public."Patient" (id) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE CASCADE,
+  CONSTRAINT "Used_requestid_fkey" FOREIGN KEY (requestid)
+  REFERENCES public."Request" (idrequest) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
 );
@@ -228,7 +233,7 @@ VALUES (1, 'Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
 INSERT INTO public."Doctor" (name , email , password , token)
 VALUES ('David', 'da@yahoo.com', 'da', '');
 
-INSERT INTO public."Request" (quantity , urgency , bloodPartType , bloodType , locationId, doctorId)
+INSERT INTO public."Request" (quantity , urgency , bloodPartType , bloodType , locationId , doctorId)
 VALUES (200, 1, 'Plasma', 'A', 1, 1),
        (400, 2, 'Blood', 'A', 1, 1),
        (200, 1, 'Thrombocites', 'A', 1, 1),
@@ -259,5 +264,5 @@ VALUES ('2970106123456', 800, 3, 2),
        ('1991211125877', 750, 1, 3);
 
 
-INSERT INTO public."Used" (iddonation , patientid , quantity)
-VALUES (1, 1, 200);
+INSERT INTO public."Used" (iddonation , patientid , quantity , requestid)
+VALUES (1, 1, 200, 1);

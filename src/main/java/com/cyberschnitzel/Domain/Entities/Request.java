@@ -7,6 +7,7 @@ public class Request extends Entity {
     private int locationId;
     private BloodType bloodType;
     private int doctorId;
+    private int status;
 
     public int getLocationId() {
         return locationId;
@@ -76,6 +77,15 @@ public class Request extends Entity {
 
     public void setLocation(int location) {
         this.locationId = location;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public Request setStatus(int status) {
+        this.status = status;
+        return this;
     }
 
     @Override
