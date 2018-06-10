@@ -90,6 +90,7 @@ CREATE TABLE public."Donator"
   email character varying COLLATE pg_catalog."default",
   password character varying COLLATE pg_catalog."default",
   token character varying COLLATE pg_catalog."default",
+  location varchar(50),
   CONSTRAINT "Donator_pkey" PRIMARY KEY (iddonator)
 );
 

@@ -90,7 +90,7 @@ public class DoctorView {
 
                 throw new ControllerException("Wrong Blood part type");
             }
-            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartType.getValue());
+            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartType.getValue(), 1); //TOdo dummy here
 
         } catch (Exception ignored){
             return ignored.getMessage();

@@ -42,6 +42,7 @@ public class Endpoints {
 	private final static String CNP_PATH = "/cnp";
 	private final static String PATIENT_DONATIONS = "/donator/donations";
 
+
     // Path parameters regex
     private final static String PATH_PARAM = "/{param}";
     private final static String PARAM = "param";

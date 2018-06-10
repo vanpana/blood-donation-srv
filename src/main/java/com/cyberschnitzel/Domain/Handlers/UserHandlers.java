@@ -35,7 +35,7 @@ public class UserHandlers {
 
         try {
             return Controller.addDonator(userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(),
-                    userInfo.getBloodType(), messageRequest.getPassword(), "");
+                    userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation());
         } catch (ControllerException e) {
             throw new HandlingException(e.getMessage());
         }
