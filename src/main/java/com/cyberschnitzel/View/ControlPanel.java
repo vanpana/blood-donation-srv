@@ -1,7 +1,6 @@
 package com.cyberschnitzel.View;
 
 import com.vaadin.ui.Button;
-import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 
 
@@ -19,9 +18,9 @@ public class ControlPanel extends VerticalLayout {
         backButton = new Button("Go back");
         backButton.addClickListener(e->mainWindow.goToMainView());
         buttonDoctor = new Button("Add a request");
-        buttonDoctor.addClickListener(e-> mainWindow.setContent(new DoctorView(mainWindow,this).getLayout()));
+        buttonDoctor.addClickListener(e-> mainWindow.setContent(new RequestBlood(mainWindow,this).getLayout()));
         buttonPersonnel = new Button("Add personnel");
-        buttonPersonnel.addClickListener(e-> mainWindow.setContent(new PersonnelView(mainWindow, this).getVerticalLayout()));
+        buttonPersonnel.addClickListener(e-> mainWindow.setContent(new CreatePersonnel(mainWindow).getVerticalLayout()));
 
         layout.addComponent(buttonDoctor);
         layout.addComponent(buttonPersonnel);
