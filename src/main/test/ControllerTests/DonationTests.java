@@ -16,7 +16,7 @@ public class DonationTests {
 
     @Before
     public void setup() throws ControllerException {
-        donatorID = Controller.addDonator("1234567890", "example@email.com", "Test name");
+        donatorID = Controller.addDonator("1234567890", "example@email.com", "Test name", "Test location");
     }
 
     @After
