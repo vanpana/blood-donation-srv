@@ -9,6 +9,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class DoctorView {
     private List<Location> locations;
 
     DoctorView(MainWindow mainWindow, ControlPanel controlPanel) {
+
         this.mainWindow = mainWindow;
         this.controlPanel = controlPanel;
         label = new Label();
@@ -60,6 +62,8 @@ public class DoctorView {
         layout.addComponent(bloodPartType);
         layout.addComponent(label);
         layout.addComponent(l);
+
+
 
     }
 

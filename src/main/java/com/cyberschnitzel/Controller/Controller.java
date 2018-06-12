@@ -8,12 +8,18 @@ import com.cyberschnitzel.Domain.Transport.Responses.AvailableBloodResponse;
 import com.cyberschnitzel.Domain.Validators.*;
 import com.cyberschnitzel.Repository.DatabaseRepository;
 import com.cyberschnitzel.Repository.Repository;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Controller {
@@ -853,5 +859,109 @@ public class Controller {
 				return 1;
 		}
 		return 0;
+	}
+
+	public static float getDistanceOfDonator(Donator d, Location l) throws IOException {
+		String donatorLocation = d.getLocation().replace(' ', '+');
+		String reqLocation = l.getName().replace(' ', '+');
+
+
+
+		String s = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=%s&destinations=%s&api=AIzaSyCwyEutOf2tdHJ8Yq2jqQAnsFIxeLTs6os\n";
+		String url = String.format(s,donatorLocation, reqLocation);
+
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		// optional default is GET
+		con.setRequestMethod("GET");
+
+		//add request header
+		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+
+		BufferedReader in = new BufferedReader(
+				new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuilder response = new StringBuilder();
+
+		while ((inputLine = in.readLine()) != null) {
+			if(inputLine.contains("km")){
+				float res = 0;
+				res = Arrays.stream(inputLine.split("\"")).filter(x->x.contains("km")).map(x -> x.split(" ")[0]).limit(1).collect(Collectors.toList())[0]
+			}
+		}
+		in.close();
+
+		//print result
+		return response.toString();
+
+
+
+		return 0;
+
+	}
+
+//	public static String getDonatorLocationJson(String donatorLocation) throws IOException {
+//		String s = "http://maps.google.com/maps/api/geocode/json?address=%s?api=AIzaSyARTgFr3TcaHjsFOfBJGXz8U9Lprt3vReM";
+//		String url = String.format(s, donatorLocation);
+//
+//		URL obj = new URL(url);
+//		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//
+//		// optional default is GET
+//		con.setRequestMethod("GET");
+//
+//		//add request header
+//		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+//
+//
+//		BufferedReader in = new BufferedReader(
+//				new InputStreamReader(con.getInputStream()));
+//		String inputLine;
+//		StringBuilder response = new StringBuilder();
+//
+//		while ((inputLine = in.readLine()) != null) {
+//			response.append(inputLine);
+//		}
+//		in.close();
+//
+//		//print result
+//		return response.toString();
+//	}
+
+	public static List<Integer> getDonatorsForNotify(int requestId){
+		Request r = requestRepository.findOne(requestId).orElse(null);
+		if(r == null){
+			return new ArrayList<>();
+		}
+		Location l = locationRepository.findOne(r.getLocationId()).orElse(null);
+
+		List<Donator> donators = new ArrayList<>();
+		donatorRepository.findAll().iterator().forEachRemaining(donators::add);
+		Map<Donator, Float> results = new HashMap<>();
+
+
+		try {
+			System.out.println(getDonatorLocationJson("Cluj"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		donators.stream().filter( d -> d.getBloodtype() == r.getBloodType()).forEach(d -> {
+			try {
+				results.put(d, getDistanceOfDonator(d, l));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+
+		Map<Donator, Float> orderedResults = new HashMap<>();
+		results.entrySet().stream().sorted(Map.Entry.comparingByValue()).limit(10).forEachOrdered(x -> orderedResults.put(x.getKey(), x.getValue()));
+
+		return orderedResults.keySet().stream().map(Entity::getId).collect(Collectors.toList());
+
+
+
+
 	}
 }

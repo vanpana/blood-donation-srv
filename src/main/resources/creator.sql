@@ -164,6 +164,7 @@ CREATE TABLE public."Used"
 (
   idused serial NOT NULL,
   iddonation integer NOT NULL,
+  requestId int,
   patientid INTEGER,
   quantity real,
   bloodPartType VARCHAR(50),
@@ -174,6 +175,10 @@ CREATE TABLE public."Used"
   ON DELETE CASCADE,
   CONSTRAINT "Used_patientcnp_fkey" FOREIGN KEY (patientid)
   REFERENCES public."Patient" (id) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE CASCADE,
+  CONSTRAINT "Used_requestId_fkey" FOREIGN KEY (requestId)
+  REFERENCES public."Request" (requestId) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
 );
