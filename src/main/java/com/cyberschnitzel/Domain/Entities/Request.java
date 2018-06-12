@@ -6,25 +6,37 @@ public class Request extends Entity {
     private String bloodPartType;
     private int locationId;
     private BloodType bloodType;
+    private int doctorId;
+    private int status;
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
 
     public Request() {
     }
 
-    public Request(float quantity, int urgency, BloodType bloodType, int locationId, String bloodPartType, Integer id) {
-        this.setId(id);
-        this.quantity = quantity;
-        this.urgency = urgency;
-        this.bloodType = bloodType;
-        this.locationId = locationId;
-        this.bloodPartType = bloodPartType;
-    }
 
-    public Request(float quantity, int urgency, BloodType bloodType, int locationId, String bloodPartType) {
+
+    public Request(float quantity, int urgency, BloodType bloodType, int locationId, String bloodPartType, int doctorId) {
         this.quantity = quantity;
         this.urgency = urgency;
         this.bloodPartType = bloodPartType;
         this.bloodType = bloodType;
         this.locationId = locationId;
+        this.doctorId = doctorId;
     }
 
     public String getBloodPartType() {
@@ -67,14 +79,24 @@ public class Request extends Entity {
         this.locationId = location;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public Request setStatus(int status) {
+        this.status = status;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Request{" +
                 "quantity=" + quantity +
                 ", urgency=" + urgency +
                 ", bloodPartType='" + bloodPartType + '\'' +
-                ", bloodType=" + bloodType +
                 ", locationId=" + locationId +
+                ", bloodType=" + bloodType +
+                ", doctorId=" + doctorId +
                 '}';
     }
 }

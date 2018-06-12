@@ -4,29 +4,23 @@ import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
 import com.vaadin.ui.*;
 
-public class PersonnelView extends VerticalLayout {
-    private MainWindow mainWindow;
-    private ControlPanel controlPanel;
+public class CreatePersonnel extends VerticalLayout {
     private TextField name;
     private TextField email;
-    private Button addButton;
     private Label label;
     private final VerticalLayout verticalLayout = new VerticalLayout();
-    private Button backButton;
 
-    PersonnelView(MainWindow mainWindow, ControlPanel controlPanel) {
-        this.mainWindow = mainWindow;
-        this.controlPanel = controlPanel;
+    CreatePersonnel(MainWindow mainWindow) {
         mainWindow.getPage().setTitle("Personnel");
 
         name = new TextField("Name:");
         email = new TextField("E-mail:");
         label = new Label();
 
-        addButton = new Button("Add personnel");
-        addButton.addClickListener(e-> label.setValue(createPersonnel()));
-        backButton = new Button("Go back");
-        backButton.addClickListener(e->mainWindow.setContent(controlPanel.getLayout()));
+        Button addButton = new Button("Add personnel");
+        addButton.addClickListener(e -> label.setValue(createPersonnel()));
+        Button backButton = new Button("Go back");
+        backButton.addClickListener(e -> mainWindow.setContent(new ControlPanel(mainWindow)));
 
         Layout l = new HorizontalLayout();
         l.addComponent(addButton);
@@ -36,14 +30,14 @@ public class PersonnelView extends VerticalLayout {
         verticalLayout.addComponent(l);
     }
 
-    private String createPersonnel(){
-        try{
-            if(name.getValue().equals(""))
+    private String createPersonnel() {
+        try {
+            if (name.getValue().equals(""))
                 throw new ControllerException("Empty name");
-            if(email.getValue().equals(""))
+            if (email.getValue().equals(""))
                 throw new ControllerException("Empty email");
             Controller.addPersonnel(name.getValue(), email.getValue());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return ex.getMessage();
         }
         return "Personnel added successfully";

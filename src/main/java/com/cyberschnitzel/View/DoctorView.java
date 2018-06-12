@@ -9,6 +9,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class DoctorView {
     private List<Location> locations;
 
     DoctorView(MainWindow mainWindow, ControlPanel controlPanel) {
+
         this.mainWindow = mainWindow;
         this.controlPanel = controlPanel;
         label = new Label();
@@ -61,6 +63,8 @@ public class DoctorView {
         layout.addComponent(label);
         layout.addComponent(l);
 
+
+
     }
 
     private String addRequest(){
@@ -90,8 +94,9 @@ public class DoctorView {
 
                 throw new ControllerException("Wrong Blood part type");
             }
-            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartType.getValue());
+            int requestID = Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartType.getValue(), 1);
 
+            // TODO: notify available users
         } catch (Exception ignored){
             return ignored.getMessage();
         }
