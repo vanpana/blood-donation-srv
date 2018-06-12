@@ -54,9 +54,9 @@ public class Controller {
 	 * @return - the id of the added donator
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static int addDonator(String cnp, String email, String name, String location) throws ControllerException {
+	public static int addDonator(String cnp, String email, String name, String location, String firebase_token) throws ControllerException {
 		try {
-			Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name, location));
+			Optional<Donator> donatorOptional = donatorRepository.save(new Donator(cnp, email, name, location, firebase_token));
 			return donatorOptional.map(Entity::getId).orElse(-1);
 		} catch (ValidatorException e) {
 			throw new ControllerException("Failed to add donator entity: " + e.getMessage());
@@ -75,10 +75,10 @@ public class Controller {
 	 * @return - the id of the added donator
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static int addDonator(String cnp, String email, String name, String bloodtype, String password, String token, String location) throws ControllerException {
+	public static int addDonator(String cnp, String email, String name, String bloodtype, String password, String token, String location, String firebase_token) throws ControllerException {
 		try {
 			Optional<Donator> donatorOptional = donatorRepository.save(
-					new Donator(cnp, email, name, location).setBloodType(bloodtype)
+					new Donator(cnp, email, name, location, firebase_token).setBloodType(bloodtype)
 							.setPassword(password)
 							.setToken(token));
 			return donatorOptional.map(Entity::getId).orElse(-1);
@@ -106,8 +106,8 @@ public class Controller {
 	 * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String location) throws ControllerException {
-		Donator donator = new Donator(cnp, email, name, location).setBloodType(bloodtype);
+	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String location, String firebase_token) throws ControllerException {
+		Donator donator = new Donator(cnp, email, name, location, firebase_token).setBloodType(bloodtype);
 		donator.setId(donatorID);
 		try {
 			donatorRepository.update(donator);

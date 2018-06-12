@@ -41,6 +41,7 @@ public class Endpoints {
 	private final static String USE_BLOOD_PATH = "/used";
 	private final static String CNP_PATH = "/cnp";
 	private final static String PATIENT_DONATIONS = "/donator/donations";
+	private final static String DONATOR_UPDATE = "/donator/update";
 
 
     // Path parameters regex
@@ -333,6 +334,16 @@ public class Endpoints {
 		return Handler.handle(() -> DonationHandlers.getAllDonationsByCnp(messageRequestJson), DONATIONS_PATH + CNP_PATH,
 				messageRequestJson);
 	}
+
+	@POST
+	@Path(DONATOR_UPDATE)
+	public Response updateDonator(String messageRequestJson)
+	{
+		return Handler.handle(() -> UserHandlers.updateDonator(messageRequestJson), DONATOR_UPDATE,
+				messageRequestJson);
+	}
+
+
 
     //</editor-fold>
 }

@@ -5,6 +5,7 @@ public class Donator extends CredentialsEntity {
     private String name;
     private BloodType bloodtype;
     private String location;
+    private String firebase_token;
 
     public Donator() {}
 
@@ -22,18 +23,32 @@ public class Donator extends CredentialsEntity {
 
 
 
-    public Donator(String cnp, String email, String name, String location) {
+    public Donator(String cnp, String email, String name, String location, String firebase_token) {
         super(email);
         this.cnp = cnp;
         this.name = name;
         this.location = location;
+        this.firebase_token = firebase_token;
     }
 
-    public Donator(String email, String password, String token, String cnp, String name, String location) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFirebase_token() {
+        return firebase_token;
+    }
+
+    public void setFirebase_token(String firebase_token) {
+        this.firebase_token = firebase_token;
+    }
+
+    public Donator(String email, String password, String token, String cnp, String name, String location, String firebase_token) {
         super(email, password, token);
         this.cnp = cnp;
         this.name = name;
         this.location = location;
+        this.firebase_token = firebase_token;
     }
 
     public Donator setBloodType(String bloodType) {
