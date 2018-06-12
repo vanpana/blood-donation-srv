@@ -778,6 +778,7 @@ public class Controller {
 	public static List<Request> getAllRequests() {
 		List<Request> requests = new ArrayList<>();
 		requestRepository.findAll().iterator().forEachRemaining(requests::add);
+		requests = requests.stream().map(request -> request.setStatus(Controller.getRequestStatus(request.getId()))).collect(Collectors.toList());
 		return requests;
 	}
 

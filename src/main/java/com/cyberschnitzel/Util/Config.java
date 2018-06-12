@@ -36,7 +36,7 @@ class Config {
      * @return File representing the properties file
      * @throws ConfigException if resource can't be fetched
      */
-    private static File getPropertiesFile() throws ConfigException {
+    public static File getPropertiesFile() throws ConfigException {
         try {
             mutex.acquire();
             if (propertiesFile == null) propertiesFile = getResourcesFile(PROPERTIES_FILENAME);
