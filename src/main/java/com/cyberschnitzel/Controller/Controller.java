@@ -15,6 +15,7 @@ import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -888,13 +889,14 @@ public class Controller {
 		while ((inputLine = in.readLine()) != null) {
 			if(inputLine.contains("km")){
 				float res = 0;
-				res = Arrays.stream(inputLine.split("\"")).filter(x->x.contains("km")).map(x -> x.split(" ")[0]).limit(1).collect(Collectors.toList())[0]
+				res = Float.parseFloat(Arrays.stream(inputLine.split("\"")).filter(x->x.contains("km")).map(x -> x.split(" ")[0]).limit(1).collect(Collectors.toList()).get(0));
+				return res;
 			}
 		}
 		in.close();
 
 		//print result
-		return response.toString();
+		return -1;
 
 
 
