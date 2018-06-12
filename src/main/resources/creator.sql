@@ -177,11 +177,10 @@ CREATE TABLE public."Patient"
 
 CREATE TABLE public."Used"
 (
-  idused serial NOT NULL,
-  iddonation integer NOT NULL,
-  requestId int,
-  patientid INTEGER,
-  quantity real,
+  idused        serial  NOT NULL,
+  iddonation    integer NOT NULL,
+  patientid     INTEGER,
+  quantity      real,
   bloodPartType VARCHAR(50),
   requestid     INTEGER,
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
@@ -217,7 +216,7 @@ VALUES ('2970107127098', 'Popa Anastasia'),
        ('1670126125816', 'Ilisei Victor');
 
 
-INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token, location)
+INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token , location)
 VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy', 'Cluj'),
        ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', 'Dunarii, Cluj'),
        ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', 'Bucharest'),
@@ -247,23 +246,23 @@ VALUES ('AB', '5.04.2018'),
        ('A', '24.03.2018');
 
 
-INSERT INTO public."RedCells" (idblood , expirationdate)
-VALUES (1, '10.04.2018');
+INSERT INTO public."RedCells" (idblood , expirationdate, quantity)
+VALUES (1, '10.04.2018', 100);
 
 
-INSERT INTO public."Plasma" (idblood , expirationdate)
-VALUES (1, '12.04.2018');
+INSERT INTO public."Plasma" (idblood , expirationdate, quantity)
+VALUES (1, '12.04.2018', 100);
 
 
-INSERT INTO public."Thrombocites" (expirationdate , idblood)
-VALUES ('8.04.2018', 1);
+INSERT INTO public."Thrombocites" (expirationdate , idblood, quantity)
+VALUES ('8.04.2018', 1, 100);
 
 
-INSERT INTO public."Donation" (cnp , quantity , status , idblood)
-VALUES ('2970106123456', 800, 3, 2),
-       ('2970421167567', 700, 2, 1),
-       ('1991211125877', 750, 1, 3);
+INSERT INTO public."Donation" (cnp , quantity , status , idblood , idlocation)
+VALUES ('2970106123456', 800, 3, 2, 1),
+       ('2970421167567', 700, 2, 1, 2),
+       ('1991211125877', 750, 1, 3, 3);
 
 
-INSERT INTO public."Used" (iddonation , patientid , quantity , requestid)
-VALUES (1, 1, 200, 1);
+INSERT INTO public."Used" (iddonation , patientid , quantity , requestid, bloodPartType)
+VALUES (1, 1, 200, 1, 'Plasma');
