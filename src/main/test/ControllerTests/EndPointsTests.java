@@ -21,9 +21,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class EndPointsTests {
 
     /**
-     ----Blood Tests---
+     * ----Blood Tests---
      */
-
 
 
     @Test
@@ -53,7 +52,7 @@ public class EndPointsTests {
             System.out.print(lastBloodDb.getBloodType());
 
             // Check if the last blood type equals to bloodType
-            if(!lastBloodDb.getBloodType().toString().equals(bloodType))fail("Blood type does not correspond!");
+            if (!lastBloodDb.getBloodType().toString().equals(bloodType)) fail("Blood type does not correspond!");
 
 
             try {
@@ -124,13 +123,12 @@ public class EndPointsTests {
     }
 
 
-
     /**
-     ----Donation Tests---
-    */
+     * ----Donation Tests---
+     */
 
     @Test
-    public void testGetDonations(){
+    public void testGetDonations() {
 
         final String personnelEmail = "popbianca@yahoo.com", bloodType = "AB";
         // Try to get personnel by email
@@ -140,10 +138,10 @@ public class EndPointsTests {
         if (personnel == null) fail("Personnel was null, no rights to get donations");
 
         // Build the messageRequest
-        MessageRequest messageRequest = new MessageRequest(personnel.getEmail(),personnel.getPassword(),personnel.getToken());
+        MessageRequest messageRequest = new MessageRequest(personnel.getEmail(), personnel.getPassword(), personnel.getToken());
 
         // Convert messageRequest into json
-        String messageRequestJson=new Gson().toJson(messageRequest);
+        String messageRequestJson = new Gson().toJson(messageRequest);
 
         // Get the response from the endpoint
         Response response = Endpoints.getDonations(messageRequestJson);
@@ -168,19 +166,19 @@ public class EndPointsTests {
 
     }
 
-     //Check if a donation is added
-     @Test
-     public void testAddDonation() {
+    //Check if a donation is added
+    @Test
+    public void testAddDonation() {
 
         final String personnelEmail = "popbianca@yahoo.com", bloodType = "AB";
-        final String donorEmail="bianca@yahooo.com";
-        double quantity=700;
+        final String donorEmail = "bianca@yahooo.com";
+        double quantity = 700;
 
         // Try to get personnel by email
         Personnel personnel = Controller.getPersonnelByEmail(personnelEmail);
 
         //Try to get donor by email from database
-        Donator donor= Controller.getDonatorByEmail(donorEmail);
+        Donator donor = Controller.getDonatorByEmail(donorEmail);
 
         // Fail if personnel was not found
         if (personnel == null) fail("Personnel was null");
@@ -188,9 +186,9 @@ public class EndPointsTests {
         // Fail if donor was not found
         if (donor == null) fail("donor was null");
 
-        AddDonationRequest addDonationRequest= new AddDonationRequest(personnel.getEmail(),personnel.getPassword(),personnel.getToken(),donor.getCnp(),quantity,donor.getId());
+        AddDonationRequest addDonationRequest = new AddDonationRequest(personnel.getEmail(), personnel.getPassword(), personnel.getToken(), donor.getCnp(), quantity, donor.getId());
 
-        String addDonationRequestJson= new Gson().toJson(addDonationRequest);
+        String addDonationRequestJson = new Gson().toJson(addDonationRequest);
         // Get the response from the endpoint
         Response response = Endpoints.addDonation(addDonationRequestJson);
 
@@ -275,25 +273,24 @@ public class EndPointsTests {
      */
 
 
-
     /**
      * Method which checks if an existing user can log in.
      */
 
     @Test
-    public void testLoginExistingUser(){
-        final String email= "david@yahooo.com";
+    public void testLoginExistingUser() {
+        final String email = "david@yahooo.com";
         //Try to take user from database by email
-        Donator donor=Controller.getDonatorByEmail(email);
+        Donator donor = Controller.getDonatorByEmail(email);
 
         //If the user is not in database, he/she can not log in
-        if (donor==null)fail("This user is not in database");
+        if (donor == null) fail("This user is not in database");
 
         //Build a message request with the donor properties
-        MessageRequest messageRequest=new MessageRequest(donor.getEmail(),donor.getPassword(),donor.getToken());
+        MessageRequest messageRequest = new MessageRequest(donor.getEmail(), donor.getPassword(), donor.getToken());
 
         //Convert message request into json
-        String messageRequestJson=new Gson().toJson(messageRequest);
+        String messageRequestJson = new Gson().toJson(messageRequest);
 
         // Get the response from the endpoint
         Response response = Endpoints.loginUser(messageRequestJson);
@@ -322,19 +319,21 @@ public class EndPointsTests {
      */
 
     @Test
-    public void testLoginUser(){
-        String cnp="1970921245045";
-        String email= "ionica@yahooo.com";
-        String name="Popescu Ionica";
+    public void testLoginUser() {
+        String cnp = "1970921245045";
+        String email = "ionica@yahooo.com";
+        String name = "Popescu Ionica";
+        String location = "My Street";
+        String firebaseToken = "123";
 
         //Creating a new donor
-        Donator donor=new Donator(cnp,email,name);
+        Donator donor = new Donator(cnp, email, name, location, firebaseToken);
 
         //Build a message request with the donor properties
-        MessageRequest messageRequest=new MessageRequest(donor.getEmail(),donor.getPassword(),donor.getToken());
+        MessageRequest messageRequest = new MessageRequest(donor.getEmail(), donor.getPassword(), donor.getToken());
 
         //Convert message request into json
-        String messageRequestJson=new Gson().toJson(messageRequest);
+        String messageRequestJson = new Gson().toJson(messageRequest);
 
         // Get the response from the endpoint
         Response response = Endpoints.loginUser(messageRequestJson);
@@ -358,19 +357,19 @@ public class EndPointsTests {
      */
 
     @Test
-    public void testLoginExistingPersonnel(){
-        final String email= "popbianca@yahoo.com";
+    public void testLoginExistingPersonnel() {
+        final String email = "popbianca@yahoo.com";
         //Try to take personnel from database by email
-        Personnel personnel=Controller.getPersonnelByEmail(email);
+        Personnel personnel = Controller.getPersonnelByEmail(email);
 
         //If the personnel is not in database, he/she can not log in
-        if (personnel==null)fail("This personnel is not in database");
+        if (personnel == null) fail("This personnel is not in database");
 
         //Build a message request with the personnel properties
-        MessageRequest messageRequest = new MessageRequest(personnel.getEmail(),personnel.getPassword(),personnel.getToken());
+        MessageRequest messageRequest = new MessageRequest(personnel.getEmail(), personnel.getPassword(), personnel.getToken());
 
         //Convert message request into json
-        String messageRequestJson=new Gson().toJson(messageRequest);
+        String messageRequestJson = new Gson().toJson(messageRequest);
 
         // Get the response from the endpoint
         Response response = Endpoints.loginPatient(messageRequestJson);
@@ -399,18 +398,18 @@ public class EndPointsTests {
      */
 
     @Test
-    public void testLoginPersonnel(){
-        String email= "ionica@yahooo.com";
-        String name="Popescu Ionica";
+    public void testLoginPersonnel() {
+        String email = "ionica@yahooo.com";
+        String name = "Popescu Ionica";
 
         //Creating a new personnel
-        Personnel personnel=new Personnel(email,name);
+        Personnel personnel = new Personnel(email, name);
 
         //Build a message request with the personnel properties
-        MessageRequest messageRequest=new MessageRequest(personnel.getEmail(),personnel.getPassword(),personnel.getToken());
+        MessageRequest messageRequest = new MessageRequest(personnel.getEmail(), personnel.getPassword(), personnel.getToken());
 
         //Convert message request into json
-        String messageRequestJson=new Gson().toJson(messageRequest);
+        String messageRequestJson = new Gson().toJson(messageRequest);
 
         // Get the response from the endpoint
         Response response = Endpoints.loginPatient(messageRequestJson);
@@ -430,9 +429,8 @@ public class EndPointsTests {
     }
 
 
-
     /**
-     ----Plasma tests---
+     * ----Plasma tests---
      */
 
 
@@ -462,7 +460,7 @@ public class EndPointsTests {
     }
 
     @Test
-    public void testGetAllRedCells(){
+    public void testGetAllRedCells() {
         //Get the response from the endpoint
         Response response = Endpoints.getAllRedCells();
 
@@ -487,7 +485,7 @@ public class EndPointsTests {
     }
 
     @Test
-    public void testAllThrombocites(){
+    public void testAllThrombocites() {
         //Get the response from the endpoint
         Response response = Endpoints.getAllThrombocites();
 
@@ -551,12 +549,12 @@ public class EndPointsTests {
 //    }
 
     @Test
-    public void testDeletePlasma(){
-        int id=1;
-        String part="Plasma";
-        int plasmasize=0;
+    public void testDeletePlasma() {
+        int id = 1;
+        String part = "Plasma";
+        int plasmasize = 0;
 
-        Response response=Endpoints.deletePlasma(id);
+        Response response = Endpoints.deletePlasma(id);
         if (response.getStatus() == 200) {
             // Build the success response
             SuccessResponse successResponse = new Gson().fromJson(response.getEntity().toString(), SuccessResponse.class);
@@ -572,45 +570,44 @@ public class EndPointsTests {
 //                fail("Invalid response body.");
 //            }
 
-            } else{
-                fail("Status should be 200.");
-            }
+        } else {
+            fail("Status should be 200.");
         }
+    }
 
     @Test
-    public void testDeleteRedCells(){
-        int id=1;
-        String part="RedCells";
+    public void testDeleteRedCells() {
+        int id = 1;
+        String part = "RedCells";
 
-        Response response=Endpoints.deleteRedCells(id);
+        Response response = Endpoints.deleteRedCells(id);
         if (response.getStatus() == 200) {
             // Build the success response
             SuccessResponse successResponse = new Gson().fromJson(response.getEntity().toString(), SuccessResponse.class);
 
             if (!successResponse.isSuccess()) fail("Deleting red cells did not succesed!");
 
-        } else{
+        } else {
             fail("Status should be 200.");
         }
     }
 
     @Test
-    public void testDeleteThrombocites(){
-        int id=1;
-        String part="Thrombocites";
+    public void testDeleteThrombocites() {
+        int id = 1;
+        String part = "Thrombocites";
 
-        Response response=Endpoints.deleteRedCells(id);
+        Response response = Endpoints.deleteRedCells(id);
         if (response.getStatus() == 200) {
             // Build the success response
             SuccessResponse successResponse = new Gson().fromJson(response.getEntity().toString(), SuccessResponse.class);
 
             if (!successResponse.isSuccess()) fail("Deleting thrombocites did not successed!");
 
-        } else{
+        } else {
             fail("Status should be 200.");
         }
     }
-
 
 
 }
