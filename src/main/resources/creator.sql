@@ -177,18 +177,11 @@ CREATE TABLE public."Patient"
 
 CREATE TABLE public."Used"
 (
-<<<<<<< HEAD
   idused serial NOT NULL,
   iddonation integer NOT NULL,
   requestId int,
   patientid INTEGER,
   quantity real,
-=======
-  idused        serial  NOT NULL,
-  iddonation    integer NOT NULL,
-  patientid     INTEGER,
-  quantity      real,
->>>>>>> cc36e7fcde3f19a83e8f9e7997e0429ea4b1b67c
   bloodPartType VARCHAR(50),
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
   CONSTRAINT "Used_iddonation_fkey" FOREIGN KEY (iddonation)
@@ -200,7 +193,7 @@ CREATE TABLE public."Used"
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
   CONSTRAINT "Used_requestId_fkey" FOREIGN KEY (requestId)
-  REFERENCES public."Request" (requestId) MATCH SIMPLE
+  REFERENCES public."Request" (idrequest) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
 );
