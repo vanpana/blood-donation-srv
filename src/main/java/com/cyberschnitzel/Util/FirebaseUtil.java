@@ -20,6 +20,8 @@ public class FirebaseUtil {
     public final static String RAFFLES_GR_ID = "raffles";
 
     public static boolean sendAsyncNotification(String destinationToken) {
+        if (destinationToken == null) return false;
+        
         if (!initialized) {
             initialized = initialise();
 
