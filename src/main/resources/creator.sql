@@ -247,12 +247,12 @@ VALUES ('AB', '5.04.2018'),
        ('A', '24.03.2018');
 
 
-INSERT INTO public."RedCells" (expirationdate, quantity)
-VALUES ('10.04.2018', 100);
+INSERT INTO public."RedCells" (idblood , expirationdate, quantity)
+VALUES (1, '10.04.2018', 100);
 
 
-INSERT INTO public."Plasma" (expirationdate, quantity)
-VALUES ('12.04.2018', 100);
+INSERT INTO public."Plasma" (idblood , expirationdate, quantity)
+VALUES (1, '12.04.2018', 100);
 
 
 INSERT INTO public."Thrombocites" (expirationdate , idblood, quantity)
@@ -265,5 +265,5 @@ VALUES ('2970106123456', 800, 3, 2, 1),
        ('1991211125877', 750, 1, 3, 3);
 
 
-INSERT INTO public."Used" (patientid , quantity , requestid, bloodPartType)
-VALUES (1, 200, 1, 'Plasma');
+INSERT INTO public."Used" (iddonation , patientid , quantity , requestid, bloodPartType)
+VALUES (1, 1, 200, 1, 'Plasma');
