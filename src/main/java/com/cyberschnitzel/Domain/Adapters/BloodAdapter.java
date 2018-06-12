@@ -61,7 +61,7 @@ public class BloodAdapter implements Adapter<Blood> {
         try {
             while (resultSet.next()) {
                 Blood blood = new Blood(resultSet.getString("bloodtype"));
-                blood.setReceivedDate(resultSet.getDate("receiveddate"));
+                blood.setReceivedDate(resultSet.getTimestamp("receiveddate"));
                 blood.setId(resultSet.getInt("idblood"));
                 bloodList.add(blood);
             }

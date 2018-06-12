@@ -640,7 +640,6 @@ public class Controller {
         CredentialsEntity credentialsEntity = getCredentialToBeValidated(entityType, email);
 
         // Hash the password and the token
-
 //		try {
 //			password = Hasher.encrypt(password);
 //		} catch (HashingException he) {

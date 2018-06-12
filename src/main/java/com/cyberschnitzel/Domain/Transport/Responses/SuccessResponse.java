@@ -17,7 +17,7 @@ public class SuccessResponse {
         this.success = success;
     }
 
-    public String isMessage() {
+    public String getMessage() {
         return message;
     }
 
