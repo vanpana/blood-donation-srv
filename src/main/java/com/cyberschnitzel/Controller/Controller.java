@@ -842,10 +842,11 @@ public class Controller {
 			}
 		}
 	}
-    public static void addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType, int doctorId) throws ControllerException {
+    public static int addRequest(float quantity, int urgency, BloodType bloodType, int location, String bloodPartType, int doctorId) throws ControllerException {
         Request request = new Request(quantity,urgency,bloodType,location,bloodPartType, doctorId);
         try {
-            requestRepository.save(request);
+			Optional<Request> requestOptional = requestRepository.save(request);
+			return requestOptional.map(Entity::getId).orElse(-1);
         } catch (ValidatorException e) {
             throw new ControllerException(e.getMessage());
         }
@@ -897,40 +898,7 @@ public class Controller {
 
 		//print result
 		return -1;
-
-
-
-		return 0;
-
 	}
-
-//	public static String getDonatorLocationJson(String donatorLocation) throws IOException {
-//		String s = "http://maps.google.com/maps/api/geocode/json?address=%s?api=AIzaSyARTgFr3TcaHjsFOfBJGXz8U9Lprt3vReM";
-//		String url = String.format(s, donatorLocation);
-//
-//		URL obj = new URL(url);
-//		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//
-//		// optional default is GET
-//		con.setRequestMethod("GET");
-//
-//		//add request header
-//		con.setRequestProperty("User-Agent", "Mozilla/5.0");
-//
-//
-//		BufferedReader in = new BufferedReader(
-//				new InputStreamReader(con.getInputStream()));
-//		String inputLine;
-//		StringBuilder response = new StringBuilder();
-//
-//		while ((inputLine = in.readLine()) != null) {
-//			response.append(inputLine);
-//		}
-//		in.close();
-//
-//		//print result
-//		return response.toString();
-//	}
 
 	public static List<Integer> getDonatorsForNotify(int requestId){
 		Request r = requestRepository.findOne(requestId).orElse(null);
@@ -944,11 +912,7 @@ public class Controller {
 		Map<Donator, Float> results = new HashMap<>();
 
 
-		try {
-			System.out.println(getDonatorLocationJson("Cluj"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 		donators.stream().filter( d -> d.getBloodtype() == r.getBloodType()).forEach(d -> {
 			try {
 				results.put(d, getDistanceOfDonator(d, l));
