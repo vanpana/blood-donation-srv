@@ -31,14 +31,30 @@ public class UserHandlers {
 
     public static int createDonator(String input) throws HandlingException {
         MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
-        UserInfo userInfo = new Gson().fromJson(messageRequest.getMessage(), UserInfo.class);
+        UserInfo userInfo = new Gson().fromJson(input, UserInfo.class);
 
         try {
             return Controller.addDonator(userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(),
-                    userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation());
+                    userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation(), userInfo.getFirebase_token());
         } catch (ControllerException e) {
             throw new HandlingException(e.getMessage());
         }
+    }
+
+    public static int updateDonator(String input) throws HandlingException {
+        MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
+        InputValidator.validateDonatorInput(messageRequest);
+
+        UserInfo userInfo = new Gson().fromJson(input, UserInfo.class);
+
+        Donator don = Controller.getDonatorByCnp(userInfo.getCNP());
+
+        try {
+            Controller.updateDonatorInformation(don.getId(),don.getCnp(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(), userInfo.getLocation(), userInfo.getFirebase_token());
+        } catch (ControllerException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static Donator getDonatorByCnp(String input) throws HandlingException {

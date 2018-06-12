@@ -5,15 +5,25 @@ public class UserInfo {
     private String name;
     private String bloodType;
     private String location;
+    private String firebase_token;
+
+    public String getFirebase_token() {
+        return firebase_token;
+    }
+
+    public void setFirebase_token(String firebase_token) {
+        this.firebase_token = firebase_token;
+    }
 
     public UserInfo() {
     }
 
-    public UserInfo(String CNP, String name, String bloodType, String location) {
+    public UserInfo(String CNP, String name, String bloodType, String location, String firebase_token) {
         this.CNP = CNP;
         this.name = name;
         this.bloodType = bloodType;
         this.location = location;
+        this.firebase_token = firebase_token;
     }
 
     public String getCNP() {

@@ -191,9 +191,9 @@ public class DonationHandlers {
             Integer donatorId;
 
             if (d == null) {
-                d = new Donator(null, null, null, cnp, name, "");
+                d = new Donator(null, null, null, cnp, name, "", "");
                 d.setBloodType(bloodType);
-                donatorId = Controller.addDonator(cnp, null, name, bloodType, null, null, "");
+                donatorId = Controller.addDonator(cnp, null, name, bloodType, null, null, "", "");
             } else {
                 donatorId = d.getId();
             }

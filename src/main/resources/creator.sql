@@ -91,6 +91,7 @@ CREATE TABLE public."Donator"
   email     character varying COLLATE pg_catalog."default",
   password  character varying COLLATE pg_catalog."default",
   token     character varying COLLATE pg_catalog."default",
+  firebase_token character varying COLLATE pg_catalog."default",
   location  varchar(50),
   CONSTRAINT "Donator_pkey" PRIMARY KEY (iddonator)
 );
@@ -215,14 +216,14 @@ VALUES ('2970107127098', 'Popa Anastasia'),
        ('2901211678123', 'Morar Irina'),
        ('1670126125816', 'Ilisei Victor');
 
+INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token, location, firebase_token)
+VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy','Cluj', '123'),
+       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', 'Dunarii, Cluj','123'),
+       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', 'Timisoara','123'),
+       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56', 'Timisoara', '123'),
+       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1', 'Cluj','123'),
+       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt', 'Cluj','123');
 
-INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token , location)
-VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy', 'Cluj'),
-       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', 'Dunarii, Cluj'),
-       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', 'Bucharest'),
-       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56', 'Floresti'),
-       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1', 'Piezisa, Cluj'),
-       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt', 'Dorobantilor, Cluj');
 
 
 INSERT INTO public."Personnel" (idpersonnel , name , email , password , token)
