@@ -20,6 +20,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 
 import java.awt.*;
+import java.io.IOException;
 
 
 /**
@@ -61,6 +62,8 @@ public class MainWindow extends UI {
         layout.setComponentAlignment(password, Alignment.MIDDLE_CENTER);
         layout.setComponentAlignment(button, Alignment.MIDDLE_CENTER);
         setContent(layout);
+     
+            System.out.println(Controller.getDonatorsForNotify(1));
 
     }
 

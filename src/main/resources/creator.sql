@@ -177,10 +177,11 @@ CREATE TABLE public."Patient"
 
 CREATE TABLE public."Used"
 (
-  idused        serial  NOT NULL,
-  iddonation    integer NOT NULL,
-  patientid     INTEGER,
-  quantity      real,
+  idused serial NOT NULL,
+  iddonation integer NOT NULL,
+  requestId int,
+  patientid INTEGER,
+  quantity real,
   bloodPartType VARCHAR(50),
   requestid     INTEGER,
   CONSTRAINT "Used_pkey" PRIMARY KEY (iddonation),
@@ -192,7 +193,7 @@ CREATE TABLE public."Used"
   REFERENCES public."Patient" (id) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
-  CONSTRAINT "Used_requestid_fkey" FOREIGN KEY (requestid)
+  CONSTRAINT "Used_requestId_fkey" FOREIGN KEY (requestId)
   REFERENCES public."Request" (idrequest) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
@@ -216,13 +217,13 @@ VALUES ('2970107127098', 'Popa Anastasia'),
        ('1670126125816', 'Ilisei Victor');
 
 
-INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token)
-VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy'),
-       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12'),
-       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA'),
-       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56'),
-       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1'),
-       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt');
+INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token, location)
+VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy', 'Cluj'),
+       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', 'Dunarii, Cluj'),
+       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', 'Bucharest'),
+       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56', 'Floresti'),
+       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1', 'Piezisa, Cluj'),
+       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt', 'Dorobantilor, Cluj');
 
 
 INSERT INTO public."Personnel" (idpersonnel , name , email , password , token)
