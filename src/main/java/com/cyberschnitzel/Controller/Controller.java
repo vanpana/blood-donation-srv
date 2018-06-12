@@ -690,17 +690,6 @@ public class Controller {
                 throw new ControllerException("Inexistent doctor with specified email");
             else throw new ControllerException("Inexistent user with specified email");
         }
-
-        // Check if the entity exists
-        if (credentialsEntity == null) {
-            if (entityType == CredentialsEntity.EntityType.DONATOR)
-                throw new ControllerException("Inexistent donor with specified email.");
-            else if (entityType == CredentialsEntity.EntityType.PERSONNEL)
-                throw new ControllerException("Inexistent personnel with specified email.");
-            else if (entityType == CredentialsEntity.EntityType.DOCTOR)
-                throw new ControllerException("Inexistent doctor with specified email");
-            else throw new ControllerException("Inexistent user with specified email");
-        }
         return credentialsEntity;
     }
 
@@ -716,8 +705,6 @@ public class Controller {
         locationRepository.findAll().iterator().forEachRemaining(locations::add);
         return locations;
     }
-    //<editor-fold desc = "Doctor methods">
-
     //<editor-fold desc = "Doctor methods">
 
 
