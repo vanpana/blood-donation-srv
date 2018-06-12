@@ -9,6 +9,8 @@ import com.cyberschnitzel.Domain.Transport.Requests.MessageRequest;
 import com.cyberschnitzel.Domain.Transport.Requests.UpdatePatientRequest;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 public class PatientHandlers {
     public static Patient addPatient(String input) throws HandlingException {
         try {
@@ -51,4 +53,6 @@ public class PatientHandlers {
             throw new HandlingException("Failed to handle delete Patient");
         }
     }
+
+
 }

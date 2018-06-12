@@ -193,7 +193,7 @@ CREATE TABLE public."Used"
   REFERENCES public."Patient" (id) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE,
-  CONSTRAINT "Used_requestid_fkey" FOREIGN KEY (requestid)
+  CONSTRAINT "Used_requestId_fkey" FOREIGN KEY (requestId)
   REFERENCES public."Request" (idrequest) MATCH SIMPLE
   ON UPDATE NO ACTION
   ON DELETE CASCADE
@@ -216,14 +216,14 @@ VALUES ('2970107127098', 'Popa Anastasia'),
        ('2901211678123', 'Morar Irina'),
        ('1670126125816', 'Ilisei Victor');
 
+INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token, location, firebase_token)
+VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy','Cluj', '123'),
+       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', 'Dunarii, Cluj','123'),
+       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', 'Timisoara','123'),
+       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56', 'Timisoara', '123'),
+       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1', 'Cluj','123'),
+       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt', 'Cluj','123');
 
-INSERT INTO public."Donator" (cnp , name , bloodtype , email , password , token, firebase_token)
-VALUES ('2970106123456', 'Prodan Bianca', '0', 'bianca@yahooo.com', 'bp1234', '123abMnOiy', '123'),
-       ('2970421167567', 'Pop Claudia', 'AB', 'claudia@yahooo.com', 'cp1234', 'aaTo945P12', '123'),
-       ('1961028125816', 'Opruta David', 'B', 'david@yahooo.com', 'od1234', 'lmnop874oA', '123'),
-       ('1661010128765', 'Panaite Dorinel', 'A', 'dorinel@yahooo.com', 'dp1234', '17Bopo0d56', '123'),
-       ('1991211125877', 'Paius Teodor', 'A', 'teodor@yahooo.com', 'tp1234', '9isD57Bls1', '123'),
-       ('1890106125899', 'Podariu Catalin', '0', 'catalin@yahooo.com', 'cp1234', 'bpm67C34nt', '123');
 
 
 INSERT INTO public."Personnel" (idpersonnel , name , email , password , token)
@@ -247,23 +247,23 @@ VALUES ('AB', '5.04.2018'),
        ('A', '24.03.2018');
 
 
-INSERT INTO public."RedCells" (idblood , expirationdate)
-VALUES (1, '10.04.2018');
+INSERT INTO public."RedCells" (idblood , expirationdate, quantity)
+VALUES (1, '10.04.2018', 100);
 
 
-INSERT INTO public."Plasma" (idblood , expirationdate)
-VALUES (1, '12.04.2018');
+INSERT INTO public."Plasma" (idblood , expirationdate, quantity)
+VALUES (1, '12.04.2018', 100);
 
 
-INSERT INTO public."Thrombocites" (expirationdate , idblood)
-VALUES ('8.04.2018', 1);
+INSERT INTO public."Thrombocites" (expirationdate , idblood, quantity)
+VALUES ('8.04.2018', 1, 100);
 
 
-INSERT INTO public."Donation" (cnp , quantity , status , idblood)
-VALUES ('2970106123456', 800, 3, 2),
-       ('2970421167567', 700, 2, 1),
-       ('1991211125877', 750, 1, 3);
+INSERT INTO public."Donation" (cnp , quantity , status , idblood , idlocation)
+VALUES ('2970106123456', 800, 3, 2, 1),
+       ('2970421167567', 700, 2, 1, 2),
+       ('1991211125877', 750, 1, 3, 3);
 
 
-INSERT INTO public."Used" (iddonation , patientid , quantity , requestid)
-VALUES (1, 1, 200, 1);
+INSERT INTO public."Used" (iddonation , patientid , quantity , requestid, bloodPartType)
+VALUES (1, 1, 200, 1, 'Plasma');

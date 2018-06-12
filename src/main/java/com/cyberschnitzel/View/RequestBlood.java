@@ -4,6 +4,7 @@ import com.cyberschnitzel.Controller.Controller;
 import com.cyberschnitzel.Domain.Entities.BloodType;
 import com.cyberschnitzel.Domain.Entities.Location;
 import com.cyberschnitzel.Domain.Exceptions.ControllerException;
+import com.cyberschnitzel.Util.FirebaseUtil;
 import com.vaadin.data.HasValue;
 import com.vaadin.data.provider.Query;
 import com.vaadin.server.Page;
@@ -93,8 +94,12 @@ public class RequestBlood {
 
                 throw new ControllerException("Wrong Blood part type");
             }
-            Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartTypeChooser.getValue(), MainWindow.doctorID);
+            int requestID = Controller.addRequest(q, urgencyInt, bloodTypeEnum, selectedID, bloodPartTypeChooser.getValue(), MainWindow.doctorID);
 
+            for (int userID : Controller.getDonatorsForNotify(requestID)) {
+                // TODO: Replace with firebase token
+                FirebaseUtil.sendAsyncNotification(Controller.getUsedById(userID).getFirebase_token());
+            }
         } catch (Exception ignored) {
             return ignored.getMessage();
         }
