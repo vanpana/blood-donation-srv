@@ -31,7 +31,7 @@ public class Endpoints {
     private final static String USE_BLOOD_PATH = "/used";
     private final static String CNP_PATH = "/cnp";
     private final static String PATIENT_DONATIONS = "/donator/donations";
-    private final static String DONATOR_UPDATE = "/donator/update";
+    private final static String DONATOR_UPDATE = "/donators/update";
 
 
     // Path parameters regex

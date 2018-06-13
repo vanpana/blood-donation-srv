@@ -17,9 +17,9 @@ public class ControlPanel extends VerticalLayout {
         Button buttonDoctor = new Button("Add a request");
         buttonDoctor.addClickListener(e-> mainWindow.setContent(new RequestBlood(mainWindow,this).getLayout()));
         Button buttonPersonnel = new Button("Add personnel");
-        buttonPersonnel.addClickListener(e-> mainWindow.setContent(new CreatePersonnel(mainWindow).getVerticalLayout()));
+        buttonPersonnel.addClickListener(e-> mainWindow.setContent(new CreatePersonnel(mainWindow,this).getVerticalLayout()));
         Button myRequests = new Button("See my requests");
-        myRequests.addClickListener(e-> mainWindow.setContent(new DoctorRequests(mainWindow)));
+        myRequests.addClickListener(e-> mainWindow.setContent(new DoctorRequests(mainWindow,this)));
 
         layout.addComponent(buttonDoctor);
         layout.addComponent(buttonPersonnel);

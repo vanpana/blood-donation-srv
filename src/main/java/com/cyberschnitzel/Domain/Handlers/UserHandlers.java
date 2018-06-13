@@ -40,7 +40,7 @@ public class UserHandlers {
                         userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation(), userInfo.getFirebase_token());
             if(d.getEmail().equals("@placeholder"))
             {
-                Controller.updateDonatorInformation(d.getId(), userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
+                Controller.updateDonatorInformation(d.getId(),messageRequest.getToken(), userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
                 return 0;
             }
 
@@ -55,12 +55,12 @@ public class UserHandlers {
         MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
         InputValidator.validateDonatorInput(messageRequest);
 
-        UserInfo userInfo = new Gson().fromJson(input, UserInfo.class);
+        UserInfo userInfo = new Gson().fromJson(messageRequest.getMessage(), UserInfo.class);
 
         Donator don = Controller.getDonatorByCnp(userInfo.getCNP());
 
         try {
-            Controller.updateDonatorInformation(don.getId(),don.getCnp(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
+            Controller.updateDonatorInformation(don.getId(),messageRequest.getToken(),don.getCnp(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
         } catch (ControllerException e) {
             e.printStackTrace();
         }

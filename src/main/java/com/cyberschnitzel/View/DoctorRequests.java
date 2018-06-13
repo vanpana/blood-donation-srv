@@ -6,12 +6,12 @@ import com.vaadin.ui.*;
 
 public class DoctorRequests extends VerticalLayout {
     private Grid<Request> requestGrid;
-
-    DoctorRequests(MainWindow mainWindow) {
+    private ControlPanel controlPanel;
+    DoctorRequests(MainWindow mainWindow, ControlPanel controlPanel) {
         mainWindow.getPage().setTitle("My requests");
-
+        this.controlPanel = controlPanel;
         Button backButton = new Button("Go back");
-        backButton.addClickListener(e -> mainWindow.setContent(new ControlPanel(mainWindow)));
+        backButton.addClickListener(e -> mainWindow.setContent(controlPanel.getLayout()));
 
         requestGrid = new Grid<>();
         requestGrid.setItems(Controller.getAllRequests().stream().filter(request -> request.getDoctorId() == MainWindow.doctorID));

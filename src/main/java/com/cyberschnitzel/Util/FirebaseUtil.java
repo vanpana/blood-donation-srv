@@ -36,8 +36,8 @@ public class FirebaseUtil {
         new Thread(() -> {
             String response = null;
             try {
-                response = FirebaseMessaging.getInstance().sendAsync(fireMessage).get(timeout, TimeUnit.SECONDS);
-            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                response = FirebaseMessaging.getInstance().sendAsync(fireMessage).get();
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
             System.out.println(response);
