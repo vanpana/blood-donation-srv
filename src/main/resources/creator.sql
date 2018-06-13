@@ -232,31 +232,50 @@ VALUES ('Pop Bianca', 'popbianca@yahoo.com', 'bp1234', '123abMnOiy'),
        ('Dragomir Irina', 'dirina@yahoo.com', 'tp1234', '9isD57Bls1');
 
 INSERT INTO public."Doctor" (name , email , password , token)
-VALUES ('David', 'da@yahoo.com', 'da', '');
+VALUES ('David', 'da@yahoo.com', 'da', ''),
+  ('Ion', 'ion@yahoo.com', 'ion', ''),
+  ('George', 'george@yahoo.com', 'george', '');
 
 INSERT INTO public."Request" (quantity , urgency , bloodPartType , bloodType , locationId , doctorId)
 VALUES (200, 1, 'Plasma', 'A', 1, 1),
        (400, 2, 'Blood', 'A', 1, 1),
-       (200, 1, 'Thrombocites', 'A', 1, 1),
-       (600, 3, 'Plasma', 'A', 1, 1);
+       (200, 1, 'Thrombocites', 'B', 1, 1),
+       (600, 3, 'Plasma', 'A', 1, 2),
+        (400, 1, 'Plasma', 'A', 1, 2),
+        (400, 2, 'Thrombocites', 'B', 1, 3);
 
 
 INSERT INTO public."Blood" (bloodtype , receiveddate)
 VALUES ('AB', '5.04.2018'),
        ('0', '23.04.2018'),
-       ('A', '24.03.2018');
+       ('A', '24.03.2018'),
+        ('0', '24.03.2018'),
+        ('0', '24.03.2018'),
+        ('A', '24.03.2018');
 
 
 INSERT INTO public."RedCells" (idblood , expirationdate, quantity)
-VALUES (1, '10.04.2018', 100);
+VALUES (1, '10.04.2018', 100),
+        (2, '10.04.2019', 200),
+        (2, '10.04.2019', 200),
+        (3, '10.04.2019', 200),
+        (3, '10.04.2019', 200);
 
 
 INSERT INTO public."Plasma" (idblood , expirationdate, quantity)
-VALUES (1, '12.04.2018', 100);
+VALUES (1, '10.04.2018', 100),
+  (2, '10.04.2019', 200),
+  (2, '10.04.2019', 200),
+  (3, '10.04.2019', 200),
+  (3, '10.04.2019', 200);
 
 
-INSERT INTO public."Thrombocites" (expirationdate , idblood, quantity)
-VALUES ('8.04.2018', 1, 100);
+INSERT INTO public."Thrombocites" ( idblood,expirationdate , quantity)
+VALUES (1, '10.04.2018', 100),
+  (2, '10.04.2019', 200),
+  (2, '10.04.2019', 200),
+  (3, '10.04.2019', 200),
+  (3, '10.04.2019', 200);
 
 
 INSERT INTO public."Donation" (cnp , quantity , status , idblood , idlocation)
