@@ -40,7 +40,7 @@ public class UserHandlers {
                         userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation(), userInfo.getFirebase_token());
             if(d.getEmail().equals("@placeholder"))
             {
-                Controller.updateDonatorInformation(d.getId(),messageRequest.getToken(), userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
+                Controller.updateDonatorInformation(d.getId(),"", userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
                 return 0;
             }
 
