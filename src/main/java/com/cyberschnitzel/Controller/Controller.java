@@ -113,9 +113,10 @@ public class Controller {
 	 * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String location, String firebase_token) throws ControllerException {
+	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String password, String location, String firebase_token) throws ControllerException {
 		Donator donator = new Donator(cnp, email, name, location, firebase_token).setBloodType(bloodtype);
 		donator.setId(donatorID);
+		donator.setPassword(password);
 		try {
 			donatorRepository.update(donator);
 		} catch (ValidatorException e) {

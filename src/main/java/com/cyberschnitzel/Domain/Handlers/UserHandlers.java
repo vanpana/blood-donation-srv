@@ -31,14 +31,24 @@ public class UserHandlers {
 
     public static int createDonator(String input) throws HandlingException {
         MessageRequest messageRequest = new Gson().fromJson(input, MessageRequest.class);
-        UserInfo userInfo = new Gson().fromJson(input, UserInfo.class);
+        UserInfo userInfo = new Gson().fromJson(messageRequest.getMessage(), UserInfo.class);
 
         try {
-            return Controller.addDonator(userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(),
-                    userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation(), userInfo.getFirebase_token());
+            Donator d = Controller.getDonatorByCnp(userInfo.getCNP());
+            if(d == null)
+                return Controller.addDonator(userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(),
+                        userInfo.getBloodType(), messageRequest.getPassword(), "", userInfo.getLocation(), userInfo.getFirebase_token());
+            if(d.getEmail().equals("@placeholder"))
+            {
+                Controller.updateDonatorInformation(d.getId(), userInfo.getCNP(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
+                return 0;
+            }
+
+
         } catch (ControllerException e) {
             throw new HandlingException(e.getMessage());
         }
+        return 1;
     }
 
     public static int updateDonator(String input) throws HandlingException {
@@ -50,7 +60,7 @@ public class UserHandlers {
         Donator don = Controller.getDonatorByCnp(userInfo.getCNP());
 
         try {
-            Controller.updateDonatorInformation(don.getId(),don.getCnp(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(), userInfo.getLocation(), userInfo.getFirebase_token());
+            Controller.updateDonatorInformation(don.getId(),don.getCnp(), messageRequest.getEmail(), userInfo.getName(), userInfo.getBloodType(),messageRequest.getPassword(), userInfo.getLocation(), userInfo.getFirebase_token());
         } catch (ControllerException e) {
             e.printStackTrace();
         }
