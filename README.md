@@ -1,7 +1,13 @@
 blood-donation
 ==============
 
-Server for Blood Donation app.
+Server for Blood Donation app developed during 4th semester
+It allows <b>Personnel</b> to manage donations (collect, test and accept/decline) and allocate blood bags for the requests.
+It allows <b>Donators</b> to create and account, check if they're suitable for donating and see all previous donations. When creating the account, if they've already donated, their CNP will be binded to the already existing donations.
+It allows <b>Doctors</b> to manage personnel, create and manage donation requests.
+
+Config
+======
 
 Config
 ======
@@ -14,3 +20,4 @@ script in the <b>db.creation_sql</b> key. Tests automatically recreate the datab
 (so make sure that's valid before testing!)
 
 For some reason, <b>db.creation</b> is shown as <b>true</b> after recreating the database, but its actual value is <b>false</b>.
+
