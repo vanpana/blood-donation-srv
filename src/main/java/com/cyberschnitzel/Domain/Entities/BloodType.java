@@ -8,6 +8,8 @@ public enum BloodType {
         switch (bloodtype) {
             case "ZERO":
                 return ZERO;
+            case "0":
+                return ZERO;
             case "A":
                 return A;
             case "B":

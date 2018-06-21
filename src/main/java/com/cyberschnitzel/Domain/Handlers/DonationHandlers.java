@@ -191,9 +191,9 @@ public class DonationHandlers {
             Integer donatorId;
 
             if (d == null) {
-                d = new Donator(null, null, null, cnp, name, "", "");
+                d = new Donator("@placeholder", "placehold", null, cnp, name, "", "");
                 d.setBloodType(bloodType);
-                donatorId = Controller.addDonator(cnp, null, name, bloodType, null, null, "", "");
+                donatorId = Controller.addDonator(cnp, "@placeholder", name, bloodType, "", null, "", "");
             } else {
                 donatorId = d.getId();
             }
@@ -221,7 +221,7 @@ public class DonationHandlers {
             }
 
 
-            System.out.println(receiveDonationRequest.toString());
+           // System.out.println(receiveDonationRequest.toString());
 
             return new SuccessResponse(true, "Donation succesfull");
         } catch (Exception ex) {

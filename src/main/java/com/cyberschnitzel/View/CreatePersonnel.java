@@ -9,10 +9,10 @@ public class CreatePersonnel extends VerticalLayout {
     private TextField email;
     private Label label;
     private final VerticalLayout verticalLayout = new VerticalLayout();
-
-    CreatePersonnel(MainWindow mainWindow) {
+    private ControlPanel controlPanel;
+    CreatePersonnel(MainWindow mainWindow,ControlPanel controlPanel) {
         mainWindow.getPage().setTitle("Personnel");
-
+        this.controlPanel=controlPanel;
         name = new TextField("Name:");
         email = new TextField("E-mail:");
         label = new Label();
@@ -20,7 +20,7 @@ public class CreatePersonnel extends VerticalLayout {
         Button addButton = new Button("Add personnel");
         addButton.addClickListener(e -> label.setValue(createPersonnel()));
         Button backButton = new Button("Go back");
-        backButton.addClickListener(e -> mainWindow.setContent(new ControlPanel(mainWindow)));
+        backButton.addClickListener(e -> mainWindow.setContent(controlPanel.getLayout()));
 
         Layout l = new HorizontalLayout();
         l.addComponent(addButton);

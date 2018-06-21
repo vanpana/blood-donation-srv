@@ -7,7 +7,6 @@ public class BloodPartResponse {
 	private Integer id;
 	private Integer idBlood;
 	private String expirationDate;
-	//bloodPartType, BloodType, receivedDate
 	private String bloodPartType;
 
 	public Float getQuantity() {
@@ -20,7 +19,6 @@ public class BloodPartResponse {
 
 	private BloodType bloodType;
 	private String receivedDate;
-	private String status;
 	private Float quantity;
 
 	public BloodPartResponse(BloodPart bloodPart, String bloodPartType, BloodType bloodType, String receivedDate, Float quantity) {

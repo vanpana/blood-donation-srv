@@ -99,7 +99,7 @@ public class RequestBlood {
             for (int userID : Controller.getDonatorsForNotify(requestID)) {
                 // TODO: Replace with firebase token
                 System.out.println(userID);
-//                FirebaseUtil.sendAsyncNotification(Controller.getDonatorByEmail(userID).getFirebase_token());
+                FirebaseUtil.sendAsyncNotification(Controller.getDonatorById(userID).getFirebase_token());
             }
         } catch (Exception ignored) {
             return ignored.getMessage();

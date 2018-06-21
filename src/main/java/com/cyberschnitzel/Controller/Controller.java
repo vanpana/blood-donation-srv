@@ -113,15 +113,18 @@ public class Controller {
 	 * @param bloodtype - the bloodtype of the donator (ZERO, A, B or AB)
 	 * @throws ControllerException if the add failed because the data can't be validated
 	 */
-	public static void updateDonatorInformation(int donatorID, String cnp, String email, String name, String bloodtype, String location, String firebase_token) throws ControllerException {
+	public static void updateDonatorInformation(int donatorID,String token, String cnp, String email, String name, String bloodtype, String password, String location, String firebase_token) throws ControllerException {
 		Donator donator = new Donator(cnp, email, name, location, firebase_token).setBloodType(bloodtype);
 		donator.setId(donatorID);
+		donator.setPassword(password);
+		donator.setToken(token);
 		try {
 			donatorRepository.update(donator);
 		} catch (ValidatorException e) {
 			throw new ControllerException("Failed to update full donator entity: " + e.getMessage());
 		}
 	}
+
 
 	/**
 	 * Method that updates the donator password
@@ -161,7 +164,7 @@ public class Controller {
 	 * @param donatorID - id of the donator to be fetched
 	 * @return Donator entity
 	 */
-	private static Donator getDonatorById(int donatorID) {
+	public static Donator getDonatorById(int donatorID) {
 		return donatorRepository.findOne(donatorID).orElse(null);
 	}
 
@@ -448,7 +451,9 @@ public class Controller {
 	 */
 	public static int addPersonnel(String name, String email) throws ControllerException {
 		try {
-			Optional<Personnel> personnelOptional = personnelRepository.save(new Personnel(name, email));
+		    Personnel p = new Personnel(name, email);
+		    p.setPassword("test");
+			Optional<Personnel> personnelOptional = personnelRepository.save(p);
 			return personnelOptional.map(Entity::getId).orElse(-1);
 		} catch (ValidatorException e) {
 			throw new ControllerException("Failed to add personnel entity: " + e.getMessage());
